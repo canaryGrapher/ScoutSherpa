@@ -1,9 +1,9 @@
 'use strict';
 
-(function() {
+(function () {
   function init() {
     var shepherd = setupShepherd();
-    setTimeout(function() {
+    setTimeout(function () {
       shepherd.start();
     }, 400);
   }
@@ -34,7 +34,7 @@
                 return this.cancel();
               },
               secondary: true,
-              text: 'Exit'
+              text: 'Quit'
             },
             {
               action() {
