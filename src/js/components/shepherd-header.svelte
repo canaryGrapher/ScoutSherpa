@@ -15,7 +15,7 @@
   {#if title}
     <ShepherdTitle {labelId} {title} />
   {/if}
-  <p>You piece of code</p>
+  <p>You piece of</p>
   {#if cancelIcon && cancelIcon.enabled}
     <ShepherdCancelIcon {cancelIcon} {step} />
   {/if}
@@ -27,7 +27,9 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    background-color: #f19026;
+    color: #fce8d4;
     line-height: 2em;
     padding: 0.75rem 0.75rem 0;
   }
