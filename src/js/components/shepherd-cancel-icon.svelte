@@ -23,13 +23,15 @@
   .shepherd-cancel-icon {
     background: transparent;
     border: none;
-    color: #fce8d4;
+    color: #ffffff;
     font-size: 2em;
     cursor: pointer;
     font-weight: normal;
     margin: 0;
     padding: 0;
     transition: color 0.5s ease;
+    margin-top: auto;
+    margin-bottom: auto;
   }
 
   .shepherd-cancel-icon:hover {
@@ -37,10 +39,10 @@
   }
 
   .shepherd-has-title .shepherd-content .shepherd-cancel-icon {
-    color: rgba(128, 128, 128, 0.75);
+    color: rgba(253, 253, 253);
   }
 
   .shepherd-has-title .shepherd-content .shepherd-cancel-icon:hover {
-    color: rgba(0, 0, 0, 0.75);
+    color: rgba(0, 0, 0);
   }
 </style>

@@ -25,6 +25,7 @@ export class Tour extends Evented {
    * @param {string} options.confirmCancelMessage The message to display in the `window.confirm` dialog
    * @param {string} options.classPrefix The prefix to add to the `shepherd-enabled` and `shepherd-target` class names as well as the `data-shepherd-step-id`.
    * @param {Object} options.defaultStepOptions Default options for Steps ({@link Step#constructor}), created through `addStep`
+   * @param {Object} options.tourName An optional "name" for the tour. This will be appended to the the tour's
    * @param {boolean} options.exitOnEsc Exiting the tour with the escape key will be enabled unless this is explicitly
    * set to false.
    * @param {boolean} options.keyboardNavigation Navigating the tour via left and right arrow keys will be enabled
@@ -32,9 +33,10 @@ export class Tour extends Evented {
    * @param {HTMLElement} options.stepsContainer An optional container element for the steps.
    * If not set, the steps will be appended to `document.body`.
    * @param {HTMLElement} options.modalContainer An optional container element for the modal.
+   * @param {string} options.tourName An optional "name" for the tour. This will be appended to the the tour's
+   * If not set, the tour will have a default name "tour"
    * If not set, the modal will be appended to `document.body`.
    * @param {object[] | Step[]} options.steps An array of step options objects or Step instances to initialize the tour with
-   * @param {string} options.tourName An optional "name" for the tour. This will be appended to the the tour's
    * dynamically generated `id` property.
    * @param {boolean} options.useModalOverlay Whether or not steps should be placed above a darkened
    * modal overlay. If true, the overlay will create an opening around the target element so that it
@@ -48,7 +50,8 @@ export class Tour extends Evented {
 
     const defaultTourOptions = {
       exitOnEsc: true,
-      keyboardNavigation: true
+      keyboardNavigation: true,
+      tourName: 'example tour'
     };
 
     this.options = Object.assign({}, defaultTourOptions, options);

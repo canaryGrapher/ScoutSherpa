@@ -14,6 +14,7 @@
         cancelIcon: {
           enabled: true
         },
+        tourName: "Buy a fucking mutual fund",
         classes: 'class-1 class-2',
         scrollTo: {
           behavior: 'smooth',
@@ -23,25 +24,26 @@
       // This should add the first tour step
       steps: [
         {
-          text: '\n         <p>\n           Shepherd is a JavaScript library for guiding users through your app.\n           It uses <a href="https://floating-ui.com/" data-test-popper-link>Floating UI</a>,\n           another open source library, to render dialogs for each tour "step".\n         </p>\n        \n         <p>\n           Among many things, Floating UI makes sure your steps never end up off screen or cropped by an overflow.\n           (Try resizing your browser to see what we mean.)\n         </p>\n',
+          text: 'This is the first step of Shepherd JS',
+          title: "Step 1",
           attachTo: {
             element: '.hero-welcome',
             on: 'bottom'
           },
           buttons: [
-            {
-              action() {
-                return this.cancel();
-              },
-              secondary: true,
-              text: 'Quit'
-            },
-            {
-              action() {
-                return this.next();
-              },
-              text: 'Next'
-            }
+            // {
+            //   action() {
+            //     return this.cancel();
+            //   },
+            //   secondary: true,
+            //   text: 'Quit'
+            // },
+            // {
+            //   action() {
+            //     return this.next();
+            //   },
+            //   text: 'Next'
+            // }
           ],
           id: 'welcome'
         }

@@ -19,12 +19,15 @@
   });
 </script>
 
+<div bind:this={element} class="shepherd-text" id={descriptionId} />
+
 <style global>
   .shepherd-text {
-    color: rgba(0, 0, 0, 0.75);
+    color: #fef8f3;
     font-size: 1rem;
     line-height: 1.3em;
-    padding: 0.75em;
+    padding: 1.5rem 1rem !important;
+    background-color: #ef7c00;
   }
 
   .shepherd-text p {
@@ -35,11 +38,3 @@
     margin-bottom: 0;
   }
 </style>
-
-<div
-  bind:this={element}
-  class="shepherd-text"
-  id="{descriptionId}"
->
-</div>
-

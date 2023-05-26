@@ -24,6 +24,7 @@ export class Step extends Evented {
   /**
    * Create a step
    * @param {Tour} tour The tour for the step
+   * @param {tourName} tourName The tour name for the step
    * @param {object} options The options for the step
    * @param {boolean} options.arrow Whether to display the arrow for the tooltip or not. Defaults to `true`.
    * @param {object} options.attachTo The element the step should be attached to on the page.
@@ -97,7 +98,7 @@ export class Step extends Evented {
    * @param {string} options.title The step's title. It becomes an `h3` at the top of the step. It can be one of two types:
    * ```
    * - HTML string
-   * - `Function` to be executed when the step is built. It must return HTML string.
+   * - `Function` to be executed when th  e step is built. It must return HTML string.
    * ```
    * @param {object} options.when You can define `show`, `hide`, etc events inside `when`. For example:
    * ```js
@@ -282,7 +283,8 @@ export class Step extends Evented {
         descriptionId,
         labelId,
         step: this,
-        styles: this.styles
+        styles: this.styles,
+        tourName: this.tour.options.tourName
       }
     });
 

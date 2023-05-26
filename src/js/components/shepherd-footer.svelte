@@ -1,32 +1,31 @@
 <script>
   import ShepherdButton from './shepherd-button.svelte';
 
-  export let step;
+  export let step, tourName;
 
   $: buttons = step.options.buttons;
 </script>
 
 <footer class="shepherd-footer">
-  {#if buttons.length > 0}
+  {#if buttons}
     {#each buttons as config}
       <ShepherdButton {config} {step} />
     {/each}
-  {:else}
-    <p>Whatever you say, boss man!</p>
   {/if}
+  {tourName}
 </footer>
 
 <style global>
   .shepherd-footer {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
     display: flex;
-    justify-content: center;
-    padding: 0 0.75rem 0.75rem;
-    text-align: center;
+    background-color: #f19026;
+    color: #fce8d4;
+    padding: 0.5rem 1rem !important;
   }
 
   .shepherd-footer .shepherd-button:last-child {
-    margin-right: 0;
+    background-color: #f19026;
+    color: #fce8d4;
+    padding: 0.5rem 1rem !important;
   }
 </style>

@@ -15,7 +15,6 @@
   {#if title}
     <ShepherdTitle {labelId} {title} />
   {/if}
-  <p>You piece of</p>
   {#if cancelIcon && cancelIcon.enabled}
     <ShepherdCancelIcon {cancelIcon} {step} />
   {/if}
@@ -24,18 +23,21 @@
 <style global>
   .shepherd-header {
     align-items: center;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     display: flex;
     justify-content: space-between;
     background-color: #f19026;
     color: #fce8d4;
-    line-height: 2em;
-    padding: 0.75rem 0.75rem 0;
+    margin: auto;
+    padding: 0.5rem 1rem !important;
   }
 
   .shepherd-has-title .shepherd-content .shepherd-header {
-    background: #e6e6e6;
-    padding: 1em;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    background-color: #f19026 !important;
+    color: #fce8d4;
+    margin: auto;
+    padding: 0.5 1rem !important;
   }
 </style>
