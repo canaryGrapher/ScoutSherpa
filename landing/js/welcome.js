@@ -4,51 +4,45 @@
   function init() {
     var shepherd = setupShepherd();
     setTimeout(function () {
+      // add tour class instance name to local storage
+      // so we don't show the tour again
       shepherd.start();
+      localStorage.setItem('currentStepIndex', 0);
+      localStorage.setItem('tourInstanceCaller', 'shepherd');
     }, 400);
   }
 
   function setupShepherd() {
     var shepherd = new Shepherd.Tour({
+      tourName: "Buy a fucking mutual fund",
       defaultStepOptions: {
         cancelIcon: {
           enabled: true
         },
-        tourName: "Buy a fucking mutual fund",
         classes: 'class-1 class-2',
         scrollTo: {
           behavior: 'smooth',
           block: 'center'
         }
       },
+      useModalOverlay: true,
       // This should add the first tour step
       steps: [
         {
+          id: 'mfTour_1',
           text: 'This is the first step of Shepherd JS',
-          title: "Step 1",
+          title: "1/6",
           attachTo: {
             element: '.hero-welcome',
             on: 'bottom'
           },
-          buttons: [
-            // {
-            //   action() {
-            //     return this.cancel();
-            //   },
-            //   secondary: true,
-            //   text: 'Quit'
-            // },
-            // {
-            //   action() {
-            //     return this.next();
-            //   },
-            //   text: 'Next'
-            // }
-          ],
+          advanceOn: {
+            selector: '.hero-welcome',
+            event: 'click',
+          },
           id: 'welcome'
         }
-      ],
-      useModalOverlay: true
+      ]
     });
 
     const element = document.createElement('p');
@@ -57,76 +51,46 @@
     // These steps should be added via `addSteps`
     const steps = [
       {
-        title: 'Including',
+        title: '2/6',
+        id: 'mfTour_2',
         text: element,
         attachTo: {
           element: '.hero-including',
           on: 'bottom'
         },
-        buttons: [
-          {
-            action() {
-              return this.back();
-            },
-            secondary: true,
-            text: 'Back'
-          },
-          {
-            action() {
-              return this.next();
-            },
-            text: 'Next'
-          }
-        ],
+        advanceOn: {
+          selector: '.hero-including',
+          event: 'click',
+        },
         id: 'including'
       },
       {
-        title: 'Creating a Shepherd Tour',
+        title: '3/6',
+        id: 'mfTour_3',
         text: 'Creating a Shepherd tour is easy. too! ' + 'Just create a \`Tour\` instance, and add as many steps as you want.',
         attachTo: {
           element: '.hero-example',
           on: 'right'
         },
-        buttons: [
-          {
-            action() {
-              return this.back();
-            },
-            secondary: true,
-            text: 'Back'
-          },
-          {
-            action() {
-              return this.next();
-            },
-            text: 'Next'
-          }
-        ],
+        advanceOn: {
+          selector: '.hero-example',
+          event: 'click',
+        },
+
         id: 'creating'
       },
       {
-        title: 'Attaching to Elements',
+        title: '4/6',
+        id: 'mfTour_4',
         text: 'Your tour steps can target and attach to elements in DOM (like this step).',
         attachTo: {
           element: '.hero-example',
           on: 'left'
         },
-        buttons: [
-          {
-            action() {
-              return this.back();
-            },
-            secondary: true,
-            text: 'Back'
-          },
-          {
-            action() {
-              return this.next();
-            },
-            text: 'Next'
-          }
-        ],
-        id: 'attaching'
+        advanceOn: {
+          selector: '.hero-example',
+          event: 'click',
+        },
       }
     ];
 
@@ -134,7 +98,12 @@
 
     // This should add steps after the ones added with `addSteps`
     shepherd.addStep({
-      title: 'Centered Shepherd Element',
+      title: '5/6',
+      id: 'mfTour_5',
+      advanceOn: {
+        selector: '.hero-welcome',
+        event: 'click',
+      },
       text: 'But attachment is totally optional!\n       Without a target, a tour step will create an element that\'s centered within the view.       Check out the <a href="https://shepherdjs.dev/docs/">documentation</a> to learn more.',
       buttons: [
         {
@@ -150,33 +119,21 @@
           },
           text: 'Next'
         }
-      ],
-      id: 'centered-example'
+      ]
     });
 
     shepherd.addStep({
-      title: 'Learn more',
+      title: '6/6',
+      id: 'mfTour_6',
       text: 'Star Shepherd on Github so you remember it for your next project',
+      advanceOn: {
+        selector: '.hero-followup',
+        event: 'click',
+      },
       attachTo: {
         element: '.hero-followup',
         on: 'top'
       },
-      buttons: [
-        {
-          action() {
-            return this.back();
-          },
-          secondary: true,
-          text: 'Back'
-        },
-        {
-          action() {
-            return this.next();
-          },
-          text: 'Done'
-        }
-      ],
-      id: 'followup',
       modalOverlayOpeningPadding: '10'
     });
     return shepherd;

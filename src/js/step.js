@@ -275,7 +275,6 @@ export class Step extends Evented {
   _createTooltipContent() {
     const descriptionId = `${this.id}-description`;
     const labelId = `${this.id}-label`;
-
     this.shepherdElementComponent = new ShepherdElement({
       target: this.tour.options.stepsContainer || document.body,
       props: {

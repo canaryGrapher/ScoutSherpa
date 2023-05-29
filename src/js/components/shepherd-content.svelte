@@ -4,7 +4,7 @@
   import ShepherdText from './shepherd-text.svelte';
   import { isUndefined } from '../utils/type-check.js';
 
-  export let descriptionId, labelId, step;
+  export let descriptionId, labelId, step, tourName;
 </script>
 
 <div class="shepherd-content">
@@ -17,9 +17,8 @@
   {/if}
 
   <!-- {#if Array.isArray(step.options.buttons) && step.options.buttons.length} -->
-  {#if Array.isArray(step.options.buttons)}
-    <ShepherdFooter {step} />
-  {/if}
+  <ShepherdFooter {step} {tourName} />
+  <!-- {/if} -->
 </div>
 
 <style global>

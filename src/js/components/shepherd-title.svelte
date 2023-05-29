@@ -8,7 +8,6 @@
     if (isFunction(title)) {
       title = title();
     }
-
     element.innerHTML = title;
   });
 </script>
@@ -20,7 +19,7 @@
   .shepherd-title {
     color: rgb(255, 255, 255);
     display: flex;
-    font-size: 0.2rem;
+    font-size: 0.1rem;
     font-weight: lighter;
     margin: auto 0;
     padding: 0;

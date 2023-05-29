@@ -25,7 +25,7 @@ export class Tour extends Evented {
    * @param {string} options.confirmCancelMessage The message to display in the `window.confirm` dialog
    * @param {string} options.classPrefix The prefix to add to the `shepherd-enabled` and `shepherd-target` class names as well as the `data-shepherd-step-id`.
    * @param {Object} options.defaultStepOptions Default options for Steps ({@link Step#constructor}), created through `addStep`
-   * @param {Object} options.tourName An optional "name" for the tour. This will be appended to the the tour's
+   * @param {string} options.tourName An optional "name" for the tour. This will be appended to the the tour's
    * @param {boolean} options.exitOnEsc Exiting the tour with the escape key will be enabled unless this is explicitly
    * set to false.
    * @param {boolean} options.keyboardNavigation Navigating the tour via left and right arrow keys will be enabled
@@ -51,9 +51,7 @@ export class Tour extends Evented {
     const defaultTourOptions = {
       exitOnEsc: true,
       keyboardNavigation: true,
-      tourName: 'example tour'
     };
-
     this.options = Object.assign({}, defaultTourOptions, options);
     this.classPrefix = normalizePrefix(this.options.classPrefix);
     this.steps = [];
@@ -158,6 +156,10 @@ export class Tour extends Evented {
    * Calls _done() triggering the `complete` event
    */
   complete() {
+    // remove local storage markers for active steps
+    localStorage.removeItem('currentStepIndex');
+    localStorage.removeItem('tourInstanceCaller');
+
     this._done('complete');
   }
 
@@ -204,10 +206,21 @@ export class Tour extends Evented {
    * If we are at the end, call `complete`
    */
   next() {
+    // saving the current step in the local storage for resuming the tour after page change
+    const currentStep = this.getCurrentStep();
+    if (currentStep) {
+      const currentStepIndex = Number(this.steps.indexOf(currentStep)) + 1;
+      localStorage.setItem('currentStepIndex', currentStepIndex);
+    }
+
+    console.log(this.activeTour);
+
     const index = this.steps.indexOf(this.currentStep);
 
     if (index === this.steps.length - 1) {
       this.complete();
+      // remove the currentStepIndex from the local storage after completing the tour
+      localStorage.removeItem('currentStepIndex');
     } else {
       this.show(index + 1, true);
     }
@@ -275,6 +288,7 @@ export class Tour extends Evented {
    * Start the tour
    */
   start() {
+
     this.trigger('start');
 
     // Save the focused element before the tour opens

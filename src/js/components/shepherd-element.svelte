@@ -16,7 +16,8 @@
     labelId,
     lastFocusableElement,
     step,
-    dataStepId;
+    dataStepId,
+    tourName;
 
   let hasCancelIcon, hasTitle, classes;
 
@@ -142,7 +143,7 @@
   {#if step.options.arrow && step.options.attachTo && step.options.attachTo.element && step.options.attachTo.on}
     <div class="shepherd-arrow" data-popper-arrow />
   {/if}
-  <ShepherdContent {descriptionId} {labelId} {step} />
+  <ShepherdContent {descriptionId} {labelId} {step} {tourName} />
 </div>
 
 <style global>

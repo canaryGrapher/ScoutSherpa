@@ -15,22 +15,33 @@
 
   function getConfigOption(option) {
     if (isFunction(option)) {
-      return option = option.call(step);
+      return (option = option.call(step));
     }
     return option;
   }
-
 </script>
+
+<button
+  aria-label={label ? label : null}
+  class={`${classes || ''} shepherd-button ${
+    secondary ? 'shepherd-button-secondary' : ''
+  }`}
+  {disabled}
+  on:click={action}
+  tabindex="0"
+>
+  {@html text}
+</button>
 
 <style global>
   .shepherd-button {
-    background: rgb(50, 136, 230);
+    background: rgb(255, 255, 255);
     border: 0;
     border-radius: 3px;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(0, 0, 0, 0.75);
     cursor: pointer;
     margin-right: 0.5rem;
-    padding: 0.5rem 1.5rem;
+    /* padding: 0.5rem 0.5rem; */
     transition: all 0.5s ease;
   }
 
@@ -53,13 +64,3 @@
     cursor: not-allowed;
   }
 </style>
-
-<button
-  aria-label="{label ? label : null}"
-  class="{`${(classes || '')} shepherd-button ${(secondary ? 'shepherd-button-secondary' : '')}`}"
-  disabled={disabled}
-  on:click={action}
-  tabindex="0"
->
-    {@html text}
-</button>
