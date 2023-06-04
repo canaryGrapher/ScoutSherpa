@@ -6,6 +6,7 @@
     setTimeout(function () {
       // add tour class instance name to local storage
       // so we don't show the tour again
+      resumeTour();
       shepherd.start();
       localStorage.setItem('currentStepIndex', 0);
       localStorage.setItem('tourInstanceCaller', 'shepherd');
@@ -13,8 +14,12 @@
   }
 
   function setupShepherd() {
+
+
+
     var shepherd = new Shepherd.Tour({
-      tourName: "Buy a fucking mutual fund",
+      tourName: "How to buy a mutual fund",
+      instanceCaller: "shepherd",
       defaultStepOptions: {
         cancelIcon: {
           enabled: true
@@ -117,6 +122,7 @@
           action() {
             return this.next();
           },
+          primary: true,
           text: 'Next'
         }
       ]
@@ -134,9 +140,19 @@
         element: '.hero-followup',
         on: 'top'
       },
-      modalOverlayOpeningPadding: '10'
     });
+
     return shepherd;
+  }
+  function resumeTour() {
+    console.log('resumeTour')
+    var tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
+    var currentStepIndex = localStorage.getItem('currentStepIndex');
+    if (tourInstanceCaller === 'shepherd') {
+      var shepherd = setupShepherd();
+      shepherd.start();
+      shepherd.show(currentStepIndex);
+    }
   }
 
   function ready() {
@@ -149,3 +165,4 @@
 
   ready();
 }).call(void 0);
+

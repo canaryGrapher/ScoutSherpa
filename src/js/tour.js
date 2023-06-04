@@ -12,7 +12,6 @@ import { normalizePrefix, uuid } from './utils/general.js';
 import ShepherdModal from './components/shepherd-modal.svelte';
 
 const Shepherd = new Evented();
-
 /**
  * Class representing the site tour
  * @extends {Evented}
@@ -26,6 +25,7 @@ export class Tour extends Evented {
    * @param {string} options.classPrefix The prefix to add to the `shepherd-enabled` and `shepherd-target` class names as well as the `data-shepherd-step-id`.
    * @param {Object} options.defaultStepOptions Default options for Steps ({@link Step#constructor}), created through `addStep`
    * @param {string} options.tourName An optional "name" for the tour. This will be appended to the the tour's
+   * @param {string} options.instanceCaller The object name sassigned to the tour instance
    * @param {boolean} options.exitOnEsc Exiting the tour with the escape key will be enabled unless this is explicitly
    * set to false.
    * @param {boolean} options.keyboardNavigation Navigating the tour via left and right arrow keys will be enabled
@@ -33,7 +33,6 @@ export class Tour extends Evented {
    * @param {HTMLElement} options.stepsContainer An optional container element for the steps.
    * If not set, the steps will be appended to `document.body`.
    * @param {HTMLElement} options.modalContainer An optional container element for the modal.
-   * @param {string} options.tourName An optional "name" for the tour. This will be appended to the the tour's
    * If not set, the tour will have a default name "tour"
    * If not set, the modal will be appended to `document.body`.
    * @param {object[] | Step[]} options.steps An array of step options objects or Step instances to initialize the tour with
@@ -125,6 +124,8 @@ export class Tour extends Evented {
    */
   back() {
     const index = this.steps.indexOf(this.currentStep);
+    // set the current number in the localStorage for future retrieval
+    localStorage.setItem('currentStepIndex', index - 1);
     this.show(index - 1, false);
   }
 
@@ -135,6 +136,8 @@ export class Tour extends Evented {
    * and only cancel when the value returned is true
    */
   async cancel() {
+    localStorage.removeItem('currentStepIndex');
+    localStorage.removeItem('tourInstanceCaller');
     if (this.options.confirmCancel) {
       const confirmCancelIsFunction =
         typeof this.options.confirmCancel === 'function';
@@ -159,7 +162,6 @@ export class Tour extends Evented {
     // remove local storage markers for active steps
     localStorage.removeItem('currentStepIndex');
     localStorage.removeItem('tourInstanceCaller');
-
     this._done('complete');
   }
 
@@ -206,22 +208,17 @@ export class Tour extends Evented {
    * If we are at the end, call `complete`
    */
   next() {
-    // saving the current step in the local storage for resuming the tour after page change
-    const currentStep = this.getCurrentStep();
-    if (currentStep) {
-      const currentStepIndex = Number(this.steps.indexOf(currentStep)) + 1;
-      localStorage.setItem('currentStepIndex', currentStepIndex);
-    }
-
-    console.log(this.activeTour);
-
     const index = this.steps.indexOf(this.currentStep);
 
     if (index === this.steps.length - 1) {
-      this.complete();
-      // remove the currentStepIndex from the local storage after completing the tour
+      // remove the currentStepIndex and the tourInstanceCaller from the local storage after completing the tour
       localStorage.removeItem('currentStepIndex');
+      localStorage.removeItem('tourInstanceCaller');
+      // if last step, complete the tour
+      this.complete();
     } else {
+      // set the current step number in the localStorage
+      localStorage.setItem('currentStepIndex', index + 1);
       this.show(index + 1, true);
     }
   }
@@ -288,16 +285,15 @@ export class Tour extends Evented {
    * Start the tour
    */
   start() {
+    // set the current step number in the localStorage and the tourInstanceCaller
+    localStorage.setItem('tourInstanceCaller', this.options.instanceCaller);
+    localStorage.setItem('currentStepIndex', 0);
 
     this.trigger('start');
-
     // Save the focused element before the tour opens
     this.focusedElBeforeOpen = document.activeElement;
-
     this.currentStep = null;
-
     this._setupModal();
-
     this._setupActiveTour();
     this.next();
   }

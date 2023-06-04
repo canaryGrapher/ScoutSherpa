@@ -19,7 +19,7 @@
   .shepherd-title {
     color: rgb(255, 255, 255);
     display: flex;
-    font-size: 0.1rem;
+    font-size: 0.8rem;
     font-weight: lighter;
     margin: auto 0;
     padding: 0;
