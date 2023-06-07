@@ -258,25 +258,28 @@ export class Tour extends Evented {
    * @param {Boolean} forward True if we are going forward, false if backward
    */
   show(key = 0, forward = true) {
-    const step = isString(key) ? this.getById(key) : this.steps[key];
+    // check if the step data in the local storage is as per the current step 
+    if () {
+      const step = isString(key) ? this.getById(key) : this.steps[key];
 
-    if (step) {
-      this._updateStateBeforeShow();
+      if (step) {
+        this._updateStateBeforeShow();
 
-      const shouldSkipStep =
-        isFunction(step.options.showOn) && !step.options.showOn();
+        const shouldSkipStep =
+          isFunction(step.options.showOn) && !step.options.showOn();
 
-      // If `showOn` returns false, we want to skip the step, otherwise, show the step like normal
-      if (shouldSkipStep) {
-        this._skipStep(step, forward);
-      } else {
-        this.trigger('show', {
-          step,
-          previous: this.currentStep
-        });
+        // If `showOn` returns false, we want to skip the step, otherwise, show the step like normal
+        if (shouldSkipStep) {
+          this._skipStep(step, forward);
+        } else {
+          this.trigger('show', {
+            step,
+            previous: this.currentStep
+          });
 
-        this.currentStep = step;
-        step.show();
+          this.currentStep = step;
+          step.show();
+        }
       }
     }
   }

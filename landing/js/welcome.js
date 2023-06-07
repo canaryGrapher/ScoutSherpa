@@ -6,12 +6,23 @@
     setTimeout(function () {
       // add tour class instance name to local storage
       // so we don't show the tour again
-      resumeTour();
+      // resumeTour();
       shepherd.start();
       localStorage.setItem('currentStepIndex', 0);
       localStorage.setItem('tourInstanceCaller', 'shepherd');
     }, 400);
   }
+
+  // function resumeTour() {
+  //   console.log('resumeTour')
+  //   var tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
+  //   var currentStepIndex = localStorage.getItem('currentStepIndex');
+  //   if (tourInstanceCaller === 'shepherd') {
+  //     var shepherd = setupShepherd();
+  //     shepherd.start();
+  //     shepherd.show(currentStepIndex);
+  //   }
+  // }
 
   function setupShepherd() {
 
@@ -45,6 +56,7 @@
             selector: '.hero-welcome',
             event: 'click',
           },
+          pageLink: "/",
           id: 'welcome'
         }
       ]
@@ -67,7 +79,8 @@
           selector: '.hero-including',
           event: 'click',
         },
-        id: 'including'
+        id: 'including',
+        pageLink: "/",
       },
       {
         title: '3/6',
@@ -82,7 +95,8 @@
           event: 'click',
         },
 
-        id: 'creating'
+        id: 'creating',
+        pageLink: "/",
       },
       {
         title: '4/6',
@@ -96,6 +110,7 @@
           selector: '.hero-example',
           event: 'click',
         },
+        pageLink: "/",
       }
     ];
 
@@ -105,6 +120,7 @@
     shepherd.addStep({
       title: '5/6',
       id: 'mfTour_5',
+      pageLink: "/",
       advanceOn: {
         selector: '.hero-welcome',
         event: 'click',
@@ -131,6 +147,7 @@
     shepherd.addStep({
       title: '6/6',
       id: 'mfTour_6',
+      pageLink: "/",
       text: 'Star Shepherd on Github so you remember it for your next project',
       advanceOn: {
         selector: '.hero-followup',
@@ -144,16 +161,7 @@
 
     return shepherd;
   }
-  function resumeTour() {
-    console.log('resumeTour')
-    var tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
-    var currentStepIndex = localStorage.getItem('currentStepIndex');
-    if (tourInstanceCaller === 'shepherd') {
-      var shepherd = setupShepherd();
-      shepherd.start();
-      shepherd.show(currentStepIndex);
-    }
-  }
+
 
   function ready() {
     if (document.attachEvent ? document.readyState === 'complete' : document.readyState !== 'loading') {
