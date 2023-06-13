@@ -8,25 +8,20 @@
       // so we don't show the tour again
       // resumeTour();
       shepherd.start();
-      localStorage.setItem('currentStepIndex', 0);
-      localStorage.setItem('tourInstanceCaller', 'shepherd');
-    }, 400);
+    }, 400)
   }
 
-  // function resumeTour() {
-  //   console.log('resumeTour')
-  //   var tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
-  //   var currentStepIndex = localStorage.getItem('currentStepIndex');
-  //   if (tourInstanceCaller === 'shepherd') {
-  //     var shepherd = setupShepherd();
-  //     shepherd.start();
-  //     shepherd.show(currentStepIndex);
-  //   }
-  // }
-
   function setupShepherd() {
-
-
+    window.onload = function () {
+      // check last tour step from local storage
+      let currentStepIndex = localStorage.getItem('currentStepIndex');
+      let currentTourIndex = localStorage.getItem('tourInstanceCaller');
+      if (currentTourIndex === 'shepherd') {
+        if (currentStepIndex == '1') {
+          shepherd.show(currentStepIndex);
+        }
+      }
+    }
 
     var shepherd = new Shepherd.Tour({
       tourName: "How to buy a mutual fund",
@@ -54,7 +49,7 @@
           },
           advanceOn: {
             selector: '.hero-welcome',
-            event: 'click',
+            event: 'mouseover',
           },
           pageLink: "/",
           id: 'welcome'
@@ -96,7 +91,7 @@
         },
 
         id: 'creating',
-        pageLink: "/",
+        pageLink: "/d",
       },
       {
         title: '4/6',
