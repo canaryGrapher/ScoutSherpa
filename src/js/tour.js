@@ -249,6 +249,9 @@ export class Tour extends Evented {
     console.log('Step load tour');
     // get tour data from localStorage
     const _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
+    const _currentStepIndex = localStorage.getItem('currentStepIndex');
+    console.log('Current step index is ', _currentStepIndex);
+    console.log('Current tour instance caller is ', _tourInstanceCaller);
     // check if the step data in the local storage is as per the current step 
     const getPageFromArray = (dataArray) =>
       dataArray.find((item) => item.hasOwnProperty('page'))?.page || null;
@@ -256,6 +259,9 @@ export class Tour extends Evented {
     // const pageVPV = getPageFromArray(window.dataLayer);
     const step = isString(key) ? this.getById(key) : this.steps[key];
     let pageVPV = getPageFromArray(window.dataLayer);
+    console.log('Current page VPV is ', pageVPV);
+    console.log('Current step page link is ', step.options.pageLink);
+
     if (
       _tourInstanceCaller === this.options.instanceCaller &&
       pageVPV === step.options.pageLink
