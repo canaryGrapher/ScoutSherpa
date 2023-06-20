@@ -45,9 +45,7 @@ export class Tour extends Evented {
    */
   constructor(options = {}) {
     super(options);
-
     autoBind(this);
-
     const defaultTourOptions = {
       exitOnEsc: true,
       keyboardNavigation: true,
@@ -56,7 +54,6 @@ export class Tour extends Evented {
     this.classPrefix = normalizePrefix(this.options.classPrefix);
     this.steps = [];
     this.addSteps(this.options.steps);
-
     // Pass these events onto the global Shepherd object
     const events = [
       'active',
@@ -75,9 +72,7 @@ export class Tour extends Evented {
         });
       })(event);
     });
-
     this._setTourID();
-
     return this;
   }
 
@@ -90,23 +85,20 @@ export class Tour extends Evented {
    */
   addStep(options, index) {
     let step = options;
-
     if (!(step instanceof Step)) {
       step = new Step(this, step);
     } else {
       step.tour = this;
     }
-
     if (!isUndefined(index)) {
       this.steps.splice(index, 0, step);
     } else {
       this.steps.push(step);
     }
-
     return step;
   }
 
-  /**
+  /** 
    * Add multiple steps to the tour
    * @param {Array<object> | Array<Step>} steps The steps to add to the tour
    */
@@ -124,6 +116,7 @@ export class Tour extends Evented {
    * Go to the previous step in the tour
    */
   back() {
+    console.log('Loading previous step');
     const index = this.steps.indexOf(this.currentStep);
     // set the current number in the localStorage for future retrieval
     localStorage.setItem('currentStepIndex', index - 1);
@@ -158,6 +151,7 @@ export class Tour extends Evented {
    * Calls _done() triggering the `complete` event
    */
   complete() {
+    console.log('Tour completed');
     this._done('complete');
   }
 
@@ -203,6 +197,7 @@ export class Tour extends Evented {
    * If we are at the end, call `complete`
    */
   next() {
+    console.log('Loading next step');
     const index = this.steps.indexOf(this.currentStep);
     if (index === this.steps.length - 1) {
       // remove the currentStepIndex and the tourInstanceCaller from the local storage after completing the tour
@@ -223,7 +218,6 @@ export class Tour extends Evented {
    */
   removeStep(name) {
     const current = this.getCurrentStep();
-
     // Find the step, destroy it and remove it from this.steps
     this.steps.some((step, i) => {
       if (step.id === name) {
@@ -252,37 +246,42 @@ export class Tour extends Evented {
    * @param {Boolean} forward True if we are going forward, false if backward
    */
   show(key = 0, forward = true) {
+    console.log('Step load tour');
     // get tour data from localStorage
-    const tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
+    const _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
     // check if the step data in the local storage is as per the current step 
+    const getPageFromArray = (dataArray) =>
+      dataArray.find((item) => item.hasOwnProperty('page'))?.page || null;
+
+    // const pageVPV = getPageFromArray(window.dataLayer);
     const step = isString(key) ? this.getById(key) : this.steps[key];
+    let pageVPV = getPageFromArray(window.dataLayer);
+    if (
+      _tourInstanceCaller === this.options.instanceCaller &&
+      pageVPV === step.options.pageLink
+    ) {
+      console.log('Page VPV matched, loading step');
 
-    if (step) {
-      this._updateStateBeforeShow();
-      const shouldSkipStep =
-        isFunction(step.options.showOn) && !step.options.showOn();
+      if (step) {
+        this._updateStateBeforeShow();
+        const shouldSkipStep =
+          isFunction(step.options.showOn) && !step.options.showOn();
 
-      // If `showOn` returns false, we want to skip the step, otherwise, show the step like normal
-      if (shouldSkipStep) {
-        this._skipStep(step, forward);
-      } else {
-        this.trigger('show', {
-          step,
-          previous: this.currentStep
-        });
+        // If `showOn` returns false, we want to skip the step, otherwise, show the step like normal
+        if (shouldSkipStep) {
+          this._skipStep(step, forward);
+        } else {
+          this.trigger('show', {
+            step,
+            previous: this.currentStep
+          });
 
-        this.currentStep = step;
-        const getPageFromArray = (dataArray) =>
-          dataArray.find((item) => item.hasOwnProperty('page'))?.page || null;
-        const pageVPV = getPageFromArray(window.dataLayer);
-
-        if (
-          tourInstanceCaller === this.options.instanceCaller &&
-          pageVPV === step.options.pageLink
-        ) {
+          this.currentStep = step;
           step.show();
         }
       }
+    } else {
+      console.log("page VPV didn't match, skipping step")
     }
   }
 
@@ -290,6 +289,7 @@ export class Tour extends Evented {
    * Start the tour
    */
   start() {
+    console.log('Setting up tour');
     // set the current step number in the localStorage and the tourInstanceCaller
     localStorage.setItem('tourInstanceCaller', this.options.instanceCaller);
     localStorage.setItem('currentStepIndex', 0);
