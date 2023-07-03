@@ -7,7 +7,7 @@
 </script>
 
 <footer class="shepherd-footer">
-  {tourName}
+  <p class="footer-text">{tourName}</p>
   <div class="button-container">
     {#if buttons}
       {#each buttons as config}
@@ -18,6 +18,11 @@
 </footer>
 
 <style global>
+  .footer-text {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
   .shepherd-footer {
     display: block;
     background-color: #f19026;
@@ -29,6 +34,7 @@
     background-color: #f19026;
     color: #fce8d4;
     padding: 0.5rem 1rem !important;
+    background: #f19026;
   }
 
   .button-container {

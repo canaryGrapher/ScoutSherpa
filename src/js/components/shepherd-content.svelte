@@ -25,5 +25,6 @@
   .shepherd-content {
     border-radius: 5px;
     outline: none;
+    background-color: #000000;
   }
 </style>

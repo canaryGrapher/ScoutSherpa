@@ -47,6 +47,7 @@
             element: '.hero-welcome',
             on: 'bottom'
           },
+
           advanceOn: {
             selector: '.hero-welcome',
             event: 'mouseover',
@@ -74,6 +75,17 @@
           selector: '.hero-including',
           event: 'click',
         },
+        buttons: [
+          {
+            text: 'Next',
+            action: shepherd.next,
+            classes: 'shepherd-button-secondary'
+          },
+          {
+            text: 'Exit',
+            action: shepherd.cancel
+          }
+        ],
         id: 'including',
         pageLink: "/",
       },

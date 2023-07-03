@@ -22,6 +22,7 @@
 </script>
 
 <button
+  type="button"
   aria-label={label ? label : null}
   class={`${classes || ''} shepherd-button ${
     secondary ? 'shepherd-button-secondary' : ''
@@ -36,17 +37,22 @@
 <style global>
   .shepherd-button {
     background: rgb(255, 255, 255);
-    border: 0;
     border-radius: 3px;
     color: rgba(0, 0, 0, 0.75);
     cursor: pointer;
     margin-right: 0.5rem;
-    /* padding: 0.5rem 0.5rem; */
+    padding: 0.5rem 0.5rem;
     transition: all 0.5s ease;
+    min-height: 35px;
+    min-width: 60px;
+    text-align: center;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(156, 156, 156);
   }
 
   .shepherd-button:not(:disabled):hover {
-    background: rgb(25, 111, 204);
+    background: #ef7c00 !important;
     color: rgba(255, 255, 255, 0.75);
   }
 

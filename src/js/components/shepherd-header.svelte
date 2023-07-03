@@ -39,5 +39,6 @@
     color: #fce8d4;
     margin: auto;
     padding: 0.5 1rem !important;
+    background: #f19026;
   }
 </style>

@@ -252,11 +252,20 @@ export class Tour extends Evented {
     const _currentStepIndex = localStorage.getItem('currentStepIndex');
     console.log('Current step index is ', _currentStepIndex);
     console.log('Current tour instance caller is ', _tourInstanceCaller);
-    // check if the step data in the local storage is as per the current step 
-    const getPageFromArray = (dataArray) =>
-      dataArray.find((item) => item.hasOwnProperty('page'))?.page || null;
 
-    // const pageVPV = getPageFromArray(window.dataLayer);
+    // check if the step data in the local storage is as per the current step 
+    const getPageFromArray = (dataArray) => {
+      const data = dataArray.find((item) => {
+        if (item.hasOwnProperty('page')) {
+          return item.page;
+        } else if (item.hasOwnProperty('vpv')) {
+          return item.vpv;
+        } else {
+          return null;
+        }
+      })
+      return data.page || data.vpv;
+    };
     const step = isString(key) ? this.getById(key) : this.steps[key];
     let pageVPV = getPageFromArray(window.dataLayer);
     console.log('Current page VPV is ', pageVPV);

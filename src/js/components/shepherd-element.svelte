@@ -148,8 +148,11 @@
 
 <style global>
   .shepherd-element {
+    font-family: Founders Grotesk, sans-serif;
     background: #fff;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6) !important;
+    -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6) !important;
     max-width: 400px;
     opacity: 0;
     outline: none;

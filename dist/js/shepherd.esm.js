@@ -2253,6 +2253,7 @@ function create_fragment$8(ctx) {
   return {
     c() {
       button = element("button");
+      attr(button, "type", "button");
       attr(button, "aria-label", button_aria_label_value = /*label*/ctx[3] ? /*label*/ctx[3] : null);
       attr(button, "class", button_class_value = `${/*classes*/ctx[1] || ''} shepherd-button ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : ''}`);
       button.disabled = /*disabled*/ctx[2];
@@ -2450,6 +2451,7 @@ function create_each_block(ctx) {
 }
 function create_fragment$7(ctx) {
   let footer;
+  let p;
   let t0;
   let t1;
   let div;
@@ -2458,16 +2460,19 @@ function create_fragment$7(ctx) {
   return {
     c() {
       footer = element("footer");
+      p = element("p");
       t0 = text( /*tourName*/ctx[1]);
       t1 = space();
       div = element("div");
       if (if_block) if_block.c();
+      attr(p, "class", "footer-text");
       attr(div, "class", "button-container");
       attr(footer, "class", "shepherd-footer");
     },
     m(target, anchor) {
       insert(target, footer, anchor);
-      append(footer, t0);
+      append(footer, p);
+      append(p, t0);
       append(footer, t1);
       append(footer, div);
       if (if_block) if_block.m(div, null);
@@ -4382,13 +4387,27 @@ class Tour extends Evented {
     console.log('Step load tour');
     // get tour data from localStorage
     const _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
-    // check if the step data in the local storage is as per the current step 
-    // const getPageFromArray = (dataArray) =>
-    //   dataArray.find((item) => item.hasOwnProperty('page'))?.page || null;
+    const _currentStepIndex = localStorage.getItem('currentStepIndex');
+    console.log('Current step index is ', _currentStepIndex);
+    console.log('Current tour instance caller is ', _tourInstanceCaller);
 
-    // const pageVPV = getPageFromArray(window.dataLayer);
+    // check if the step data in the local storage is as per the current step 
+    const getPageFromArray = dataArray => {
+      const data = dataArray.find(item => {
+        if (item.hasOwnProperty('page')) {
+          return item.page;
+        } else if (item.hasOwnProperty('vpv')) {
+          return item.vpv;
+        } else {
+          return null;
+        }
+      });
+      return data.page || data.vpv;
+    };
     const step = isString(key) ? this.getById(key) : this.steps[key];
-    let pageVPV = '/';
+    let pageVPV = getPageFromArray(window.dataLayer);
+    console.log('Current page VPV is ', pageVPV);
+    console.log('Current step page link is ', step.options.pageLink);
     if (_tourInstanceCaller === this.options.instanceCaller && pageVPV === step.options.pageLink) {
       console.log('Page VPV matched, loading step');
       if (step) {

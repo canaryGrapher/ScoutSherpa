@@ -26,7 +26,7 @@
     color: #ffffff;
     font-size: 2em;
     cursor: pointer;
-    font-weight: normal;
+    font-weight: lighter;
     margin: 0;
     padding: 0;
     transition: color 0.5s ease;
