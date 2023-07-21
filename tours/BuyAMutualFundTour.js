@@ -130,19 +130,6 @@ BuyAMutualFundTour.addStep({
     pageLink: "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/FundSelectedListing-Edelweiss Multi Asset Allocation Fund Reg-G"
 })
 
-// print current step index
-window.addEventListener('DOMContentLoaded', () => {
-    // check last tour step from local storage
-    let currentStepIndex = localStorage.getItem('currentStepIndex');
-    let currentTourIndex = localStorage.getItem('tourInstanceCaller');
-    if (currentTourIndex === 'BuyAMutualFundTour') {
-        if (currentStepIndex != '1') {
-            BuyAMutualFundTour.show(Number(currentStepIndex));
-        }
-    }
-}, false)
-
-
 
 var HowToBuyAFastTagTour = new Shepherd.Tour({
     tourName: "How to buy a ICICI FastTag",
@@ -267,19 +254,6 @@ HowToBuyAFastTagTour.addStep({
     },
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
 })
-
-window.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM content loaded. Loading tour")
-    // check last tour step from local storage 
-    let currentStepIndex = localStorage.getItem('currentStepIndex');
-    let currentTourIndex = localStorage.getItem('tourInstanceCaller');
-    // if current tour is active, continue
-    if (currentTourIndex === 'HowToMakeICICIBankCreditCardPaymentTour') {
-        if (Number(currentStepIndex) >= 1) {
-            HowToMakeICICIBankCreditCardPaymentTour.show(Number(currentStepIndex));
-        }
-    }
-}, false) 
 
 var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
     tourName: "How to make ICICI bank credit card payment?",
@@ -432,9 +406,26 @@ window.addEventListener('DOMContentLoaded', () => {
     let currentStepIndex = localStorage.getItem('currentStepIndex');
     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
     // if current tour is active, continue
+    if (currentTourIndex === 'HowToBuyAFastTagTour') {
+        console.log("Buying a FastTag tour under progress")
+        if (currentStepIndex != '1') {
+            HowToBuyAFastTagTour.show(Number(currentStepIndex));
+        }
+    }
+    
     if (currentTourIndex === 'HowToMakeICICIBankCreditCardPaymentTour') {
-        if (Number(currentStepIndex) >= 1) {
+        console.log("Credit card payment tour in progress")
+        if (currentStepIndex != '1') {
             HowToMakeICICIBankCreditCardPaymentTour.show(Number(currentStepIndex));
         }
     }
+
+    if (currentTourIndex === 'BuyAMutualFundTour') {
+         console.log("Buying a mutual fund tour under progress")
+        if (currentStepIndex != '1') {
+            BuyAMutualFundTour.show(Number(currentStepIndex));
+        }
+    }
+
+    
 }, false) 
