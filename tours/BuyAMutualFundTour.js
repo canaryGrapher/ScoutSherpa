@@ -171,7 +171,7 @@ HowToBuyAFastTagTour.addStep({
     text: "Click on 'Buy/Recharge FastTag'",
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)",
-        on: "bottom"
+        on: "left"
     },
     advanceOn: {
         selector: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)",
@@ -185,11 +185,12 @@ HowToBuyAFastTagTour.addStep({
     title: "3/7",
     text: "Fill in the details of your vehicle to get a quote",
     attachTo: {
-        element: "#DispFormWithTableContent_DigiGold\\.R311112",
+        document.querySelector("")
+        element: "#CustomFasTagFG\\.VEHICLE_REG_NUMBER",
         on: "left"
     },
     advanceOn: {
-        selector: "#CustomFasTagFG\\.VEHICLE_REG_NUMBER",
+        selector: "#DispFormWithTableContent_DigiGold\\.R311112",
         event: 'click',
     },
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
@@ -201,7 +202,7 @@ HowToBuyAFastTagTour.addStep({
     text: "You can edit the address you want your FastTag to be delivered.",
     attachTo: {
         element: "#Caption19502135",
-        on: "top"
+        on: "bottom"
     },
     advanceOn: {
         selector: "#Caption19502135",
@@ -216,7 +217,7 @@ HowToBuyAFastTagTour.addStep({
     text: "Select the account you want the amount to be collected from.",
     attachTo: {
         element: "#DispFormWithTableContent_DigiGold\\.R3111162",
-        on: "right"
+        on: "left"
     },
     advanceOn: {
         selector: "#DispFormWithTableContent_DigiGold\\.R3111162",
@@ -231,7 +232,7 @@ HowToBuyAFastTagTour.addStep({
     text: "After you have read the <u>Terms and Conditions</u>, click on the checkbox to accept.",
     attachTo: {
         element: "#TERMS_AND_COND_FLAG",
-        on: "bottom"
+        on: "left"
     },
     advanceOn: {
         selector: "#TERMS_AND_COND_FLAG",
@@ -246,7 +247,7 @@ HowToBuyAFastTagTour.addStep({
     text: "Click on Proceed to pay the amount and buy your FastTag",
     attachTo: {
         element: "#DispFormWithTableContent_DigiGold\\.R3121\\.C1",
-        on: "top"
+        on: "right"
     },
     advanceOn: {
         selector: "#DispFormWithTableContent_DigiGold\\.R3121\\.C1",
