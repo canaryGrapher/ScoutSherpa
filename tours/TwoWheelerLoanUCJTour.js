@@ -28,7 +28,7 @@ UCJTwoWheelerLoanTour.addStep({
         selector: "#fillForm_manual > form > div > div:nth-child(3)",
         event: 'click',
     },
-    pageLink: "/VPV/ucj/unified-two-wheeler-loan/home"
+    pageLink: "/VPV/NLI/Loans/TwoWheelerLoan/ucj/unified-two-wheeler-loan/home"
 })
 
 
@@ -45,7 +45,7 @@ UCJTwoWheelerLoanTour.addStep({
         selector: "#AdditionalPage > div.page-content.stylesheet.center-all4.main-page.form-page > div > div.col-main.col-main-1 > div:nth-child(3)",
         event: 'click',
     },
-    pageLink: "/VPV/ucj/unified-two-wheeler-loan/home"
+    pageLink: "/VPV/NLI/Loans/TwoWheelerLoan/ucj/unified-two-wheeler-loan/home"
 })
 
 // description
@@ -61,7 +61,7 @@ UCJTwoWheelerLoanTour.addStep({
         selector: "#AdditionalPage > div.page-content.stylesheet.center-all4.main-page.form-page > div > div.col-main.col-main-1 > div.style.mt-3.row > div:nth-child(2)",
         event: 'click',
     },
-    pageLink: "/VPV/ucj/unified-two-wheeler-loan/home",
+    pageLink: "/VPV/NLI/Loans/TwoWheelerLoan/ucj/unified-two-wheeler-loan/home",
     // beforeShowPromise: function() {
     //     if(true) {
 
