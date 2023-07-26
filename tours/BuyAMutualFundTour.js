@@ -185,7 +185,6 @@ HowToBuyAFastTagTour.addStep({
     title: "3/7",
     text: "Fill in the details of your vehicle to get a quote",
     attachTo: {
-        document.querySelector("")
         element: "#CustomFasTagFG\\.VEHICLE_REG_NUMBER",
         on: "left"
     },
