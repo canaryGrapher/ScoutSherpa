@@ -185,11 +185,11 @@ HowToBuyAFastTagTour.addStep({
     title: "3/7",
     text: "Fill in the details of your vehicle to get a quote",
     attachTo: {
-        element: "#CustomFasTagFG\\.VEHICLE_REG_NUMBER",
-        on: "bottom"
+        element: "#DispFormWithTableContent_DigiGold\\.R311112",
+        on: "top"
     },
     advanceOn: {
-        selector: "#DispFormWithTableContent_DigiGold\\.R31111214\\.C23 > span > span > div > span",
+        selector: "#vehiclemodal",
         event: 'click',
     },
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
@@ -203,10 +203,12 @@ HowToBuyAFastTagTour.addStep({
         element: "#arrowImage",
         on: "bottom"
     },
-    advanceOn: {
-        selector: "#arrowImage",
-        event: 'mouseover',
-    },
+    buttons: [
+        {
+            text: 'Next',
+            action: HowToBuyAFastTagTour.next
+        }
+    ],
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
 })
 
@@ -218,10 +220,12 @@ HowToBuyAFastTagTour.addStep({
         element: "#CustomFastTagFG\\.INITOR_ACCOUNT",
         on: "bottom"
     },
-    advanceOn: {
-        selector: "#DispFormWithTableContent_DigiGold\\.R3111162",
-        event: 'click',
-    },
+    buttons: [
+        {
+            text: 'Next',
+            action: HowToBuyAFastTagTour.next
+        }
+    ],
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
 })
 
