@@ -186,10 +186,10 @@ HowToBuyAFastTagTour.addStep({
     text: "Fill in the details of your vehicle to get a quote",
     attachTo: {
         element: "#CustomFasTagFG\\.VEHICLE_REG_NUMBER",
-        on: "left"
+        on: "bottom"
     },
     advanceOn: {
-        selector: "#DispFormWithTableContent_DigiGold\\.R311112",
+        selector: "#DispFormWithTableContent_DigiGold\\.R31111214\\.C23 > span > span > div > span",
         event: 'click',
     },
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
@@ -200,11 +200,11 @@ HowToBuyAFastTagTour.addStep({
     title: "4/7",
     text: "You can edit the address you want your FastTag to be delivered.",
     attachTo: {
-        element: "#Caption19502135",
+        element: "#arrowImage",
         on: "bottom"
     },
     advanceOn: {
-        selector: "#Caption19502135",
+        selector: "#arrowImage",
         event: 'mouseover',
     },
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
@@ -215,12 +215,12 @@ HowToBuyAFastTagTour.addStep({
     title: "5/7",
     text: "Select the account you want the amount to be collected from.",
     attachTo: {
-        element: "#DispFormWithTableContent_DigiGold\\.R3111162",
-        on: "left"
+        element: "#CustomFastTagFG\\.INITOR_ACCOUNT",
+        on: "bottom"
     },
     advanceOn: {
         selector: "#DispFormWithTableContent_DigiGold\\.R3111162",
-        event: 'mouseover',
+        event: 'click',
     },
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
 })
@@ -231,10 +231,10 @@ HowToBuyAFastTagTour.addStep({
     text: "After you have read the <u>Terms and Conditions</u>, click on the checkbox to accept.",
     attachTo: {
         element: "#TERMS_AND_COND_FLAG",
-        on: "left"
+        on: "top"
     },
     advanceOn: {
-        selector: "#TERMS_AND_COND_FLAG",
+        selector: "#LabelForControl21674903",
         event: 'click',
     },
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
