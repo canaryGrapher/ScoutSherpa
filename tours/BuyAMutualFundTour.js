@@ -155,7 +155,7 @@ HowToBuyAFastTagTour.addStep({
     text: "Move your mouse over 'PAYMENTS & TRANSFER",
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(3)",
-        on: "bottom"
+        on: "right"
     },
     advanceOn: {
         selector: '#topbar > div.light-orange > div > div:nth-child(3)',
@@ -217,8 +217,8 @@ HowToBuyAFastTagTour.addStep({
     title: "5/7",
     text: "Select the account you want the amount to be collected from.",
     attachTo: {
-        element: "#CustomFastTagFG\\.INITOR_ACCOUNT",
-        on: "bottom"
+        element: "#DispFormWithTableContent_DigiGold\\.R311116",
+        on: "top"
     },
     buttons: [
         {
