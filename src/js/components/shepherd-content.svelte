@@ -27,4 +27,7 @@
     outline: none;
     background-color: #000000;
   }
+  .shepherd-highlight-border {
+    border: 3px solid #ef7c00;
+  }
 </style>

@@ -47,6 +47,14 @@
             element: '.hero-welcome',
             on: 'bottom'
           },
+          when: {
+            show: function () {
+              document.querySelector(".hero-welcome").classList.add("custom-highlight-class");
+            },
+            hide: function () {
+              document.querySelector(".hero-welcome").classList.remove("custom-highlight-class");
+            },
+          },
 
           advanceOn: {
             selector: '.hero-welcome',
