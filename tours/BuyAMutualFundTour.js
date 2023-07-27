@@ -212,15 +212,21 @@ HowToBuyAFastTagTour.addStep({
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_3',
     title: '3/7',
-    text: 'Fill in the details of your vehicle to get a quote',
+    text: 'Fill in the details of your vehicle to get a quote.<br /> Click on next after filling all the details.',
     attachTo: {
         element: '#DispFormWithTableContent_DigiGold\\.R311112',
         on: 'top'
     },
-    advanceOn: {
-        selector: '#DispFormWithTableContent_DigiGold\\.R31111214\\.C23 > span > span > div > div > ul',
-        event: 'click'
-    },
+    buttons: [
+        {
+            text: 'Next',
+            action: HowToBuyAFastTagTour.next
+        },
+        {
+            text: 'Cancel',
+            action: HowToBuyAFastTagTour.cancel
+        }
+    ],
     when: {
         show: function () {
             document.querySelector("#DispFormWithTableContent_DigiGold\\.R311112").classList.add("shepherd-highlight-border");
@@ -238,13 +244,16 @@ HowToBuyAFastTagTour.addStep({
     text: 'You can edit the address you want your FastTag to be delivered.',
     attachTo: {
         element: '#DispFormWithTableContent_DigiGold\\.R3111131\\.C2',
-        on: 'right'
+        on: 'top'
     },
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next,
-            classes: 'shepherd-buton-secondary'
+            action: HowToBuyAFastTagTour.next
+        },
+        {
+            text: 'Cancel',
+            action: HowToBuyAFastTagTour.cancel
         }
     ],
     when: {

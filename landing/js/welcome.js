@@ -36,6 +36,9 @@
           block: 'center'
         }
       },
+      // floatingUIOptions: {
+      //   middleware: [offset({ mainAxis: 0, crossAxis: 12 })]
+      // },
       useModalOverlay: true,
       // This should add the first tour step
       steps: [
