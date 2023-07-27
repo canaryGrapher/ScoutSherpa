@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable max-lines */
 let BuyAMutualFundTour = new Shepherd.Tour({
     tourName: 'How to Buy a Mutual Fund?',
     instanceCaller: 'BuyAMutualFundTour',
@@ -10,15 +12,15 @@ let BuyAMutualFundTour = new Shepherd.Tour({
             behavior: 'smooth',
             block: 'center'
         },
-        arrow: true,
+        arrow: true
     },
-    useModalOverlay: false,
+    useModalOverlay: false
 });
 
 // General Notification
 BuyAMutualFundTour.addStep({
     id: 'BuyAMutualFundTour_1',
-    title: "1/7",
+    title: '1/7',
     text: 'Welcome to your retail internet banking dashboard. From here, we will show you how to buy a mutual fund.',
     buttons: [
         {
@@ -30,40 +32,40 @@ BuyAMutualFundTour.addStep({
             action: BuyAMutualFundTour.cancel
         }
     ],
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
+    pageLink: '/vpv/li/personal-banking/dashboardPage'
 });
 
 // Select the 'Investment and Insurance' button on the menubar on dashboard
 BuyAMutualFundTour.addStep({
-    id: "BuyAMutualFundTour_2",
-    title: "2/7",
-    text: "Move your mouse over Investments & Insurance",
+    id: 'BuyAMutualFundTour_2',
+    title: '2/7',
+    text: 'Move your mouse over Investments & Insurance',
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(5)",
-        on: "left"
+        element: '#topbar > div.light-orange > div > div:nth-child(5)',
+        on: 'left'
     },
     advanceOn: {
         selector: '#topbar > div.light-orange > div > div:nth-child(5)',
-        event: 'mouseover',
+        event: 'mouseover'
     },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
-})
+    pageLink: '/vpv/li/personal-banking/dashboardPage'
+});
 
 // Click on Buy Mutual Funds option in the drop-down menu > redirection
 BuyAMutualFundTour.addStep({
-    id: "BuyAMutualFundTour_3",
-    title: "3/7",
-    text: "Click on Buy Mutual Funds",
+    id: 'BuyAMutualFundTour_3',
+    title: '3/7',
+    text: 'Click on Buy Mutual Funds',
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(5) > div",
-        on: "left"
+        element: '#topbar > div.light-orange > div > div:nth-child(5) > div',
+        on: 'left'
     },
     advanceOn: {
         selector: '#topbar > div.light-orange > div > div:nth-child(5) > div',
-        event: 'click',
+        event: 'click'
     },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
-})
+    pageLink: '/vpv/li/personal-banking/dashboardPage'
+});
 
 //Click on view all button on the page where investment categories are displayed
 BuyAMutualFundTour.addStep({
@@ -71,16 +73,18 @@ BuyAMutualFundTour.addStep({
     title: '4/7',
     text: "Click 'View All'",
     attachTo: {
-
-        element: "#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > div > button.btn.btn-default.js-show",
-        on: "top"
+        element:
+            '#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > div > button.btn.btn-default.js-show',
+        on: 'top'
     },
     advanceOn: {
-        selector: '#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > div > button.btn.btn-default.js-show',
-        event: 'click',
+        selector:
+            '#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > div > button.btn.btn-default.js-show',
+        event: 'click'
     },
-    pageLink: "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails"
-})
+    pageLink:
+        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails'
+});
 
 // User clicks on any one category from the tiles displayed
 BuyAMutualFundTour.addStep({
@@ -88,52 +92,59 @@ BuyAMutualFundTour.addStep({
     title: '5/7',
     text: "<p>Let's Buy a Mutual Fund by Clicking on the Categories below</p><br /> <p style='text-align: right'>or click Next to search for funds manually</p>",
     attachTo: {
-        element: "#ListingTable3 > main > section:nth-child(3) > div > div > div.head-wrap > p",
-        on: "top"
+        element:
+            '#ListingTable3 > main > section:nth-child(3) > div > div > div.head-wrap > p',
+        on: 'top'
     },
     advanceOn: {
-        selector: '#ListingTable3 > main > section:nth-child(3) > div > div > div.head-wrap > p',
-        event: 'click',
+        selector:
+            '#ListingTable3 > main > section:nth-child(3) > div > div > div.head-wrap > p',
+        event: 'click'
     },
-    pageLink: "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails"
-})
+    pageLink:
+        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails'
+});
 
 // Click on "Invest Now" on any one of the suggested funds
 BuyAMutualFundTour.addStep({
     id: 'BuyAMutualFundTour_6',
     title: '6/7',
-    text: "Click <strong>Invest Now</strong> on the mutual fund of your choice.",
+    text: 'Click <strong>Invest Now</strong> on the mutual fund of your choice.',
     attachTo: {
-        element: "#MFfundslist > li:nth-child(1) > div",
-        on: "top"
+        element: '#MFfundslist > li:nth-child(1) > div',
+        on: 'top'
     },
     advanceOn: {
         selector: '#MFfundslist > li:nth-child(1) > div',
-        event: 'click',
+        event: 'click'
     },
-    pageLink: "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/WhatsNewFundsListing"
-})
+    pageLink:
+        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/WhatsNewFundsListing'
+});
 
 // user is suggested to select one type of transaction type
 BuyAMutualFundTour.addStep({
     id: 'BuyAMutualFundTour_7',
     title: '7/7',
-    text: "<p>Please select the required transaction type</p><ul><li><strong>SIP</strong> - Regular investment</li><li><strong>One time</strong> - Lumpsum investment</li><li><strong>FIP</strong> - Regular investment at a frequency of your choice</li></ul>",
+    text: '<p>Please select the required transaction type</p><ul><li><strong>SIP</strong> - Regular investment</li><li><strong>One time</strong> - Lumpsum investment</li><li><strong>FIP</strong> - Regular investment at a frequency of your choice</li></ul>',
     attachTo: {
-        element: "#MFfundsSellist > li > div > div > div.bf-cont.js-hidden.js-hidden0 > div > div > ul > li.form-item.typ-2 > div",
-        on: "top"
+        element:
+            '#MFfundsSellist > li > div > div > div.bf-cont.js-hidden.js-hidden0 > div > div > ul > li.form-item.typ-2 > div',
+        on: 'top'
     },
     advanceOn: {
-        selector: '#MFfundsSellist > li > div > div > div.bf-cont.js-hidden.js-hidden0 > div > div > ul > li.form-item.typ-2 > div',
-        event: 'click',
+        selector:
+            '#MFfundsSellist > li > div > div > div.bf-cont.js-hidden.js-hidden0 > div > div > ul > li.form-item.typ-2 > div',
+        event: 'click'
     },
-    pageLink: "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/FundSelectedListing-Edelweiss Multi Asset Allocation Fund Reg-G"
-})
+    pageLink:
+        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/FundSelectedListing-Edelweiss Multi Asset Allocation Fund Reg-G'
+});
 
 
 var HowToBuyAFastTagTour = new Shepherd.Tour({
-    tourName: "How to buy a ICICI FastTag",
-    instanceCaller: "HowToBuyAFastTagTour",
+    tourName: 'How to buy a ICICI FastTag',
+    instanceCaller: 'HowToBuyAFastTagTour',
     defaultStepOptions: {
         cancelIcon: {
             enabled: true
@@ -143,65 +154,91 @@ var HowToBuyAFastTagTour = new Shepherd.Tour({
             behavior: 'smooth',
             block: 'center'
         },
-        arrow: true,
+        arrow: true
     },
-    useModalOverlay: false,
+    useModalOverlay: false
 });
 
 // Select the 'PAYMENTS & TRANSFER' button on the menubar on dashboard
 HowToBuyAFastTagTour.addStep({
-    id: "HowToBuyAFastTagTour_1",
-    title: "1/7",
+    id: 'HowToBuyAFastTagTour_1',
+    title: '1/7',
     text: "Move your mouse over 'PAYMENTS & TRANSFER",
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(3)",
-        on: "right"
+        element: '#topbar > div.light-orange > div > div:nth-child(3)',
+        on: 'right'
     },
     advanceOn: {
         selector: '#topbar > div.light-orange > div > div:nth-child(3)',
-        event: 'mouseover',
+        event: 'mouseover'
     },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
-})
+    when: {
+        show: function () {
+            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").classList.add("shepherd-highlight-border");
+        },
+        hide: function () {
+            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").classList.remove("shepherd-highlight-border");
+        },
+    },
+    pageLink: '/vpv/li/personal-banking/dashboardPage'
+});
 
 // Select the 'Buy/Recharge FastTag' sub-link under 'Cards & Loans'
 HowToBuyAFastTagTour.addStep({
-    id: "HowToBuyAFastTagTour_2",
-    title: "2/7",
+    id: 'HowToBuyAFastTagTour_2',
+    title: '2/7',
     text: "Click on 'Buy/Recharge FastTag'",
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)",
-        on: "left"
+        element:
+            '#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)',
+        on: 'left'
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)",
-        event: 'click',
+        selector:
+            '#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)',
+        event: 'click'
     },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
-})
+    when: {
+        show: function () {
+            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)").classList.add("shepherd-highlight-border");
+        },
+        hide: function () {
+            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)").classList.remove("shepherd-highlight-border");
+        },
+    },
+    pageLink: '/vpv/li/personal-banking/dashboardPage'
+});
 
 HowToBuyAFastTagTour.addStep({
-    id: "HowToBuyAFastTagTour_3",
-    title: "3/7",
-    text: "Fill in the details of your vehicle to get a quote",
+    id: 'HowToBuyAFastTagTour_3',
+    title: '3/7',
+    text: 'Fill in the details of your vehicle to get a quote',
     attachTo: {
-        element: "#DispFormWithTableContent_DigiGold\\.R311112",
-        on: "top"
+        element: '#DispFormWithTableContent_DigiGold\\.R311112',
+        on: 'top'
     },
     advanceOn: {
-        selector: "#vehiclemodal",
-        event: 'click',
+        selector: '#vehiclemodal',
+        event: 'select'
     },
-    pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
-})
+    when: {
+        show: function () {
+            document.querySelector("#DispFormWithTableContent_DigiGold\\.R311112").classList.add("shepherd-highlight-border");
+        },
+        hide: function () {
+            document.querySelector("#DispFormWithTableContent_DigiGold\\.R311112").classList.remove("shepherd-highlight-border");
+        },
+    },
+    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
+});
 
 HowToBuyAFastTagTour.addStep({
-    id: "HowToBuyAFastTagTour_4",
-    title: "4/7",
-    text: "You can edit the address you want your FastTag to be delivered.",
+    id: 'HowToBuyAFastTagTour_4',
+    title: '4/7',
+    text: 'You can edit the address you want your FastTag to be delivered.',
     attachTo: {
-        element: "#arrowImage",
-        on: "bottom"
+        element: '#DispFormWithTableContent_DigiGold\\.R3111131\\.C2',
+        on: 'right'
     },
     buttons: [
         {
@@ -210,16 +247,24 @@ HowToBuyAFastTagTour.addStep({
             classes: 'shepherd-buton-secondary'
         }
     ],
-    pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
-})
+    when: {
+        show: function () {
+            document.querySelector("#DispFormWithTableContent_DigiGold\\.R3111131\\.C2").classList.add("shepherd-highlight-border");
+        },
+        hide: function () {
+            document.querySelector("#DispFormWithTableContent_DigiGold\\.R3111131\\.C2").classList.remove("shepherd-highlight-border");
+        },
+    },
+    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
+});
 
 HowToBuyAFastTagTour.addStep({
-    id: "HowToBuyAFastTagTour_5",
-    title: "5/7",
-    text: "Select the account you want the amount to be collected from.",
+    id: 'HowToBuyAFastTagTour_5',
+    title: '5/7',
+    text: 'Select the account you want the amount to be collected from.',
     attachTo: {
-        element: "#DispFormWithTableContent_DigiGold\\.R311116",
-        on: "top"
+        element: '#DispFormWithTableContent_DigiGold\\.R311116',
+        on: 'top'
     },
     buttons: [
         {
@@ -228,38 +273,63 @@ HowToBuyAFastTagTour.addStep({
             classes: 'shepherd-buton-secondary'
         }
     ],
-    pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
-})
+    when: {
+        show: function () {
+            document.querySelector("#DispFormWithTableContent_DigiGold\\.R311116").classList.add("shepherd-highlight-border");
+        },
+        hide: function () {
+            document.querySelector("#DispFormWithTableContent_DigiGold\\.R311116").classList.remove("shepherd-highlight-border");
+        },
+    },
+    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
+});
 
 HowToBuyAFastTagTour.addStep({
-    id: "HowToBuyAFastTagTour_6",
-    title: "6/7",
-    text: "After you have read the <u>Terms and Conditions</u>, click on the checkbox to accept.",
+    id: 'HowToBuyAFastTagTour_6',
+    title: '6/7',
+    text: 'After you have read the <u>Terms and Conditions</u>, click on the checkbox to accept.',
     attachTo: {
-        element: "#TERMS_AND_COND_FLAG",
-        on: "top"
+        element: '#DispFormWithTableContent_DigiGold\\.Ra0dth_mr\\.C1',
+        on: 'top'
     },
     advanceOn: {
-        selector: "#LabelForControl21674903",
-        event: 'click',
+        selector: '#TERMS_AND_COND_FLAG',
+        event: 'change'
     },
-    pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
-})
+    when: {
+        show: function () {
+            document.querySelector("#DispFormWithTableContent_DigiGold\\.Ra0dth_mr\\.C1").classList.add("shepherd-highlight-border");
+        },
+        hide: function () {
+            document.querySelector("#DispFormWithTableContent_DigiGold\\.Ra0dth_mr\\.C1").classList.remove("shepherd-highlight-border");
+        },
+    },
+    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
+});
 
 HowToBuyAFastTagTour.addStep({
-    id: "HowToBuyAFastTagTour_7",
-    title: "7/7",
-    text: "Click on Proceed to pay the amount and buy your FastTag",
+    id: 'HowToBuyAFastTagTour_7',
+    title: '7/7',
+    text: 'Click on Proceed to pay the amount and buy your FastTag',
     attachTo: {
-        element: "#DispFormWithTableContent_DigiGold\\.R3121\\.C1",
-        on: "right"
+        element: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
+        on: 'right'
     },
     advanceOn: {
-        selector: "#DispFormWithTableContent_DigiGold\\.R3121\\.C1",
-        event: 'click',
+        selector: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
+        event: 'click'
     },
-    pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
-})
+    when: {
+        show: function () {
+            document.querySelector("#DispFormWithTableContent_DigiGold\\.R3121\\.C1").classList.add("shepherd-highlight-border");
+        },
+        hide: function () {
+            document.querySelector("#DispFormWithTableContent_DigiGold\\.R3121\\.C1").classList.remove("shepherd-highlight-border");
+        },
+    },
+    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
+});
+
 
 var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
     tourName: "How to make ICICI bank credit card payment?",
@@ -418,7 +488,7 @@ window.addEventListener('DOMContentLoaded', () => {
             HowToBuyAFastTagTour.show(Number(currentStepIndex));
         }
     }
-    
+
     if (currentTourIndex === 'HowToMakeICICIBankCreditCardPaymentTour') {
         console.log("Credit card payment tour in progress")
         if (currentStepIndex != '1') {
@@ -427,11 +497,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     if (currentTourIndex === 'BuyAMutualFundTour') {
-         console.log("Buying a mutual fund tour under progress")
+        console.log("Buying a mutual fund tour under progress")
         if (currentStepIndex != '1') {
             BuyAMutualFundTour.show(Number(currentStepIndex));
         }
     }
 
-    
+
 }, false) 
