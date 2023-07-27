@@ -278,8 +278,11 @@ HowToBuyAFastTagTour.addStep({
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next,
-            classes: 'shepherd-buton-secondary'
+            action: HowToBuyAFastTagTour.next
+        },
+        {
+            text: 'Cancel',
+            action: HowToBuyAFastTagTour.cancel
         }
     ],
     when: {
