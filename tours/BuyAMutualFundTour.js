@@ -219,7 +219,7 @@ HowToBuyAFastTagTour.addStep({
     },
     advanceOn: {
         selector: '#vehiclemodal',
-        event: 'select'
+        event: 'change'
     },
     when: {
         show: function () {
