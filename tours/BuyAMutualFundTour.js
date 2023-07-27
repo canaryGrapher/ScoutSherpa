@@ -218,8 +218,8 @@ HowToBuyAFastTagTour.addStep({
         on: 'top'
     },
     advanceOn: {
-        selector: '#vehiclemodal',
-        event: 'change'
+        selector: '#DispFormWithTableContent_DigiGold\\.R31111214\\.C23 > span > span > div > div > ul',
+        event: 'click'
     },
     when: {
         show: function () {
