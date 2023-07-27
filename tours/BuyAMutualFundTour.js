@@ -206,7 +206,8 @@ HowToBuyAFastTagTour.addStep({
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next
+            action: HowToBuyAFastTagTour.next,
+            classes: 'shepherd-buton-secondary'
         }
     ],
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
@@ -223,7 +224,8 @@ HowToBuyAFastTagTour.addStep({
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next
+            action: HowToBuyAFastTagTour.next,
+            classes: 'shepherd-buton-secondary'
         }
     ],
     pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
