@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+// eslint-disable-next-line no-undef
 let BuyAMutualFundTour = new Shepherd.Tour({
     tourName: 'How to Buy a Mutual Fund?',
     instanceCaller: 'BuyAMutualFundTour',
@@ -142,6 +143,7 @@ BuyAMutualFundTour.addStep({
 });
 
 
+// eslint-disable-next-line no-undef
 var HowToBuyAFastTagTour = new Shepherd.Tour({
     tourName: 'How to buy a ICICI FastTag',
     instanceCaller: 'HowToBuyAFastTagTour',
@@ -244,7 +246,7 @@ HowToBuyAFastTagTour.addStep({
     text: 'You can edit the address you want your FastTag to be delivered.',
     attachTo: {
         element: '#DispFormWithTableContent_DigiGold\\.R3111131\\.C2',
-        on: 'top'
+        on: 'left'
     },
     buttons: [
         {
@@ -273,7 +275,7 @@ HowToBuyAFastTagTour.addStep({
     text: 'Select the account you want the amount to be collected from.',
     attachTo: {
         element: '#DispFormWithTableContent_DigiGold\\.R311116',
-        on: 'top'
+        on: 'left'
     },
     buttons: [
         {
@@ -302,7 +304,7 @@ HowToBuyAFastTagTour.addStep({
     text: 'After you have read the <u>Terms and Conditions</u>, click on the checkbox to accept.',
     attachTo: {
         element: '#DispFormWithTableContent_DigiGold\\.Ra0dth_mr\\.C1',
-        on: 'top'
+        on: 'right'
     },
     advanceOn: {
         selector: '#TERMS_AND_COND_FLAG',
@@ -325,7 +327,7 @@ HowToBuyAFastTagTour.addStep({
     text: 'Click on Proceed to pay the amount and buy your FastTag',
     attachTo: {
         element: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
-        on: 'right'
+        on: 'bottom'
     },
     advanceOn: {
         selector: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
@@ -343,6 +345,7 @@ HowToBuyAFastTagTour.addStep({
 });
 
 
+// eslint-disable-next-line no-undef
 var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
     tourName: "How to make ICICI bank credit card payment?",
     instanceCaller: "HowToMakeICICIBankCreditCardPaymentTour",
