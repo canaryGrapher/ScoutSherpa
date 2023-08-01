@@ -210,7 +210,6 @@ HowToBuyAFastTagTour.addStep({
     pageLink: '/vpv/li/personal-banking/dashboardPage'
 });
 
-if (document.querySelector("#FastagRech\\.Rowset1 > ul > li.bar-tab-active.right-border").classList.contains('bar-tab-active')) {
     HowToBuyAFastTagTour.addStep({
         id: 'HowToBuyAFastTagTour_2b',
         title: '2b/7',
@@ -219,6 +218,15 @@ if (document.querySelector("#FastagRech\\.Rowset1 > ul > li.bar-tab-active.right
             element: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
             on: 'bottom'
         },
+        beforeShowPromise: function () {
+        return new Promise(function (resolve, reject) {
+            if (document.querySelector("#FastagRech\\.Rowset1 > ul > li.bar-tab-active.right-border").classList.contains('bar-tab-active')) {
+                resolve()
+            } else {
+                reject()
+            }
+        })
+    },
         advanceOn: {
             selector: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
             event: 'click'
@@ -233,7 +241,7 @@ if (document.querySelector("#FastagRech\\.Rowset1 > ul > li.bar-tab-active.right
         },
         pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
     });
-}
+
 
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_3',
