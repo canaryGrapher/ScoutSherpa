@@ -142,7 +142,6 @@ BuyAMutualFundTour.addStep({
         '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/FundSelectedListing-Edelweiss Multi Asset Allocation Fund Reg-G'
 });
 
-
 // eslint-disable-next-line no-undef
 var HowToBuyAFastTagTour = new Shepherd.Tour({
     tourName: 'How to buy a ICICI FastTag',
@@ -167,19 +166,19 @@ HowToBuyAFastTagTour.addStep({
     title: '1/7',
     text: "Move your mouse over 'PAYMENTS & TRANSFER",
     attachTo: {
-        element: '#topbar > div.light-orange > div > div:nth-child(3)',
+        element: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])",
         on: 'right'
     },
     advanceOn: {
-        selector: '#topbar > div.light-orange > div > div:nth-child(3)',
+        selector: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])",
         event: 'mouseover'
     },
     when: {
         show: function () {
-            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").classList.add("shepherd-highlight-border");
+            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])").classList.add("shepherd-highlight-border");
         },
         hide: function () {
-            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").classList.remove("shepherd-highlight-border");
+            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])").classList.remove("shepherd-highlight-border");
         },
     },
     pageLink: '/vpv/li/personal-banking/dashboardPage'
@@ -210,6 +209,31 @@ HowToBuyAFastTagTour.addStep({
     },
     pageLink: '/vpv/li/personal-banking/dashboardPage'
 });
+
+if (document.querySelector("#FastagRech\\.Rowset1 > ul > li.bar-tab-active.right-border").classList.contains('bar-tab-active')) {
+    HowToBuyAFastTagTour.addStep({
+        id: 'HowToBuyAFastTagTour_2b',
+        title: '2b/7',
+        text: 'Click on the PURCHASE tab.',
+        attachTo: {
+            element: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
+            on: 'bottom'
+        },
+        advanceOn: {
+            selector: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
+            event: 'click'
+        },
+        when: {
+            show: function () {
+                document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(1)").classList.add("shepherd-highlight-border");
+            },
+            hide: function () {
+                document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(1)").classList.remove("shepherd-highlight-border");
+            },
+        },
+        pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
+    });
+}
 
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_3',
