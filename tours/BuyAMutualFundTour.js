@@ -210,37 +210,36 @@ HowToBuyAFastTagTour.addStep({
     pageLink: '/vpv/li/personal-banking/dashboardPage'
 });
 
-    HowToBuyAFastTagTour.addStep({
-        id: 'HowToBuyAFastTagTour_2b',
-        title: '2b/7',
-        text: 'Click on the PURCHASE tab.',
-        attachTo: {
-            element: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
-            on: 'bottom'
-        },
-        beforeShowPromise: function () {
-        return new Promise(function (resolve, reject) {
-            if (document.querySelector("#FastagRech\\.Rowset1 > ul > li.bar-tab-active.right-border").classList.contains('bar-tab-active')) {
+HowToBuyAFastTagTour.addStep({
+    id: 'HowToBuyAFastTagTour_2b',
+    title: '2b/7',
+    text: 'Click on the PURCHASE tab.',
+    attachTo: {
+        element: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
+        on: 'bottom'
+    },
+    beforeShowPromise: function () {
+        return new Promise(function (resolve) {
+            const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li.bar-tab-active.right-border")
+            if (element.classList.contains('bar-tab-active')) {
                 resolve()
-            } else {
-                reject()
             }
         })
     },
-        advanceOn: {
-            selector: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
-            event: 'click'
+    advanceOn: {
+        selector: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
+        event: 'click'
+    },
+    when: {
+        show: function () {
+            document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(1)").classList.add("shepherd-highlight-border");
         },
-        when: {
-            show: function () {
-                document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(1)").classList.add("shepherd-highlight-border");
-            },
-            hide: function () {
-                document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(1)").classList.remove("shepherd-highlight-border");
-            },
+        hide: function () {
+            document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(1)").classList.remove("shepherd-highlight-border");
         },
-        pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
-    });
+    },
+    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
+});
 
 
 HowToBuyAFastTagTour.addStep({
