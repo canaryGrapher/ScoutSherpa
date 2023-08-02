@@ -242,7 +242,7 @@ HowToBuyAFastTagTour.addStep({
             document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(1)").classList.remove("shepherd-highlight-border");
         },
     },
-    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
+    pageLink: '/vpv/li/personal-banking/FASTAG/TAGRECHARGE'
 });
 
 
