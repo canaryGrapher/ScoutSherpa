@@ -161,24 +161,25 @@ var HowToBuyAFastTagTour = new Shepherd.Tour({
 });
 
 // Select the 'PAYMENTS & TRANSFER' button on the menubar on dashboard
+document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)")
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_1',
     title: '1/7',
     text: "Move your mouse over 'PAYMENTS & TRANSFER",
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])",
+        element: "#topbar > div.light-orange > div > div:nth-child(3)",
         on: 'right'
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])",
+        selector: "#topbar > div.light-orange > div > div:nth-child(3)",
         event: 'mouseover'
     },
     when: {
         show: function () {
-            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])").classList.add("shepherd-highlight-border");
+            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").classList.add("shepherd-highlight-border");
         },
         hide: function () {
-            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])").classList.remove("shepherd-highlight-border");
+            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").classList.remove("shepherd-highlight-border");
         },
     },
     pageLink: '/vpv/li/personal-banking/dashboardPage'
@@ -191,20 +192,20 @@ HowToBuyAFastTagTour.addStep({
     text: "Click on 'Buy/Recharge FastTag'",
     attachTo: {
         element:
-            '#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)',
+            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/ L001 / consumer / theme / dashboardRevamp / topMenuImages / RTXNS / FASTAG.svg'])",
         on: 'left'
     },
     advanceOn: {
         selector:
-            '#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)',
+            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/ L001 / consumer / theme / dashboardRevamp / topMenuImages / RTXNS / FASTAG.svg'])",
         event: 'click'
     },
     when: {
         show: function () {
-            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)").classList.add("shepherd-highlight-border");
+            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])").classList.add("shepherd-highlight-border");
         },
         hide: function () {
-            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:nth-child(4)").classList.remove("shepherd-highlight-border");
+            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])").classList.remove("shepherd-highlight-border");
         },
     },
     pageLink: '/vpv/li/personal-banking/dashboardPage'

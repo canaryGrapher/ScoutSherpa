@@ -48,7 +48,7 @@ export class Tour extends Evented {
     autoBind(this);
     const defaultTourOptions = {
       exitOnEsc: true,
-      keyboardNavigation: true,
+      keyboardNavigation: true
     };
     this.options = Object.assign({}, defaultTourOptions, options);
     this.classPrefix = normalizePrefix(this.options.classPrefix);
