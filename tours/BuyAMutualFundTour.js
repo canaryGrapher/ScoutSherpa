@@ -192,12 +192,12 @@ HowToBuyAFastTagTour.addStep({
     text: "Click on 'Buy/Recharge FastTag'",
     attachTo: {
         element:
-            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/ L001 / consumer / theme / dashboardRevamp / topMenuImages / RTXNS / FASTAG.svg'])",
+            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])",
         on: 'left'
     },
     advanceOn: {
         selector:
-            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/ L001 / consumer / theme / dashboardRevamp / topMenuImages / RTXNS / FASTAG.svg'])",
+            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])",
         event: 'click'
     },
     when: {

@@ -98,7 +98,7 @@ export class Tour extends Evented {
     return step;
   }
 
-  /** 
+  /**
    * Add multiple steps to the tour
    * @param {Array<object> | Array<Step>} steps The steps to add to the tour
    */
@@ -253,7 +253,7 @@ export class Tour extends Evented {
     console.log('Current step index is ', _currentStepIndex);
     console.log('Current tour instance caller is ', _tourInstanceCaller);
 
-    // check if the step data in the local storage is as per the current step 
+    // check if the step data in the local storage is as per the current step
     const getPageFromArray = (dataArray) => {
       const data = dataArray.find((item) => {
         if (item.hasOwnProperty('page')) {
@@ -263,7 +263,7 @@ export class Tour extends Evented {
         } else {
           return null;
         }
-      })
+      });
       return data.page || data.vpv;
     };
     const step = isString(key) ? this.getById(key) : this.steps[key];
@@ -296,7 +296,7 @@ export class Tour extends Evented {
         }
       }
     } else {
-      console.log("page VPV didn't match, skipping step")
+      console.log("page VPV didn't match, skipping step");
     }
   }
 
