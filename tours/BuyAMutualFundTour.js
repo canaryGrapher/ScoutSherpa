@@ -220,13 +220,11 @@ HowToBuyAFastTagTour.addStep({
     },
     beforeShowPromise: function () {
         return new Promise(function (resolve, reject) {
-            window.onload = function () {
-                const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(2)")
-                if (element.classList.contains('bar-tab-active')) {
-                    resolve()
-                } else {
-                    reject()
-                }
+            const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(2)")
+            if (element.classList.contains('bar-tab-active')) {
+                resolve()
+            } else {
+                reject()
             }
         })
     },
