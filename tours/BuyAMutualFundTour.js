@@ -174,14 +174,6 @@ HowToBuyAFastTagTour.addStep({
         selector: "#topbar > div.light-orange > div > div:nth-child(3)",
         event: 'mouseover'
     },
-    when: {
-        show: function () {
-            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").classList.add("shepherd-highlight-border");
-        },
-        hide: function () {
-            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").classList.remove("shepherd-highlight-border");
-        },
-    },
     pageLink: '/vpv/li/personal-banking/dashboardPage'
 });
 
@@ -199,14 +191,6 @@ HowToBuyAFastTagTour.addStep({
         selector:
             "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])",
         event: 'click'
-    },
-    when: {
-        show: function () {
-            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])").classList.add("shepherd-highlight-border");
-        },
-        hide: function () {
-            document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])").classList.remove("shepherd-highlight-border");
-        },
     },
     pageLink: '/vpv/li/personal-banking/dashboardPage'
 });
@@ -233,14 +217,6 @@ HowToBuyAFastTagTour.addStep({
         selector: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
         event: 'click'
     },
-    when: {
-        show: function () {
-            document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(1)").classList.add("shepherd-highlight-border");
-        },
-        hide: function () {
-            document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(1)").classList.remove("shepherd-highlight-border");
-        },
-    },
     pageLink: '/vpv/li/personal-banking/FASTAG/TAGRECHARGE'
 });
 
@@ -263,14 +239,6 @@ HowToBuyAFastTagTour.addStep({
             action: HowToBuyAFastTagTour.cancel
         }
     ],
-    when: {
-        show: function () {
-            document.querySelector("#DispFormWithTableContent_DigiGold\\.R311112").classList.add("shepherd-highlight-border");
-        },
-        hide: function () {
-            document.querySelector("#DispFormWithTableContent_DigiGold\\.R311112").classList.remove("shepherd-highlight-border");
-        },
-    },
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
 });
 
@@ -292,14 +260,6 @@ HowToBuyAFastTagTour.addStep({
             action: HowToBuyAFastTagTour.cancel
         }
     ],
-    when: {
-        show: function () {
-            document.querySelector("#DispFormWithTableContent_DigiGold\\.R3111131\\.C2").classList.add("shepherd-highlight-border");
-        },
-        hide: function () {
-            document.querySelector("#DispFormWithTableContent_DigiGold\\.R3111131\\.C2").classList.remove("shepherd-highlight-border");
-        },
-    },
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
 });
 
@@ -321,14 +281,6 @@ HowToBuyAFastTagTour.addStep({
             action: HowToBuyAFastTagTour.cancel
         }
     ],
-    when: {
-        show: function () {
-            document.querySelector("#DispFormWithTableContent_DigiGold\\.R311116").classList.add("shepherd-highlight-border");
-        },
-        hide: function () {
-            document.querySelector("#DispFormWithTableContent_DigiGold\\.R311116").classList.remove("shepherd-highlight-border");
-        },
-    },
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
 });
 
@@ -344,14 +296,6 @@ HowToBuyAFastTagTour.addStep({
         selector: '#TERMS_AND_COND_FLAG',
         event: 'change'
     },
-    when: {
-        show: function () {
-            document.querySelector("#DispFormWithTableContent_DigiGold\\.Ra0dth_mr\\.C1").classList.add("shepherd-highlight-border");
-        },
-        hide: function () {
-            document.querySelector("#DispFormWithTableContent_DigiGold\\.Ra0dth_mr\\.C1").classList.remove("shepherd-highlight-border");
-        },
-    },
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
 });
 
@@ -366,14 +310,6 @@ HowToBuyAFastTagTour.addStep({
     advanceOn: {
         selector: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
         event: 'click'
-    },
-    when: {
-        show: function () {
-            document.querySelector("#DispFormWithTableContent_DigiGold\\.R3121\\.C1").classList.add("shepherd-highlight-border");
-        },
-        hide: function () {
-            document.querySelector("#DispFormWithTableContent_DigiGold\\.R3121\\.C1").classList.remove("shepherd-highlight-border");
-        },
     },
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
 });

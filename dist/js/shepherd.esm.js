@@ -1,7 +1,5 @@
 /*! scoutsherpa.js 11.0.1 */
 
-
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var isMergeableObject = function isMergeableObject(value) {
   return isNonNullObject(value) && !isSpecial(value);
 };
@@ -460,22 +458,6 @@ const computePosition$1 = async (reference, floating, config) => {
   } = config;
   const validMiddleware = middleware.filter(Boolean);
   const rtl = await (platform.isRTL == null ? void 0 : platform.isRTL(floating));
-  {
-    if (platform == null) {
-      console.error(['Floating UI: `platform` property was not passed to config. If you', 'want to use Floating UI on the web, install @floating-ui/dom', 'instead of the /core package. Otherwise, you can create your own', '`platform`: https://floating-ui.com/docs/platform'].join(' '));
-    }
-    if (validMiddleware.filter(_ref => {
-      let {
-        name
-      } = _ref;
-      return name === 'autoPlacement' || name === 'flip';
-    }).length > 1) {
-      throw new Error(['Floating UI: duplicate `flip` and/or `autoPlacement` middleware', 'detected. This will lead to an infinite loop. Ensure only one of', 'either has been passed to the `middleware` array.'].join(' '));
-    }
-    if (!reference || !floating) {
-      console.error(['Floating UI: The reference and/or floating element was not defined', 'when `computePosition()` was called. Ensure that both elements have', 'been created and can be measured.'].join(' '));
-    }
-  }
   let rects = await platform.getElementRects({
     reference,
     floating,
@@ -517,11 +499,6 @@ const computePosition$1 = async (reference, floating, config) => {
     middlewareData = _extends({}, middlewareData, {
       [name]: _extends({}, middlewareData[name], data)
     });
-    {
-      if (resetCount > 50) {
-        console.warn(['Floating UI: The middleware lifecycle appears to be running in an', 'infinite loop. This is usually caused by a `reset` continually', 'being returned without a break condition.'].join(' '));
-      }
-    }
     if (reset && resetCount <= 50) {
       resetCount++;
       if (typeof reset === 'object') {
@@ -667,9 +644,6 @@ const arrow = options => ({
       elements
     } = state;
     if (element == null) {
-      {
-        console.warn('Floating UI: No `element` was passed to the `arrow` middleware.');
-      }
       return {};
     }
     const paddingObject = getSideObjectFromPadding(padding);
@@ -3818,6 +3792,7 @@ class Step extends Evented {
     const target = this.target || document.body;
     target.classList.add(`${this.classPrefix}shepherd-enabled`);
     target.classList.add(`${this.classPrefix}shepherd-target`);
+    target.classList.add(`shepherd-highlight-border`);
     content.classList.add('shepherd-enabled');
     this.trigger('show');
   }
@@ -3853,7 +3828,7 @@ class Step extends Evented {
     if (this.options.highlightClass) {
       target.classList.remove(this.options.highlightClass);
     }
-    target.classList.remove('shepherd-target-click-disabled', `${this.classPrefix}shepherd-enabled`, `${this.classPrefix}shepherd-target`);
+    target.classList.remove('shepherd-target-click-disabled', `${this.classPrefix}shepherd-enabled`, `${this.classPrefix}shepherd-target`, 'shepherd-highlight-border');
   }
 }
 
@@ -4265,7 +4240,7 @@ class Tour extends Evented {
     return step;
   }
 
-  /** 
+  /**
    * Add multiple steps to the tour
    * @param {Array<object> | Array<Step>} steps The steps to add to the tour
    */
@@ -4417,11 +4392,13 @@ class Tour extends Evented {
     console.log('Current step index is ', _currentStepIndex);
     console.log('Current tour instance caller is ', _tourInstanceCaller);
 
-    // check if the step data in the local storage is as per the current step 
+    // check if the step data in the local storage is as per the current step
     const getPageFromArray = dataArray => {
       const data = dataArray.find(item => {
+        // eslint-disable-next-line no-prototype-builtins
         if (item.hasOwnProperty('page')) {
           return item.page;
+          // eslint-disable-next-line no-prototype-builtins
         } else if (item.hasOwnProperty('vpv')) {
           return item.vpv;
         } else {
@@ -4433,27 +4410,27 @@ class Tour extends Evented {
     const step = isString(key) ? this.getById(key) : this.steps[key];
     let pageVPV = getPageFromArray(window.dataLayer);
     console.log('Current page VPV is ', pageVPV);
-    console.log('Current step page link is ', step.options.pageLink);
-    if (_tourInstanceCaller === this.options.instanceCaller && pageVPV === step.options.pageLink) {
-      console.log('Page VPV matched, loading step');
-      if (step) {
-        this._updateStateBeforeShow();
-        const shouldSkipStep = isFunction(step.options.showOn) && !step.options.showOn();
+    console.log('Current step VPV is ', step.options.pageLink);
+    console.log('Page VPV matched, loading step');
+    if (step) {
+      this._updateStateBeforeShow();
+      const shouldSkipStep = isFunction(step.options.showOn) && !step.options.showOn();
 
-        // If `showOn` returns false, we want to skip the step, otherwise, show the step like normal
-        if (shouldSkipStep) {
-          this._skipStep(step, forward);
-        } else {
+      // If `showOn` returns false, we want to skip the step, otherwise, show the step like normal
+      if (shouldSkipStep) {
+        this._skipStep(step, forward);
+      } else {
+        if (_tourInstanceCaller === this.options.instanceCaller && pageVPV === step.options.pageLink) {
           this.trigger('show', {
             step,
             previous: this.currentStep
           });
           this.currentStep = step;
           step.show();
+        } else {
+          console.log("page VPV didn't match, skipping step");
         }
       }
-    } else {
-      console.log("page VPV didn't match, skipping step");
     }
   }
 

@@ -256,8 +256,10 @@ export class Tour extends Evented {
     // check if the step data in the local storage is as per the current step
     const getPageFromArray = (dataArray) => {
       const data = dataArray.find((item) => {
+        // eslint-disable-next-line no-prototype-builtins
         if (item.hasOwnProperty('page')) {
           return item.page;
+          // eslint-disable-next-line no-prototype-builtins
         } else if (item.hasOwnProperty('vpv')) {
           return item.vpv;
         } else {
@@ -269,23 +271,23 @@ export class Tour extends Evented {
     const step = isString(key) ? this.getById(key) : this.steps[key];
     let pageVPV = getPageFromArray(window.dataLayer);
     console.log('Current page VPV is ', pageVPV);
-    console.log('Current step page link is ', step.options.pageLink);
+    console.log('Current step VPV is ', step.options.pageLink);
 
-    if (
-      _tourInstanceCaller === this.options.instanceCaller &&
-      pageVPV === step.options.pageLink
-    ) {
-      console.log('Page VPV matched, loading step');
+    console.log('Page VPV matched, loading step');
 
-      if (step) {
-        this._updateStateBeforeShow();
-        const shouldSkipStep =
-          isFunction(step.options.showOn) && !step.options.showOn();
+    if (step) {
+      this._updateStateBeforeShow();
+      const shouldSkipStep =
+        isFunction(step.options.showOn) && !step.options.showOn();
 
-        // If `showOn` returns false, we want to skip the step, otherwise, show the step like normal
-        if (shouldSkipStep) {
-          this._skipStep(step, forward);
-        } else {
+      // If `showOn` returns false, we want to skip the step, otherwise, show the step like normal
+      if (shouldSkipStep) {
+        this._skipStep(step, forward);
+      } else {
+        if (
+          _tourInstanceCaller === this.options.instanceCaller &&
+          pageVPV === step.options.pageLink
+        ) {
           this.trigger('show', {
             step,
             previous: this.currentStep
@@ -293,10 +295,10 @@ export class Tour extends Evented {
 
           this.currentStep = step;
           step.show();
+        } else {
+          console.log("page VPV didn't match, skipping step");
         }
       }
-    } else {
-      console.log("page VPV didn't match, skipping step");
     }
   }
 

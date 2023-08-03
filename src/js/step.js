@@ -126,11 +126,8 @@ export class Step extends Evented {
      * @private
      */
     this._resolvedAttachTo = null;
-
     autoBind(this);
-
     this._setOptions(options);
-
     return this;
   }
 
@@ -422,6 +419,7 @@ export class Step extends Evented {
     const target = this.target || document.body;
     target.classList.add(`${this.classPrefix}shepherd-enabled`);
     target.classList.add(`${this.classPrefix}shepherd-target`);
+    target.classList.add(`shepherd-highlight-border`);
     content.classList.add('shepherd-enabled');
 
     this.trigger('show');
@@ -463,11 +461,11 @@ export class Step extends Evented {
     if (this.options.highlightClass) {
       target.classList.remove(this.options.highlightClass);
     }
-
     target.classList.remove(
       'shepherd-target-click-disabled',
       `${this.classPrefix}shepherd-enabled`,
-      `${this.classPrefix}shepherd-target`
+      `${this.classPrefix}shepherd-target`,
+      'shepherd-highlight-border'
     );
   }
 }
