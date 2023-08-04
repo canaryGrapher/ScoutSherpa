@@ -160,7 +160,6 @@ var HowToBuyAFastTagTour = new Shepherd.Tour({
 });
 
 // Select the 'PAYMENTS & TRANSFER' button on the menubar on dashboard
-document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)")
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_1',
     title: '1/7',
