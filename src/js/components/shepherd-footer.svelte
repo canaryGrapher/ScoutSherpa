@@ -6,7 +6,7 @@
   $: buttons = step.options.buttons;
 </script>
 
-<footer class="shepherd-footer">
+<div class="shepherd-footer">
   <p class="footer-text">{tourName}</p>
   <div class="button-container">
     {#if buttons}
@@ -15,7 +15,7 @@
       {/each}
     {/if}
   </div>
-</footer>
+</div>
 
 <style global>
   .footer-text {
