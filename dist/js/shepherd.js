@@ -2456,32 +2456,32 @@
 	  };
 	}
 	function create_fragment$7(ctx) {
-	  let footer;
+	  let div1;
 	  let p;
 	  let t0;
 	  let t1;
-	  let div;
+	  let div0;
 	  let current;
 	  let if_block = /*buttons*/ctx[2] && create_if_block$3(ctx);
 	  return {
 	    c() {
-	      footer = element("footer");
+	      div1 = element("div");
 	      p = element("p");
 	      t0 = text( /*tourName*/ctx[1]);
 	      t1 = space();
-	      div = element("div");
+	      div0 = element("div");
 	      if (if_block) if_block.c();
 	      attr(p, "class", "footer-text");
-	      attr(div, "class", "button-container");
-	      attr(footer, "class", "shepherd-footer");
+	      attr(div0, "class", "button-container");
+	      attr(div1, "class", "shepherd-footer");
 	    },
 	    m(target, anchor) {
-	      insert(target, footer, anchor);
-	      append(footer, p);
+	      insert(target, div1, anchor);
+	      append(div1, p);
 	      append(p, t0);
-	      append(footer, t1);
-	      append(footer, div);
-	      if (if_block) if_block.m(div, null);
+	      append(div1, t1);
+	      append(div1, div0);
+	      if (if_block) if_block.m(div0, null);
 	      current = true;
 	    },
 	    p(ctx, _ref) {
@@ -2497,7 +2497,7 @@
 	          if_block = create_if_block$3(ctx);
 	          if_block.c();
 	          transition_in(if_block, 1);
-	          if_block.m(div, null);
+	          if_block.m(div0, null);
 	        }
 	      } else if (if_block) {
 	        group_outros();
@@ -2517,7 +2517,7 @@
 	      current = false;
 	    },
 	    d(detaching) {
-	      if (detaching) detach(footer);
+	      if (detaching) detach(div1);
 	      if (if_block) if_block.d();
 	    }
 	  };
