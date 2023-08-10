@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', function () {
         var button = document.createElement("button");
         button.innerHTML = "Guide Me";
         // button.classList.add("shepherd-button-guide-me");
-        button.style.cssText = "position: fixed; left: 0; top: 50 %; z-index: 500; padding: 5px 13px; border-radius: 5px 5px 0 0; border-color: rgb(239, 124, 0); color: #ffffff; background-color: rgb(239, 124, 0); transform: translate(0, -50%) rotate(90deg); cursor: pointer;"
+        button.style.cssText = "position: fixed; left: 0; top: 50%; z-index: 500; padding: 5px 13px; border-radius: 5px 5px 0 0; border-color: rgb(239, 124, 0); color: #ffffff; background-color: rgb(239, 124, 0); transform: translate(-30px, 0%) rotate(90deg); cursor: pointer;"
         if (matchedLink.tour === "WhatsOnBankAccountPageGuideMe") {
             button.onclick = function () {
                 WhatsOnBankAccountPageGuideMe.start();
@@ -442,7 +442,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
     title: "3/8",
     text: "List of all accounts with summary is displayed here. Select that account using the radio button to interact with it.",
     attachTo: {
-        element: "#ListTableWithCtrlsDEH\\.Rowset1",
+        element: "#SummaryList",
         on: "bottom"
     },
     buttons: [
@@ -461,9 +461,9 @@ WhatsOnBankAccountPageGuideMe.addStep({
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_4",
     title: "4/8",
-    text: "For the selected account, use the following buttons to interact with it. You can View the last 10 transactions, or get a detailed statement.",
+    text: "For the selected account, use the following button to view the last 10 transactions.",
     attachTo: {
-        element: "#ListTableWithCtrlsDEH\\.Rb1_mr",
+        element: "#VIEW_MINI_STATEMENT",
         on: "bottom"
     },
     buttons: [
@@ -484,7 +484,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
     title: "5/8",
     text: "Click on this dropdown to view more options for the selected account.",
     attachTo: {
-        element: "#ListTableWithCtrlsDEH\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div",
+        element: "#ListTableWithCtrls\\.Rb1_mr\\.C16",
         on: "left"
     },
     advanceOn: {
@@ -531,7 +531,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
     text: "Select the format for download of the file. You can select between PDF or XLX format.",
     attachTo: {
         element: "#NavPanel_mr\\.Rb1",
-        on: "bottom"
+        on: "left"
     },
     buttons: [
         {
@@ -552,7 +552,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
     text: "That is all for this tour. Hope you understood the options available on this page.",
     buttons: [
         {
-            text: 'Complete',
+            text: 'Finish',
             action: WhatsOnBankAccountPageGuideMe.next
         },
         {
