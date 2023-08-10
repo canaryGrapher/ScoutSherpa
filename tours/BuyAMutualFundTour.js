@@ -135,18 +135,6 @@ HowToBuyAFastTagTour.addStep({
         }
         return false
     },
-    beforeShowPromise: function () {
-        return new Promise(function (resolve, reject) {
-            const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(2)")
-            if (element.classList.contains('bar-tab-active')) {
-                console.log("bar-tab-active class found")
-                resolve()
-            } else {
-                console.log("bar-tab-active class not found")
-                reject()
-            }
-        })
-    },
     advanceOn: {
         selector: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
         event: 'click'
