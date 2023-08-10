@@ -192,7 +192,7 @@ HowToBuyAMutualFundTour.addStep({
     buttons: [
         {
             text: 'Finish',
-            action: HowToBuyAFastTagTour.complete
+            action: HowToBuyAFastTagTour.next
         },
         {
             text: 'Back',
