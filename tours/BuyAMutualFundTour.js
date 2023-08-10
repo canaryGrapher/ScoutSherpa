@@ -9,7 +9,8 @@ window.addEventListener('DOMContentLoaded', function () {
     if (matchedLink) {
         var button = document.createElement("button");
         button.innerHTML = "Guide Me";
-        button.classList.add("shepherd-button-guide-me");
+        // button.classList.add("shepherd-button-guide-me");
+        button.style.cssText = "position: fixed; left: 0; top: 50 %; z-index: 500; padding: 5px 13px; border-radius: 5px 5px 0 0; border-color: rgb(239, 124, 0); color: #ffffff; background-color: rgb(239, 124, 0); transform: translate(0, -50%) rotate(90deg); cursor: pointer;"
         if (matchedLink.tour === "WhatsOnBankAccountPageGuideMe") {
             button.onclick = function () {
                 WhatsOnBankAccountPageGuideMe.start();
