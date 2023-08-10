@@ -1,5 +1,51 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+window.addEventListener('DOMContentLoaded', function () {
+    const GuideMeLinks = [{ tour: WhatsOnBankAccountPageGuideMe, link: "/vpv/li/personal-banking/myacc/bankacc" }]
+    const pageLink = getPageFromArray(window.dataLayer)
+    console.log("DOM content loaded for guideMe button injection. Loading tour")
+    // match if current pageLink is in the GuideMeLinks array
+    const matchedLink = GuideMeLinks.find((link) => link.link === pageLink)
+    if (matchedLink) {
+        var button = document.createElement("button");
+        button.innerHTML = "Guide Me";
+        button.classList.add("shepherd-button-guide-me");
+        button.onclick = function () {
+            matchedLink.tour.start();
+        };
+        document.body.appendChild(button);
+    }
+})
+
+window.addEventListener('load', function () {
+    console.log("Page loaded, loading tour now")
+    // check last tour step from local storage 
+    let currentStepIndex = localStorage.getItem('currentStepIndex');
+    let currentTourIndex = localStorage.getItem('tourInstanceCaller');
+    // if current tour is active, continue
+    if (currentTourIndex === 'HowToBuyAFastTagTour') {
+        console.log("Buying a FastTag tour under progress")
+        if (currentStepIndex != '0') {
+            HowToBuyAFastTagTour.show(Number(currentStepIndex));
+        }
+    }
+
+    if (currentTourIndex === 'HowToMakeICICIBankCreditCardPaymentTour') {
+        console.log("Credit card payment tour in progress")
+        if (currentStepIndex != '0') {
+            HowToMakeICICIBankCreditCardPaymentTour.show(Number(currentStepIndex));
+        }
+    }
+
+    if (currentTourIndex === 'HowToBuyAMutualFundTour') {
+        console.log("Buying a mutual fund tour under progress")
+        if (currentStepIndex != '0') {
+            HowToBuyAMutualFundTour.show(Number(currentStepIndex));
+        }
+    }
+}, false)
+
+
 const getPageFromArray = (dataArray) => {
     const data = dataArray.find((item) => {
         // eslint-disable-next-line no-prototype-builtins
@@ -657,47 +703,3 @@ WhatsOnBankAccountPageGuideMe.addStep({
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
-window.addEventListener('DOMContentLoaded', () => {
-    const GuideMeLinks = [{ tour: WhatsOnBankAccountPageGuideMe, link: "/vpv/li/personal-banking/myacc/bankacc" }]
-    const pageLink = getPageFromArray(window.dataLayer)
-    console.log("DOM content loaded for guideMe button injection. Loading tour")
-    // match if current pageLink is in the GuideMeLinks array
-    const matchedLink = GuideMeLinks.find((link) => link.link === pageLink)
-    if (matchedLink) {
-        var button = document.createElement("button");
-        button.innerHTML = "Guide Me";
-        button.classList.add("shepherd-button-guide-me");
-        button.onclick = function () {
-            matchedLink.tour.start();
-        };
-        document.body.appendChild(button);
-    }
-})
-
-window.addEventListener('load', () => {
-    console.log("Page loaded, loading tour now")
-    // check last tour step from local storage 
-    let currentStepIndex = localStorage.getItem('currentStepIndex');
-    let currentTourIndex = localStorage.getItem('tourInstanceCaller');
-    // if current tour is active, continue
-    if (currentTourIndex === 'HowToBuyAFastTagTour') {
-        console.log("Buying a FastTag tour under progress")
-        if (currentStepIndex != '0') {
-            HowToBuyAFastTagTour.show(Number(currentStepIndex));
-        }
-    }
-
-    if (currentTourIndex === 'HowToMakeICICIBankCreditCardPaymentTour') {
-        console.log("Credit card payment tour in progress")
-        if (currentStepIndex != '0') {
-            HowToMakeICICIBankCreditCardPaymentTour.show(Number(currentStepIndex));
-        }
-    }
-
-    if (currentTourIndex === 'HowToBuyAMutualFundTour') {
-        console.log("Buying a mutual fund tour under progress")
-        if (currentStepIndex != '0') {
-            HowToBuyAMutualFundTour.show(Number(currentStepIndex));
-        }
-    }
-}, false) 
