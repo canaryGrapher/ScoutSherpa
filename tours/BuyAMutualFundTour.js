@@ -127,6 +127,14 @@ HowToBuyAFastTagTour.addStep({
         element: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
         on: 'bottom'
     },
+    showOn: function () {
+        const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(2)")
+        if (element.classList.contains('bar-tab-active')) {
+            console.log("bar-tab-active class found")
+            return true
+        }
+        return false
+    },
     beforeShowPromise: function () {
         return new Promise(function (resolve, reject) {
             const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(2)")
