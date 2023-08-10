@@ -127,10 +127,8 @@
    * @private
    */
   function _styleForStep(step) {
-    const {
-      modalOverlayOpeningPadding,
-      modalOverlayOpeningRadius
-    } = step.options;
+    const { modalOverlayOpeningPadding, modalOverlayOpeningRadius } =
+      step.options;
 
     const scrollParent = _getScrollParent(step.target);
 

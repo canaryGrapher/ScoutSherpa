@@ -1,11 +1,31 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+
+// function to get page VPV from window.dataLayer
+const getPageFromArray = (dataArray) => {
+    const data = dataArray.find((item) => {
+        // eslint-disable-next-line no-prototype-builtins
+        if (item.hasOwnProperty('page')) {
+            return item.page;
+            // eslint-disable-next-line no-prototype-builtins
+        } else if (item.hasOwnProperty('vpv')) {
+            return item.vpv;
+        } else {
+            return null;
+        }
+    });
+    return data.page || data.vpv;
+};
+
+// add a button prompt on the pages where overlay pages tour is available
 window.addEventListener('DOMContentLoaded', function () {
     const GuideMeLinks = [{ tour: "WhatsOnBankAccountPageGuideMe", link: "/vpv/li/personal-banking/myacc/bankacc" }]
     const pageLink = getPageFromArray(window.dataLayer)
     console.log("DOM content loaded for guideMe button injection. Loading tour")
     // match if current pageLink is in the GuideMeLinks array
     const matchedLink = GuideMeLinks.find((link) => link.link === pageLink)
+
+    // if matched, add a button to the left corner, vertically centered on the page
     if (matchedLink) {
         var button = document.createElement("button");
         button.innerHTML = "Guide Me";
@@ -48,25 +68,6 @@ window.addEventListener('load', function () {
     }
 }, false)
 
-
-const getPageFromArray = (dataArray) => {
-    const data = dataArray.find((item) => {
-        // eslint-disable-next-line no-prototype-builtins
-        if (item.hasOwnProperty('page')) {
-            return item.page;
-            // eslint-disable-next-line no-prototype-builtins
-        } else if (item.hasOwnProperty('vpv')) {
-            return item.vpv;
-        } else {
-            return null;
-        }
-    });
-    return data.page || data.vpv;
-};
-
-
-
-
 // eslint-disable-next-line no-undef
 var HowToBuyAFastTagTour = new Shepherd.Tour({
     tourName: 'How to buy a ICICI FastTag',
@@ -75,7 +76,6 @@ var HowToBuyAFastTagTour = new Shepherd.Tour({
         cancelIcon: {
             enabled: true
         },
-        classes: 'z-50',
         scrollTo: {
             behavior: 'smooth',
             block: 'center'
@@ -247,7 +247,6 @@ var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
         cancelIcon: {
             enabled: true
         },
-        classes: 'z-50',
         scrollTo: {
             behavior: 'smooth',
             block: 'center'
@@ -393,7 +392,6 @@ var WhatsOnBankAccountPageGuideMe = new Shepherd.Tour({
         cancelIcon: {
             enabled: true
         },
-        classes: 'z-50',
         scrollTo: {
             behavior: 'smooth',
             block: 'center'
@@ -410,11 +408,11 @@ WhatsOnBankAccountPageGuideMe.addStep({
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
             text: 'Cancel',
-            action: HowToBuyAFastTagTour.cancel
+            action: WhatsOnBankAccountPageGuideMe.cancel
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -431,11 +429,11 @@ WhatsOnBankAccountPageGuideMe.addStep({
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
             text: 'Back',
-            action: HowToBuyAFastTagTour.back
+            action: WhatsOnBankAccountPageGuideMe.back
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -452,11 +450,11 @@ WhatsOnBankAccountPageGuideMe.addStep({
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
             text: 'Back',
-            action: HowToBuyAFastTagTour.back
+            action: WhatsOnBankAccountPageGuideMe.back
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -473,11 +471,11 @@ WhatsOnBankAccountPageGuideMe.addStep({
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
             text: 'Back',
-            action: HowToBuyAFastTagTour.back
+            action: WhatsOnBankAccountPageGuideMe.back
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -498,11 +496,11 @@ WhatsOnBankAccountPageGuideMe.addStep({
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
             text: 'Back',
-            action: HowToBuyAFastTagTour.back
+            action: WhatsOnBankAccountPageGuideMe.back
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -519,11 +517,11 @@ WhatsOnBankAccountPageGuideMe.addStep({
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
             text: 'Back',
-            action: HowToBuyAFastTagTour.back
+            action: WhatsOnBankAccountPageGuideMe.back
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -540,11 +538,11 @@ WhatsOnBankAccountPageGuideMe.addStep({
     buttons: [
         {
             text: 'Next',
-            action: HowToBuyAFastTagTour.next
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
             text: 'Back',
-            action: HowToBuyAFastTagTour.back
+            action: WhatsOnBankAccountPageGuideMe.back
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -557,11 +555,11 @@ WhatsOnBankAccountPageGuideMe.addStep({
     buttons: [
         {
             text: 'Complete',
-            action: HowToBuyAFastTagTour.next
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
             text: 'Back',
-            action: HowToBuyAFastTagTour.back
+            action: WhatsOnBankAccountPageGuideMe.back
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -575,7 +573,6 @@ let HowToBuyAMutualFundTour = new Shepherd.Tour({
         cancelIcon: {
             enabled: true
         },
-        classes: 'z-50',
         scrollTo: {
             behavior: 'smooth',
             block: 'center'
@@ -700,8 +697,8 @@ HowToBuyAMutualFundTour.addStep({
             action: HowToBuyAMutualFundTour.next
         },
         {
-            text: 'Back',
-            action: HowToBuyAMutualFundTour.back
+            text: 'Cancel',
+            action: HowToBuyAMutualFundTour.cancel
         }
     ],
     pageLink:
