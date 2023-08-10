@@ -4417,7 +4417,6 @@ Z`;
 	    let pageVPV = getPageFromArray(window.dataLayer);
 	    console.log('Current page VPV is ', pageVPV);
 	    console.log('Current step VPV is ', step.options.pageLink);
-	    console.log('Page VPV matched, loading step');
 	    if (step) {
 	      this._updateStateBeforeShow();
 	      const shouldSkipStep = isFunction(step.options.showOn) && !step.options.showOn();
@@ -4427,6 +4426,7 @@ Z`;
 	        this._skipStep(step, forward);
 	      } else {
 	        if (_tourInstanceCaller === this.options.instanceCaller && pageVPV === step.options.pageLink) {
+	          console.log('Page VPV matched, loading step');
 	          this.trigger('show', {
 	            step,
 	            previous: this.currentStep
@@ -4545,7 +4545,9 @@ Z`;
 	  _updateStateBeforeShow() {
 	    if (this.currentStep) {
 	      this.currentStep.hide();
+	      // eslint-disable-next-line max-lines
 	    }
+
 	    if (!this.isActive()) {
 	      this._setupActiveTour();
 	    }

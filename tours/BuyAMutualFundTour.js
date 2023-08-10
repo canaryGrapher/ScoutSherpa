@@ -1,9 +1,25 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+const getPageFromArray = (dataArray) => {
+    const data = dataArray.find((item) => {
+        // eslint-disable-next-line no-prototype-builtins
+        if (item.hasOwnProperty('page')) {
+            return item.page;
+            // eslint-disable-next-line no-prototype-builtins
+        } else if (item.hasOwnProperty('vpv')) {
+            return item.vpv;
+        } else {
+            return null;
+        }
+    });
+    return data.page || data.vpv;
+};
+
+
 // eslint-disable-next-line no-undef
-let BuyAMutualFundTour = new Shepherd.Tour({
+let HowToBuyAMutualFundTour = new Shepherd.Tour({
     tourName: 'How to Buy a Mutual Fund?',
-    instanceCaller: 'BuyAMutualFundTour',
+    instanceCaller: 'HowToBuyAMutualFundTour',
     defaultStepOptions: {
         cancelIcon: {
             enabled: true
@@ -20,8 +36,8 @@ let BuyAMutualFundTour = new Shepherd.Tour({
 
 
 // Select the 'Investment and Insurance' button on the menubar on dashboard
-BuyAMutualFundTour.addStep({
-    id: 'BuyAMutualFundTour_1',
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_1',
     title: '1/7',
     text: 'Move your mouse over Investments & Insurance',
     attachTo: {
@@ -36,8 +52,8 @@ BuyAMutualFundTour.addStep({
 });
 
 // Click on Buy Mutual Funds option in the drop-down menu > redirection
-BuyAMutualFundTour.addStep({
-    id: 'BuyAMutualFundTour_2',
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_2',
     title: '2/7',
     text: 'Click on Buy Mutual Funds',
     attachTo: {
@@ -52,8 +68,8 @@ BuyAMutualFundTour.addStep({
 });
 
 //Click on view all button on the page where investment categories are displayed
-BuyAMutualFundTour.addStep({
-    id: 'BuyAMutualFundTour_3',
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_3',
     title: '3/7',
     text: "These are the top categories of Mutual Funds. Click on <strong>View All</strong> to see more categories",
     attachTo: {
@@ -69,8 +85,8 @@ BuyAMutualFundTour.addStep({
 });
 
 // User clicks on any one category from the tiles displayed
-BuyAMutualFundTour.addStep({
-    id: 'BuyAMutualFundTour_4',
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_4',
     title: '4/7',
     text: "Let's start buying one of the top-rated mutual funds. Click on <strong>Top Rated Funds</strong> to begin.",
     attachTo: {
@@ -88,8 +104,8 @@ BuyAMutualFundTour.addStep({
 });
 
 // Click on "Invest Now" on any one of the suggested funds
-BuyAMutualFundTour.addStep({
-    id: 'BuyAMutualFundTour_5',
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_5',
     title: '5/7',
     text: "Let's start with Equity funds. Click on the <strong>Invest Now</strong> button on the highlighted fund to start investing.",
     attachTo: {
@@ -105,8 +121,8 @@ BuyAMutualFundTour.addStep({
 });
 
 // user is suggested to select one type of transaction type
-BuyAMutualFundTour.addStep({
-    id: 'BuyAMutualFundTour_6',
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_6',
     title: '6/7',
     text: '<p>Please select the required transaction type</p><ul><li><strong>SIP</strong> - Regular investment</li><li><strong>One time</strong> - Lumpsum investment</li><li><strong>FIP</strong> - Regular investment at a frequency of your choice</li></ul>',
     attachTo: {
@@ -123,8 +139,8 @@ BuyAMutualFundTour.addStep({
         "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
 });
 
-BuyAMutualFundTour.addStep({
-    id: 'BuyAMutualFundTour_7',
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_7',
     title: '7/7',
     text: 'Fill in the additional information and you are good to go! You would have invested in a Mutual Fund.',
     buttons: [
@@ -642,42 +658,46 @@ WhatsOnBankAccountPageGuideMe.addStep({
 })
 
 window.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM content loaded. Loading tour")
-    var button = document.createElement("Button");
-    button.innerHTML = "Guide Me";
-    button.onclick = function () {
-        WhatsOnBankAccountPageGuideMe.start();
-    };
-    button.style = "left:-25px;position:fixed;top:50%;z-index:9999;transform:rotate(90deg);color:white;background-color:rgb(239, 124, 0);border-radius: 5px 5px 0 0;padding:5px 13px;cursor:pointer;"
-    document.body.appendChild(button);
+    const GuideMeLinks = [{ tour: WhatsOnBankAccountPageGuideMe, link: "/vpv/li/personal-banking/myacc/bankacc" }]
+    const pageLink = getPageFromArray(window.dataLayer)
+    console.log("DOM content loaded for guideMe button injection. Loading tour")
+    // match if current pageLink is in the GuideMeLinks array
+    const matchedLink = GuideMeLinks.find((link) => link.link === pageLink)
+    if (matchedLink) {
+        var button = document.createElement("button");
+        button.innerHTML = "Guide Me";
+        button.classList.add("shepherd-button-guide-me");
+        button.onclick = function () {
+            matchedLink.tour.start();
+        };
+        document.body.appendChild(button);
+    }
 })
 
-window.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM content loaded. Loading tour")
+window.addEventListener('load', () => {
+    console.log("Page loaded, loading tour now")
     // check last tour step from local storage 
     let currentStepIndex = localStorage.getItem('currentStepIndex');
     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
     // if current tour is active, continue
     if (currentTourIndex === 'HowToBuyAFastTagTour') {
         console.log("Buying a FastTag tour under progress")
-        if (currentStepIndex != '1') {
+        if (currentStepIndex != '0') {
             HowToBuyAFastTagTour.show(Number(currentStepIndex));
         }
     }
 
     if (currentTourIndex === 'HowToMakeICICIBankCreditCardPaymentTour') {
         console.log("Credit card payment tour in progress")
-        if (currentStepIndex != '1') {
+        if (currentStepIndex != '0') {
             HowToMakeICICIBankCreditCardPaymentTour.show(Number(currentStepIndex));
         }
     }
 
-    if (currentTourIndex === 'BuyAMutualFundTour') {
+    if (currentTourIndex === 'HowToBuyAMutualFundTour') {
         console.log("Buying a mutual fund tour under progress")
-        if (currentStepIndex != '1') {
-            BuyAMutualFundTour.show(Number(currentStepIndex));
+        if (currentStepIndex != '0') {
+            HowToBuyAMutualFundTour.show(Number(currentStepIndex));
         }
     }
-
-
 }, false) 

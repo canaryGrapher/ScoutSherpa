@@ -273,8 +273,6 @@ export class Tour extends Evented {
     console.log('Current page VPV is ', pageVPV);
     console.log('Current step VPV is ', step.options.pageLink);
 
-    console.log('Page VPV matched, loading step');
-
     if (step) {
       this._updateStateBeforeShow();
       const shouldSkipStep =
@@ -288,6 +286,7 @@ export class Tour extends Evented {
           _tourInstanceCaller === this.options.instanceCaller &&
           pageVPV === step.options.pageLink
         ) {
+          console.log('Page VPV matched, loading step');
           this.trigger('show', {
             step,
             previous: this.currentStep
@@ -413,6 +412,7 @@ export class Tour extends Evented {
   _updateStateBeforeShow() {
     if (this.currentStep) {
       this.currentStep.hide();
+      // eslint-disable-next-line max-lines
     }
 
     if (!this.isActive()) {
