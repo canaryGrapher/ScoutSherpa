@@ -191,7 +191,7 @@ HowToBuyAMutualFundTour.addStep({
 HowToBuyAMutualFundTour.addStep({
     id: 'HowToBuyAMutualFundTour_7',
     title: '7/7',
-    text: 'Fill in the additional information and you are good to go! You would have invested in a Mutual Fund.',
+    text: 'Fill in the additional information in the fields and you are good to go! You would have invested in a Mutual Fund.',
     buttons: [
         {
             text: 'Finish',
