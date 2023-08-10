@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
 window.addEventListener('DOMContentLoaded', function () {
-    const GuideMeLinks = [{ tour: WhatsOnBankAccountPageGuideMe, link: "/vpv/li/personal-banking/myacc/bankacc" }]
+    const GuideMeLinks = [{ tour: "WhatsOnBankAccountPageGuideMe", link: "/vpv/li/personal-banking/myacc/bankacc" }]
     const pageLink = getPageFromArray(window.dataLayer)
     console.log("DOM content loaded for guideMe button injection. Loading tour")
     // match if current pageLink is in the GuideMeLinks array
@@ -10,9 +10,11 @@ window.addEventListener('DOMContentLoaded', function () {
         var button = document.createElement("button");
         button.innerHTML = "Guide Me";
         button.classList.add("shepherd-button-guide-me");
-        button.onclick = function () {
-            matchedLink.tour.start();
-        };
+        if (matchedLink.tour === "WhatsOnBankAccountPageGuideMe") {
+            button.onclick = function () {
+                WhatsOnBankAccountPageGuideMe.start();
+            };
+        }
         document.body.appendChild(button);
     }
 })
@@ -192,11 +194,11 @@ HowToBuyAMutualFundTour.addStep({
     buttons: [
         {
             text: 'Finish',
-            action: HowToBuyAFastTagTour.next
+            action: HowToBuyAMutualFundTour.next
         },
         {
             text: 'Back',
-            action: HowToBuyAFastTagTour.back
+            action: HowToBuyAMutualFundTour.back
         }
     ],
     pageLink:
