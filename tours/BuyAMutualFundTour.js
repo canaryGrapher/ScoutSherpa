@@ -129,10 +129,11 @@ HowToBuyAFastTagTour.addStep({
     },
     showOn: function () {
         const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(2)")
-        if (element.classList.contains('bar-tab-active')) {
-            console.log("bar-tab-active class found")
+        if (element) {
+            console.log("element found, skipping")
             return true
         }
+        console.log("element not found, continuing")
         return false
     },
     advanceOn: {
