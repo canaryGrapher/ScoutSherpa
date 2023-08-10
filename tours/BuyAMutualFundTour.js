@@ -65,146 +65,7 @@ const getPageFromArray = (dataArray) => {
 };
 
 
-// eslint-disable-next-line no-undef
-let HowToBuyAMutualFundTour = new Shepherd.Tour({
-    tourName: 'How to Buy a Mutual Fund?',
-    instanceCaller: 'HowToBuyAMutualFundTour',
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        },
-        classes: 'z-50',
-        scrollTo: {
-            behavior: 'smooth',
-            block: 'center'
-        },
-        arrow: true
-    },
-    useModalOverlay: false
-});
 
-
-// Select the 'Investment and Insurance' button on the menubar on dashboard
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_1',
-    title: '1/7',
-    text: 'Move your mouse over Investments & Insurance',
-    attachTo: {
-        element: '#topbar > div.light-orange > div > div:nth-child(5)',
-        on: 'left'
-    },
-    advanceOn: {
-        selector: '#topbar > div.light-orange > div > div:nth-child(5)',
-        event: 'mouseover'
-    },
-    pageLink: '/vpv/li/personal-banking/dashboardPage'
-});
-
-// Click on Buy Mutual Funds option in the drop-down menu > redirection
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_2',
-    title: '2/7',
-    text: 'Click on Buy Mutual Funds',
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RINVIN/MFRV.svg'])",
-        on: 'left'
-    },
-    advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RINVIN/MFRV.svg'])",
-        event: 'click'
-    },
-    pageLink: '/vpv/li/personal-banking/dashboardPage'
-});
-
-//Click on view all button on the page where investment categories are displayed
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_3',
-    title: '3/7',
-    text: "These are the top categories of Mutual Funds. Click on <strong>View All</strong> to see more categories",
-    attachTo: {
-        element: "#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds",
-        on: 'right'
-    },
-    advanceOn: {
-        selector: "#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > div > button.btn.btn-default.js-show",
-        event: 'click'
-    },
-    pageLink:
-        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails'
-});
-
-// User clicks on any one category from the tiles displayed
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_4',
-    title: '4/7',
-    text: "Let's start buying one of the top-rated mutual funds. Click on <strong>Top Rated Funds</strong> to begin.",
-    attachTo: {
-        element:
-            `#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > ul > a:has([onclick="callFundListing('topRated')"]) > li`,
-        on: 'right'
-    },
-    advanceOn: {
-        selector:
-            `#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > ul > a:has([onclick="callFundListing('topRated')"]) > li`,
-        event: 'click'
-    },
-    pageLink:
-        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails'
-});
-
-// Click on "Invest Now" on any one of the suggested funds
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_5',
-    title: '5/7',
-    text: "Let's start with Equity funds. Click on the <strong>Invest Now</strong> button on the highlighted fund to start investing.",
-    attachTo: {
-        element: '#equity > div > ul > li:first-child',
-        on: 'top'
-    },
-    advanceOn: {
-        selector: "#equity > div > ul > li:nth-child(1) > div > div > div > div.bf-action-wrap > button.btn.btn-default.investNow0.flInvest0",
-        event: 'click'
-    },
-    pageLink:
-        "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedFundsListing"
-});
-
-// user is suggested to select one type of transaction type
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_6',
-    title: '6/7',
-    text: '<p>Please select the required transaction type</p><ul><li><strong>SIP</strong> - Regular investment</li><li><strong>One time</strong> - Lumpsum investment</li><li><strong>FIP</strong> - Regular investment at a frequency of your choice</li></ul>',
-    attachTo: {
-        element:
-            "#equity > div > ul > li > div > div > div.bf-cont.js-hidden.jsHidden0 > div > div > ul > li.form-item.typ-2 > div",
-        on: 'top'
-    },
-    advanceOn: {
-        selector:
-            "#equity > div > ul > li > div > div > div.bf-cont.js-hidden.jsHidden0 > div > div > ul > li.form-item.typ-2 > div",
-        event: 'click'
-    },
-    pageLink:
-        "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
-});
-
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_7',
-    title: '7/7',
-    text: 'Fill in the additional information in the fields and you are good to go! You would have invested in a Mutual Fund.',
-    buttons: [
-        {
-            text: 'Finish',
-            action: HowToBuyAMutualFundTour.next
-        },
-        {
-            text: 'Back',
-            action: HowToBuyAMutualFundTour.back
-        }
-    ],
-    pageLink:
-        "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
-});
 
 // eslint-disable-next-line no-undef
 var HowToBuyAFastTagTour = new Shepherd.Tour({
@@ -706,3 +567,143 @@ WhatsOnBankAccountPageGuideMe.addStep({
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
+// eslint-disable-next-line no-undef
+let HowToBuyAMutualFundTour = new Shepherd.Tour({
+    tourName: 'How to Buy a Mutual Fund?',
+    instanceCaller: 'HowToBuyAMutualFundTour',
+    defaultStepOptions: {
+        cancelIcon: {
+            enabled: true
+        },
+        classes: 'z-50',
+        scrollTo: {
+            behavior: 'smooth',
+            block: 'center'
+        },
+        arrow: true
+    },
+    useModalOverlay: false
+});
+
+
+// Select the 'Investment and Insurance' button on the menubar on dashboard
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_1',
+    title: '1/7',
+    text: 'Move your mouse over Investments & Insurance',
+    attachTo: {
+        element: '#topbar > div.light-orange > div > div:nth-child(5)',
+        on: 'left'
+    },
+    advanceOn: {
+        selector: '#topbar > div.light-orange > div > div:nth-child(5)',
+        event: 'mouseover'
+    },
+    pageLink: '/vpv/li/personal-banking/dashboardPage'
+});
+
+// Click on Buy Mutual Funds option in the drop-down menu > redirection
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_2',
+    title: '2/7',
+    text: 'Click on Buy Mutual Funds',
+    attachTo: {
+        element: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RINVIN/MFRV.svg'])",
+        on: 'left'
+    },
+    advanceOn: {
+        selector: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RINVIN/MFRV.svg'])",
+        event: 'click'
+    },
+    pageLink: '/vpv/li/personal-banking/dashboardPage'
+});
+
+//Click on view all button on the page where investment categories are displayed
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_3',
+    title: '3/7',
+    text: "These are the top categories of Mutual Funds. Click on <strong>View All</strong> to see more categories",
+    attachTo: {
+        element: "#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds",
+        on: 'right'
+    },
+    advanceOn: {
+        selector: "#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > div > button.btn.btn-default.js-show",
+        event: 'click'
+    },
+    pageLink:
+        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails'
+});
+
+// User clicks on any one category from the tiles displayed
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_4',
+    title: '4/7',
+    text: "Let's start buying one of the top-rated mutual funds. Click on <strong>Top Rated Funds</strong> to begin.",
+    attachTo: {
+        element:
+            `#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > ul > a:has([onclick="callFundListing('topRated')"]) > li`,
+        on: 'right'
+    },
+    advanceOn: {
+        selector:
+            `#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > ul > a:has([onclick="callFundListing('topRated')"]) > li`,
+        event: 'click'
+    },
+    pageLink:
+        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails'
+});
+
+// Click on "Invest Now" on any one of the suggested funds
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_5',
+    title: '5/7',
+    text: "Let's start with Equity funds. Click on the <strong>Invest Now</strong> button on the highlighted fund to start investing.",
+    attachTo: {
+        element: '#equity > div > ul > li:first-child',
+        on: 'top'
+    },
+    advanceOn: {
+        selector: "#equity > div > ul > li:nth-child(1) > div > div > div > div.bf-action-wrap > button.btn.btn-default.investNow0.flInvest0",
+        event: 'click'
+    },
+    pageLink:
+        "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedFundsListing"
+});
+
+// user is suggested to select one type of transaction type
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_6',
+    title: '6/7',
+    text: '<p>Please select the required transaction type</p><ul><li><strong>SIP</strong> - Regular investment</li><li><strong>One time</strong> - Lumpsum investment</li><li><strong>FIP</strong> - Regular investment at a frequency of your choice</li></ul>',
+    attachTo: {
+        element:
+            "#equity > div > ul > li > div > div > div.bf-cont.js-hidden.jsHidden0 > div > div > ul > li.form-item.typ-2 > div",
+        on: 'top'
+    },
+    advanceOn: {
+        selector:
+            "#equity > div > ul > li > div > div > div.bf-cont.js-hidden.jsHidden0 > div > div > ul > li.form-item.typ-2 > div",
+        event: 'click'
+    },
+    pageLink:
+        "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
+});
+
+HowToBuyAMutualFundTour.addStep({
+    id: 'HowToBuyAMutualFundTour_7',
+    title: '7/7',
+    text: 'Fill in the additional information in the fields and you are good to go! You would have invested in a Mutual Fund.',
+    buttons: [
+        {
+            text: 'Finish',
+            action: HowToBuyAMutualFundTour.next
+        },
+        {
+            text: 'Back',
+            action: HowToBuyAMutualFundTour.back
+        }
+    ],
+    pageLink:
+        "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
+});
