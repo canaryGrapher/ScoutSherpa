@@ -108,12 +108,12 @@ HowToBuyAFastTagTour.addStep({
     text: "Click on 'Buy/Recharge FastTag'",
     attachTo: {
         element:
-            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])",
+            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])",
         on: 'left'
     },
     advanceOn: {
         selector:
-            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RTXNS/FASTAG.svg'])",
+            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])",
         event: 'click'
     },
     pageLink: '/vpv/li/personal-banking/dashboardPage'
@@ -130,10 +130,10 @@ HowToBuyAFastTagTour.addStep({
     showOn: function () {
         const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(2)")
         if (element) {
-            console.log("element found, skipping")
+            console.log("element found, continuing step")
             return true
         }
-        console.log("element not found, continuing")
+        console.log("element not found, skipping step")
         return false
     },
     advanceOn: {
@@ -258,11 +258,11 @@ var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
 // Select the 'Cards & Loans' button on the menubar on dashboard
 HowToMakeICICIBankCreditCardPaymentTour.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTour_1",
-    title: "1/8",
+    title: "1/5",
     text: "Move your mouse over 'Cards & Loans'",
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(4)",
-        on: "bottom"
+        on: "left"
     },
     advanceOn: {
         selector: '#topbar > div.light-orange > div > div:nth-child(4)',
@@ -274,40 +274,69 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
 // Select the 'Credit Cards' sub-link under 'Cards & Loans'
 HowToMakeICICIBankCreditCardPaymentTour.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTour_2",
-    title: "2/8",
+    title: "2/5",
     text: "Click on 'Credit Cards'",
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:nth-child(2)",
+        element: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
         on: "left"
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:nth-child(2)",
+        selector: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
         event: 'mouseover',
     },
     pageLink: "/vpv/li/personal-banking/dashboardPage"
 })
 
-// Click on 'Pay Bill' button to pay the bill
+// Select the credit card you want to pay bill for
 HowToMakeICICIBankCreditCardPaymentTour.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTour_3",
-    title: "3/8",
-    text: "Click on 'Pay Bill' to pay your Credit Card bills <br />Note: You can review your 'Total Due Amount' and 'Due Date' above",
+    title: "3/5",
+    text: "You can select the credit card you want to pay the bill for in this glider. However if you have only one credit card, you can ignore this step.",
     attachTo: {
-        element: "#credit-1 > div.pl-4.pt-2 > a",
-        on: "bottom"
+        element: "#credit-1 > div.glider-cont.glider-contain.mb-20",
+        on: "top"
     },
-    advanceOn: {
-        selector: "#credit-1 > div.pl-4.pt-2 > a",
-        event: 'click',
+    buttons: [
+        {
+            text: 'Next',
+            action: HowToMakeICICIBankCreditCardPaymentTour.next
+        },
+        {
+            text: 'Cancel',
+            action: HowToMakeICICIBankCreditCardPaymentTour.cancel
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/creditcards"
+})
+
+
+// check outstanding balance
+HowToMakeICICIBankCreditCardPaymentTour.addStep({
+    id: "HowToMakeICICIBankCreditCardPaymentTour_4",
+    title: "4/5",
+    text: "You can see your credit card outstanding balance here.",
+    attachTo: {
+        element: "#pb0",
+        on: "right"
     },
+    buttons: [
+        {
+            text: 'Next',
+            action: HowToMakeICICIBankCreditCardPaymentTour.next
+        },
+        {
+            text: 'Cancel',
+            action: HowToMakeICICIBankCreditCardPaymentTour.cancel
+        }
+    ],
     pageLink: "/vpv/li/personal-banking/myacc/creditcards"
 })
 
 // Click on 'Pay Bill' button to pay the bill
 HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_4",
-    title: "4/8",
-    text: "Click on 'Pay Bill' to pay your Credit Card bills <br />Note: You can review your 'Total Due Amount' and 'Due Date' above",
+    id: "HowToMakeICICIBankCreditCardPaymentTour_5",
+    title: "5/5",
+    text: "Click on 'Pay Bill' to pay against your Credit Card bill. You can select to pay for your outstanding dues, minimum amount due or any other amount you want to pay on the following page.",
     attachTo: {
         element: "#credit-1 > div.pl-4.pt-2 > a",
         on: "bottom"
@@ -317,70 +346,6 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
         event: 'click',
     },
     pageLink: "/vpv/li/personal-banking/myacc/creditcards"
-})
-
-// Select account to pay from
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_5",
-    title: "5/8",
-    text: "Select the account from the drop-down from which you want to pay for your Credit Card.",
-    attachTo: {
-        element: "#DispFormWithTableContent\\.Rix0_mr\\.C1",
-        on: "bottom"
-    },
-    advanceOn: {
-        selector: "#DispFormWithTableContent\\.Rix0_mr\\.C1",
-        event: 'click',
-    },
-    pageLink: "/VPV/LI/PaymentsandTransfer/FundsTransfer/TransferFundstoMyPayeesnew"
-})
-
-// selecting amount to pay
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_6",
-    title: "6/8",
-    text: "Select the amount to pay. You have the following options to pay: <ul><li>Total Amount due: The amount that is due to be paid against your credit card bill.</li><li>Min amount due: The minimum amount that you need to pay in order to prevent a default on your credit card</li><li>Other amount: If you wish to make a part payment to your credit card</li><li>Current outstanding amount: If you wish to pay the amount you have spent in the current billing cycle.</li></ul>",
-    attachTo: {
-        element: "#Amount",
-        on: "top"
-    },
-    advanceOn: {
-        selector: "#Amount",
-        event: 'click',
-    },
-    pageLink: "/VPV/LI/PaymentsandTransfer/FundsTransfer/TransferFundstoMyPayeesnew"
-})
-
-// select a mode of verification to pay amount
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_7",
-    title: "7/8",
-    text: "Select the mode of verification for payment.",
-    attachTo: {
-        element: "#DispFormWithTableContent\\.RowsetOtp2",
-        on: "right"
-    },
-    advanceOn: {
-        selector: "#DispFormWithTableContent\\.RowsetOtp2",
-        event: 'click',
-    },
-    pageLink: "/VPV/LI/PaymentsandTransfer/FundsTransfer/TransferFundstoMyPayeesnew"
-})
-
-// select a mode of verification to pay amount
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_8",
-    title: "8/8",
-    text: "Click on next to continue paying your credit card bill.",
-    attachTo: {
-        element: "#CONTINUE_TRANSACTION",
-        on: "bottom"
-    },
-    advanceOn: {
-        selector: "#CONTINUE_TRANSACTION",
-        event: 'click',
-    },
-    pageLink: "/VPV/LI/PaymentsandTransfer/FundsTransfer/TransferFundstoMyPayeesnew"
 })
 
 // eslint-disable-next-line no-undef
@@ -462,9 +427,9 @@ WhatsOnBankAccountPageGuideMe.addStep({
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_4",
     title: "4/8",
-    text: "For the selected account, use the following button to view the last 10 transactions.",
+    text: "These buttons can be used to download your account statements.",
     attachTo: {
-        element: "#VIEW_MINI_STATEMENT",
+        element: "ListTableWithCtrls.Rb1_mr",
         on: "bottom"
     },
     buttons: [
@@ -489,19 +454,9 @@ WhatsOnBankAccountPageGuideMe.addStep({
         on: "left"
     },
     advanceOn: {
-        selector: "#ListTableWithCtrlsDEH\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.selectedTxt",
+        selector: "#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.selectedTxt",
         event: 'click',
     },
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back
-        }
-    ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
@@ -510,7 +465,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
     title: "6/8",
     text: "These are the list of service requests you can make for the selected account.",
     attachTo: {
-        element: "#ListTableWithCtrlsDEH\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper",
+        element: "#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper",
         on: "left"
     },
     buttons: [
@@ -529,7 +484,10 @@ WhatsOnBankAccountPageGuideMe.addStep({
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_7",
     title: "7/8",
-    text: "Select the format for download of the file. You can select between PDF or XLX format.",
+    text: "You can also download your acccount details in PDF or XLS format. Click on 'OK' to download the file after selecting the desired format.",
+    beforeShowPromise: function () {
+        document.querySelector("#footerInner").click();
+    },
     attachTo: {
         element: "#NavPanel_mr\\.Rb1",
         on: "left"
@@ -550,7 +508,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_7",
     title: "8/8",
-    text: "That is all for this tour. Hope you understood the options available on this page.",
+    text: "That is all for this tour! Click on 'Finish' to end the tour.",
     buttons: [
         {
             text: 'Finish',
@@ -604,11 +562,11 @@ HowToBuyAMutualFundTour.addStep({
     title: '2/7',
     text: 'Click on Buy Mutual Funds',
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RINVIN/MFRV.svg'])",
+        element: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])",
         on: 'left'
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src='PR2/L001/consumer/theme/dashboardRevamp/topMenuImages/RINVIN/MFRV.svg'])",
+        selector: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])",
         event: 'click'
     },
     pageLink: '/vpv/li/personal-banking/dashboardPage'
@@ -618,7 +576,7 @@ HowToBuyAMutualFundTour.addStep({
 HowToBuyAMutualFundTour.addStep({
     id: 'HowToBuyAMutualFundTour_3',
     title: '3/7',
-    text: "These are the top categories of Mutual Funds. Click on <strong>View All</strong> to see more categories",
+    text: "These are the top categories of Mutual Funds. <strong>Click on 'View All'</strong> to see more categories",
     attachTo: {
         element: "#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds",
         on: 'right'
