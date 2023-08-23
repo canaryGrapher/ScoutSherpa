@@ -17,7 +17,8 @@
     lastFocusableElement,
     step,
     dataStepId,
-    tourName;
+    tourName,
+    useModalOverlay;
 
   let hasCancelIcon, hasTitle, classes;
 
@@ -143,7 +144,13 @@
   {#if step.options.arrow && step.options.attachTo && step.options.attachTo.element && step.options.attachTo.on}
     <div class="shepherd-arrow" data-popper-arrow />
   {/if}
-  <ShepherdContent {descriptionId} {labelId} {step} {tourName} />
+  <ShepherdContent
+    {descriptionId}
+    {labelId}
+    {step}
+    {tourName}
+    {useModalOverlay}
+  />
 </div>
 
 <style global>

@@ -24,8 +24,9 @@
     }
 
     var shepherd = new Shepherd.Tour({
-      tourName: "How to buy a mutual fund",
+      tourName: "",
       instanceCaller: "shepherd",
+      useModalOverlay: true,
       defaultStepOptions: {
         cancelIcon: {
           enabled: true
@@ -39,7 +40,6 @@
       // floatingUIOptions: {
       //   middleware: [offset({ mainAxis: 0, crossAxis: 12 })]
       // },
-      useModalOverlay: true,
       // This should add the first tour step
       steps: [
         {

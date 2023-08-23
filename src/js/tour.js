@@ -252,26 +252,34 @@ export class Tour extends Evented {
     const _currentStepIndex = localStorage.getItem('currentStepIndex');
     console.log('Current step index is ', _currentStepIndex);
     console.log('Current tour instance caller is ', _tourInstanceCaller);
-
+    const step = isString(key) ? this.getById(key) : this.steps[key];
     // check if the step data in the local storage is as per the current step
     const getPageFromArray = (dataArray) => {
-      const data = dataArray.find((item) => {
+      const vpvArray = [];
+      dataArray.forEach((item) => {
         // eslint-disable-next-line no-prototype-builtins
         if (item.hasOwnProperty('page')) {
-          return item.page;
+          vpvArray.push(item.page);
           // eslint-disable-next-line no-prototype-builtins
         } else if (item.hasOwnProperty('vpv')) {
-          return item.vpv;
+          vpvArray.push(item.vpv);
         } else {
-          return null;
+          void 0;
         }
       });
-      return data.page || data.vpv;
+      return vpvArray;
     };
-    const step = isString(key) ? this.getById(key) : this.steps[key];
-    let pageVPV = getPageFromArray(window.dataLayer);
-    console.log('Current page VPV is ', pageVPV);
-    console.log('Current step VPV is ', step.options.pageLink);
+    const vpvInPage = () => {
+      let pageVPV = getPageFromArray(window.dataLayer);
+      let currentVPV = step.options.pageLink;
+      console.log('Current page VPV is ', pageVPV);
+      console.log('Current step VPV is ', currentVPV);
+      if (pageVPV.indexOf(currentVPV) > -1) {
+        return true;
+      } else {
+        return false;
+      }
+    };
 
     if (step) {
       this._updateStateBeforeShow();
@@ -284,7 +292,7 @@ export class Tour extends Evented {
       } else {
         if (
           _tourInstanceCaller === this.options.instanceCaller &&
-          pageVPV === step.options.pageLink
+          vpvInPage()
         ) {
           console.log('Page VPV matched, loading step');
           this.trigger('show', {
@@ -397,6 +405,7 @@ export class Tour extends Evented {
     const index = this.steps.indexOf(step);
 
     if (index === this.steps.length - 1) {
+      // eslint-disable-next-line max-lines
       this.complete();
     } else {
       const nextIndex = forward ? index + 1 : index - 1;

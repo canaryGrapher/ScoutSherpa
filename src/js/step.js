@@ -25,6 +25,7 @@ export class Step extends Evented {
    * Create a step
    * @param {Tour} tour The tour for the step
    * @param {tourName} tourName The tour name for the step
+   * @param {useModalOverlay} useModalOverlay The useModalOverlay for the step
    * @param {object} options The options for the step
    * @param {boolean} options.arrow Whether to display the arrow for the tooltip or not. Defaults to `true`.
    * @param {object} options.attachTo The element the step should be attached to on the page.
@@ -281,7 +282,8 @@ export class Step extends Evented {
         labelId,
         step: this,
         styles: this.styles,
-        tourName: this.tour.options.tourName
+        tourName: this.tour.options.tourName,
+        overlayPresent: this.tour.options.useModalOverlay
       }
     });
 
