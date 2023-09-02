@@ -38,9 +38,14 @@
   }
 
   .shepherd-content {
-    border-radius: 5px;
+    box-shadow: 0px 2px 20px 0px #ee6f281a;
+    webkit-box-shadow: 0px 2px 20px 0px #ee6f281a;
+    -moz-box-shadow: 0px 2px 20px 0px #ee6f281a;
+    border: 3px solid #f27b1a !important;
+    background-color: #fff6f1;
+    border: 1px;
+    border-radius: 12px;
     outline: none;
-    background-color: #000000;
   }
   .shepherd-highlight-border {
     border: 3px solid #ef7c00;

@@ -23,11 +23,9 @@
 
 <style global>
   .shepherd-text {
-    color: #fef8f3 !important;
-    font-size: 1rem;
-    line-height: 1.3em;
-    padding: 1.5rem 1rem !important;
-    background-color: #ef7c00;
+    font-size: 0.9rem !important;
+    padding: 1rem 1rem !important;
+    color: #414141;
   }
 
   .shepherd-text p {

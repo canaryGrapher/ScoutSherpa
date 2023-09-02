@@ -25,16 +25,13 @@
 
   .shepherd-footer {
     display: block;
-    background-color: #f19026;
     color: #fce8d4;
     padding: 0.5rem 1rem !important;
   }
 
   .shepherd-footer .shepherd-button:last-child {
-    background-color: #f19026;
     color: #fce8d4;
     padding: 0.5rem 1rem !important;
-    background: #f19026;
   }
 
   .button-container {

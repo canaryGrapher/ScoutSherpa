@@ -8,7 +8,17 @@
     if (isFunction(title)) {
       title = title();
     }
-    element.innerHTML = title;
+    const currentSteps = String(title).split('/');
+    element.innerHTML =
+      "<span class='currentStepIndicatorTitle'>" +
+      currentSteps[0] +
+      '</span>' +
+      "<span class='totalStepsIndicatorTitle'>" +
+      '/' +
+      currentSteps[1] +
+      ' ' +
+      'steps' +
+      '</span>';
   });
 </script>
 
@@ -17,11 +27,21 @@
 
 <style global>
   .shepherd-title {
-    color: rgb(255, 255, 255);
     display: flex;
     font-size: 0.8rem;
-    font-weight: lighter;
-    margin: auto 0;
     padding: 0;
+  }
+
+  .currentStepIndicatorTitle {
+    font-size: 1.4rem;
+    margin: auto 3px 0 0;
+    color: #494848;
+    font-weight: bold;
+  }
+
+  .totalStepsIndicatorTitle {
+    font-weight: normal;
+    margin: auto 0 5px 0;
+    color: #7e7977;
   }
 </style>

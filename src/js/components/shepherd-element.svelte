@@ -155,14 +155,9 @@
 
 <style global>
   .shepherd-element {
-    font-family: Founders Grotesk, sans-serif;
-    background: #fff;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-    webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6) !important;
-    -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.6) !important;
+    font-family: 'Open sans', Mulish, sans-serif;
     max-width: 400px;
     opacity: 0;
-    outline: none;
     transition: opacity 0.3s, visibility 0.3s;
     visibility: hidden;
     width: 100%;
@@ -199,7 +194,7 @@
   .shepherd-arrow:before {
     content: '';
     transform: rotate(45deg);
-    background: #f19026;
+    /* background: #f19026; */
   }
 
   .shepherd-element[data-popper-placement^='top'] > .shepherd-arrow {
@@ -227,7 +222,7 @@
   */
   .shepherd-element.shepherd-has-title[data-popper-placement^='bottom']
     > .shepherd-arrow::before {
-    background: #f19026;
+    /* background: #f19026; */
   }
 
   .shepherd-target-click-disabled.shepherd-enabled.shepherd-target,

@@ -25,20 +25,18 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    background-color: #f19026;
-    color: #fce8d4;
+    color: #7e7977;
     margin: auto;
     padding: 0.5rem 1rem !important;
+    text-transform: lowercase !important;
   }
 
   .shepherd-has-title .shepherd-content .shepherd-header {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    background-color: #f19026 !important;
-    color: #fce8d4;
+    color: #7e7977;
     margin: auto;
     padding: 0.5 1rem !important;
-    background: #f19026;
   }
 </style>
