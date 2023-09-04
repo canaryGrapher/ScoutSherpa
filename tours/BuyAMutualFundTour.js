@@ -159,7 +159,8 @@ HowToBuyAFastTagTour.addStep({
         },
         {
             text: 'Cancel',
-            action: HowToBuyAFastTagTour.cancel
+            action: HowToBuyAFastTagTour.cancel,
+            secondary: true
         }
     ],
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
@@ -180,7 +181,8 @@ HowToBuyAFastTagTour.addStep({
         },
         {
             text: 'Cancel',
-            action: HowToBuyAFastTagTour.cancel
+            action: HowToBuyAFastTagTour.cancel,
+            secondary: true
         }
     ],
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
@@ -201,7 +203,8 @@ HowToBuyAFastTagTour.addStep({
         },
         {
             text: 'Cancel',
-            action: HowToBuyAFastTagTour.cancel
+            action: HowToBuyAFastTagTour.cancel,
+            secondary: true
         }
     ],
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
@@ -303,7 +306,8 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
         },
         {
             text: 'Cancel',
-            action: HowToMakeICICIBankCreditCardPaymentTour.cancel
+            action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/creditcards"
@@ -326,7 +330,8 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
         },
         {
             text: 'Cancel',
-            action: HowToMakeICICIBankCreditCardPaymentTour.cancel
+            action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/creditcards"
@@ -376,7 +381,8 @@ WhatsOnBankAccountPageGuideMe.addStep({
         },
         {
             text: 'Cancel',
-            action: WhatsOnBankAccountPageGuideMe.cancel
+            action: WhatsOnBankAccountPageGuideMe.cancel,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -397,7 +403,8 @@ WhatsOnBankAccountPageGuideMe.addStep({
         },
         {
             text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -418,7 +425,8 @@ WhatsOnBankAccountPageGuideMe.addStep({
         },
         {
             text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -439,7 +447,8 @@ WhatsOnBankAccountPageGuideMe.addStep({
         },
         {
             text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -475,7 +484,8 @@ WhatsOnBankAccountPageGuideMe.addStep({
         },
         {
             text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -499,7 +509,8 @@ WhatsOnBankAccountPageGuideMe.addStep({
         },
         {
             text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -516,7 +527,8 @@ WhatsOnBankAccountPageGuideMe.addStep({
         },
         {
             text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
@@ -655,7 +667,8 @@ HowToBuyAMutualFundTour.addStep({
         },
         {
             text: 'Cancel',
-            action: HowToBuyAMutualFundTour.cancel
+            action: HowToBuyAMutualFundTour.cancel,
+            secondary: true
         }
     ],
     pageLink:
