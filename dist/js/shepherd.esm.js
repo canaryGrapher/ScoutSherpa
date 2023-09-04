@@ -2416,7 +2416,7 @@ function get_each_context(ctx, list, i) {
   return child_ctx;
 }
 
-// (13:4) {#if buttons}
+// (14:4) {#if buttons}
 function create_if_block$4(ctx) {
   let each_1_anchor;
   let current;
@@ -2488,7 +2488,7 @@ function create_if_block$4(ctx) {
   };
 }
 
-// (14:6) {#each buttons as config}
+// (15:6) {#each buttons as config}
 function create_each_block(ctx) {
   let shepherdbutton;
   let current;
