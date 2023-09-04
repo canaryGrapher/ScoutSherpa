@@ -162,6 +162,9 @@
     visibility: hidden;
     width: 100%;
     z-index: 9999;
+    border: 2.5px solid #f19026;
+    border-radius: 12px;
+    background-color: #fff6f1;
   }
 
   .shepherd-enabled.shepherd-element {
@@ -180,7 +183,7 @@
   .shepherd-element *:after,
   .shepherd-element *:before {
     box-sizing: border-box;
-    border: 0 !important;
+    outline: none;
   }
 
   .shepherd-arrow,
@@ -194,7 +197,8 @@
   .shepherd-arrow:before {
     content: '';
     transform: rotate(45deg);
-    /* background: #f19026; */
+    border: 2.5px solid #f19026;
+    background-color: #fff6f1;
   }
 
   .shepherd-element[data-popper-placement^='top'] > .shepherd-arrow {

@@ -11,14 +11,14 @@
   }
 </script>
 
-<header class="shepherd-header">
+<div class="shepherd-header">
   {#if title}
     <ShepherdTitle {labelId} {title} />
   {/if}
   {#if cancelIcon && cancelIcon.enabled}
     <ShepherdCancelIcon {cancelIcon} {step} />
   {/if}
-</header>
+</div>
 
 <style global>
   .shepherd-header {
@@ -28,15 +28,13 @@
     color: #7e7977;
     margin: auto;
     padding: 0.5rem 1rem !important;
-    text-transform: lowercase !important;
   }
 
   .shepherd-has-title .shepherd-content .shepherd-header {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    color: #7e7977;
     margin: auto;
-    padding: 0.5 1rem !important;
+    border-radius: 12px;
   }
 </style>

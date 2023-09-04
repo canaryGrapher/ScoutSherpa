@@ -1,7 +1,5 @@
 /*! scoutsherpa.js 11.0.1 */
 
-
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var isMergeableObject = function isMergeableObject(value) {
   return isNonNullObject(value) && !isSpecial(value);
 };
@@ -460,22 +458,6 @@ const computePosition$1 = async (reference, floating, config) => {
   } = config;
   const validMiddleware = middleware.filter(Boolean);
   const rtl = await (platform.isRTL == null ? void 0 : platform.isRTL(floating));
-  {
-    if (platform == null) {
-      console.error(['Floating UI: `platform` property was not passed to config. If you', 'want to use Floating UI on the web, install @floating-ui/dom', 'instead of the /core package. Otherwise, you can create your own', '`platform`: https://floating-ui.com/docs/platform'].join(' '));
-    }
-    if (validMiddleware.filter(_ref => {
-      let {
-        name
-      } = _ref;
-      return name === 'autoPlacement' || name === 'flip';
-    }).length > 1) {
-      throw new Error(['Floating UI: duplicate `flip` and/or `autoPlacement` middleware', 'detected. This will lead to an infinite loop. Ensure only one of', 'either has been passed to the `middleware` array.'].join(' '));
-    }
-    if (!reference || !floating) {
-      console.error(['Floating UI: The reference and/or floating element was not defined', 'when `computePosition()` was called. Ensure that both elements have', 'been created and can be measured.'].join(' '));
-    }
-  }
   let rects = await platform.getElementRects({
     reference,
     floating,
@@ -517,11 +499,6 @@ const computePosition$1 = async (reference, floating, config) => {
     middlewareData = _extends({}, middlewareData, {
       [name]: _extends({}, middlewareData[name], data)
     });
-    {
-      if (resetCount > 50) {
-        console.warn(['Floating UI: The middleware lifecycle appears to be running in an', 'infinite loop. This is usually caused by a `reset` continually', 'being returned without a break condition.'].join(' '));
-      }
-    }
     if (reset && resetCount <= 50) {
       resetCount++;
       if (typeof reset === 'object') {
@@ -667,9 +644,6 @@ const arrow = options => ({
       elements
     } = state;
     if (element == null) {
-      {
-        console.warn('Floating UI: No `element` was passed to the `arrow` middleware.');
-      }
       return {};
     }
     const paddingObject = getSideObjectFromPadding(padding);
@@ -888,6 +862,74 @@ const flip = function flip(options) {
         }
       }
       return {};
+    }
+  };
+};
+async function convertValueToCoords(state, value) {
+  const {
+    placement,
+    platform,
+    elements
+  } = state;
+  const rtl = await (platform.isRTL == null ? void 0 : platform.isRTL(elements.floating));
+  const side = getSide(placement);
+  const alignment = getAlignment(placement);
+  const isVertical = getMainAxisFromPlacement(placement) === 'x';
+  const mainAxisMulti = ['left', 'top'].includes(side) ? -1 : 1;
+  const crossAxisMulti = rtl && isVertical ? -1 : 1;
+  const rawValue = typeof value === 'function' ? value(state) : value;
+
+  // eslint-disable-next-line prefer-const
+  let {
+    mainAxis,
+    crossAxis,
+    alignmentAxis
+  } = typeof rawValue === 'number' ? {
+    mainAxis: rawValue,
+    crossAxis: 0,
+    alignmentAxis: null
+  } : _extends({
+    mainAxis: 0,
+    crossAxis: 0,
+    alignmentAxis: null
+  }, rawValue);
+  if (alignment && typeof alignmentAxis === 'number') {
+    crossAxis = alignment === 'end' ? alignmentAxis * -1 : alignmentAxis;
+  }
+  return isVertical ? {
+    x: crossAxis * crossAxisMulti,
+    y: mainAxis * mainAxisMulti
+  } : {
+    x: mainAxis * mainAxisMulti,
+    y: crossAxis * crossAxisMulti
+  };
+}
+
+/**
+ * Modifies the placement by translating the floating element along the
+ * specified axes.
+ * A number (shorthand for `mainAxis` or distance), or an axes configuration
+ * object may be passed.
+ * @see https://floating-ui.com/docs/offset
+ */
+const offset = function offset(value) {
+  if (value === void 0) {
+    value = 0;
+  }
+  return {
+    name: 'offset',
+    options: value,
+    async fn(state) {
+      const {
+        x,
+        y
+      } = state;
+      const diffCoords = await convertValueToCoords(state, value);
+      return {
+        x: x + diffCoords.x,
+        y: y + diffCoords.y,
+        data: diffCoords
+      };
     }
   };
 };
@@ -1813,7 +1855,10 @@ function placeArrow(el, middlewareData) {
 function getFloatingUIOptions(attachToOptions, step) {
   const options = {
     strategy: 'absolute',
-    middleware: []
+    middleware: [offset({
+      mainAxis: 10,
+      crossAxis: 0
+    })]
   };
   const arrowEl = addArrow(step);
   const shouldCenter = shouldCenterStep(attachToOptions);
@@ -1868,6 +1913,9 @@ function safe_not_equal(a, b) {
 }
 function is_empty(obj) {
   return Object.keys(obj).length === 0;
+}
+function null_to_empty(value) {
+  return value == null ? '' : value;
 }
 function append(target, node) {
   target.appendChild(node);
@@ -1927,9 +1975,12 @@ function set_attributes(node, attributes) {
 function children(element) {
   return Array.from(element.childNodes);
 }
-function set_data(text, data) {
-  data = '' + data;
-  if (text.wholeText !== data) text.data = data;
+function set_style(node, key, value, important) {
+  if (value === null) {
+    node.style.removeProperty(key);
+  } else {
+    node.style.setProperty(key, value, important ? 'important' : '');
+  }
 }
 function toggle_class(element, name, toggle) {
   element.classList[toggle ? 'add' : 'remove'](name);
@@ -2270,7 +2321,7 @@ class SvelteComponent {
 }
 
 /* src\js\components\shepherd-button.svelte generated by Svelte v3.57.0 */
-function create_fragment$8(ctx) {
+function create_fragment$9(ctx) {
   let button;
   let button_aria_label_value;
   let button_class_value;
@@ -2281,7 +2332,7 @@ function create_fragment$8(ctx) {
       button = element("button");
       attr(button, "type", "button");
       attr(button, "aria-label", button_aria_label_value = /*label*/ctx[3] ? /*label*/ctx[3] : null);
-      attr(button, "class", button_class_value = `${/*classes*/ctx[1] || ''} shepherd-button ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : ''}`);
+      attr(button, "class", button_class_value = "" + (null_to_empty(`shepherd-button ${/*classes*/ctx[1] || ''} ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : 'shepherd-button-primary'}`) + " svelte-1id0au4"));
       button.disabled = /*disabled*/ctx[2];
       attr(button, "tabindex", "0");
     },
@@ -2302,7 +2353,7 @@ function create_fragment$8(ctx) {
       if (dirty & /*label*/8 && button_aria_label_value !== (button_aria_label_value = /*label*/ctx[3] ? /*label*/ctx[3] : null)) {
         attr(button, "aria-label", button_aria_label_value);
       }
-      if (dirty & /*classes, secondary*/18 && button_class_value !== (button_class_value = `${/*classes*/ctx[1] || ''} shepherd-button ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : ''}`)) {
+      if (dirty & /*classes, secondary*/18 && button_class_value !== (button_class_value = "" + (null_to_empty(`shepherd-button ${/*classes*/ctx[1] || ''} ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : 'shepherd-button-primary'}`) + " svelte-1id0au4"))) {
         attr(button, "class", button_class_value);
       }
       if (dirty & /*disabled*/4) {
@@ -2318,7 +2369,7 @@ function create_fragment$8(ctx) {
     }
   };
 }
-function instance$8($$self, $$props, $$invalidate) {
+function instance$9($$self, $$props, $$invalidate) {
   let {
     config,
     step
@@ -2341,7 +2392,7 @@ function instance$8($$self, $$props, $$invalidate) {
         $$invalidate(1, classes = config.classes);
         $$invalidate(2, disabled = config.disabled ? getConfigOption(config.disabled) : false);
         $$invalidate(3, label = config.label ? getConfigOption(config.label) : null);
-        $$invalidate(4, secondary = config.secondary);
+        $$invalidate(4, secondary = config.secondary == null || typeof config.secondary == undefined || !config.secondary ? false : true);
         $$invalidate(5, text = config.text ? getConfigOption(config.text) : null);
       }
     }
@@ -2351,7 +2402,7 @@ function instance$8($$self, $$props, $$invalidate) {
 class Shepherd_button extends SvelteComponent {
   constructor(options) {
     super();
-    init(this, options, instance$8, create_fragment$8, safe_not_equal, {
+    init(this, options, instance$9, create_fragment$9, safe_not_equal, {
       config: 6,
       step: 7
     });
@@ -2361,15 +2412,15 @@ class Shepherd_button extends SvelteComponent {
 /* src\js\components\shepherd-footer.svelte generated by Svelte v3.57.0 */
 function get_each_context(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[3] = list[i];
+  child_ctx[2] = list[i];
   return child_ctx;
 }
 
-// (12:4) {#if buttons}
-function create_if_block$3(ctx) {
+// (13:4) {#if buttons}
+function create_if_block$4(ctx) {
   let each_1_anchor;
   let current;
-  let each_value = /*buttons*/ctx[2];
+  let each_value = /*buttons*/ctx[1];
   let each_blocks = [];
   for (let i = 0; i < each_value.length; i += 1) {
     each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
@@ -2394,8 +2445,8 @@ function create_if_block$3(ctx) {
       current = true;
     },
     p(ctx, dirty) {
-      if (dirty & /*buttons, step*/5) {
-        each_value = /*buttons*/ctx[2];
+      if (dirty & /*buttons, step*/3) {
+        each_value = /*buttons*/ctx[1];
         let i;
         for (i = 0; i < each_value.length; i += 1) {
           const child_ctx = get_each_context(ctx, each_value, i);
@@ -2437,13 +2488,13 @@ function create_if_block$3(ctx) {
   };
 }
 
-// (13:6) {#each buttons as config}
+// (14:6) {#each buttons as config}
 function create_each_block(ctx) {
   let shepherdbutton;
   let current;
   shepherdbutton = new Shepherd_button({
     props: {
-      config: /*config*/ctx[3],
+      config: /*config*/ctx[2],
       step: /*step*/ctx[0]
     }
   });
@@ -2457,7 +2508,7 @@ function create_each_block(ctx) {
     },
     p(ctx, dirty) {
       const shepherdbutton_changes = {};
-      if (dirty & /*buttons*/4) shepherdbutton_changes.config = /*config*/ctx[3];
+      if (dirty & /*buttons*/2) shepherdbutton_changes.config = /*config*/ctx[2];
       if (dirty & /*step*/1) shepherdbutton_changes.step = /*step*/ctx[0];
       shepherdbutton.$set(shepherdbutton_changes);
     },
@@ -2475,46 +2526,35 @@ function create_each_block(ctx) {
     }
   };
 }
-function create_fragment$7(ctx) {
+function create_fragment$8(ctx) {
   let div1;
-  let p;
-  let t0;
-  let t1;
   let div0;
   let current;
-  let if_block = /*buttons*/ctx[2] && create_if_block$3(ctx);
+  let if_block = /*buttons*/ctx[1] && create_if_block$4(ctx);
   return {
     c() {
       div1 = element("div");
-      p = element("p");
-      t0 = text( /*tourName*/ctx[1]);
-      t1 = space();
       div0 = element("div");
       if (if_block) if_block.c();
-      attr(p, "class", "footer-text");
       attr(div0, "class", "button-container");
       attr(div1, "class", "shepherd-footer");
     },
     m(target, anchor) {
       insert(target, div1, anchor);
-      append(div1, p);
-      append(p, t0);
-      append(div1, t1);
       append(div1, div0);
       if (if_block) if_block.m(div0, null);
       current = true;
     },
     p(ctx, _ref) {
       let [dirty] = _ref;
-      if (!current || dirty & /*tourName*/2) set_data(t0, /*tourName*/ctx[1]);
-      if ( /*buttons*/ctx[2]) {
+      if ( /*buttons*/ctx[1]) {
         if (if_block) {
           if_block.p(ctx, dirty);
-          if (dirty & /*buttons*/4) {
+          if (dirty & /*buttons*/2) {
             transition_in(if_block, 1);
           }
         } else {
-          if_block = create_if_block$3(ctx);
+          if_block = create_if_block$4(ctx);
           if_block.c();
           transition_in(if_block, 1);
           if_block.m(div0, null);
@@ -2542,71 +2582,55 @@ function create_fragment$7(ctx) {
     }
   };
 }
-function instance$7($$self, $$props, $$invalidate) {
+function instance$8($$self, $$props, $$invalidate) {
   let buttons;
   let {
-    step,
-    tourName
+    step
   } = $$props;
   $$self.$$set = $$props => {
     if ('step' in $$props) $$invalidate(0, step = $$props.step);
-    if ('tourName' in $$props) $$invalidate(1, tourName = $$props.tourName);
   };
   $$self.$$.update = () => {
     if ($$self.$$.dirty & /*step*/1) {
-      $$invalidate(2, buttons = step.options.buttons);
+      // export let tourName;
+      $$invalidate(1, buttons = step.options.buttons);
     }
   };
-  return [step, tourName, buttons];
+  return [step, buttons];
 }
 class Shepherd_footer extends SvelteComponent {
   constructor(options) {
     super();
-    init(this, options, instance$7, create_fragment$7, safe_not_equal, {
-      step: 0,
-      tourName: 1
+    init(this, options, instance$8, create_fragment$8, safe_not_equal, {
+      step: 0
     });
   }
 }
 
 /* src\js\components\shepherd-cancel-icon.svelte generated by Svelte v3.57.0 */
-function create_fragment$6(ctx) {
+function create_fragment$7(ctx) {
   let div;
-  let svg;
   let button;
   let span;
-  let t;
   let button_aria_label_value;
   let mounted;
   let dispose;
   return {
     c() {
       div = element("div");
-      svg = svg_element("svg");
-      button = svg_element("button");
-      span = svg_element("span");
-      t = text("×");
+      button = element("button");
+      span = element("span");
+      span.textContent = "×";
       attr(span, "aria-hidden", "true");
       attr(button, "aria-label", button_aria_label_value = /*cancelIcon*/ctx[0].label ? /*cancelIcon*/ctx[0].label : 'Close Tour');
       attr(button, "class", "shepherd-cancel-icon");
       attr(button, "type", "button");
-      attr(svg, "aria-hidden", "true");
-      attr(svg, "class", "shepherd-cancel-icon");
-      attr(svg, "fill", "currentColor");
-      attr(svg, "height", "1em");
-      attr(svg, "stroke", "currentColor");
-      attr(svg, "stroke-width", "0");
-      attr(svg, "viewBox", "0 0 352 512");
-      attr(svg, "width", "1em");
-      attr(svg, "xmlns", "http://www.w3.org/2000/svg");
-      attr(div, "class", "shepherd-cancel-icon-container");
+      attr(div, "class", "shepherd-cancel-icon-container svelte-5x77fn");
     },
     m(target, anchor) {
       insert(target, div, anchor);
-      append(div, svg);
-      append(svg, button);
+      append(div, button);
       append(button, span);
-      append(span, t);
       if (!mounted) {
         dispose = listen(button, "click", /*handleCancelClick*/ctx[1]);
         mounted = true;
@@ -2627,7 +2651,7 @@ function create_fragment$6(ctx) {
     }
   };
 }
-function instance$6($$self, $$props, $$invalidate) {
+function instance$7($$self, $$props, $$invalidate) {
   let {
     cancelIcon,
     step
@@ -2649,7 +2673,7 @@ function instance$6($$self, $$props, $$invalidate) {
 class Shepherd_cancel_icon extends SvelteComponent {
   constructor(options) {
     super();
-    init(this, options, instance$6, create_fragment$6, safe_not_equal, {
+    init(this, options, instance$7, create_fragment$7, safe_not_equal, {
       cancelIcon: 0,
       step: 2
     });
@@ -2657,7 +2681,7 @@ class Shepherd_cancel_icon extends SvelteComponent {
 }
 
 /* src\js\components\shepherd-title.svelte generated by Svelte v3.57.0 */
-function create_fragment$5(ctx) {
+function create_fragment$6(ctx) {
   let h3;
   return {
     c() {
@@ -2685,7 +2709,7 @@ function create_fragment$5(ctx) {
     }
   };
 }
-function instance$5($$self, $$props, $$invalidate) {
+function instance$6($$self, $$props, $$invalidate) {
   let {
     labelId,
     element,
@@ -2714,7 +2738,7 @@ function instance$5($$self, $$props, $$invalidate) {
 class Shepherd_title extends SvelteComponent {
   constructor(options) {
     super();
-    init(this, options, instance$5, create_fragment$5, safe_not_equal, {
+    init(this, options, instance$6, create_fragment$6, safe_not_equal, {
       labelId: 1,
       element: 0,
       title: 2
@@ -2762,7 +2786,7 @@ function create_if_block_1$1(ctx) {
 }
 
 // (18:2) {#if cancelIcon && cancelIcon.enabled}
-function create_if_block$2(ctx) {
+function create_if_block$3(ctx) {
   let shepherdcancelicon;
   let current;
   shepherdcancelicon = new Shepherd_cancel_icon({
@@ -2799,25 +2823,25 @@ function create_if_block$2(ctx) {
     }
   };
 }
-function create_fragment$4(ctx) {
-  let header;
+function create_fragment$5(ctx) {
+  let div;
   let t;
   let current;
   let if_block0 = /*title*/ctx[2] && create_if_block_1$1(ctx);
-  let if_block1 = /*cancelIcon*/ctx[3] && /*cancelIcon*/ctx[3].enabled && create_if_block$2(ctx);
+  let if_block1 = /*cancelIcon*/ctx[3] && /*cancelIcon*/ctx[3].enabled && create_if_block$3(ctx);
   return {
     c() {
-      header = element("header");
+      div = element("div");
       if (if_block0) if_block0.c();
       t = space();
       if (if_block1) if_block1.c();
-      attr(header, "class", "shepherd-header");
+      attr(div, "class", "shepherd-header");
     },
     m(target, anchor) {
-      insert(target, header, anchor);
-      if (if_block0) if_block0.m(header, null);
-      append(header, t);
-      if (if_block1) if_block1.m(header, null);
+      insert(target, div, anchor);
+      if (if_block0) if_block0.m(div, null);
+      append(div, t);
+      if (if_block1) if_block1.m(div, null);
       current = true;
     },
     p(ctx, _ref) {
@@ -2832,7 +2856,7 @@ function create_fragment$4(ctx) {
           if_block0 = create_if_block_1$1(ctx);
           if_block0.c();
           transition_in(if_block0, 1);
-          if_block0.m(header, t);
+          if_block0.m(div, t);
         }
       } else if (if_block0) {
         group_outros();
@@ -2848,10 +2872,10 @@ function create_fragment$4(ctx) {
             transition_in(if_block1, 1);
           }
         } else {
-          if_block1 = create_if_block$2(ctx);
+          if_block1 = create_if_block$3(ctx);
           if_block1.c();
           transition_in(if_block1, 1);
-          if_block1.m(header, null);
+          if_block1.m(div, null);
         }
       } else if (if_block1) {
         group_outros();
@@ -2873,13 +2897,13 @@ function create_fragment$4(ctx) {
       current = false;
     },
     d(detaching) {
-      if (detaching) detach(header);
+      if (detaching) detach(div);
       if (if_block0) if_block0.d();
       if (if_block1) if_block1.d();
     }
   };
 }
-function instance$4($$self, $$props, $$invalidate) {
+function instance$5($$self, $$props, $$invalidate) {
   let {
     labelId,
     step
@@ -2902,39 +2926,176 @@ function instance$4($$self, $$props, $$invalidate) {
 class Shepherd_header extends SvelteComponent {
   constructor(options) {
     super();
-    init(this, options, instance$4, create_fragment$4, safe_not_equal, {
+    init(this, options, instance$5, create_fragment$5, safe_not_equal, {
       labelId: 0,
       step: 1
     });
   }
 }
 
-/* src\js\components\shepherd-text.svelte generated by Svelte v3.57.0 */
-function create_fragment$3(ctx) {
-  let div;
+/* src\js\components\shepherd-progress-bar.svelte generated by Svelte v3.57.0 */
+function create_fragment$4(ctx) {
+  let div1;
+  let div0;
+  let span;
   return {
     c() {
-      div = element("div");
-      attr(div, "class", "shepherd-text");
-      attr(div, "id", /*descriptionId*/ctx[1]);
+      div1 = element("div");
+      div0 = element("div");
+      span = element("span");
+      attr(span, "class", "progress-bar svelte-15e62ep");
+      set_style(span, "width", /*percentage_progress*/ctx[0] + "%");
+      attr(div0, "class", "shepherd-progress-bar svelte-15e62ep");
+      attr(div1, "class", "padding-container svelte-15e62ep");
     },
     m(target, anchor) {
-      insert(target, div, anchor);
-      /*div_binding*/
-      ctx[3](div);
+      insert(target, div1, anchor);
+      append(div1, div0);
+      append(div0, span);
     },
     p(ctx, _ref) {
       let [dirty] = _ref;
-      if (dirty & /*descriptionId*/2) {
-        attr(div, "id", /*descriptionId*/ctx[1]);
+      if (dirty & /*percentage_progress*/1) {
+        set_style(span, "width", /*percentage_progress*/ctx[0] + "%");
       }
     },
     i: noop,
     o: noop,
     d(detaching) {
-      if (detaching) detach(div);
-      /*div_binding*/
-      ctx[3](null);
+      if (detaching) detach(div1);
+    }
+  };
+}
+function instance$4($$self, $$props, $$invalidate) {
+  let {
+    title
+  } = $$props;
+  let total_progress, current_progress, percentage_progress;
+  $$self.$$set = $$props => {
+    if ('title' in $$props) $$invalidate(1, title = $$props.title);
+  };
+  $$self.$$.update = () => {
+    if ($$self.$$.dirty & /*title, current_progress, total_progress*/14) {
+      {
+        function removeAlphabets(inputString) {
+          return inputString.replace(/[a-zA-Z]/g, '');
+        }
+        $$invalidate(2, total_progress = title.split('/')[1]);
+        $$invalidate(3, current_progress = removeAlphabets(title.split('/')[0]));
+        $$invalidate(0, percentage_progress = current_progress / total_progress * 100);
+      }
+    }
+  };
+  return [percentage_progress, title, total_progress, current_progress];
+}
+class Shepherd_progress_bar extends SvelteComponent {
+  constructor(options) {
+    super();
+    init(this, options, instance$4, create_fragment$4, safe_not_equal, {
+      title: 1
+    });
+  }
+}
+
+/* src\js\components\shepherd-text.svelte generated by Svelte v3.57.0 */
+function create_if_block$2(ctx) {
+  let shepherdprogressbar;
+  let current;
+  shepherdprogressbar = new Shepherd_progress_bar({
+    props: {
+      title: /*title*/ctx[1]
+    }
+  });
+  return {
+    c() {
+      create_component(shepherdprogressbar.$$.fragment);
+    },
+    m(target, anchor) {
+      mount_component(shepherdprogressbar, target, anchor);
+      current = true;
+    },
+    p(ctx, dirty) {
+      const shepherdprogressbar_changes = {};
+      if (dirty & /*title*/2) shepherdprogressbar_changes.title = /*title*/ctx[1];
+      shepherdprogressbar.$set(shepherdprogressbar_changes);
+    },
+    i(local) {
+      if (current) return;
+      transition_in(shepherdprogressbar.$$.fragment, local);
+      current = true;
+    },
+    o(local) {
+      transition_out(shepherdprogressbar.$$.fragment, local);
+      current = false;
+    },
+    d(detaching) {
+      destroy_component(shepherdprogressbar, detaching);
+    }
+  };
+}
+function create_fragment$3(ctx) {
+  let div1;
+  let t;
+  let div0;
+  let current;
+  let if_block = /*title*/ctx[1] && create_if_block$2(ctx);
+  return {
+    c() {
+      div1 = element("div");
+      if (if_block) if_block.c();
+      t = space();
+      div0 = element("div");
+      attr(div0, "class", "shepherd-text");
+      attr(div0, "id", /*descriptionId*/ctx[2]);
+    },
+    m(target, anchor) {
+      insert(target, div1, anchor);
+      if (if_block) if_block.m(div1, null);
+      append(div1, t);
+      append(div1, div0);
+      /*div0_binding*/
+      ctx[4](div0);
+      current = true;
+    },
+    p(ctx, _ref) {
+      let [dirty] = _ref;
+      if ( /*title*/ctx[1]) {
+        if (if_block) {
+          if_block.p(ctx, dirty);
+          if (dirty & /*title*/2) {
+            transition_in(if_block, 1);
+          }
+        } else {
+          if_block = create_if_block$2(ctx);
+          if_block.c();
+          transition_in(if_block, 1);
+          if_block.m(div1, t);
+        }
+      } else if (if_block) {
+        group_outros();
+        transition_out(if_block, 1, 1, () => {
+          if_block = null;
+        });
+        check_outros();
+      }
+      if (!current || dirty & /*descriptionId*/4) {
+        attr(div0, "id", /*descriptionId*/ctx[2]);
+      }
+    },
+    i(local) {
+      if (current) return;
+      transition_in(if_block);
+      current = true;
+    },
+    o(local) {
+      transition_out(if_block);
+      current = false;
+    },
+    d(detaching) {
+      if (detaching) detach(div1);
+      if (if_block) if_block.d();
+      /*div0_binding*/
+      ctx[4](null);
     }
   };
 }
@@ -2942,7 +3103,8 @@ function instance$3($$self, $$props, $$invalidate) {
   let {
     descriptionId,
     element,
-    step
+    step,
+    title
   } = $$props;
   afterUpdate(() => {
     let {
@@ -2957,26 +3119,35 @@ function instance$3($$self, $$props, $$invalidate) {
       $$invalidate(0, element.innerHTML = text, element);
     }
   });
-  function div_binding($$value) {
+  function div0_binding($$value) {
     binding_callbacks[$$value ? 'unshift' : 'push'](() => {
       element = $$value;
       $$invalidate(0, element);
     });
   }
   $$self.$$set = $$props => {
-    if ('descriptionId' in $$props) $$invalidate(1, descriptionId = $$props.descriptionId);
+    if ('descriptionId' in $$props) $$invalidate(2, descriptionId = $$props.descriptionId);
     if ('element' in $$props) $$invalidate(0, element = $$props.element);
-    if ('step' in $$props) $$invalidate(2, step = $$props.step);
+    if ('step' in $$props) $$invalidate(3, step = $$props.step);
+    if ('title' in $$props) $$invalidate(1, title = $$props.title);
   };
-  return [element, descriptionId, step, div_binding];
+  $$self.$$.update = () => {
+    if ($$self.$$.dirty & /*step*/8) {
+      {
+        $$invalidate(1, title = step.options.title);
+      }
+    }
+  };
+  return [element, title, descriptionId, step, div0_binding];
 }
 class Shepherd_text extends SvelteComponent {
   constructor(options) {
     super();
     init(this, options, instance$3, create_fragment$3, safe_not_equal, {
-      descriptionId: 1,
+      descriptionId: 2,
       element: 0,
-      step: 2
+      step: 3,
+      title: 1
     });
   }
 }

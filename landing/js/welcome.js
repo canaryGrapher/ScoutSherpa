@@ -35,11 +35,8 @@
         scrollTo: {
           behavior: 'smooth',
           block: 'center'
-        }
+        },
       },
-      // floatingUIOptions: {
-      //   middleware: [offset({ mainAxis: 0, crossAxis: 12 })]
-      // },
       // This should add the first tour step
       steps: [
         {
@@ -50,15 +47,6 @@
             element: '.hero-welcome',
             on: 'bottom'
           },
-          when: {
-            show: function () {
-              document.querySelector(".hero-welcome").classList.add("custom-highlight-class");
-            },
-            hide: function () {
-              document.querySelector(".hero-welcome").classList.remove("custom-highlight-class");
-            },
-          },
-
           advanceOn: {
             selector: '.hero-welcome',
             event: 'mouseover',
@@ -79,22 +67,18 @@
         id: 'mfTour_2',
         text: element,
         attachTo: {
-          element: '.hero-including',
+          element: document.querySelector("body > header > div > div > div > div:nth-child(1) > div"),
           on: 'bottom'
-        },
-        advanceOn: {
-          selector: '.hero-including',
-          event: 'click',
         },
         buttons: [
           {
             text: 'Next',
             action: shepherd.next,
-            classes: 'shepherd-button-secondary'
           },
           {
             text: 'Exit',
-            action: shepherd.cancel
+            action: shepherd.cancel,
+            secondary: true
           }
         ],
         id: 'including',
@@ -105,16 +89,16 @@
         id: 'mfTour_3',
         text: 'Creating a Shepherd tour is easy. too! ' + 'Just create a \`Tour\` instance, and add as many steps as you want.',
         attachTo: {
-          element: '.hero-example',
+          element: document.querySelector("body > header > div > div > div > div:nth-child(2) > div"),
           on: 'right'
         },
         advanceOn: {
-          selector: '.hero-example',
+          selector: document.querySelector("body > header > div > div > div > div:nth-child(2) > div"),
           event: 'click',
         },
 
         id: 'creating',
-        pageLink: "/d",
+        pageLink: "/",
       },
       {
         title: '4/6',

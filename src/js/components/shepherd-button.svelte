@@ -9,7 +9,12 @@
     classes = config.classes;
     disabled = config.disabled ? getConfigOption(config.disabled) : false;
     label = config.label ? getConfigOption(config.label) : null;
-    secondary = config.secondary;
+    secondary =
+      config.secondary == null ||
+      typeof config.secondary == undefined ||
+      !config.secondary
+        ? false
+        : true;
     text = config.text ? getConfigOption(config.text) : null;
   }
 
@@ -24,8 +29,8 @@
 <button
   type="button"
   aria-label={label ? label : null}
-  class={`${classes || ''} shepherd-button ${
-    secondary ? 'shepherd-button-secondary' : ''
+  class={`shepherd-button ${classes || ''} ${
+    secondary ? 'shepherd-button-secondary' : 'shepherd-button-primary'
   }`}
   {disabled}
   on:click={action}
@@ -34,36 +39,39 @@
   {@html text}
 </button>
 
-<style global>
+<style>
   .shepherd-button {
-    background: rgb(255, 255, 255);
-    border-radius: 3px;
-    color: rgba(0, 0, 0, 0.75);
+    background-color: #ffe3cb;
+    color: #f27b1a;
+    border-radius: 20px;
     cursor: pointer;
     margin-right: 0.5rem;
     padding: 0.5rem 0.5rem;
-    transition: all 0.5s ease;
-    min-height: 35px;
-    min-width: 60px;
+    height: 36px;
+    width: 105px;
     text-align: center;
-    border-width: 2px;
-    border-style: solid;
-    border-color: rgb(156, 156, 156);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
   }
 
-  .shepherd-button:not(:disabled):hover {
-    background: #ef7c00 !important;
-    color: rgba(255, 255, 255, 0.75);
+  button.shepherd-button-primary {
+    background: #ffe3cb;
+    border: none;
   }
 
-  .shepherd-button.shepherd-button-secondary {
-    background: rgb(241, 242, 243);
-    color: rgba(0, 0, 0, 0.75);
+  button.shepherd-button-secondary {
+    background: transparent;
+    border: none;
   }
 
-  .shepherd-button.shepherd-button-secondary:not(:disabled):hover {
-    background: rgb(214, 217, 219);
-    color: rgba(0, 0, 0, 0.75);
+  button.shepherd-button-primary:not(:disabled):hover {
+    background: #ef7c00;
+    color: rgb(255, 255, 255);
+  }
+
+  button.shepherd-button-secondary:not(:disabled):hover {
+    border: 2px solid #ef7c00;
   }
 
   .shepherd-button:disabled {

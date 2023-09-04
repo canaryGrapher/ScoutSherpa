@@ -6,7 +6,8 @@ import {
   computePosition,
   flip,
   limitShift,
-  shift
+  shift,
+  offset
 } from '@floating-ui/dom';
 
 /**
@@ -169,7 +170,7 @@ function placeArrow(el, middlewareData) {
 export function getFloatingUIOptions(attachToOptions, step) {
   const options = {
     strategy: 'absolute',
-    middleware: []
+    middleware: [offset({ mainAxis: 10, crossAxis: 0 })]
   };
 
   const arrowEl = addArrow(step);

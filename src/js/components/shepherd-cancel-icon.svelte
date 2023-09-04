@@ -11,63 +11,35 @@
 </script>
 
 <div class="shepherd-cancel-icon-container">
-  <svg
-    aria-hidden="true"
+  <button
+    aria-label={cancelIcon.label ? cancelIcon.label : 'Close Tour'}
     class="shepherd-cancel-icon"
-    fill="currentColor"
-    height="1em"
-    stroke="currentColor"
-    stroke-width="0"
-    viewBox="0 0 352 512"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
+    on:click={handleCancelClick}
+    type="button"
   >
-    <button
-      aria-label={cancelIcon.label ? cancelIcon.label : 'Close Tour'}
-      class="shepherd-cancel-icon"
-      on:click={handleCancelClick}
-      type="button"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </svg>
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 
-<style global>
+<style>
   .shepherd-cancel-icon-container {
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    background-color: #ffffff;
+    padding: 2px;
+    border: 0.8px solid #fee3d4;
+    border-radius: 100%;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: 30px;
-    width: 30px;
-    background-color: #ffffff;
-    padding: 2px;
-    border: 2px solid #f59c55;
-    border-radius: 100%;
+    font-size: 20px;
+    color: #f27b1a;
   }
 
-  .shepherd-cancel-icon {
-    background: transparent;
-    border: none;
-    color: #f59c55;
-    font-size: 2em;
-    cursor: pointer;
-    font-weight: lighter;
-    margin: auto;
-    padding: 0;
-    transition: color 0.5s ease;
-  }
-
-  .shepherd-cancel-icon:hover {
-    color: #f59c55;
-  }
-
-  .shepherd-has-title .shepherd-content .shepherd-cancel-icon {
-    color: #f59c55;
-  }
-
-  .shepherd-has-title .shepherd-content .shepherd-cancel-icon:hover {
-    color: rgba(0, 0, 0);
+  .shepherd-cancel-icon-container:hover {
+    background-color: #f27b1a;
+    color: #ffffff;
   }
 </style>

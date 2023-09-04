@@ -1,8 +1,13 @@
 <script>
   import { afterUpdate } from 'svelte';
   import { isHTMLElement, isFunction } from '../utils/type-check';
+  import ShepherdProgressBar from './shepherd-progress-bar.svelte';
 
-  export let descriptionId, element, step;
+  export let descriptionId, element, step, title;
+
+  $: {
+    title = step.options.title;
+  }
 
   afterUpdate(() => {
     let { text } = step.options;
@@ -19,7 +24,13 @@
   });
 </script>
 
-<div bind:this={element} class="shepherd-text" id={descriptionId} />
+<div>
+  {#if title}
+    <ShepherdProgressBar {title} />
+  {/if}
+
+  <div bind:this={element} class="shepherd-text" id={descriptionId} />
+</div>
 
 <style global>
   .shepherd-text {

@@ -41,13 +41,17 @@
     box-shadow: 0px 2px 20px 0px #ee6f281a;
     webkit-box-shadow: 0px 2px 20px 0px #ee6f281a;
     -moz-box-shadow: 0px 2px 20px 0px #ee6f281a;
-    border: 3px solid #f27b1a !important;
     background-color: #fff6f1;
-    border: 1px;
+    outline: none;
     border-radius: 12px;
+  }
+
+  .shepherd-content:focus {
     outline: none;
   }
+
   .shepherd-highlight-border {
     border: 3px solid #ef7c00;
+    border-radius: 5px;
   }
 </style>

@@ -30,6 +30,7 @@
     display: flex;
     font-size: 0.8rem;
     padding: 0;
+    margin-top: 10px;
   }
 
   .currentStepIndicatorTitle {
