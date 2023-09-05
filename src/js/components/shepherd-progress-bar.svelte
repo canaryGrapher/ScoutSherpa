@@ -20,11 +20,12 @@
 
 <style>
   .padding-container {
-    padding: 0 1rem;
+    padding: 0 15px;
     margin: 0 auto;
   }
 
   .shepherd-progress-bar {
+    width: 100%;
     background: #fee9da;
     height: 5px;
     border-radius: 5px;

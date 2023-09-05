@@ -45,8 +45,8 @@
     color: #f27b1a;
     border-radius: 20px;
     cursor: pointer;
-    margin-right: 0.5rem;
-    padding: 0.5rem 0.5rem;
+    margin-right: 5px;
+    padding: 5px 5px;
     height: 36px;
     width: 105px;
     text-align: center;

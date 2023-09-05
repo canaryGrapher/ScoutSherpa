@@ -2332,7 +2332,7 @@ function create_fragment$9(ctx) {
       button = element("button");
       attr(button, "type", "button");
       attr(button, "aria-label", button_aria_label_value = /*label*/ctx[3] ? /*label*/ctx[3] : null);
-      attr(button, "class", button_class_value = "" + (null_to_empty(`shepherd-button ${/*classes*/ctx[1] || ''} ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : 'shepherd-button-primary'}`) + " svelte-1id0au4"));
+      attr(button, "class", button_class_value = "" + (null_to_empty(`shepherd-button ${/*classes*/ctx[1] || ''} ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : 'shepherd-button-primary'}`) + " svelte-223odw"));
       button.disabled = /*disabled*/ctx[2];
       attr(button, "tabindex", "0");
     },
@@ -2353,7 +2353,7 @@ function create_fragment$9(ctx) {
       if (dirty & /*label*/8 && button_aria_label_value !== (button_aria_label_value = /*label*/ctx[3] ? /*label*/ctx[3] : null)) {
         attr(button, "aria-label", button_aria_label_value);
       }
-      if (dirty & /*classes, secondary*/18 && button_class_value !== (button_class_value = "" + (null_to_empty(`shepherd-button ${/*classes*/ctx[1] || ''} ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : 'shepherd-button-primary'}`) + " svelte-1id0au4"))) {
+      if (dirty & /*classes, secondary*/18 && button_class_value !== (button_class_value = "" + (null_to_empty(`shepherd-button ${/*classes*/ctx[1] || ''} ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : 'shepherd-button-primary'}`) + " svelte-223odw"))) {
         attr(button, "class", button_class_value);
       }
       if (dirty & /*disabled*/4) {
@@ -2622,10 +2622,11 @@ function create_fragment$7(ctx) {
       span = element("span");
       span.textContent = "×";
       attr(span, "aria-hidden", "true");
+      attr(span, "class", "svelte-1ezcgz2");
       attr(button, "aria-label", button_aria_label_value = /*cancelIcon*/ctx[0].label ? /*cancelIcon*/ctx[0].label : 'Close Tour');
-      attr(button, "class", "shepherd-cancel-icon");
+      attr(button, "class", "shepherd-cancel-icon svelte-1ezcgz2");
       attr(button, "type", "button");
-      attr(div, "class", "shepherd-cancel-icon-container svelte-5x77fn");
+      attr(div, "class", "shepherd-cancel-icon-container svelte-1ezcgz2");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -2943,10 +2944,10 @@ function create_fragment$4(ctx) {
       div1 = element("div");
       div0 = element("div");
       span = element("span");
-      attr(span, "class", "progress-bar svelte-15e62ep");
+      attr(span, "class", "progress-bar svelte-1h0axkz");
       set_style(span, "width", /*percentage_progress*/ctx[0] + "%");
-      attr(div0, "class", "shepherd-progress-bar svelte-15e62ep");
-      attr(div1, "class", "padding-container svelte-15e62ep");
+      attr(div0, "class", "shepherd-progress-bar svelte-1h0axkz");
+      attr(div1, "class", "padding-container svelte-1h0axkz");
     },
     m(target, anchor) {
       insert(target, div1, anchor);

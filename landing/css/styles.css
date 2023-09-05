@@ -110,7 +110,7 @@ pre {
   color          : #16202D;
   display        : flex;
   flex-grow      : 1;
-  font-size      : 1rem;
+  font-size      : 12px;
   justify-content: center;
   margin         : 0;
   padding        : 1rem;
@@ -130,10 +130,6 @@ pre {
 .shepherd-button.shepherd-button-secondary:hover {
   color     : #CAD5D5;
   background: #16202D;
-}
-
-.shepherd-element {
-  border: solid 4px #16202D;
 }
 
 .shepherd-element,

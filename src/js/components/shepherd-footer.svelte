@@ -20,6 +20,7 @@
 </div>
 
 <style global>
+  /* uncomment the next line if you want to show the tourname in the footer */
   /* .footer-text {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -28,7 +29,7 @@
   .shepherd-footer {
     display: block;
     color: #fce8d4;
-    padding: 0.1rem 0.8rem 1rem 0.8rem !important;
+    padding: 1px 15px 16px 15px !important;
   }
 
   .button-container {

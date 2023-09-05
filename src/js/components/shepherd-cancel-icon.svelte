@@ -22,6 +22,33 @@
 </div>
 
 <style>
+  button {
+    text-transform: none;
+    cursor: pointer;
+  }
+
+  button,
+  [type='button'] {
+    -webkit-appearance: button;
+    /* 1 */
+    background-color: transparent;
+    /* 2 */
+    background-image: none;
+    /* 2 */
+  }
+
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    height: auto;
+  }
+
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    /* 1 */
+    font: inherit;
+    /* 2 */
+  }
+
   .shepherd-cancel-icon-container {
     height: 25px;
     width: 25px;
@@ -41,5 +68,13 @@
   .shepherd-cancel-icon-container:hover {
     background-color: #f27b1a;
     color: #ffffff;
+  }
+
+  .shepherd-cancel-icon {
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.25s ease-in-out;
   }
 </style>
