@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
-
+// source code for the tours
 // function to get page VPV from window.dataLayer
 const getPageFromArray = (dataArray) => {
     const data = dataArray.find((item) => {
