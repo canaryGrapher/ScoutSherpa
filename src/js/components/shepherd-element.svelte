@@ -182,7 +182,7 @@
     width: 100%;
     z-index: 9999;
     border: 1px solid #f19026 !important;
-    border-radius: 12px;
+    border-radius: 12px !important;
     background-color: #fff6f1;
   }
 
