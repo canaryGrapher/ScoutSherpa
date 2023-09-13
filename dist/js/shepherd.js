@@ -2425,7 +2425,7 @@
 	      button = element("button");
 	      attr(button, "type", "button");
 	      attr(button, "aria-label", button_aria_label_value = /*label*/ctx[3] ? /*label*/ctx[3] : null);
-	      attr(button, "class", button_class_value = "" + (null_to_empty(`shepherd-button ${/*classes*/ctx[1] || ''} ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : 'shepherd-button-primary'}`) + " svelte-n6s91e"));
+	      attr(button, "class", button_class_value = "" + (null_to_empty(`shepherd-button ${/*classes*/ctx[1] || ''} ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : 'shepherd-button-primary'}`) + " svelte-1ws16f4"));
 	      button.disabled = /*disabled*/ctx[2];
 	      attr(button, "tabindex", "0");
 	    },
@@ -2445,7 +2445,7 @@
 	      if (dirty & /*label*/8 && button_aria_label_value !== (button_aria_label_value = /*label*/ctx[3] ? /*label*/ctx[3] : null)) {
 	        attr(button, "aria-label", button_aria_label_value);
 	      }
-	      if (dirty & /*classes, secondary*/18 && button_class_value !== (button_class_value = "" + (null_to_empty(`shepherd-button ${/*classes*/ctx[1] || ''} ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : 'shepherd-button-primary'}`) + " svelte-n6s91e"))) {
+	      if (dirty & /*classes, secondary*/18 && button_class_value !== (button_class_value = "" + (null_to_empty(`shepherd-button ${/*classes*/ctx[1] || ''} ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : 'shepherd-button-primary'}`) + " svelte-1ws16f4"))) {
 	        attr(button, "class", button_class_value);
 	      }
 	      if (dirty & /*disabled*/4) {

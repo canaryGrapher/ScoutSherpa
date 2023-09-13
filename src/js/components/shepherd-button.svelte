@@ -42,7 +42,7 @@
 <style>
   .shepherd-button {
     background-color: #ffe3cb;
-    color: #f27b1a;
+    color: #ef7c00;
     border-radius: 20px;
     cursor: pointer;
     margin-right: 6px;
@@ -54,9 +54,11 @@
     font-weight: 700;
     font-size: 12px;
     flex-grow: unset;
+    margin: auto 0;
   }
 
   button.shepherd-button-primary {
+    border: 0 !important;
     background: #ffe3cb;
     border: none;
   }
@@ -72,7 +74,9 @@
   }
 
   button.shepherd-button-secondary:not(:disabled):hover {
-    border: 2px solid #ef7c00;
+    border: 2px solid #ef7c00 !important;
+    color: #ef7c00;
+    background: none;
   }
 
   .shepherd-button:disabled {
