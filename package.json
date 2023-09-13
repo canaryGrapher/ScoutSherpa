@@ -1,6 +1,6 @@
 {
   "name": "scoutsherpa.js",
-  "version": "11.0.1",
+  "version": "1.0.0",
   "description": "Guide your users through a tour of your app.",
   "keywords": [
     "site tour",
@@ -8,14 +8,10 @@
     "tutorial",
     "shepherd"
   ],
-  "homepage": "https://shepherdjs.dev",
+  "homepage": "https://github.com/canaryGrapher/ScoutSherpa/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shipshapecode/shepherd.git"
-  },
-  "funding": {
-    "type": "individual",
-    "url": "https://github.com/sponsors/rwwagner90"
+    "url": "git+https://github.com/canaryGrapher/ScoutSherpa.git"
   },
   "license": "MIT",
   "main": "dist/js/shepherd.js",
@@ -118,7 +114,8 @@
   },
   "authors": [
     "Adam Schwartz <adam.flynn.schwartz@gmail.com>",
-    "Zack Bloom <zackbloom@gmail.com>"
+    "Zack Bloom <zackbloom@gmail.com>",
+    "Yash Aryan <yasharyan307@outlook.com>"
   ],
   "maintainers": [
     "Robert Wagner <rwwagner90@gmail.com>",

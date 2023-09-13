@@ -143,9 +143,9 @@ pre {
 }
 
 .shepherd-element .shepherd-arrow {
-  border-width: 0;
-  height      : auto;
-  width       : auto;
+  border: 1px solid #F27B1A;
+  height: 20px;
+  width : 20px;
 }
 
 .shepherd-arrow::before {

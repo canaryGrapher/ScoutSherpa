@@ -45,11 +45,11 @@
           title: "1/6",
           attachTo: {
             element: '.hero-welcome',
-            on: 'bottom'
+            on: 'right'
           },
           advanceOn: {
             selector: '.hero-welcome',
-            event: 'mouseover',
+            event: 'click',
           },
           pageLink: "/",
           id: 'welcome'

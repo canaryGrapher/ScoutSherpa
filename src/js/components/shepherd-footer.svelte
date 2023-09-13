@@ -26,7 +26,6 @@
   } */
 
   .shepherd-footer {
-    display: block;
     color: #fce8d4;
     padding: 0.1rem 0.8rem 1rem 0.8rem !important;
   }
@@ -34,7 +33,7 @@
   .button-container {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: flex-start;
-    gap: 0.1rem;
+    justify-content: end;
+    gap: 4px;
   }
 </style>

@@ -154,6 +154,25 @@
 </div>
 
 <style global>
+  .shepherd-highlight-border {
+    border: 2px solid #ef7c00;
+    border-radius: 5px;
+  }
+
+  .shepherd-button-guide-me {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    z-index: 500;
+    padding: 5px 13px;
+    border-radius: 5px 5px 0 0;
+    border-color: rgb(239, 124, 0);
+    color: #ffffff;
+    background-color: rgb(239, 124, 0);
+    transform: translate(0, -50%) rotate(90deg);
+    cursor: pointer;
+  }
+
   .shepherd-element {
     font-family: 'Open sans', Mulish, sans-serif;
     max-width: 400px;
@@ -162,7 +181,7 @@
     visibility: hidden;
     width: 100%;
     z-index: 9999;
-    border: 2.5px solid #f19026;
+    border: 1px solid #f19026 !important;
     border-radius: 12px;
     background-color: #fff6f1;
   }
@@ -191,11 +210,12 @@
     position: absolute;
     width: 16px;
     height: 16px;
+    border: 2px solid #f27b1a;
     z-index: -1;
   }
 
   .shepherd-arrow:before {
-    content: '';
+    content: 'f' !important;
     transform: rotate(45deg);
     border: 2.5px solid #f19026;
     background-color: #fff6f1;
@@ -226,7 +246,7 @@
   */
   .shepherd-element.shepherd-has-title[data-popper-placement^='bottom']
     > .shepherd-arrow::before {
-    /* background: #f19026; */
+    background: #f19026;
   }
 
   .shepherd-target-click-disabled.shepherd-enabled.shepherd-target,
