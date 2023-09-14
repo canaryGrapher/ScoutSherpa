@@ -20,7 +20,7 @@
 
 <style>
   .padding-container {
-    padding: 0 1rem;
+    padding: 0 12px;
     margin: 0 auto;
   }
 

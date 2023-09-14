@@ -27,7 +27,7 @@
     justify-content: space-between;
     color: #7e7977;
     margin: auto;
-    padding: 0.5rem 1rem !important;
+    padding: 6px 12px !important;
   }
 
   .shepherd-has-title .shepherd-content .shepherd-header {

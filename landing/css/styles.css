@@ -110,10 +110,10 @@ pre {
   color          : #16202D;
   display        : flex;
   flex-grow      : 1;
-  font-size      : 1rem;
+  font-size      : 12px;
   justify-content: center;
   margin         : 0;
-  padding        : 1rem;
+  padding        : 12px;
   text-align     : center;
   text-transform : uppercase;
 }
@@ -205,7 +205,7 @@ pre {
 .shepherd-has-title .shepherd-content .shepherd-header {
   background    : transparent;
   padding-bottom: 0;
-  padding-left  : 2rem;
+  padding-left  : 15px;
 }
 
 .shepherd-has-title .shepherd-content .shepherd-header .shepherd-title {
@@ -213,8 +213,8 @@ pre {
 }
 
 .shepherd-text {
-  font-size: 1.2rem;
-  padding  : 2rem;
+  font-size: 15px;
+  padding  : 20px;
 }
 
 .shepherd-text a,

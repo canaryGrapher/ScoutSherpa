@@ -27,7 +27,7 @@
 
   .shepherd-footer {
     color: #fce8d4;
-    padding: 0.1rem 0.8rem 1rem 0.8rem !important;
+    padding: 5px 10px 12px 5px !important;
   }
 
   .button-container {

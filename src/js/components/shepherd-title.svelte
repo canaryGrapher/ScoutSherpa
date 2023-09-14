@@ -28,13 +28,13 @@
 <style global>
   .shepherd-title {
     display: flex;
-    font-size: 0.8rem;
+    font-size: 10px;
     padding: 0;
     margin-top: 10px;
   }
 
   .currentStepIndicatorTitle {
-    font-size: 1.4rem;
+    font-size: 15px;
     margin: auto 3px 0 0;
     color: #494848;
     font-weight: bold;

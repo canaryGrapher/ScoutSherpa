@@ -210,14 +210,12 @@
     position: absolute;
     width: 16px;
     height: 16px;
-    border: 2px solid #f27b1a;
     z-index: -1;
   }
 
   .shepherd-arrow:before {
-    content: 'f' !important;
     transform: rotate(45deg);
-    border: 2.5px solid #f19026;
+    border: 1px solid #f19026 !important;
     background-color: #fff6f1;
   }
 

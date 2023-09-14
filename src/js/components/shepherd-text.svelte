@@ -34,8 +34,8 @@
 
 <style global>
   .shepherd-text {
-    font-size: 0.9rem !important;
-    padding: 1rem 1rem !important;
+    font-size: 12px !important;
+    padding: 12px 12px !important;
     color: #414141;
   }
 
