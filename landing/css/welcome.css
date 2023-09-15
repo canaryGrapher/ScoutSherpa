@@ -997,9 +997,9 @@ pre {
   width : 20px;
 }
 
-.shepherd-arrow::before {
+/* .shepherd-arrow::before {
   display: none;
-}
+} */
 
 .shepherd-element .shepherd-arrow:after {
   content: url('../assets/img/arrow.svg');

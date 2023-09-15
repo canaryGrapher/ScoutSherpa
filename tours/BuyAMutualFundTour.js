@@ -437,7 +437,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
     title: "4/8",
     text: "These buttons can be used to download your account statements.",
     attachTo: {
-        element: "#ListTableWithCtrls.Rb1_mr",
+        element: document.querySelector("#ListTableWithCtrls\\.Rb1_mr"),
         on: "bottom"
     },
     buttons: [

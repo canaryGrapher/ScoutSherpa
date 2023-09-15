@@ -208,8 +208,8 @@
   .shepherd-arrow,
   .shepherd-arrow::before {
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 31px;
+    height: 31px;
     z-index: -1;
   }
 

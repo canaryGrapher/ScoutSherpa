@@ -1,5 +1,7 @@
 /*! scoutsherpa.js 1.0.0 */
 
+
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
@@ -3027,10 +3029,10 @@
 	      div1 = element("div");
 	      div0 = element("div");
 	      span = element("span");
-	      attr(span, "class", "progress-bar svelte-15e62ep");
+	      attr(span, "class", "progress-bar svelte-1gtpt1b");
 	      set_style(span, "width", /*percentage_progress*/ctx[0] + "%");
-	      attr(div0, "class", "shepherd-progress-bar svelte-15e62ep");
-	      attr(div1, "class", "padding-container svelte-15e62ep");
+	      attr(div0, "class", "shepherd-progress-bar svelte-1gtpt1b");
+	      attr(div1, "class", "padding-container svelte-1gtpt1b");
 	    },
 	    m(target, anchor) {
 	      insert(target, div1, anchor);
