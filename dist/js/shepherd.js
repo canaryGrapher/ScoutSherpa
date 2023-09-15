@@ -2712,9 +2712,9 @@
 	      div0 = element("div");
 	      t = text("×");
 	      attr(div0, "aria-label", div0_aria_label_value = /*cancelIcon*/ctx[0].label ? /*cancelIcon*/ctx[0].label : 'Close Tour');
-	      attr(div0, "class", "shepherd-cancel-icon svelte-1hwov79");
+	      attr(div0, "class", "shepherd-cancel-icon svelte-1jleo5i");
 	      attr(div0, "type", "button");
-	      attr(div1, "class", "shepherd-cancel-icon-container svelte-1hwov79");
+	      attr(div1, "class", "shepherd-cancel-icon-container svelte-1jleo5i");
 	    },
 	    m(target, anchor) {
 	      insert(target, div1, anchor);

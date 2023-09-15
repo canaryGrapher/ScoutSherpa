@@ -174,12 +174,14 @@
   }
 
   .shepherd-element {
-    font-family: 'Open sans', Mulish, sans-serif;
+    font-family: Mulish, system-ui, -apple-system, BlinkMacSystemFont,
+      'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+      'Helvetica Neue', sans-serif;
     max-width: 400px;
     opacity: 0;
     transition: opacity 0.3s, visibility 0.3s;
     visibility: hidden;
-    width: 100%;
+    min-width: 300px;
     z-index: 9999;
     border: 1px solid #f19026 !important;
     border-radius: 12px !important;

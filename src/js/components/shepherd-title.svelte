@@ -27,22 +27,21 @@
 
 <style global>
   .shepherd-title {
-    display: flex;
-    font-size: 10px;
-    padding: 0;
     margin-top: 10px;
   }
 
   .currentStepIndicatorTitle {
     font-size: 15px;
-    margin: auto 3px 0 0;
+    margin-right: 1px;
     color: #494848;
     font-weight: bold;
+    vertical-align: baseline;
   }
 
   .totalStepsIndicatorTitle {
+    vertical-align: middle;
     font-weight: normal;
-    margin: auto 0 5px 0;
+    font-size: 11px;
     color: #7e7977;
   }
 </style>
