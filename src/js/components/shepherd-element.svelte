@@ -155,14 +155,14 @@
 
 <style global>
   .shepherd-highlight-border {
-    border: 2px solid #ef7c00;
+    border: 1.5px solid #ef7c00;
     border-radius: 5px;
   }
 
   .shepherd-button-guide-me {
     position: fixed;
-    left: 0;
-    top: 50%;
+    right: 0;
+    top: 35%;
     z-index: 500;
     padding: 5px 13px;
     border-radius: 5px 5px 0 0;

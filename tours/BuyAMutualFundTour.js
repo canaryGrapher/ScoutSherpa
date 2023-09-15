@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', function () {
     // if matched, add a button to the left corner, vertically centered on the page
     if (matchedLink) {
         var button = document.createElement("button");
-        button.innerHTML = "Guide Me";
+        button.innerHTML = "Watch Demo";
         // button.classList.add("shepherd-button-guide-me");
         button.style.cssText = "position: fixed; left: 0; top: 50%; z-index: 500; padding: 5px 13px; border-radius: 5px 5px 0 0; border-color: rgb(239, 124, 0); color: #ffffff; background-color: rgb(239, 124, 0); transform: translate(-30px, 0%) rotate(90deg); cursor: pointer;"
         if (matchedLink.tour === "WhatsOnBankAccountPageGuideMe") {
@@ -674,3 +674,38 @@ HowToBuyAMutualFundTour.addStep({
     pageLink:
         "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
 });
+
+// eslint-disable-next-line no-undef
+// var WhatsOnDebitCardPageGuideMe = new Shepherd.Tour({
+//     tourName: "Guide Me: What's on Debit Card Page",
+//     instanceCaller: 'WhatsOnDebitCardPageGuideMe',
+//     defaultStepOptions: {
+//         cancelIcon: {
+//             enabled: true
+//         },
+//         scrollTo: {
+//             behavior: 'smooth',
+//             block: 'center'
+//         },
+//         arrow: true
+//     },
+//     useModalOverlay: true
+// });
+
+// WhatsOnDebitCardPageGuideMe.addStep({
+//     id: 'WhatsOnDebitCardPageGuideMe_1',
+//     title: '7/7',
+//     text: 'Fill in the additional information in the fields and you are good to go! You would have invested in a Mutual Fund.',
+//     buttons: [
+//         {
+//             text: 'Finish',
+//             action: WhatsOnDebitCardPageGuideMe.next
+//         },
+//         {
+//             text: 'Cancel',
+//             action: WhatsOnDebitCardPageGuideMe.cancel,
+//             secondary: true
+//         }
+//     ],
+//     pageLink: ""
+// });
