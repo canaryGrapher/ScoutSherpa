@@ -171,6 +171,9 @@
     background-color: rgb(239, 124, 0);
     transform: translate(0, -50%) rotate(90deg);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .shepherd-element {
