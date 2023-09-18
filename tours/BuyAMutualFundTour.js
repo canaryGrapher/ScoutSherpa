@@ -427,7 +427,7 @@ HowToBuyAMutualFundTour.addStep({
 HowToBuyAMutualFundTour.addStep({
     id: 'HowToBuyAMutualFundTour_6',
     title: '6/7',
-    text: '<p>Please select the required transaction type</p><ul><li><strong>SIP</strong> - Regular investment</li><li><strong>One time</strong> - Lumpsum investment</li><li><strong>FIP</strong> - Regular investment at a frequency of your choice</li></ul>',
+    text: '<p>Please select the required transaction type</p><ol><li><strong>SIP</strong> - Regular investment</li><li><strong>One time</strong> - Lumpsum investment</li><li><strong>FIP</strong> - Regular investment at a frequency of your choice</li></ol>',
     attachTo: {
         element:
             "#equity > div > ul > li > div > div > div.bf-cont.js-hidden.jsHidden0 > div > div > ul > li.form-item.typ-2 > div",
