@@ -601,7 +601,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
     title: "4/8",
     text: "These buttons can be used to download your account statements.",
     attachTo: {
-        element: document.querySelector("#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper"),
+        element: "#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper",
         on: "bottom"
     },
     buttons: [
@@ -748,7 +748,7 @@ WhatsOnDebitCardPageGuideMe.addStep({
 WhatsOnDebitCardPageGuideMe.addStep({
     id: 'WhatsOnDebitCardPageGuideMe_3',
     title: '3/7',
-    text: 'These are the Service Requests you can make for your debit card: <ul><li>Generate Pin: If you need a new PIN or want to generate PIN for a new card, you can use this PIN.</li><li>Block Card: Misplaced your card? Block it now.</li><li>Reissue Card: Get a new debit card issued.</li><li>Manage Card Limit: You can set up your transaction limits for this card for various categories here.</li></ul>',
+    text: 'These are the Service Requests you can make for your debit card: <ol><li>Generate Pin: If you need a new PIN or want to generate PIN for a new card, you can use this PIN.</li><li>Block Card: Misplaced your card? Block it now.</li><li>Reissue Card: Get a new debit card issued.</li><li>Manage Card Limit: You can set up your transaction limits for this card for various categories here.</li></ol>',
     buttons: [
         {
             text: 'Next',

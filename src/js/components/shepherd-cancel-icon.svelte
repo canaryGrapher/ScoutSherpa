@@ -18,25 +18,24 @@
     on:click={handleCancelClick}
     type="button"
   >
-    &times;
-    <!-- <span aria-hidden="true">&times;</span> -->
+    <span aria-hidden="true">&times;</span>
   </div>
 </div>
 
 <style>
   .shepherd-cancel-icon-container {
-    height: 25px;
     width: 25px;
-    line-height: 25px;
+    height: 25px;
     background-color: #ffffff;
     padding: 2px;
     border: 0.9px solid #fee3d4;
-    border-radius: 100%;
-    text-align: center;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     font-size: 20px;
     color: #f27b1a;
-    position: relative;
-    cursor: pointer;
   }
 
   .shepherd-cancel-icon-container:hover {
@@ -45,6 +44,16 @@
   }
 
   .shepherd-cancel-icon {
-    vertical-align: middle;
+    margin-top: -4px !important;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .shepherd-cancel-icon > span {
+    line-height: 25px;
   }
 </style>

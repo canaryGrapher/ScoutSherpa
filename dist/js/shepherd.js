@@ -2700,7 +2700,7 @@
 	function create_fragment$7(ctx) {
 	  let div1;
 	  let div0;
-	  let t;
+	  let span;
 	  let div0_aria_label_value;
 	  let mounted;
 	  let dispose;
@@ -2708,16 +2708,19 @@
 	    c() {
 	      div1 = element("div");
 	      div0 = element("div");
-	      t = text("×");
+	      span = element("span");
+	      span.textContent = "×";
+	      attr(span, "aria-hidden", "true");
+	      attr(span, "class", "svelte-1qs1ew2");
 	      attr(div0, "aria-label", div0_aria_label_value = /*cancelIcon*/ctx[0].label ? /*cancelIcon*/ctx[0].label : 'Close Tour');
-	      attr(div0, "class", "shepherd-cancel-icon svelte-1jleo5i");
+	      attr(div0, "class", "shepherd-cancel-icon svelte-1qs1ew2");
 	      attr(div0, "type", "button");
-	      attr(div1, "class", "shepherd-cancel-icon-container svelte-1jleo5i");
+	      attr(div1, "class", "shepherd-cancel-icon-container svelte-1qs1ew2");
 	    },
 	    m(target, anchor) {
 	      insert(target, div1, anchor);
 	      append(div1, div0);
-	      append(div0, t);
+	      append(div0, span);
 	      if (!mounted) {
 	        dispose = listen(div0, "click", /*handleCancelClick*/ctx[1]);
 	        mounted = true;

@@ -162,7 +162,7 @@
   .shepherd-button-guide-me {
     position: fixed;
     right: 0;
-    top: 35%;
+    bottom: 75%;
     z-index: 500;
     padding: 5px 13px;
     border-radius: 5px 5px 0 0;
