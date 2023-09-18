@@ -1,45 +1,12 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
 
-// function to get page VPV from window.dataLayer
-const getPageFromArray = (dataArray) => {
-    const data = dataArray.find((item) => {
-        // eslint-disable-next-line no-prototype-builtins
-        if (item.hasOwnProperty('page')) {
-            return item.page;
-            // eslint-disable-next-line no-prototype-builtins
-        } else if (item.hasOwnProperty('vpv')) {
-            return item.vpv;
-        } else {
-            return null;
-        }
-    });
-    return data.page || data.vpv;
-};
 
-// add a button prompt on the pages where overlay pages tour is available
-window.addEventListener('DOMContentLoaded', function () {
-    const GuideMeLinks = [{ tour: "WhatsOnBankAccountPageGuideMe", link: "/vpv/li/personal-banking/myacc/bankacc" }]
-    const pageLink = getPageFromArray(window.dataLayer)
-    console.log("DOM content loaded for guideMe button injection. Loading tour")
-    // match if current pageLink is in the GuideMeLinks array
-    const matchedLink = GuideMeLinks.find((link) => link.link === pageLink)
 
-    // if matched, add a button to the left corner, vertically centered on the page
-    if (matchedLink) {
-        var button = document.createElement("button");
-        button.innerHTML = "Watch Demo";
-        // button.classList.add("shepherd-button-guide-me");
-        button.style.cssText = "position: fixed; left: 0; top: 50%; z-index: 500; padding: 5px 13px; border-radius: 5px 5px 0 0; border-color: rgb(239, 124, 0); color: #ffffff; background-color: rgb(239, 124, 0); transform: translate(-30px, 0%) rotate(90deg); cursor: pointer;"
-        if (matchedLink.tour === "WhatsOnBankAccountPageGuideMe") {
-            button.onclick = function () {
-                WhatsOnBankAccountPageGuideMe.start();
-            };
-        }
-        document.body.appendChild(button);
-    }
-})
+// This is the start of a file
+// Path: ICICIGuidedJourney.js
 
+// ICICIGuidedJourneys.js
 window.addEventListener('load', function () {
     console.log("Page loaded, loading tour now")
     // check last tour step from local storage 
@@ -353,186 +320,6 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     pageLink: "/vpv/li/personal-banking/myacc/creditcards"
 })
 
-// eslint-disable-next-line no-undef
-var WhatsOnBankAccountPageGuideMe = new Shepherd.Tour({
-    tourName: "Guide Me: What's on Bank Account Page",
-    instanceCaller: "WhatsOnBankAccountPageGuideMe",
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        },
-        scrollTo: {
-            behavior: 'smooth',
-            block: 'center'
-        },
-        arrow: true,
-    },
-    useModalOverlay: true,
-});
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_1",
-    title: "1/8",
-    text: "Welcome to your account page. Here you can view your account summary, account details, and account statements.",
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Cancel',
-            action: WhatsOnBankAccountPageGuideMe.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_2",
-    title: "2/8",
-    text: "This is your account summary. Here you can view your account balance.",
-    attachTo: {
-        element: "#AccountsTable_TotalBalance-MonthsTurnover > tbody",
-        on: "bottom"
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_3",
-    title: "3/8",
-    text: "List of all accounts with summary is displayed here. Select that account using the radio button to interact with it.",
-    attachTo: {
-        element: "#SummaryList",
-        on: "bottom"
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_4",
-    title: "4/8",
-    text: "These buttons can be used to download your account statements.",
-    attachTo: {
-        element: document.querySelector("#ListTableWithCtrls\\.Rb1_mr"),
-        on: "bottom"
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_5",
-    title: "5/8",
-    text: "Click on this dropdown to view more options for the selected account.",
-    attachTo: {
-        element: "#ListTableWithCtrls\\.Rb1_mr\\.C16",
-        on: "left"
-    },
-    advanceOn: {
-        selector: "#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.selectedTxt",
-        event: 'click',
-    },
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_6",
-    title: "6/8",
-    text: "These are the list of service requests you can make for the selected account.",
-    attachTo: {
-        element: "#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper",
-        on: "left"
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_7",
-    title: "7/8",
-    text: "You can also download your acccount details in PDF or XLS format. Click on 'OK' to download the file after selecting the desired format.",
-    beforeShowPromise: function () {
-        document.querySelector("#footerInner").click();
-    },
-    attachTo: {
-        element: "#NavPanel_mr\\.Rb1",
-        on: "left"
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_7",
-    title: "8/8",
-    text: "That is all for this tour! Click on 'Finish' to end the tour.",
-    buttons: [
-        {
-            text: 'Finish',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
 
 // eslint-disable-next-line no-undef
 let HowToBuyAMutualFundTour = new Shepherd.Tour({
@@ -550,7 +337,6 @@ let HowToBuyAMutualFundTour = new Shepherd.Tour({
     },
     useModalOverlay: false
 });
-
 
 // Select the 'Investment and Insurance' button on the menubar on dashboard
 HowToBuyAMutualFundTour.addStep({
@@ -675,37 +461,392 @@ HowToBuyAMutualFundTour.addStep({
         "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
 });
 
-// eslint-disable-next-line no-undef
-// var WhatsOnDebitCardPageGuideMe = new Shepherd.Tour({
-//     tourName: "Guide Me: What's on Debit Card Page",
-//     instanceCaller: 'WhatsOnDebitCardPageGuideMe',
-//     defaultStepOptions: {
-//         cancelIcon: {
-//             enabled: true
-//         },
-//         scrollTo: {
-//             behavior: 'smooth',
-//             block: 'center'
-//         },
-//         arrow: true
-//     },
-//     useModalOverlay: true
-// });
 
-// WhatsOnDebitCardPageGuideMe.addStep({
-//     id: 'WhatsOnDebitCardPageGuideMe_1',
-//     title: '7/7',
-//     text: 'Fill in the additional information in the fields and you are good to go! You would have invested in a Mutual Fund.',
-//     buttons: [
-//         {
-//             text: 'Finish',
-//             action: WhatsOnDebitCardPageGuideMe.next
-//         },
-//         {
-//             text: 'Cancel',
-//             action: WhatsOnDebitCardPageGuideMe.cancel,
-//             secondary: true
-//         }
-//     ],
-//     pageLink: ""
-// });
+// This is the start of a file
+// Path: ICICIOverlayPagesTour.js
+
+// function to get page VPV from window.dataLayer
+const getPageFromArray = (dataArray) => {
+    const data = dataArray.find((item) => {
+        // eslint-disable-next-line no-prototype-builtins
+        if (item.hasOwnProperty('page')) {
+            return item.page;
+            // eslint-disable-next-line no-prototype-builtins
+        } else if (item.hasOwnProperty('vpv')) {
+            return item.vpv;
+        } else {
+            return null;
+        }
+    });
+    return data.page || data.vpv;
+};
+
+// add a button prompt on the pages where overlay pages tour is available
+window.addEventListener('DOMContentLoaded', function () {
+    const GuideMeLinks = [
+        {
+            tour: "WhatsOnBankAccountPageGuideMe",
+            link: "/vpv/li/personal-banking/myacc/bankacc"
+        },
+        {
+            tour: "WhatsOnDebitCardPageGuideMe",
+            link: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
+        }]
+    const pageLink = getPageFromArray(window.dataLayer)
+    console.log("DOM content loaded for guideMe button injection. Loading tour")
+    // match if current pageLink is in the GuideMeLinks array
+    const matchedLink = GuideMeLinks.find((link) => link.link === pageLink)
+
+    // if matched, add a button to the left corner, vertically centered on the page
+    if (matchedLink) {
+        var button = document.createElement("button");
+        button.innerHTML = "Watch Demo";
+        // button.classList.add("shepherd-button-guide-me");
+        button.style.cssText = "position: fixed; left: 0; top: 50%; z-index: 500; padding: 5px 13px; border-radius: 5px 5px 0 0; border-color: rgb(239, 124, 0); color: #ffffff; background-color: rgb(239, 124, 0); transform: translate(-30px, 0%) rotate(90deg); cursor: pointer;"
+        if (matchedLink.tour === "WhatsOnBankAccountPageGuideMe") {
+            button.onclick = function () {
+                WhatsOnBankAccountPageGuideMe.start();
+            };
+        }
+        else if (matchedLink.tour === "WhatsOnDebitCardPageGuideMe") {
+            button.onclick = function () {
+                WhatsOnDebitCardPageGuideMe.start();
+            };
+        }
+        document.body.appendChild(button);
+    }
+})
+
+// eslint-disable-next-line no-undef
+var WhatsOnBankAccountPageGuideMe = new Shepherd.Tour({
+    tourName: "Guide Me: What's on Bank Account Page",
+    instanceCaller: "WhatsOnBankAccountPageGuideMe",
+    defaultStepOptions: {
+        cancelIcon: {
+            enabled: true
+        },
+        scrollTo: {
+            behavior: 'smooth',
+            block: 'center'
+        },
+        arrow: true,
+    },
+    useModalOverlay: true,
+});
+
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_1",
+    title: "1/8",
+    text: "Welcome to your account page. Here you can view your account summary, account details, and account statements.",
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
+        },
+        {
+            text: 'Cancel',
+            action: WhatsOnBankAccountPageGuideMe.cancel,
+            secondary: true
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
+})
+
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_2",
+    title: "2/8",
+    text: "This is your account summary. Here you can view your account balance.",
+    attachTo: {
+        element: "#AccountsTable_TotalBalance-MonthsTurnover > tbody",
+        on: "bottom"
+    },
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
+})
+
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_3",
+    title: "3/8",
+    text: "List of all accounts with summary is displayed here. Select that account using the radio button to interact with it.",
+    attachTo: {
+        element: "#SummaryList",
+        on: "bottom"
+    },
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
+})
+
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_4",
+    title: "4/8",
+    text: "These buttons can be used to download your account statements.",
+    attachTo: {
+        element: document.querySelector("#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper"),
+        on: "bottom"
+    },
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
+})
+
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_5",
+    title: "5/8",
+    text: "Click on this dropdown to view more options for the selected account.",
+    attachTo: {
+        element: "#ListTableWithCtrls\\.Rb1_mr\\.C16",
+        on: "left"
+    },
+    advanceOn: {
+        selector: "#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.selectedTxt",
+        event: 'click',
+    },
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
+})
+
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_6",
+    title: "6/8",
+    text: "These are the list of service requests you can make for the selected account.",
+    attachTo: {
+        element: "#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper",
+        on: "left"
+    },
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
+})
+
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_7",
+    title: "7/8",
+    text: "You can also download your acccount details in PDF or XLS format. Click on 'OK' to download the file after selecting the desired format.",
+    beforeShowPromise: function () {
+        document.querySelector("#footerInner").click();
+    },
+    attachTo: {
+        element: "#NavPanel_mr\\.Rb1",
+        on: "left"
+    },
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
+})
+
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_7",
+    title: "8/8",
+    text: "That is all for this tour! Click on 'Finish' to end the tour.",
+    buttons: [
+        {
+            text: 'Finish',
+            action: WhatsOnBankAccountPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
+})
+
+// eslint-disable-next-line no-undef
+var WhatsOnDebitCardPageGuideMe = new Shepherd.Tour({
+    tourName: "Guide Me: What's on Debit Card Page",
+    instanceCaller: 'WhatsOnDebitCardPageGuideMe',
+    defaultStepOptions: {
+        cancelIcon: {
+            enabled: true
+        },
+        scrollTo: {
+            behavior: 'smooth',
+            block: 'center'
+        },
+        arrow: true
+    },
+    useModalOverlay: true
+});
+
+WhatsOnDebitCardPageGuideMe.addStep({
+    id: 'WhatsOnDebitCardPageGuideMe_1',
+    title: '1/7',
+    text: 'Welcome to your Virtual Debit card page. Here you can view and manage your debit card.',
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnDebitCardPageGuideMe.next
+        },
+        {
+            text: 'Cancel',
+            action: WhatsOnDebitCardPageGuideMe.cancel,
+            secondary: true
+        }
+    ],
+    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
+});
+
+WhatsOnDebitCardPageGuideMe.addStep({
+    id: 'WhatsOnDebitCardPageGuideMe_2',
+    title: '2/7',
+    text: 'This is your Debit card. You can view the card number, expiry date, and CVV here.',
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnDebitCardPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnDebitCardPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    attachTo: {
+        element: '#glider-track > div > div.card-container',
+        on: 'right'
+    },
+    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
+});
+
+WhatsOnDebitCardPageGuideMe.addStep({
+    id: 'WhatsOnDebitCardPageGuideMe_3',
+    title: '3/7',
+    text: 'These are the Service Requests you can make for your debit card: <ul><li>Generate Pin: If you need a new PIN or want to generate PIN for a new card, you can use this PIN.</li><li>Block Card: Misplaced your card? Block it now.</li><li>Reissue Card: Get a new debit card issued.</li><li>Manage Card Limit: You can set up your transaction limits for this card for various categories here.</li></ul>',
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnDebitCardPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnDebitCardPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    attachTo: {
+        element: "#VDC\\.Rowset2 > #VDC\\.Rowset21.service-card-container",
+        on: 'left'
+    },
+    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
+});
+
+WhatsOnDebitCardPageGuideMe.addStep({
+    id: 'WhatsOnDebitCardPageGuideMe_4',
+    title: '4/7',
+    text: 'Want better privileges with your debit card? Click on the <strong>Upgrade Now</strong> button below to upgrade your debit card.',
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnDebitCardPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnDebitCardPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    attachTo: {
+        element: "#VDC\\.Rowset12:has([id='upgradeNow'])",
+        on: 'top'
+    },
+    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
+});
+
+WhatsOnDebitCardPageGuideMe.addStep({
+    id: 'WhatsOnDebitCardPageGuideMe_',
+    title: '5/7',
+    text: 'Standing instructions are the instructions you give to the bank to automatically debit your account for a fixed amount at a fixed frequency. You can manage those standinging instructions here.',
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnDebitCardPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnDebitCardPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    attachTo: {
+        element: "#VDC\\.Rowset12:has([target='_blank'])",
+        on: 'top'
+    },
+    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
+});
+
+WhatsOnDebitCardPageGuideMe.addStep({
+    id: 'WhatsOnDebitCardPageGuideMe_',
+    title: '6/7',
+    text: 'Your card can be tokenized for faster checkouts at various merchants. Click on <strong>Manage Tokens</strong> to review/delete your card tokens.',
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnDebitCardPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnDebitCardPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    attachTo: {
+        element: "#VDC\\.Rowset12:has([id='MANAGE_TOKENS'])",
+        on: 'top'
+    },
+    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
+});
+
+WhatsOnDebitCardPageGuideMe.addStep({
+    id: "WhatsOnDebitCardPageGuideMe_7",
+    title: "7/7",
+    text: "That is all for this tour! Click on 'Finish' to end the tour.",
+    buttons: [
+        {
+            text: 'Finish',
+            action: WhatsOnDebitCardPageGuideMe.complete
+        },
+        {
+            text: 'Back',
+            action: WhatsOnDebitCardPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
+})
