@@ -33,7 +33,7 @@
   .button-container {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 4px;
   }
 </style>

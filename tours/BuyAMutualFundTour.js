@@ -501,8 +501,9 @@ window.addEventListener('DOMContentLoaded', function () {
     if (matchedLink) {
         var button = document.createElement("button");
         button.innerHTML = "Watch Demo";
+        button.classList.add("shepherd-button-guide-me");
         // button.classList.add("shepherd-button-guide-me");
-        button.style.cssText = "position: fixed; left: 0; top: 50%; z-index: 500; padding: 5px 13px; border-radius: 5px 5px 0 0; border-color: rgb(239, 124, 0); color: #ffffff; background-color: rgb(239, 124, 0); transform: translate(-30px, 0%) rotate(90deg); cursor: pointer;"
+        // button.style.cssText = "position: fixed; left: 0; top: 50%; z-index: 500; padding: 5px 13px; border-radius: 5px 5px 0 0; border-color: rgb(239, 124, 0); color: #ffffff; background-color: rgb(239, 124, 0); transform: translate(-30px, 0%) rotate(90deg); cursor: pointer;"
         if (matchedLink.tour === "WhatsOnBankAccountPageGuideMe") {
             button.onclick = function () {
                 WhatsOnBankAccountPageGuideMe.start();
@@ -783,7 +784,7 @@ WhatsOnDebitCardPageGuideMe.addStep({
         }
     ],
     attachTo: {
-        element: "#VDC\\.Rowset12:has([id='upgradeNow'])",
+        element: ".expression-card:has([id='upgradeNow'])",
         on: 'top'
     },
     pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
@@ -805,7 +806,7 @@ WhatsOnDebitCardPageGuideMe.addStep({
         }
     ],
     attachTo: {
-        element: "#VDC\\.Rowset12:has([target='_blank'])",
+        element: ".expression-card:has([target='_blank'])",
         on: 'top'
     },
     pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
@@ -827,7 +828,7 @@ WhatsOnDebitCardPageGuideMe.addStep({
         }
     ],
     attachTo: {
-        element: "#VDC\\.Rowset12:has([id='MANAGE_TOKENS'])",
+        element: ".expression-card:has([id='MANAGE_TOKENS'])",
         on: 'top'
     },
     pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"

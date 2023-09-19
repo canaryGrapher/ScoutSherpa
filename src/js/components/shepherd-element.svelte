@@ -169,11 +169,12 @@
     border-color: rgb(239, 124, 0);
     color: #ffffff;
     background-color: rgb(239, 124, 0);
-    transform: translate(0, -50%) rotate(90deg);
+    transform: translate(0, -50%) rotate(-90deg);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: -40px;
   }
 
   .shepherd-element {
@@ -213,15 +214,21 @@
   .shepherd-arrow,
   .shepherd-arrow::before {
     position: absolute;
-    width: 31px;
-    height: 31px;
+    width: 30px;
+    height: 30px;
     z-index: -1;
   }
 
   .shepherd-arrow:before {
     transform: rotate(45deg);
-    border: 1px solid #f19026 !important;
+    /* border: 1px solid #f19026 !important; */
     background-color: #fff6f1;
+    /* content: ''; */
+  }
+
+  .shepherd-arrow:after {
+    border: 1px solid #f27b1a;
+    content: '';
   }
 
   .shepherd-element[data-popper-placement^='top'] > .shepherd-arrow {
@@ -249,7 +256,7 @@
   */
   .shepherd-element.shepherd-has-title[data-popper-placement^='bottom']
     > .shepherd-arrow::before {
-    background: #f19026;
+    background-color: #fff6f1;
   }
 
   .shepherd-target-click-disabled.shepherd-enabled.shepherd-target,

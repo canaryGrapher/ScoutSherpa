@@ -45,7 +45,7 @@
           title: "1/6",
           attachTo: {
             element: '.hero-welcome',
-            on: 'right'
+            on: 'bottom'
           },
           advanceOn: {
             selector: '.hero-welcome',
