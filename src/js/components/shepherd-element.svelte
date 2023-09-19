@@ -162,7 +162,7 @@
   .shepherd-button-guide-me {
     position: fixed;
     right: 0;
-    bottom: 75%;
+    bottom: 60%;
     z-index: 500;
     padding: 5px 13px;
     border-radius: 5px 5px 0 0;
@@ -213,6 +213,8 @@
 
   .shepherd-arrow,
   .shepherd-arrow::before {
+    background-color: #fff6f1;
+    border: 1px solid #f19026;
     position: absolute;
     width: 30px;
     height: 30px;
@@ -220,14 +222,10 @@
   }
 
   .shepherd-arrow:before {
-    transform: rotate(45deg);
-    /* border: 1px solid #f19026 !important; */
     background-color: #fff6f1;
-    /* content: ''; */
   }
 
   .shepherd-arrow:after {
-    border: 1px solid #f27b1a;
     content: '';
   }
 

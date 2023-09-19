@@ -30,6 +30,8 @@
     background-color: #fff6f1;
     outline: none;
     border-radius: 12px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .shepherd-content:focus {

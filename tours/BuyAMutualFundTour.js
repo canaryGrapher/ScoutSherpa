@@ -491,7 +491,8 @@ window.addEventListener('DOMContentLoaded', function () {
         {
             tour: "WhatsOnDebitCardPageGuideMe",
             link: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
-        }]
+        }
+    ]
     const pageLink = getPageFromArray(window.dataLayer)
     console.log("DOM content loaded for guideMe button injection. Loading tour")
     // match if current pageLink is in the GuideMeLinks array
@@ -806,7 +807,7 @@ WhatsOnDebitCardPageGuideMe.addStep({
         }
     ],
     attachTo: {
-        element: ".expression-card:has([target='_blank'])",
+        element: document.querySelector(".expression-card > div.buttons-div:has([target='_blank'])"),
         on: 'top'
     },
     pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
@@ -828,7 +829,7 @@ WhatsOnDebitCardPageGuideMe.addStep({
         }
     ],
     attachTo: {
-        element: ".expression-card:has([id='MANAGE_TOKENS'])",
+        element: document.querySelector("#MANAGE_TOKENS"),
         on: 'top'
     },
     pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
