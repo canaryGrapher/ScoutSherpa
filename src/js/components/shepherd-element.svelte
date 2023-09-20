@@ -213,7 +213,7 @@
 
   .shepherd-arrow,
   .shepherd-arrow::before {
-    background-color: #fff6f1;
+    background: #fff6f1;
     border: 1px solid #f19026;
     position: absolute;
     width: 30px;
@@ -228,6 +228,7 @@
 
   .shepherd-arrow:after {
     content: '';
+    background: #fff6f1;
   }
 
   .shepherd-element[data-popper-placement^='top'] > .shepherd-arrow {

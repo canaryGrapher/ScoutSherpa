@@ -24,14 +24,11 @@
 
 <style global>
   .shepherd-content {
-    box-shadow: 0px 2px 20px 0px #ee6f281a;
-    webkit-box-shadow: 0px 2px 20px 0px #ee6f281a;
-    -moz-box-shadow: 0px 2px 20px 0px #ee6f281a;
     background-color: #fff6f1;
     outline: none;
     border-radius: 12px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .shepherd-content:focus {

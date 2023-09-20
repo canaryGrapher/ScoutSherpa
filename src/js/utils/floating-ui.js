@@ -170,7 +170,7 @@ function placeArrow(el, middlewareData) {
 export function getFloatingUIOptions(attachToOptions, step) {
   const options = {
     strategy: 'absolute',
-    middleware: [offset({ mainAxis: 10, crossAxis: 0 })]
+    middleware: [offset({ mainAxis: 15, crossAxis: 0 })]
   };
 
   const arrowEl = addArrow(step);
