@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+// eslint-disable-next-line no-undef
 var UCJTwoWheelerLoanTour = new Shepherd.Tour({
     tourName: 'Apply for a two wheeler loan',
     instanceCaller: 'UCJTwoWheelerLoanTour',
