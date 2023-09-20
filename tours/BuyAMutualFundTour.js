@@ -682,3 +682,406 @@ WhatsOnBankAccountPageGuideMe.addStep({
 })
 
 // eslint-disable-next-line no-undef
+var WhatsOnOtherBankAddPayee = new Shepherd.Tour({ 
+
+    tourName: "Guide Me: What's on Add Other bank payee page?",
+
+    instanceCaller: "WhatsOnOtherBankAddPayee",
+
+    defaultStepOptions: {
+
+        cancelIcon: {
+
+            enabled: true
+
+        },
+
+        classes: 'z-50',
+
+        scrollTo: {
+
+            behavior: 'smooth',
+
+            block: 'center'
+
+        },
+
+        arrow: true,
+
+    },
+
+    useModalOverlay: false,
+
+});
+
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_1",
+
+    title: "1/10",
+
+    text: "<p>Welcome to Add Payee: Other Bank page. This tour will guide you through the options available on the page.</p>",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Cancel',
+
+            action: WhatsOnOtherBankAddPayee.cancel,
+
+            secondary: true
+
+        }
+
+    ],
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_2",
+
+    title: "2/10",
+
+    text: "Enter the Payee Account Number as it is displayed on your payee's bank records.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz1_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_3",
+
+    title: "3/10",
+
+    text: "Enter the Nickname of your choice as you want this payee to be visible on your payee page.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz2_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_4",
+
+    title: "4/10",
+
+    text: "Select an account type for the payee account you are adding. You can select between Savings, Current Account, Cash Credit or Loan Account. Click on the drowdown to proceed.",
+
+    advanceOn: {
+
+        selector: "#DispFormWithTableContent\\.Ryz7_mr\\.C2 > span > span > div > div.selectedTxt",
+
+        event: 'click'
+
+    },
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz7_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_5",
+
+    title: "5/10",
+
+    text: "Select an account type and click on <strong>Next</strong> to continue.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz7_mr\\.C2 > span > span > div > div.SSContainerDivWrapper"),
+
+        on: "right"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_6",
+
+    title: "6/10",
+
+    text: "Enter the payee's bank account IFSC code. Not sure about the IFSC code? You can search for the IFSC code by clicking on the <strong>Search</strong> button.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz6_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_7",
+
+    title: "7/10",
+
+    text: "Enter the Account number of the payee. It is critical that you get this number right to avoid sending money to the wrong account.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz3_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_8",
+
+    title: "8/10",
+
+    text: "Re-enter the account number to make sure you got it right the first time. You can validate the payee you just added by clicking on the <span style='color: red;'><u>Click here</u></span> hyperlink.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz5_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_8",
+
+    title: "9/10",
+
+    text: "Payee alert will be sent to this mobile number. Keep it handy.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz15_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_9",
+
+    title: "10/10",
+
+    text: "That's all for this guide. Click on <strong>Next</strong> to go to the confirmation page to finalize the payee addition.",
+
+    buttons: [
+
+        {
+
+            text: 'Complete',
+
+            action: WhatsOnOtherBankAddPayee.complete
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
