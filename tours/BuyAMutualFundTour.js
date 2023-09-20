@@ -488,10 +488,10 @@ window.addEventListener('DOMContentLoaded', function () {
             tour: "WhatsOnBankAccountPageGuideMe",
             link: "/vpv/li/personal-banking/myacc/bankacc"
         },
-        {
-            tour: "WhatsOnDebitCardPageGuideMe",
-            link: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
-        }
+{
+tour: "WhatsOnOtherBankAddPayee",
+link: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+}
     ]
     const pageLink = getPageFromArray(window.dataLayer)
     console.log("DOM content loaded for guideMe button injection. Loading tour")
@@ -510,9 +510,9 @@ window.addEventListener('DOMContentLoaded', function () {
                 WhatsOnBankAccountPageGuideMe.start();
             };
         }
-        else if (matchedLink.tour === "WhatsOnDebitCardPageGuideMe") {
+else if (matchedLink.tour === "WhatsOnOtherBankAddPayee") {
             button.onclick = function () {
-                WhatsOnDebitCardPageGuideMe.start();
+                WhatsOnOtherBankAddPayee.start();
             };
         }
         document.body.appendChild(button);
@@ -691,164 +691,406 @@ WhatsOnBankAccountPageGuideMe.addStep({
 })
 
 // eslint-disable-next-line no-undef
-var WhatsOnDebitCardPageGuideMe = new Shepherd.Tour({
-    tourName: "Guide Me: What's on Debit Card Page",
-    instanceCaller: 'WhatsOnDebitCardPageGuideMe',
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        },
-        scrollTo: {
-            behavior: 'smooth',
-            block: 'center'
-        },
-        arrow: true
-    },
-    useModalOverlay: true
+var WhatsOnOtherBankAddPayee = new Shepherd.Tour({ 
+
+    tourName: "Guide Me: What's on Add Other bank payee page?",
+
+    instanceCaller: "WhatsOnOtherBankAddPayee",
+
+    defaultStepOptions: {
+
+        cancelIcon: {
+
+            enabled: true
+
+        },
+
+        classes: 'z-50',
+
+        scrollTo: {
+
+            behavior: 'smooth',
+
+            block: 'center'
+
+        },
+
+        arrow: true,
+
+    },
+
+    useModalOverlay: false,
+
 });
 
-WhatsOnDebitCardPageGuideMe.addStep({
-    id: 'WhatsOnDebitCardPageGuideMe_1',
-    title: '1/7',
-    text: 'Welcome to your Virtual Debit card page. Here you can view and manage your debit card.',
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnDebitCardPageGuideMe.next
-        },
-        {
-            text: 'Cancel',
-            action: WhatsOnDebitCardPageGuideMe.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
-});
 
-WhatsOnDebitCardPageGuideMe.addStep({
-    id: 'WhatsOnDebitCardPageGuideMe_2',
-    title: '2/7',
-    text: 'This is your Debit card. You can view the card number, expiry date, and CVV here.',
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnDebitCardPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnDebitCardPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    attachTo: {
-        element: '#glider-track > div > div.card-container',
-        on: 'right'
-    },
-    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
-});
+WhatsOnOtherBankAddPayee.step({
 
-WhatsOnDebitCardPageGuideMe.addStep({
-    id: 'WhatsOnDebitCardPageGuideMe_3',
-    title: '3/7',
-    text: 'These are the Service Requests you can make for your debit card: <ol><li>Generate Pin: If you need a new PIN or want to generate PIN for a new card, you can use this PIN.</li><li>Block Card: Misplaced your card? Block it now.</li><li>Reissue Card: Get a new debit card issued.</li><li>Manage Card Limit: You can set up your transaction limits for this card for various categories here.</li></ol>',
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnDebitCardPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnDebitCardPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    attachTo: {
-        element: "#VDC\\.Rowset2 > #VDC\\.Rowset21.service-card-container",
-        on: 'left'
-    },
-    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
-});
+    id: "WhatsOnOtherBankAddPayee_1",
 
-WhatsOnDebitCardPageGuideMe.addStep({
-    id: 'WhatsOnDebitCardPageGuideMe_4',
-    title: '4/7',
-    text: 'Want better privileges with your debit card? Click on the <strong>Upgrade Now</strong> button below to upgrade your debit card.',
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnDebitCardPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnDebitCardPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    attachTo: {
-        element: ".expression-card:has([id='upgradeNow'])",
-        on: 'top'
-    },
-    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
-});
+    title: "1/10",
 
-WhatsOnDebitCardPageGuideMe.addStep({
-    id: 'WhatsOnDebitCardPageGuideMe_',
-    title: '5/7',
-    text: 'Standing instructions are the instructions you give to the bank to automatically debit your account for a fixed amount at a fixed frequency. You can manage those standinging instructions here.',
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnDebitCardPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnDebitCardPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    attachTo: {
-        element: document.querySelector(".expression-card > div.buttons-div:has([target='_blank'])"),
-        on: 'top'
-    },
-    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
-});
+    text: "<p>Welcome to Add Payee: Other Bank page. This tour will guide you through the options available on the page.</p>",
 
-WhatsOnDebitCardPageGuideMe.addStep({
-    id: 'WhatsOnDebitCardPageGuideMe_',
-    title: '6/7',
-    text: 'Your card can be tokenized for faster checkouts at various merchants. Click on <strong>Manage Tokens</strong> to review/delete your card tokens.',
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnDebitCardPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnDebitCardPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    attachTo: {
-        element: document.querySelector("#MANAGE_TOKENS"),
-        on: 'top'
-    },
-    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
-});
+    buttons: [
 
-WhatsOnDebitCardPageGuideMe.addStep({
-    id: "WhatsOnDebitCardPageGuideMe_7",
-    title: "7/7",
-    text: "That is all for this tour! Click on 'Finish' to end the tour.",
-    buttons: [
-        {
-            text: 'Finish',
-            action: WhatsOnDebitCardPageGuideMe.complete
-        },
-        {
-            text: 'Back',
-            action: WhatsOnDebitCardPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    pageLink: "/VPV/LI/CARDS&LOANS/VirtualDebitCard/LandingPage"
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Cancel',
+
+            action: WhatsOnOtherBankAddPayee.cancel,
+
+            secondary: true
+
+        }
+
+    ],
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_2",
+
+    title: "2/10",
+
+    text: "Enter the Payee Account Number as it is displayed on your payee's bank records.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz1_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_3",
+
+    title: "3/10",
+
+    text: "Enter the Nickname of your choice as you want this payee to be visible on your payee page.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz2_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_4",
+
+    title: "4/10",
+
+    text: "Select an account type for the payee account you are adding. You can select between Savings, Current Account, Cash Credit or Loan Account. Click on the drowdown to proceed.",
+
+    advanceOn: {
+
+        selector: "#DispFormWithTableContent\\.Ryz7_mr\\.C2 > span > span > div > div.selectedTxt",
+
+        event: 'click'
+
+    },
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz7_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_5",
+
+    title: "5/10",
+
+    text: "Select an account type and click on <strong>Next</strong> to continue.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz7_mr\\.C2 > span > span > div > div.SSContainerDivWrapper"),
+
+        on: "right"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_6",
+
+    title: "6/10",
+
+    text: "Enter the payee's bank account IFSC code. Not sure about the IFSC code? You can search for the IFSC code by clicking on the <strong>Search</strong> button.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz6_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_7",
+
+    title: "7/10",
+
+    text: "Enter the Account number of the payee. It is critical that you get this number right to avoid sending money to the wrong account.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz3_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_8",
+
+    title: "8/10",
+
+    text: "Re-enter the account number to make sure you got it right the first time. You can validate the payee you just added by clicking on the <span style='color: red;'><u>Click here</u></span> hyperlink.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz5_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_8",
+
+    title: "9/10",
+
+    text: "Payee alert will be sent to this mobile number. Keep it handy.",
+
+    buttons: [
+
+        {
+
+            text: 'Next',
+
+            action: WhatsOnOtherBankAddPayee.next
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    attachTo: {
+
+        element: document.querySelector("#DispFormWithTableContent\\.Ryz15_mr"),
+
+        on: "bottom"
+
+    },
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
+})
+
+WhatsOnOtherBankAddPayee.step({
+
+    id: "WhatsOnOtherBankAddPayee_9",
+
+    title: "10/10",
+
+    text: "That's all for this guide. Click on <strong>Next</strong> to go to the confirmation page to finalize the payee addition.",
+
+    buttons: [
+
+        {
+
+            text: 'Complete',
+
+            action: WhatsOnOtherBankAddPayee.complete
+
+        },
+
+        {
+
+            text: 'Back',
+
+            action: WhatsOnOtherBankAddPayee.back,
+
+            secondary: true
+
+        }
+
+    ],
+
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+
 })
