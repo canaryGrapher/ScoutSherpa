@@ -219,6 +219,7 @@
     width: 30px;
     height: 30px;
     z-index: -1;
+    transform: rotate(45deg);
   }
 
   .shepherd-arrow:before {
