@@ -487,7 +487,11 @@ window.addEventListener('DOMContentLoaded', function () {
         {
             tour: "WhatsOnBankAccountPageGuideMe",
             link: "/vpv/li/personal-banking/myacc/bankacc"
-        }
+        },
+{
+tour: "WhatsOnOtherBankAddPayee",
+link: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+}
     ]
     const pageLink = getPageFromArray(window.dataLayer)
     console.log("DOM content loaded for guideMe button injection. Loading tour")
@@ -504,6 +508,11 @@ window.addEventListener('DOMContentLoaded', function () {
         if (matchedLink.tour === "WhatsOnBankAccountPageGuideMe") {
             button.onclick = function () {
                 WhatsOnBankAccountPageGuideMe.start();
+            };
+        }
+else if (matchedLink.tour === "WhatsOnOtherBankAddPayee") {
+            button.onclick = function () {
+                WhatsOnOtherBankAddPayee.start();
             };
         }
         document.body.appendChild(button);
