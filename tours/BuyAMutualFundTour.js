@@ -244,7 +244,7 @@ var WhatsOnOtherBankAddPayee = new Shepherd.Tour({
         },
         arrow: true,
     },
-    useModalOverlay: false,
+    useModalOverlay: true,
 });
 
 
@@ -283,7 +283,7 @@ WhatsOnOtherBankAddPayee.addStep({
         }
     ],
     attachTo: {
-        element: document.querySelector("#DispFormWithTableContent\\.Ryz1_mr"),
+        element: "p#DispFormWithTableContent\\.Ryz1_mr",
         on: "bottom"
     },
     pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
@@ -306,7 +306,7 @@ WhatsOnOtherBankAddPayee.addStep({
     ],
 
     attachTo: {
-        element: document.querySelector("#DispFormWithTableContent\\.Ryz2_mr"),
+        element: "p#DispFormWithTableContent\\.Ryz2_mr",
         on: "bottom"
     },
     pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
@@ -321,7 +321,7 @@ WhatsOnOtherBankAddPayee.addStep({
         event: 'click'
     },
     attachTo: {
-        element: document.querySelector("#DispFormWithTableContent\\.Ryz7_mr"),
+        element: "#DispFormWithTableContent\\.Ryz7_mr",
         on: "bottom"
     },
     pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
@@ -338,7 +338,7 @@ WhatsOnOtherBankAddPayee.addStep({
         }
     ],
     attachTo: {
-        element: document.querySelector("#DispFormWithTableContent\\.Ryz7_mr\\.C2 > span > span > div > div.SSContainerDivWrapper"),
+        element: "#DispFormWithTableContent\\.Ryz7_mr\\.C2 > span > span > div > div.SSContainerDivWrapper",
         on: "right"
     },
     pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
@@ -355,7 +355,7 @@ WhatsOnOtherBankAddPayee.addStep({
         }
     ],
     attachTo: {
-        element: document.querySelector("#DispFormWithTableContent\\.Ryz6_mr"),
+        element: "#DispFormWithTableContent\\.Ryz6_mr",
         on: "bottom"
     },
     pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
@@ -377,7 +377,7 @@ WhatsOnOtherBankAddPayee.addStep({
         }
     ],
     attachTo: {
-        element: document.querySelector("#DispFormWithTableContent\\.Ryz3_mr"),
+        element: "#DispFormWithTableContent\\.Ryz3_mr",
         on: "bottom"
     },
     pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
@@ -399,7 +399,7 @@ WhatsOnOtherBankAddPayee.addStep({
         }
     ],
     attachTo: {
-        element: document.querySelector("#DispFormWithTableContent\\.Ryz5_mr"),
+        element: "#DispFormWithTableContent\\.Ryz5_mr",
         on: "bottom"
     },
     pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
@@ -421,7 +421,7 @@ WhatsOnOtherBankAddPayee.addStep({
         }
     ],
     attachTo: {
-        element: document.querySelector("#DispFormWithTableContent\\.Ryz15_mr"),
+        element: "#DispFormWithTableContent\\.Ryz15_mr",
         on: "bottom"
     },
     pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
