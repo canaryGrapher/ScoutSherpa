@@ -39,7 +39,7 @@
   }
 
   .totalStepsIndicatorTitle {
-    vertical-align: middle;
+    vertical-align: bottom;
     font-weight: normal;
     font-size: 11px;
     color: #7e7977;
