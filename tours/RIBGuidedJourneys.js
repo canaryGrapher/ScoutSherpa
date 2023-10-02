@@ -30,6 +30,22 @@ window.addEventListener('load', function () {
     }
 }, false)
 
+function isElementHovered(element) {
+    var isHovered = false;
+    // Add mouseenter event listener
+    element.addEventListener('mouseenter', function () {
+        isHovered = true;
+    });
+    // Add mouseleave event listener
+    element.addEventListener('mouseleave', function () {
+        isHovered = false;
+    });
+    // Return the current hover state
+    return function () {
+        return isHovered;
+    };
+}
+
 // eslint-disable-next-line no-undef
 var HowToBuyAFastTagTour = new Shepherd.Tour({
     tourName: 'How to buy a ICICI FastTag',
@@ -68,6 +84,18 @@ HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_2',
     title: '2/7',
     text: "Click on 'Buy/Recharge FastTag'",
+    when: {
+        show: () => {
+            if (isElementHovered(document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)"))) {
+                return true
+            }
+        },
+        hide: () => {
+            if (!isElementHovered(document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)"))) {
+                return true
+            }
+        }
+    },
     attachTo: {
         element:
             "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])",
@@ -104,7 +132,6 @@ HowToBuyAFastTagTour.addStep({
     },
     pageLink: '/vpv/li/personal-banking/FASTAG/TAGRECHARGE'
 });
-
 
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_3',
@@ -184,13 +211,24 @@ HowToBuyAFastTagTour.addStep({
         selector: '#TERMS_AND_COND_FLAG',
         event: 'change'
     },
+    buttons: [
+        {
+            text: 'Next',
+            action: HowToBuyAFastTagTour.next
+        },
+        {
+            text: 'Cancel',
+            action: HowToBuyAFastTagTour.cancel,
+            secondary: true
+        }
+    ],
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
 });
 
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_7',
     title: '7/7',
-    text: 'Click on Proceed to pay the amount and buy your FastTag',
+    text: 'Click on Proceed to pay the amount and buy your FastTag.',
     attachTo: {
         element: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
         on: 'bottom'
@@ -201,7 +239,6 @@ HowToBuyAFastTagTour.addStep({
     },
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
 });
-
 
 // eslint-disable-next-line no-undef
 var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
@@ -241,6 +278,24 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTour_2",
     title: "2/5",
     text: "Click on 'Credit Cards'",
+    beforeShowPromise: () => {
+        // check if element exists in the DOM
+        if (document.querySelector("#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])") == null) {
+            HowToMakeICICIBankCreditCardPaymentTour.cancel()
+        }
+    },
+    when: {
+        show: () => {
+            if (isElementHovered(document.querySelector("#topbar > div.light-orange > div > div:nth-child(4)"))) {
+                return true
+            }
+        },
+        hide: () => {
+            if (!isElementHovered(document.querySelector("#topbar > div.light-orange > div > div:nth-child(4)"))) {
+                return true
+            }
+        }
+    },
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
         on: "left"
@@ -274,7 +329,6 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     ],
     pageLink: "/vpv/li/personal-banking/myacc/creditcards"
 })
-
 
 // check outstanding balance
 HowToMakeICICIBankCreditCardPaymentTour.addStep({
@@ -354,6 +408,18 @@ HowToBuyAMutualFundTour.addStep({
     id: 'HowToBuyAMutualFundTour_2',
     title: '2/7',
     text: 'Click on Buy Mutual Funds',
+    when: {
+        show: () => {
+            if (isElementHovered(document.querySelector("#topbar > div.light-orange > div > div:nth-child(5)"))) {
+                return true
+            }
+        },
+        hide: () => {
+            if (!isElementHovered(document.querySelector("#topbar > div.light-orange > div > div:nth-child(5)"))) {
+                return true
+            }
+        }
+    },
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])",
         on: 'left'
