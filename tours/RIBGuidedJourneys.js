@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // This file contains all the Guided journeys for RIB
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
@@ -30,21 +31,39 @@ window.addEventListener('load', function () {
     }
 }, false)
 
-// function isElementHovered(element) {
-//     var isHovered = false;
-//     // Add mouseenter event listener
-//     element.addEventListener('mouseenter', function () {
-//         isHovered = true;
-//     });
-//     // Add mouseleave event listener
-//     element.addEventListener('mouseleave', function () {
-//         isHovered = false;
-//     });
-//     // Return the current hover state
-//     return function () {
-//         return isHovered;
-//     };
-// }
+
+document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").addEventListener('mouseenter', () => {
+    if (Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
+        HowToBuyAFastTagTour.show()
+    }
+})
+document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").addEventListener('mouseleave', () => {
+    if (Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
+        HowToBuyAFastTagTour.hide()
+    }
+})
+
+document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)').addEventListener('mouseenter', () => {
+    if (Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
+        HowToMakeICICIBankCreditCardPaymentTour.show()
+    }
+})
+document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)').addEventListener('mouseleave', () => {
+    if (Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
+        HowToMakeICICIBankCreditCardPaymentTour.hide()
+    }
+})
+
+document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)').addEventListener('mouseenter', () => {
+    if (Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
+        HowToBuyAMutualFundTour.show()
+    }
+})
+document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)').addEventListener('mouseleave', () => {
+    if (Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
+        HowToBuyAMutualFundTour.hide()
+    }
+})
 
 // eslint-disable-next-line no-undef
 var HowToBuyAFastTagTour = new Shepherd.Tour({
@@ -84,6 +103,11 @@ HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_2',
     title: '2/7',
     text: "Click on 'Buy/Recharge FastTag'",
+    beforeShowPromise: () => {
+        if (!document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])")) {
+            HowToBuyAFastTagTour.cancel()
+        }
+    },
     attachTo: {
         element:
             "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])",
@@ -266,12 +290,10 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTour_2",
     title: "2/5",
     text: "Click on 'Credit Cards'",
-    showOn: () => {
-        // check if element exists in the DOM
-        if (document.querySelector("#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])") == null) {
-            HowToMakeICICIBankCreditCardPaymentTour.complete()
-            return false
-        } return true
+    beforeShowPromise: () => {
+        if (!document.querySelector("#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])")) {
+            HowToMakeICICIBankCreditCardPaymentTour.cancel()
+        }
     },
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
@@ -385,6 +407,11 @@ HowToBuyAMutualFundTour.addStep({
     id: 'HowToBuyAMutualFundTour_2',
     title: '2/7',
     text: 'Click on Buy Mutual Funds',
+    beforeShowPromise: () => {
+        if (!document.querySelector("#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])")) {
+            HowToBuyAMutualFundTour.cancel()
+        }
+    },
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])",
         on: 'left'

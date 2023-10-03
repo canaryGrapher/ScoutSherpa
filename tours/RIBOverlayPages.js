@@ -74,7 +74,7 @@ var WhatsOnBankAccountPageGuideMe = new Shepherd.Tour({
 // Code for Bank Account page overlay pages tour
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_1",
-    title: "1/7",
+    title: "1/6",
     text: "Welcome to your account page. Here you can view your account summary, account details, and account statements.",
     buttons: [
         {
@@ -92,7 +92,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
 
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_2",
-    title: "2/7",
+    title: "2/6",
     text: "This is your account summary. Here you can view your account balance.",
     attachTo: {
         element: "#AccountsTable_TotalBalance-MonthsTurnover > tbody",
@@ -114,7 +114,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
 
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_3",
-    title: "3/7",
+    title: "3/6",
     text: "List of all accounts with summary is displayed here. Select that account using the radio button to interact with it.",
     attachTo: {
         element: "#SummaryList",
@@ -136,45 +136,14 @@ WhatsOnBankAccountPageGuideMe.addStep({
 
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_4i",
-    title: "4/7",
-    text: "These buttons can be used to download your account statements.",
-    beforeShowPromise: function () {
-        if (document.querySelector("#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper") == null) {
-            WhatsOnBankAccountPageGuideMe.next()
-        } else {
-            document.querySelector("#footerInner").click();
-        }
-    },
-    attachTo: {
-        element: "#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper",
-        on: "bottom"
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_4i",
-    title: "4/7",
-    text: "These buttons can be used to download your account statements.",
+    title: "4/6",
+    text: "Use these action buttons to view more information about your account(s). You can also use the dropdown to raise service requests like Account Linking, Cheque Status Enquiry, Cheque stopping, Debit/ATM card blocking and Aadhaar number updation",
     showOn: function () {
-        if (document.querySelector("#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper") == null) {
+        if (document.querySelector("#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper")) {
+            return true
+        } else {
             return false
         }
-        return true
-    },
-    beforeShowPromise: function () {
-        document.querySelector("#footerInner").click();
     },
     attachTo: {
         element: "#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper",
@@ -196,19 +165,19 @@ WhatsOnBankAccountPageGuideMe.addStep({
 
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_4ii",
-    title: "4/7",
-    text: "These buttons can be used to download your account statements.",
+    title: "4/6",
+    text: "Use these action buttons to view more information about your account(s). You can also use the dropdown to raise service requests like Account Linking, Cheque Status Enquiry, Cheque stopping, Debit/ATM card blocking and Aadhaar number updation",
     showOn: function () {
-        if (document.querySelector("#ListTableWithCtrlsDEH\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper") == null) {
-            return false
+        if (document.querySelector("#ListTableWithCtrlsDEH\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper")) {
+            return true
         }
-        return true
+        return false
     },
     beforeShowPromise: function () {
         document.querySelector("#footerInner").click();
     },
     attachTo: {
-        element: "#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper",
+        element: "#ListTableWithCtrlsDEH\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper",
         on: "bottom"
     },
     buttons: [
@@ -226,78 +195,9 @@ WhatsOnBankAccountPageGuideMe.addStep({
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_5i",
-    title: "5/7",
-    text: "These are the list of service requests you can make for the selected account. You can access this list by clicking on the dropdown.",
-    showOn: function () {
-        if (document.querySelector("#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper") == null) {
-            return false
-        }
-        return true
-    },
-    beforeShowPromise: () => {
-        if (window.getComputedStyle(document.querySelector("#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper")).display == 'none') {
-            document.querySelector("#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.selectedTxt").click();
-        }
-    },
-    attachTo: {
-        element: "#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper",
-        on: "left"
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_5ii",
-    title: "5/7",
-    text: "These are the list of service requests you can make for the selected account. You can access this list by clicking on the dropdown.",
-    showOn: function () {
-        if (document.querySelector("#ListTableWithCtrlsDEH\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper") == null) {
-            return false
-        }
-        return true
-    },
-    beforeShowPromise: () => {
-        if (window.getComputedStyle(document.querySelector("#ListTableWithCtrlsDEH\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper")).display == 'none') {
-            document.querySelector("#ListTableWithCtrlsDEH\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.selectedTxt").click();
-        }
-    },
-    attachTo: {
-        element: "#ListTableWithCtrlsDEH\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper",
-        on: "left"
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnBankAccountPageGuideMe.next
-        },
-        {
-            text: 'Back',
-            action: WhatsOnBankAccountPageGuideMe.back,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_6",
-    title: "6/7",
+    id: "WhatsOnBankAccountPageGuideMe_5",
+    title: "5/6",
     text: "You can also download your acccount details in PDF or XLS format. Click on 'OK' to download the file after selecting the desired format.",
-    beforeShowPromise: function () {
-        document.querySelector("#footerInner").click();
-    },
     attachTo: {
         element: "#NavPanel_mr\\.Rb1",
         on: "left"
@@ -317,8 +217,8 @@ WhatsOnBankAccountPageGuideMe.addStep({
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_7",
-    title: "7/7",
+    id: "WhatsOnBankAccountPageGuideMe_6",
+    title: "6/6",
     text: "That is all for this tour! Click on 'Finish' to end the tour.",
     buttons: [
         {
