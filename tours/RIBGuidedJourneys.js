@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // This file contains all the Guided journeys for RIB
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
@@ -31,36 +30,38 @@ window.addEventListener('load', function () {
     }
 }, false)
 
-
-document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").addEventListener('mouseenter', () => {
-    if (Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
+const PaymentsandTransferTabElement = document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)");
+PaymentsandTransferTabElement.addEventListener('mouseenter', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
         HowToBuyAFastTagTour.show()
     }
 })
-document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)").addEventListener('mouseleave', () => {
-    if (Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
+PaymentsandTransferTabElement.addEventListener('mouseleave', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
         HowToBuyAFastTagTour.hide()
     }
 })
 
-document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)').addEventListener('mouseenter', () => {
-    if (Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
+const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)')
+CardsAndLoansTabElement.addEventListener('mouseenter', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
         HowToMakeICICIBankCreditCardPaymentTour.show()
     }
 })
-document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)').addEventListener('mouseleave', () => {
-    if (Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
+CardsAndLoansTabElement.addEventListener('mouseleave', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
         HowToMakeICICIBankCreditCardPaymentTour.hide()
     }
 })
 
-document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)').addEventListener('mouseenter', () => {
-    if (Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
+const InvestmentsAndInsuranceTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)');
+InvestmentsAndInsuranceTabElement.addEventListener('mouseenter', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
         HowToBuyAMutualFundTour.show()
     }
 })
-document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)').addEventListener('mouseleave', () => {
-    if (Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
+InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
         HowToBuyAMutualFundTour.hide()
     }
 })
