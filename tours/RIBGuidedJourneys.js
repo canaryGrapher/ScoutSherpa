@@ -45,20 +45,6 @@ if (PaymentsandTransferTabElement) {
     })
 }
 
-const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)')
-if (CardsAndLoansTabElement) {
-    CardsAndLoansTabElement.addEventListener('mouseenter', () => {
-        if (window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
-            HowToMakeICICIBankCreditCardPaymentTour.show()
-        }
-    })
-    CardsAndLoansTabElement.addEventListener('mouseleave', () => {
-        if (window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
-            HowToMakeICICIBankCreditCardPaymentTour.hide()
-        }
-    })
-}
-
 const InvestmentsAndInsuranceTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)');
 if (InvestmentsAndInsuranceTabElement) {
     InvestmentsAndInsuranceTabElement.addEventListener('mouseenter', () => {
@@ -69,6 +55,20 @@ if (InvestmentsAndInsuranceTabElement) {
     InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', () => {
         if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
             HowToBuyAMutualFundTour.hide()
+        }
+    })
+}
+
+const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)')
+if (CardsAndLoansTabElement) {
+    CardsAndLoansTabElement.addEventListener('mouseenter', () => {
+        if (window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
+            HowToMakeICICIBankCreditCardPaymentTour.show()
+        }
+    })
+    CardsAndLoansTabElement.addEventListener('mouseleave', () => {
+        if (window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
+            HowToMakeICICIBankCreditCardPaymentTour.hide()
         }
     })
 }
