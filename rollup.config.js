@@ -11,6 +11,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import sveltePreprocess from 'svelte-preprocess';
 import svelte from 'rollup-plugin-svelte';
 import visualizer from 'rollup-plugin-visualizer';
+import strip from '@rollup/plugin-strip';
 
 const pkg = require('./package.json');
 const banner = ['/*!', pkg.name, pkg.version, '*/\n'].join(' ');
@@ -18,6 +19,10 @@ const banner = ['/*!', pkg.name, pkg.version, '*/\n'].join(' ');
 const env = process.env.DEVELOPMENT ? 'development' : 'production';
 
 const plugins = [
+  strip({
+    functions: ['console.log'],
+    include: '**/*.js'
+  }),
   svelte({
     preprocess: sveltePreprocess(),
     emitCss: true

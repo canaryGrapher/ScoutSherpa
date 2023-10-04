@@ -111,11 +111,6 @@ HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_2',
     title: '2/7',
     text: "Click on 'Buy/Recharge FastTag'",
-    beforeShowPromise: () => {
-        if (!document.querySelector("#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])")) {
-            HowToBuyAFastTagTour.cancel()
-        }
-    },
     attachTo: {
         element:
             "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])",
@@ -298,11 +293,6 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTour_2",
     title: "2/5",
     text: "Click on 'Credit Cards'",
-    beforeShowPromise: () => {
-        if (!document.querySelector("#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])")) {
-            HowToMakeICICIBankCreditCardPaymentTour.cancel()
-        }
-    },
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
         on: "left"
@@ -415,11 +405,6 @@ HowToBuyAMutualFundTour.addStep({
     id: 'HowToBuyAMutualFundTour_2',
     title: '2/7',
     text: 'Click on Buy Mutual Funds',
-    beforeShowPromise: () => {
-        if (!document.querySelector("#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])")) {
-            HowToBuyAMutualFundTour.cancel()
-        }
-    },
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])",
         on: 'left'
