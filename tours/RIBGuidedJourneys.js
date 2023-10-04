@@ -31,7 +31,7 @@ window.addEventListener('load', function () {
 }, false)
 
 const PaymentsandTransferTabElement = document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)");
-PaymentsandTransferTabElement.addEventListener('mouseleave', () => {
+PaymentsandTransferTabElement.addEventListener('mouseenter', () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
         HowToBuyAFastTagTour.back()
     }
