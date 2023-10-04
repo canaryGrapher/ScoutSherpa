@@ -32,46 +32,40 @@ window.addEventListener('load', function () {
 
 
 const PaymentsandTransferTabElement = document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)");
-if (PaymentsandTransferTabElement) {
-    PaymentsandTransferTabElement.addEventListener('mouseenter', () => {
-        if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
-            HowToBuyAFastTagTour.show()
-        }
-    })
-    PaymentsandTransferTabElement.addEventListener('mouseleave', () => {
-        if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
-            HowToBuyAFastTagTour.hide()
-        }
-    })
-}
+PaymentsandTransferTabElement?.addEventListener('mouseenter', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
+        HowToBuyAFastTagTour.show()
+    }
+})
+PaymentsandTransferTabElement?.addEventListener('mouseleave', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
+        HowToBuyAFastTagTour.hide()
+    }
+})
 
 const InvestmentsAndInsuranceTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)');
-if (InvestmentsAndInsuranceTabElement) {
-    InvestmentsAndInsuranceTabElement.addEventListener('mouseenter', () => {
-        if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
-            HowToBuyAMutualFundTour.show()
-        }
-    })
-    InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', () => {
-        if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
-            HowToBuyAMutualFundTour.hide()
-        }
-    })
-}
+InvestmentsAndInsuranceTabElement?.addEventListener('mouseenter', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
+        HowToBuyAMutualFundTour.show()
+    }
+})
+InvestmentsAndInsuranceTabElement?.addEventListener('mouseleave', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
+        HowToBuyAMutualFundTour.hide()
+    }
+})
 
 const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)')
-if (CardsAndLoansTabElement) {
-    CardsAndLoansTabElement.addEventListener('mouseenter', () => {
-        if (window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
-            HowToMakeICICIBankCreditCardPaymentTour.show()
-        }
-    })
-    CardsAndLoansTabElement.addEventListener('mouseleave', () => {
-        if (window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
-            HowToMakeICICIBankCreditCardPaymentTour.hide()
-        }
-    })
-}
+CardsAndLoansTabElement?.addEventListener('mouseenter', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
+        HowToMakeICICIBankCreditCardPaymentTour.show()
+    }
+})
+CardsAndLoansTabElement?.addEventListener('mouseleave', () => {
+    if (window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
+        HowToMakeICICIBankCreditCardPaymentTour.hide()
+    }
+})
 
 // eslint-disable-next-line no-undef
 var HowToBuyAFastTagTour = new Shepherd.Tour({
