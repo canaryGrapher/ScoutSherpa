@@ -30,6 +30,7 @@ window.addEventListener('load', function () {
     }
 }, false)
 
+// upon mouse leave event, the step moves back one step
 const PaymentsandTransferTabElement = document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)");
 PaymentsandTransferTabElement.addEventListener('mouseleave', () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
@@ -37,6 +38,7 @@ PaymentsandTransferTabElement.addEventListener('mouseleave', () => {
     }
 })
 
+// upon mouse leave event, the step moves back one step
 const InvestmentsAndInsuranceTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)');
 InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
@@ -44,6 +46,7 @@ InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', () => {
     }
 })
 
+// upon mouse leave event, the step moves back one step
 const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)')
 CardsAndLoansTabElement.addEventListener('mouseleave', () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {

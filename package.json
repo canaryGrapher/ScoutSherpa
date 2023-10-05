@@ -1,6 +1,6 @@
 {
   "name": "scoutsherpa.js",
-  "version": "1.0.0",
+  "version": "2.2.3",
   "description": "Guide your users through a tour of your app.",
   "keywords": [
     "site tour",
@@ -114,11 +114,11 @@
     "registry": "https://registry.npmjs.org"
   },
   "authors": [
-    "Adam Schwartz <adam.flynn.schwartz@gmail.com>",
-    "Zack Bloom <zackbloom@gmail.com>",
     "Yash Aryan <yasharyan307@outlook.com>"
   ],
   "maintainers": [
+    "Adam Schwartz <adam.flynn.schwartz@gmail.com>",
+    "Zack Bloom <zackbloom@gmail.com>",
     "Robert Wagner <rwwagner90@gmail.com>",
     "Chuck Carpenter <chuck@shipshape.io>"
   ]
