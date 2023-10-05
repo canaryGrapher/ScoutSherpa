@@ -30,29 +30,39 @@ window.addEventListener('load', function () {
     }
 }, false)
 
-// upon mouse leave event, the step moves back one step
-const PaymentsandTransferTabElement = document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)");
-PaymentsandTransferTabElement.addEventListener('mouseleave', () => {
+window.addEventListener('DOMContentLoaded', function () {
+    const PaymentsandTransferTabElement = document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)");
+    const InvestmentsAndInsuranceTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)');
+    const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)')
+
+    if (PaymentsandTransferTabElement) {
+        PaymentsandTransferTabElement.addEventListener('mouseleave', PaymentsandTransferTabElementFunction)
+    }
+    if (InvestmentsAndInsuranceTabElement) {
+        InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', InvestmentsAndInsuranceTabElementFunction)
+    }
+    if (CardsAndLoansTabElement) {
+        CardsAndLoansTabElement.addEventListener('mouseleave', CardsAndLoansTabElementFunction)
+    }
+})
+
+const PaymentsandTransferTabElementFunction = () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
         HowToBuyAFastTagTour.back()
     }
-})
+}
 
-// upon mouse leave event, the step moves back one step
-const InvestmentsAndInsuranceTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)');
-InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', () => {
+const InvestmentsAndInsuranceTabElementFunction = () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
         HowToBuyAMutualFundTour.back()
     }
-})
+}
 
-// upon mouse leave event, the step moves back one step
-const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)')
-CardsAndLoansTabElement.addEventListener('mouseleave', () => {
+const CardsAndLoansTabElementFunction = () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
         HowToMakeICICIBankCreditCardPaymentTour.back()
     }
-})
+}
 
 // eslint-disable-next-line no-undef
 var HowToBuyAFastTagTour = new Shepherd.Tour({
@@ -487,4 +497,3 @@ HowToBuyAMutualFundTour.addStep({
     pageLink:
         "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
 });
-
