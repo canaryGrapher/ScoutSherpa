@@ -1,5 +1,5 @@
-/*! scoutsherpa.js 2.2.3 */
-/*! created by canaryGrapher */
+/*! scoutsherpa.js 2.3.0 */
+
 var isMergeableObject = function isMergeableObject(value) {
   return isNonNullObject(value) && !isSpecial(value);
 };
@@ -54,8 +54,8 @@ function propertyIsOnObject(object, property) {
 // Protects from prototype poisoning and unexpected merging up the prototype chain.
 function propertyIsUnsafe(target, key) {
   return propertyIsOnObject(target, key) // Properties are safe to merge if they don't exist in the target yet,
-    && !(Object.hasOwnProperty.call(target, key) // unsafe if they exist up the prototype chain,
-      && Object.propertyIsEnumerable.call(target, key)); // and also unsafe if they're nonenumerable.
+  && !(Object.hasOwnProperty.call(target, key) // unsafe if they exist up the prototype chain,
+  && Object.propertyIsEnumerable.call(target, key)); // and also unsafe if they're nonenumerable.
 }
 
 function mergeObject(target, source, options) {
@@ -780,13 +780,13 @@ const flip = function flip(options) {
         elements
       } = state;
       const {
-        mainAxis: checkMainAxis = true,
-        crossAxis: checkCrossAxis = true,
-        fallbackPlacements: specifiedFallbackPlacements,
-        fallbackStrategy = 'bestFit',
-        fallbackAxisSideDirection = 'none',
-        flipAlignment = true
-      } = options,
+          mainAxis: checkMainAxis = true,
+          crossAxis: checkCrossAxis = true,
+          fallbackPlacements: specifiedFallbackPlacements,
+          fallbackStrategy = 'bestFit',
+          fallbackAxisSideDirection = 'none',
+          flipAlignment = true
+        } = options,
         detectOverflowOptions = _objectWithoutPropertiesLoose(options, _excluded2);
       const side = getSide(placement);
       const isBasePlacement = getSide(initialPlacement) === initialPlacement;
@@ -956,21 +956,21 @@ const shift = function shift(options) {
         placement
       } = state;
       const {
-        mainAxis: checkMainAxis = true,
-        crossAxis: checkCrossAxis = false,
-        limiter = {
-          fn: _ref => {
-            let {
-              x,
-              y
-            } = _ref;
-            return {
-              x,
-              y
-            };
+          mainAxis: checkMainAxis = true,
+          crossAxis: checkCrossAxis = false,
+          limiter = {
+            fn: _ref => {
+              let {
+                x,
+                y
+              } = _ref;
+              return {
+                x,
+                y
+              };
+            }
           }
-        }
-      } = options,
+        } = options,
         detectOverflowOptions = _objectWithoutPropertiesLoose(options, _excluded4);
       const coords = {
         x,
@@ -1356,14 +1356,14 @@ function getParentNode(node) {
     return node;
   }
   const result =
-    // Step into the shadow DOM of the parent of a slotted node.
-    node.assignedSlot ||
-    // DOM Element detected.
-    node.parentNode ||
-    // ShadowRoot detected.
-    isShadowRoot(node) && node.host ||
-    // Fallback.
-    getDocumentElement(node);
+  // Step into the shadow DOM of the parent of a slotted node.
+  node.assignedSlot ||
+  // DOM Element detected.
+  node.parentNode ||
+  // ShadowRoot detected.
+  isShadowRoot(node) && node.host ||
+  // Fallback.
+  getDocumentElement(node);
   return isShadowRoot(result) ? result.host : result;
 }
 function getNearestOverflowAncestor(node) {
@@ -1775,18 +1775,18 @@ function destroyTooltip(step) {
  */
 function setPosition(target, step, floatingUIOptions, shouldCenter) {
   return computePosition(target, step.el, floatingUIOptions).then(floatingUIposition(step, shouldCenter))
-    // Wait before forcing focus.
-    .then(step => new Promise(resolve => {
-      setTimeout(() => resolve(step), 300);
-    }))
-    // Replaces focusAfterRender modifier.
-    .then(step => {
-      if (step && step.el) {
-        step.el.focus({
-          preventScroll: true
-        });
-      }
-    });
+  // Wait before forcing focus.
+  .then(step => new Promise(resolve => {
+    setTimeout(() => resolve(step), 300);
+  }))
+  // Replaces focusAfterRender modifier.
+  .then(step => {
+    if (step && step.el) {
+      step.el.focus({
+        preventScroll: true
+      });
+    }
+  });
 }
 
 /**
@@ -1864,11 +1864,11 @@ function getFloatingUIOptions(attachToOptions, step) {
   const shouldCenter = shouldCenterStep(attachToOptions);
   if (!shouldCenter) {
     options.middleware.push(flip(),
-      // Replicate PopperJS default behavior.
-      shift({
-        limiter: limitShift(),
-        crossAxis: true
-      }));
+    // Replicate PopperJS default behavior.
+    shift({
+      limiter: limitShift(),
+      crossAxis: true
+    }));
     if (arrowEl) {
       options.middleware.push(arrow({
         element: arrowEl
@@ -1890,7 +1890,7 @@ function addArrow(step) {
   return false;
 }
 
-function noop() { }
+function noop() {}
 function assign(tar, src) {
   // @ts-ignore
   for (const k in src) tar[k] = src[k];
@@ -1953,7 +1953,7 @@ function listen(node, event, handler, options) {
   return () => node.removeEventListener(event, handler, options);
 }
 function attr(node, attribute, value) {
-  if (value == null) node.removeAttribute(attribute); else if (node.getAttribute(attribute) !== value) node.setAttribute(attribute, value);
+  if (value == null) node.removeAttribute(attribute);else if (node.getAttribute(attribute) !== value) node.setAttribute(attribute, value);
 }
 function set_attributes(node, attributes) {
   // @ts-ignore
@@ -3489,7 +3489,7 @@ function create_fragment$1(ctx) {
     p(ctx, _ref) {
       let [dirty] = _ref;
       if ( /*step*/ctx[4].options.arrow && /*step*/ctx[4].options.attachTo && /*step*/ctx[4].options.attachTo.element && /*step*/ctx[4].options.attachTo.on) {
-        if (if_block); else {
+        if (if_block) ; else {
           if_block = create_if_block();
           if_block.c();
           if_block.m(div, t);
@@ -4677,10 +4677,12 @@ class Tour extends Evented {
           // eslint-disable-next-line no-prototype-builtins
         } else if (item.hasOwnProperty('vpv')) {
           vpvArray.push(item.vpv);
-        } else;
+        } else ;
       });
       return vpvArray;
     };
+
+    // check if the page VPV passed in the step matches with any of the VPV available in the dataLayer populated by GTM
     const vpvInPage = () => {
       let pageVPV = getPageFromArray(window.dataLayer);
       let currentVPV = step.options.pageLink;
@@ -4690,6 +4692,21 @@ class Tour extends Evented {
         return false;
       }
     };
+
+    // check if the window pathname passed in the step matches with the location.pathname of the window
+    const pathnameInPage = () => {
+      const pathname = window.location.pathname;
+      const currentPageName = step.options.pageLink;
+      if (pathname === currentPageName) {
+        return true;
+      }
+      return false;
+    };
+
+    // Check if the either the page VPV pageLink matches, or the pathname matches passed in the step
+    const pageLinkMatches = () => {
+      return vpvInPage || pathnameInPage;
+    };
     if (step) {
       this._updateStateBeforeShow();
       const shouldSkipStep = isFunction(step.options.showOn) && !step.options.showOn();
@@ -4698,7 +4715,7 @@ class Tour extends Evented {
       if (shouldSkipStep) {
         this._skipStep(step, forward);
       } else {
-        if (_tourInstanceCaller === this.options.instanceCaller && vpvInPage()) {
+        if (_tourInstanceCaller === this.options.instanceCaller && pageLinkMatches()) {
           this.trigger('show', {
             step,
             previous: this.currentStep
@@ -4835,7 +4852,7 @@ class Tour extends Evented {
 
 const isServerSide = typeof window === 'undefined';
 class NoOp {
-  constructor() { }
+  constructor() {}
 }
 if (isServerSide) {
   Object.assign(Shepherd, {

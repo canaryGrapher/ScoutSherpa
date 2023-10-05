@@ -269,6 +269,8 @@ export class Tour extends Evented {
       });
       return vpvArray;
     };
+
+    // check if the page VPV passed in the step matches with any of the VPV available in the dataLayer populated by GTM
     const vpvInPage = () => {
       let pageVPV = getPageFromArray(window.dataLayer);
       let currentVPV = step.options.pageLink;
@@ -279,6 +281,21 @@ export class Tour extends Evented {
       } else {
         return false;
       }
+    };
+
+    // check if the window pathname passed in the step matches with the location.pathname of the window
+    const pathnameInPage = () => {
+      const pathname = window.location.pathname;
+      const currentPageName = step.options.pageLink;
+      if (pathname === currentPageName) {
+        return true;
+      }
+      return false;
+    };
+
+    // Check if the either the page VPV pageLink matches, or the pathname matches passed in the step
+    const pageLinkMatches = () => {
+      return vpvInPage || pathnameInPage;
     };
 
     if (step) {
@@ -292,7 +309,7 @@ export class Tour extends Evented {
       } else {
         if (
           _tourInstanceCaller === this.options.instanceCaller &&
-          vpvInPage()
+          pageLinkMatches()
         ) {
           console.log('Page VPV matched, loading step');
           this.trigger('show', {
