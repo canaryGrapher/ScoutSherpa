@@ -4438,6 +4438,7 @@ class Shepherd_modal extends SvelteComponent {
   }
 }
 
+/* eslint-disable max-lines */
 const Shepherd = new Evented();
 /**
  * Class representing the site tour

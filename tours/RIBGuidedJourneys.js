@@ -45,19 +45,16 @@ window.addEventListener('DOMContentLoaded', function () {
         CardsAndLoansTabElement.addEventListener('mouseleave', CardsAndLoansTabElementFunction)
     }
 })
-
 const PaymentsandTransferTabElementFunction = () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
         HowToBuyAFastTagTour.back()
     }
 }
-
 const InvestmentsAndInsuranceTabElementFunction = () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
         HowToBuyAMutualFundTour.back()
     }
 }
-
 const CardsAndLoansTabElementFunction = () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
         HowToMakeICICIBankCreditCardPaymentTour.back()
@@ -124,12 +121,11 @@ HowToBuyAFastTagTour.addStep({
         on: 'bottom'
     },
     showOn: function () {
+        // if user already has a FasTag, website opens on the recharge page, this step asks the user to move to Buy tab. 
         const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(2)")
         if (element) {
-            console.log("element found, continuing step")
             return true
         }
-        console.log("element not found, skipping step")
         return false
     },
     advanceOn: {
@@ -239,6 +235,17 @@ HowToBuyAFastTagTour.addStep({
         element: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
         on: 'bottom'
     },
+    buttons: [
+        {
+            text: 'back',
+            action: HowToBuyAFastTagTour.back,
+            secondary: true
+        },
+        {
+            text: 'Complete',
+            action: HowToBuyAFastTagTour.complete
+        }
+    ],
     advanceOn: {
         selector: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
         event: 'click'

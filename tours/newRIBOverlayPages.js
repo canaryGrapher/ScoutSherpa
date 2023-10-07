@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 window.addEventListener('DOMContentLoaded', function () {
     const GuideMeLinks = [
         {
@@ -6,7 +7,9 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     ];
     // match if current pageLink is in the GuideMeLinks array
-    const matchedLink = GuideMeLinks.find((link) => link.link === window.location.pathname);
+    const matchedLink = GuideMeLinks.find(
+        (link) => link.link === window.location.pathname
+    );
 
     // if matched, add a button to the left corner, vertically centered on the page
     if (matchedLink) {
@@ -24,23 +27,25 @@ window.addEventListener('DOMContentLoaded', function () {
             <div _ngcontent-aqm-c82="" id="watchDemoToolTip" style="display: none;"
                 class="tooltip-new font-11 font-weight-normal color-white ng-tns-c82-5 ng-trigger ng-trigger-enterAnimation ng-star-inserted">
                 Watch Demo </div>
-    
+   
         </div>
     </div>`;
         if (matchedLink.tour === 'GuideMeWhatsOnNewRIBAccountPage') {
-            console.log('DOM content loaded for guideMe button injection. Loading tour');
+            console.log(
+                'DOM content loaded for guideMe button injection. Loading tour'
+            );
             demoInitiator.onclick = function () {
                 GuideMeWhatsOnNewRIBAccountPage.start();
             };
         }
-        const quickLinks = document.querySelector("#forscroll > div > div.col-12.section-padding.pt-4.ng-tns-c172-24 > app-profile-component > div > div.row.ng-tns-c82-25 > div.status-wrap.ng-tns-c82-25 > div:nth-child(2) > div")
+        const quickLinks = document.querySelector('div.services-container');
         quickLinks.appendChild(demoInitiator);
     }
 });
 
 // eslint-disable-next-line no-undef
 var GuideMeWhatsOnNewRIBAccountPage = new Shepherd.Tour({
-    tourName: 'Guide Me: What\'s on new Bank account page',
+    tourName: "Guide Me: What's on new Bank account page",
     instanceCaller: 'GuideMeWhatsOnNewRIBAccountPage',
     defaultStepOptions: {
         cancelIcon: {
@@ -57,8 +62,8 @@ var GuideMeWhatsOnNewRIBAccountPage = new Shepherd.Tour({
 
 GuideMeWhatsOnNewRIBAccountPage.addStep({
     id: 'GuideMeWhatsOnNewRIBAccountPage_1',
-    title: '1/8',
-    text: "Welcome to your new Bank Accounts page. All your account information is visible here.",
+    title: '1/7',
+    text: 'Welcome to your new Bank Accounts page. All your account information is visible here.',
     buttons: [
         {
             text: 'Next',
@@ -75,10 +80,10 @@ GuideMeWhatsOnNewRIBAccountPage.addStep({
 
 GuideMeWhatsOnNewRIBAccountPage.addStep({
     id: 'GuideMeWhatsOnNewRIBAccountPage_2',
-    title: '2/8',
-    text: "All your accounts are visible here. You can select any one of these accounts to view its details.",
+    title: '2/7',
+    text: 'All your accounts are visible here. You can select any one of these accounts to view its details.',
     attachTo: {
-        element: document.querySelector("#secondToolbar > div.curr-account.col-lg-12.col-md-12.ng-tns-c154-6 > owl-carousel-o"),
+        element: document.querySelector('app-account-type'),
         on: 'bottom'
     },
     buttons: [
@@ -97,10 +102,10 @@ GuideMeWhatsOnNewRIBAccountPage.addStep({
 
 GuideMeWhatsOnNewRIBAccountPage.addStep({
     id: 'GuideMeWhatsOnNewRIBAccountPage_3',
-    title: '3/8',
-    text: "Your account information including your balances are is visible here.",
+    title: '3/7',
+    text: 'Your account information including your balances are is visible here.',
     attachTo: {
-        element: document.querySelector("#acc-det"),
+        element: document.querySelector('#acc-det'),
         on: 'right'
     },
     buttons: [
@@ -119,10 +124,12 @@ GuideMeWhatsOnNewRIBAccountPage.addStep({
 
 GuideMeWhatsOnNewRIBAccountPage.addStep({
     id: 'GuideMeWhatsOnNewRIBAccountPage_4',
-    title: '4/8',
-    text: "You can use these options to manage your accounts through service requests.",
+    title: '4/7',
+    text: 'You can use these options to manage your accounts through service requests.',
     attachTo: {
-        element: document.querySelector("#service-card-zero.ng-tns-c153-10"),
+        element: document.querySelectorAll(
+            '#service-card-zero.service-request-section'
+        )[2],
         on: 'left'
     },
     buttons: [
@@ -141,10 +148,12 @@ GuideMeWhatsOnNewRIBAccountPage.addStep({
 
 GuideMeWhatsOnNewRIBAccountPage.addStep({
     id: 'GuideMeWhatsOnNewRIBAccountPage_5',
-    title: '5/8',
-    text: "Need to buy a Car or a Bike? These are the offers the bank has for you.",
+    title: '5/7',
+    text: 'Need to buy a Car or a Bike? These are the offers the bank has for you.',
     attachTo: {
-        element: document.querySelector("#view-statement-opened > div > div.col-md-5.col-12.inside-section-padding.pt-0.pl-0.pr-0.pd-mr.ng-tns-c172-4 > div.white-box.ng-tns-c172-4"),
+        element: document.querySelector(
+            '#view-statement-opened > div > div.col-md-5.col-12.inside-section-padding.pt-0.pl-0.pr-0.pd-mr > div.white-box'
+        ),
         on: 'left'
     },
     buttons: [
@@ -163,10 +172,10 @@ GuideMeWhatsOnNewRIBAccountPage.addStep({
 
 GuideMeWhatsOnNewRIBAccountPage.addStep({
     id: 'GuideMeWhatsOnNewRIBAccountPage_6',
-    title: '6/8',
-    text: "These are the transactions that you have recently made. You can also search for a particular transaction using the search bar provided on top of this element.",
+    title: '6/7',
+    text: 'These are the transactions that you have recently made. You can also search for a particular transaction using the search bar provided on top of this element. If you want to download your transactions statments in either PDF or XLS format based on your requirement, you can use the buttons at the bottom.',
     attachTo: {
-        element: document.querySelectorAll("#rec-trans-id")[1],
+        element: document.querySelectorAll('#rec-trans-id')[1],
         on: 'right'
     },
     buttons: [
@@ -185,29 +194,7 @@ GuideMeWhatsOnNewRIBAccountPage.addStep({
 
 GuideMeWhatsOnNewRIBAccountPage.addStep({
     id: 'GuideMeWhatsOnNewRIBAccountPage_7',
-    title: '7/8',
-    text: "If you want to download your transactions statments in either PDF or XLS format based on your requirement, you can use these buttons.",
-    attachTo: {
-        element: document.querySelectorAll("#rec-trans-id > div.rt-bottom.ng-star-inserted")[1],
-        on: 'top'
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: GuideMeWhatsOnNewRIBAccountPage.next
-        },
-        {
-            text: 'back',
-            action: GuideMeWhatsOnNewRIBAccountPage.back,
-            secondary: true
-        }
-    ],
-    pageLink: '/bank-account'
-});
-
-GuideMeWhatsOnNewRIBAccountPage.addStep({
-    id: 'GuideMeWhatsOnNewRIBAccountPage_8',
-    title: '8/8',
+    title: '7/7',
     text: "That's all for this page. Please feel free to revisit this demo if you need further clarification.",
     buttons: [
         {

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { Evented } from './evented.js';
 import { Step } from './step.js';
 import autoBind from './utils/auto-bind.js';

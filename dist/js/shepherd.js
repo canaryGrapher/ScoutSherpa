@@ -4444,6 +4444,7 @@ Z`;
 	  }
 	}
 
+	/* eslint-disable max-lines */
 	const Shepherd = new Evented();
 	/**
 	 * Class representing the site tour
