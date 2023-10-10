@@ -4079,8 +4079,6 @@
 	    content.classList.add('shepherd-enabled');
 	    if (isUndefined(this.target) || this.target) {
 	      this.trigger('show');
-	    } else {
-	      this.cancel();
 	    }
 	  }
 
@@ -4699,6 +4697,21 @@ Z`;
 	        return false;
 	      }
 	    };
+
+	    // check if the window pathname passed in the step matches with the location.pathname of the window
+	    const pathnameInPage = () => {
+	      const pathname = window.location.pathname;
+	      const currentPageName = step.options.pageLink;
+	      if (pathname === currentPageName) {
+	        return true;
+	      }
+	      return false;
+	    };
+
+	    // Check if the either the page VPV pageLink matches, or the pathname matches passed in the step
+	    const pageLinkMatches = () => {
+	      return vpvInPage || pathnameInPage;
+	    };
 	    if (step) {
 	      this._updateStateBeforeShow();
 	      const shouldSkipStep = isFunction(step.options.showOn) && !step.options.showOn();
@@ -4707,7 +4720,7 @@ Z`;
 	      if (shouldSkipStep) {
 	        this._skipStep(step, forward);
 	      } else {
-	        if (_tourInstanceCaller === this.options.instanceCaller && vpvInPage()) {
+	        if (_tourInstanceCaller === this.options.instanceCaller && pageLinkMatches()) {
 	          this.trigger('show', {
 	            step,
 	            previous: this.currentStep

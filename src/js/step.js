@@ -426,8 +426,6 @@ export class Step extends Evented {
     content.classList.add('shepherd-enabled');
     if (isUndefined(this.target) || this.target) {
       this.trigger('show');
-    } else {
-      this.cancel();
     }
   }
 
