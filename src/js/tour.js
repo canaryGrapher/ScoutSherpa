@@ -254,6 +254,7 @@ export class Tour extends Evented {
     console.log('Current step index is ', _currentStepIndex);
     console.log('Current tour instance caller is ', _tourInstanceCaller);
     const step = isString(key) ? this.getById(key) : this.steps[key];
+
     // check if the step data in the local storage is as per the current step
     const getPageFromArray = (dataArray) => {
       const vpvArray = [];
@@ -284,21 +285,6 @@ export class Tour extends Evented {
       }
     };
 
-    // check if the window pathname passed in the step matches with the location.pathname of the window
-    const pathnameInPage = () => {
-      const pathname = window.location.pathname;
-      const currentPageName = step.options.pageLink;
-      if (pathname === currentPageName) {
-        return true;
-      }
-      return false;
-    };
-
-    // Check if the either the page VPV pageLink matches, or the pathname matches passed in the step
-    const pageLinkMatches = () => {
-      return vpvInPage || pathnameInPage;
-    };
-
     if (step) {
       this._updateStateBeforeShow();
       const shouldSkipStep =
@@ -310,7 +296,7 @@ export class Tour extends Evented {
       } else {
         if (
           _tourInstanceCaller === this.options.instanceCaller &&
-          pageLinkMatches()
+          vpvInPage()
         ) {
           console.log('Page VPV matched, loading step');
           this.trigger('show', {
