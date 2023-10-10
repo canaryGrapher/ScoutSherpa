@@ -30,6 +30,37 @@ window.addEventListener('load', function () {
     }
 }, false)
 
+window.addEventListener('DOMContentLoaded', function () {
+    const PaymentsandTransferTabElement = document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)");
+    const InvestmentsAndInsuranceTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)');
+    const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)')
+
+    if (PaymentsandTransferTabElement) {
+        PaymentsandTransferTabElement.addEventListener('mouseleave', PaymentsandTransferTabElementFunction)
+    }
+    if (InvestmentsAndInsuranceTabElement) {
+        InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', InvestmentsAndInsuranceTabElementFunction)
+    }
+    if (CardsAndLoansTabElement) {
+        CardsAndLoansTabElement.addEventListener('mouseleave', CardsAndLoansTabElementFunction)
+    }
+})
+const PaymentsandTransferTabElementFunction = () => {
+    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
+        HowToBuyAFastTagTour.back()
+    }
+}
+const InvestmentsAndInsuranceTabElementFunction = () => {
+    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
+        HowToBuyAMutualFundTour.back()
+    }
+}
+const CardsAndLoansTabElementFunction = () => {
+    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
+        HowToMakeICICIBankCreditCardPaymentTour.back()
+    }
+}
+
 // eslint-disable-next-line no-undef
 var HowToBuyAFastTagTour = new Shepherd.Tour({
     tourName: 'How to buy a ICICI FastTag',
@@ -90,12 +121,11 @@ HowToBuyAFastTagTour.addStep({
         on: 'bottom'
     },
     showOn: function () {
+        // if user already has a FasTag, website opens on the recharge page, this step asks the user to move to Buy tab. 
         const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(2)")
         if (element) {
-            console.log("element found, continuing step")
             return true
         }
-        console.log("element not found, skipping step")
         return false
     },
     advanceOn: {
@@ -104,7 +134,6 @@ HowToBuyAFastTagTour.addStep({
     },
     pageLink: '/vpv/li/personal-banking/FASTAG/TAGRECHARGE'
 });
-
 
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_3',
@@ -184,24 +213,45 @@ HowToBuyAFastTagTour.addStep({
         selector: '#TERMS_AND_COND_FLAG',
         event: 'change'
     },
+    buttons: [
+        {
+            text: 'Next',
+            action: HowToBuyAFastTagTour.next
+        },
+        {
+            text: 'Cancel',
+            action: HowToBuyAFastTagTour.cancel,
+            secondary: true
+        }
+    ],
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
 });
 
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_7',
     title: '7/7',
-    text: 'Click on Proceed to pay the amount and buy your FastTag',
+    text: 'Click on Proceed to pay the amount and buy your FastTag.',
     attachTo: {
         element: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
         on: 'bottom'
     },
+    buttons: [
+        {
+            text: 'back',
+            action: HowToBuyAFastTagTour.back,
+            secondary: true
+        },
+        {
+            text: 'Complete',
+            action: HowToBuyAFastTagTour.complete
+        }
+    ],
     advanceOn: {
         selector: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
         event: 'click'
     },
     pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
 });
-
 
 // eslint-disable-next-line no-undef
 var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
@@ -274,7 +324,6 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     ],
     pageLink: "/vpv/li/personal-banking/myacc/creditcards"
 })
-
 
 // check outstanding balance
 HowToMakeICICIBankCreditCardPaymentTour.addStep({
@@ -455,4 +504,3 @@ HowToBuyAMutualFundTour.addStep({
     pageLink:
         "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
 });
-

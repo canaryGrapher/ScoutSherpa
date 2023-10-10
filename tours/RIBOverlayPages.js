@@ -71,11 +71,10 @@ var WhatsOnBankAccountPageGuideMe = new Shepherd.Tour({
     useModalOverlay: true,
 });
 
-
 // Code for Bank Account page overlay pages tour
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_1",
-    title: "1/8",
+    title: "1/6",
     text: "Welcome to your account page. Here you can view your account summary, account details, and account statements.",
     buttons: [
         {
@@ -93,7 +92,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
 
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_2",
-    title: "2/8",
+    title: "2/6",
     text: "This is your account summary. Here you can view your account balance.",
     attachTo: {
         element: "#AccountsTable_TotalBalance-MonthsTurnover > tbody",
@@ -115,7 +114,7 @@ WhatsOnBankAccountPageGuideMe.addStep({
 
 WhatsOnBankAccountPageGuideMe.addStep({
     id: "WhatsOnBankAccountPageGuideMe_3",
-    title: "3/8",
+    title: "3/6",
     text: "List of all accounts with summary is displayed here. Select that account using the radio button to interact with it.",
     attachTo: {
         element: "#SummaryList",
@@ -136,9 +135,16 @@ WhatsOnBankAccountPageGuideMe.addStep({
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_4",
-    title: "4/8",
-    text: "These buttons can be used to download your account statements.",
+    id: "WhatsOnBankAccountPageGuideMe_4i",
+    title: "4/6",
+    text: "Use these action buttons to view more information about your account(s). You can also use the dropdown to raise service requests like Account Linking, Cheque Status Enquiry, Cheque stopping, Debit/ATM card blocking and Aadhaar number updation",
+    showOn: function () {
+        if (document.querySelector("#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper")) {
+            return true
+        } else {
+            return false
+        }
+    },
     attachTo: {
         element: "#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper",
         on: "bottom"
@@ -158,44 +164,40 @@ WhatsOnBankAccountPageGuideMe.addStep({
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_5",
-    title: "5/8",
-    text: "Click on this dropdown to view more options for the selected account.",
-    attachTo: {
-        element: "#ListTableWithCtrls\\.Rb1_mr\\.C16",
-        on: "left"
+    id: "WhatsOnBankAccountPageGuideMe_4ii",
+    title: "4/6",
+    text: "Use these action buttons to view more information about your account(s). You can also use the dropdown to raise service requests like Account Linking, Cheque Status Enquiry, Cheque stopping, Debit/ATM card blocking and Aadhaar number updation",
+    showOn: function () {
+        if (document.querySelector("#ListTableWithCtrlsDEH\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper")) {
+            return true
+        }
+        return false
     },
-    advanceOn: {
-        selector: "#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.selectedTxt",
-        event: 'click',
+    beforeShowPromise: function () {
+        document.querySelector("#footerInner").click();
     },
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
-})
-
-WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_6",
-    title: "6/8",
-    text: "These are the list of service requests you can make for the selected account.",
     attachTo: {
-        element: "#ListTableWithCtrls\\.Rb1_mr\\.C16 > span.labelColumn_combo_small > span > div > div.SSContainerDivWrapper",
-        on: "left"
+        element: "#ListTableWithCtrlsDEH\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper",
+        on: "bottom"
     },
     buttons: [
         {
             text: 'Next',
             action: WhatsOnBankAccountPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_7",
-    title: "7/8",
+    id: "WhatsOnBankAccountPageGuideMe_5",
+    title: "5/6",
     text: "You can also download your acccount details in PDF or XLS format. Click on 'OK' to download the file after selecting the desired format.",
-    beforeShowPromise: function () {
-        document.querySelector("#footerInner").click();
-    },
     attachTo: {
         element: "#NavPanel_mr\\.Rb1",
         on: "left"
@@ -204,14 +206,19 @@ WhatsOnBankAccountPageGuideMe.addStep({
         {
             text: 'Next',
             action: WhatsOnBankAccountPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
         }
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
-    id: "WhatsOnBankAccountPageGuideMe_7",
-    title: "8/8",
+    id: "WhatsOnBankAccountPageGuideMe_6",
+    title: "6/6",
     text: "That is all for this tour! Click on 'Finish' to end the tour.",
     buttons: [
         {
@@ -226,7 +233,6 @@ WhatsOnBankAccountPageGuideMe.addStep({
     ],
     pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
-
 
 // code for Add Payee: Other bank overlay pages tour
 // eslint-disable-next-line no-undef
@@ -247,10 +253,9 @@ var WhatsOnOtherBankAddPayee = new Shepherd.Tour({
     useModalOverlay: true,
 });
 
-
 WhatsOnOtherBankAddPayee.addStep({
     id: "WhatsOnOtherBankAddPayee_1",
-    title: "1/10",
+    title: "1/9",
     text: "<p>Welcome to Add Payee: Other Bank page. This tour will guide you through the options available on the page.</p>",
     buttons: [
         {
@@ -266,10 +271,9 @@ WhatsOnOtherBankAddPayee.addStep({
     pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
-
 WhatsOnOtherBankAddPayee.addStep({
     id: "WhatsOnOtherBankAddPayee_2",
-    title: "2/10",
+    title: "2/9",
     text: "Enter the Payee Account Number as it is displayed on your payee's bank records.",
     buttons: [
         {
@@ -291,7 +295,10 @@ WhatsOnOtherBankAddPayee.addStep({
 
 WhatsOnOtherBankAddPayee.addStep({
     id: "WhatsOnOtherBankAddPayee_3",
-    title: "3/10",
+    title: "3/9",
+    beforeShowPromise: function () {
+        document.querySelector("#main > div.wrapper").click();
+    },
     text: "Enter the Nickname of your choice as you want this payee to be visible on your payee page.",
     buttons: [
         {
@@ -314,12 +321,22 @@ WhatsOnOtherBankAddPayee.addStep({
 
 WhatsOnOtherBankAddPayee.addStep({
     id: "WhatsOnOtherBankAddPayee_4",
-    title: "4/10",
-    text: "Select an account type for the payee account you are adding. You can select between Savings, Current Account, Cash Credit or Loan Account. Click on the drowdown to proceed.",
-    advanceOn: {
-        selector: "#DispFormWithTableContent\\.Ryz7_mr\\.C2 > span > span > div > div.selectedTxt",
-        event: 'click'
+    title: "4/9",
+    beforeShowPromise: function () {
+        document.querySelector("#DispFormWithTableContent\\.Ryz7_mr\\.C2 > span > span > div > div.selectedTxt").click();
     },
+    text: "Select an account type for the payee account you are adding. You can select between Savings, Current Account, Cash Credit or Loan Account from this dropdown.",
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnOtherBankAddPayee.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnOtherBankAddPayee.back,
+            secondary: true
+        }
+    ],
     attachTo: {
         element: "#DispFormWithTableContent\\.Ryz7_mr",
         on: "bottom"
@@ -329,29 +346,20 @@ WhatsOnOtherBankAddPayee.addStep({
 
 WhatsOnOtherBankAddPayee.addStep({
     id: "WhatsOnOtherBankAddPayee_5",
-    title: "5/10",
-    text: "Select an account type and click on <strong>Next</strong> to continue.",
-    buttons: [
-        {
-            text: 'Next',
-            action: WhatsOnOtherBankAddPayee.next
-        }
-    ],
-    attachTo: {
-        element: "#DispFormWithTableContent\\.Ryz7_mr\\.C2 > span > span > div > div.SSContainerDivWrapper",
-        on: "right"
+    title: "5/9",
+    beforeShowPromise: function () {
+        document.querySelector("#main > div.wrapper").click();
     },
-    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
-})
-
-WhatsOnOtherBankAddPayee.addStep({
-    id: "WhatsOnOtherBankAddPayee_6",
-    title: "6/10",
     text: "Enter the payee's bank account IFSC code. Not sure about the IFSC code? You can search for the IFSC code by clicking on the <strong>Search</strong> button.",
     buttons: [
         {
             text: 'Next',
             action: WhatsOnOtherBankAddPayee.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnOtherBankAddPayee.back,
+            secondary: true
         }
     ],
     attachTo: {
@@ -362,8 +370,8 @@ WhatsOnOtherBankAddPayee.addStep({
 })
 
 WhatsOnOtherBankAddPayee.addStep({
-    id: "WhatsOnOtherBankAddPayee_7",
-    title: "7/10",
+    id: "WhatsOnOtherBankAddPayee_6",
+    title: "6/9",
     text: "Enter the Account number of the payee. It is critical that you get this number right to avoid sending money to the wrong account.",
     buttons: [
         {
@@ -384,8 +392,8 @@ WhatsOnOtherBankAddPayee.addStep({
 })
 
 WhatsOnOtherBankAddPayee.addStep({
-    id: "WhatsOnOtherBankAddPayee_8",
-    title: "8/10",
+    id: "WhatsOnOtherBankAddPayee_7",
+    title: "7/9",
     text: "Re-enter the account number to make sure you got it right the first time. You can validate the payee you just added by clicking on the <span style='color: red;'><u>Click here</u></span> hyperlink.",
     buttons: [
         {
@@ -406,8 +414,8 @@ WhatsOnOtherBankAddPayee.addStep({
 })
 
 WhatsOnOtherBankAddPayee.addStep({
-    id: "WhatsOnOtherBankAddPayee_9",
-    title: "9/10",
+    id: "WhatsOnOtherBankAddPayee_8",
+    title: "8/9",
     text: "Payee alert will be sent to this mobile number. Keep it handy.",
     buttons: [
         {
@@ -428,8 +436,8 @@ WhatsOnOtherBankAddPayee.addStep({
 })
 
 WhatsOnOtherBankAddPayee.addStep({
-    id: "WhatsOnOtherBankAddPayee_10",
-    title: "10/10",
+    id: "WhatsOnOtherBankAddPayee_9",
+    title: "9/9",
     text: "That's all for this guide. Click on <strong>Next</strong> to go to the confirmation page to finalize the payee addition.",
     buttons: [
         {
