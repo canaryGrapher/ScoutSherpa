@@ -4156,9 +4156,7 @@ class Step extends Evented {
     target.classList.add(`${this.classPrefix}shepherd-target`);
     target.classList.add(`shepherd-highlight-border`);
     content.classList.add('shepherd-enabled');
-    if (isUndefined(this.target) || this.target) {
-      this.trigger('show');
-    }
+    this.trigger('show');
   }
 
   /**
