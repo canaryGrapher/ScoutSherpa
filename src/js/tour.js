@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { Evented } from './evented.js';
 import { Step } from './step.js';
 import autoBind from './utils/auto-bind.js';
@@ -254,7 +253,6 @@ export class Tour extends Evented {
     console.log('Current step index is ', _currentStepIndex);
     console.log('Current tour instance caller is ', _tourInstanceCaller);
     const step = isString(key) ? this.getById(key) : this.steps[key];
-
     // check if the step data in the local storage is as per the current step
     const getPageFromArray = (dataArray) => {
       const vpvArray = [];
@@ -271,8 +269,6 @@ export class Tour extends Evented {
       });
       return vpvArray;
     };
-
-    // check if the page VPV passed in the step matches with any of the VPV available in the dataLayer populated by GTM
     const vpvInPage = () => {
       let pageVPV = getPageFromArray(window.dataLayer);
       let currentVPV = step.options.pageLink;

@@ -137,7 +137,6 @@ export class Step extends Evented {
    * Triggers the `cancel` event
    */
   cancel() {
-    console.log('Tour cancelled as element could not be found');
     this.tour.cancel();
     this.trigger('cancel');
   }
@@ -424,6 +423,7 @@ export class Step extends Evented {
     target.classList.add(`${this.classPrefix}shepherd-target`);
     target.classList.add(`shepherd-highlight-border`);
     content.classList.add('shepherd-enabled');
+
     this.trigger('show');
   }
 
