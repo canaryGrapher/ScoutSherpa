@@ -4511,7 +4511,6 @@ class Shepherd_modal extends SvelteComponent {
   }
 }
 
-/* eslint-disable max-lines */
 const Shepherd = new Evented();
 /**
  * Class representing the site tour
@@ -4732,7 +4731,6 @@ class Tour extends Evented {
     const _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
     localStorage.getItem('currentStepIndex');
     const step = isString(key) ? this.getById(key) : this.steps[key];
-
     // check if the step data in the local storage is as per the current step
     const getPageFromArray = dataArray => {
       const vpvArray = [];
@@ -4747,8 +4745,6 @@ class Tour extends Evented {
       });
       return vpvArray;
     };
-
-    // check if the page VPV passed in the step matches with any of the VPV available in the dataLayer populated by GTM
     const vpvInPage = () => {
       let pageVPV = getPageFromArray(window.dataLayer);
       let currentVPV = step.options.pageLink;
