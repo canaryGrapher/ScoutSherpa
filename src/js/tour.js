@@ -253,6 +253,7 @@ export class Tour extends Evented {
     console.log('Current step index is ', _currentStepIndex);
     console.log('Current tour instance caller is ', _tourInstanceCaller);
     const step = isString(key) ? this.getById(key) : this.steps[key];
+
     // check if the step data in the local storage is as per the current step
     const getPageFromArray = (dataArray) => {
       const vpvArray = [];
@@ -269,14 +270,27 @@ export class Tour extends Evented {
       });
       return vpvArray;
     };
+
     const vpvInPage = () => {
       let pageVPV = getPageFromArray(window.dataLayer);
       let currentVPV = step.options.pageLink;
       console.log('Current page VPV is ', pageVPV);
       console.log('Current step VPV is ', currentVPV);
       if (pageVPV.indexOf(currentVPV) > -1) {
+        console.log(
+          'TRUE Current VPV: ',
+          currentVPV,
+          '/n is present in pageVPV array: ',
+          pageVPV
+        );
         return true;
       } else {
+        console.log(
+          'FALSE Current VPV: ',
+          currentVPV,
+          '/n is not present in pageVPV array: ',
+          pageVPV
+        );
         return false;
       }
     };
@@ -385,6 +399,7 @@ export class Tour extends Evented {
    * _setupModal create the modal container and instance
    * @private
    */
+  // eslint-disable-next-line max-lines
   _setupModal() {
     this.modal = new ShepherdModal({
       target: this.options.modalContainer || document.body,

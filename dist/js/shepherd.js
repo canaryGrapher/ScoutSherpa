@@ -4157,12 +4157,16 @@
 	    }
 	    this.el.hidden = false;
 	    const content = this.shepherdElementComponent.getElement();
-	    const target = this.target || document.body;
+	    const target = this.target;
 	    target.classList.add(`${this.classPrefix}shepherd-enabled`);
 	    target.classList.add(`${this.classPrefix}shepherd-target`);
 	    target.classList.add(`shepherd-highlight-border`);
 	    content.classList.add('shepherd-enabled');
-	    this.trigger('show');
+	    if (target != undefined && target != null) {
+	      this.trigger('show');
+	    } else {
+	      this.trigger('cancel');
+	    }
 	  }
 
 	  /**
@@ -4737,6 +4741,7 @@ Z`;
 	    const _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
 	    localStorage.getItem('currentStepIndex');
 	    const step = isString(key) ? this.getById(key) : this.steps[key];
+
 	    // check if the step data in the local storage is as per the current step
 	    const getPageFromArray = dataArray => {
 	      const vpvArray = [];
@@ -4850,6 +4855,7 @@ Z`;
 	   * _setupModal create the modal container and instance
 	   * @private
 	   */
+	  // eslint-disable-next-line max-lines
 	  _setupModal() {
 	    this.modal = new Shepherd_modal({
 	      target: this.options.modalContainer || document.body,

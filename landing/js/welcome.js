@@ -82,7 +82,7 @@
           }
         ],
         id: 'including',
-        pageLink: "/",
+        pageLink: "/hjj",
       },
       {
         title: '3/6',
@@ -98,7 +98,7 @@
         },
 
         id: 'creating',
-        pageLink: "/",
+        pageLink: "/jh",
       },
       {
         title: '4/6',
