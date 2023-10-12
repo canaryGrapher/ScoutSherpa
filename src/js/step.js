@@ -418,17 +418,13 @@ export class Step extends Evented {
     this.el.hidden = false;
 
     const content = this.shepherdElementComponent.getElement();
-    const target = this.target;
+    const target = this.target || document.body;
     target.classList.add(`${this.classPrefix}shepherd-enabled`);
     target.classList.add(`${this.classPrefix}shepherd-target`);
     target.classList.add(`shepherd-highlight-border`);
     content.classList.add('shepherd-enabled');
-    if (target != undefined && target != null) {
-      console.log('Item is available in DOM');
-      this.trigger('show');
-    } else {
-      this.trigger('cancel');
-    }
+
+    this.trigger('show');
   }
 
   /**
