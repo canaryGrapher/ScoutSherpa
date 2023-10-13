@@ -395,7 +395,6 @@ export class Step extends Evented {
    */
   _show() {
     this.trigger('before-show');
-
     // Force resolve to make sure the options are updated on subsequent shows.
     this._resolveAttachToOptions();
     this._setupElements();
@@ -419,8 +418,10 @@ export class Step extends Evented {
 
     const content = this.shepherdElementComponent.getElement();
     const target = this.target || document.body;
-    target.classList.add(`${this.classPrefix}shepherd-enabled`);
+    console.log("Creating the content canvas at:", content)
+    console.log("Attaching the modal to element:", target)
     target.classList.add(`${this.classPrefix}shepherd-target`);
+    target.classList.add(`${this.classPrefix}shepherd-enabled`);
     target.classList.add(`shepherd-highlight-border`);
     content.classList.add('shepherd-enabled');
 

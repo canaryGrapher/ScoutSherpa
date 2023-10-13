@@ -20,7 +20,7 @@ const env = process.env.DEVELOPMENT ? 'development' : 'production';
 
 const plugins = [
   strip({
-    functions: ['console.log'],
+    // functions: ['console.log'],
     include: '**/*.js'
   }),
   svelte({
