@@ -357,10 +357,17 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
         element: "#credit-1 > div.pl-4.pt-2 > a",
         on: "bottom"
     },
-    advanceOn: {
-        selector: "#credit-1 > div.pl-4.pt-2 > a",
-        event: 'click',
-    },
+    buttons: [
+        {
+            text: 'back',
+            action: HowToMakeICICIBankCreditCardPaymentTour.back,
+            secondary: true
+        },
+        {
+            text: 'Complete',
+            action: HowToMakeICICIBankCreditCardPaymentTour.complete
+        }
+    ],
     pageLink: "/vpv/li/personal-banking/myacc/creditcards"
 })
 
