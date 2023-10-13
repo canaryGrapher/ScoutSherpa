@@ -297,7 +297,7 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     },
     advanceOn: {
         selector: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
-        event: 'mouseover',
+        event: 'click',
     },
     pageLink: "/vpv/li/personal-banking/dashboardPage"
 })
