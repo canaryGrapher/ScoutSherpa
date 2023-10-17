@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 window.addEventListener('DOMContentLoaded', function () {
+console.log("DOM loaded, looking out for existing overlays and tours.")
     const GuideMeLinks = [
         {
             tour: 'GuideMeWhatsOnNewRIBAccountPage',
