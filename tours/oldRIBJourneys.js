@@ -7,9 +7,9 @@
 // 1 - How to buy a mutual fund
 // 2 - How to Pay ICICI Credit card bill
 // 3 - How to buy ICICI FasTag
+// 4 - transfer funds
 
 // journeys to be created
-// 1 - transfer funds
 // 2 - do a premature closure of FD
 // 3 - Know about various ICICI Bank pre-approved loans offer
 // 4 - How to view personal loan account statement
@@ -20,7 +20,8 @@ window.listOfTours = {
     'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
     'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
     'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
-    'HowToTransferFundsTour': HowToTransferFundsTour
+    'HowToTransferFundsTour': HowToTransferFundsTour,
+    'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour
 }
 
 // eslint-disable-next-line no-undef
@@ -392,7 +393,7 @@ HowToTransferFundsTour.addStep({
         "/vpv/li/personal-banking/dashboardPage"
 });
 
-// Select the 'Payments and Transfer' button on the menubar on dashboard
+// Select the 'Fund Transfer' button in the dropdown menu
 HowToTransferFundsTour.addStep({
     id: 'HowToTransferFundsTour_2',
     title: '2/3',
@@ -435,4 +436,115 @@ HowToTransferFundsTour.addStep({
     ],
     pageLink:
         "/VPV/LI/PaymentsandTransfer/FundsTransfer/TransferFundstoMyPayeesne"
-}); 
+});
+
+// eslint-disable-next-line no-undef
+let HowToPrematurelyCloseFDTour = new Shepherd.Tour({
+    tourName: 'How to prematurely close a FD?',
+    instanceCaller: 'HowToPrematurelyCloseFDTour',
+    defaultStepOptions: {
+        cancelIcon: {
+            enabled: true
+        },
+        scrollTo: {
+            behavior: 'smooth',
+            block: 'center'
+        },
+        arrow: true
+    },
+    useModalOverlay: false
+});
+
+// Select the 'Customer Service' button on the menubar on dashboard
+HowToPrematurelyCloseFDTour.addStep({
+    id: 'HowToPrematurelyCloseFDTour_1',
+    title: '1/5',
+    text: 'Move your mouse over Customer Service',
+    attachTo: {
+        element: "#topbar > div.light-orange > div > div:nth-child(6)",
+        on: 'left'
+    },
+    advanceOn: {
+        selector: "#topbar > div.light-orange > div > div:nth-child(6)",
+        event: 'mouseover'
+    },
+    pageLink:
+        "/vpv/li/personal-banking/dashboardPage"
+});
+
+// Select the 'Service Requests' button in the dropdown menu
+HowToPrematurelyCloseFDTour.addStep({
+    id: 'HowToPrematurelyCloseFDTour_2',
+    title: '2/5',
+    text: 'Click on Service Requests',
+    attachTo: {
+        element: "#topbar > div.light-orange > div > div:nth-child(6) > div > div > div.mr-15 > a:has([src*='topMenuImages/RGNSER/RVMPSR.svg'])",
+        on: 'left'
+    },
+    advanceOn: {
+        selector: "#topbar > div.light-orange > div > div:nth-child(6) > div > div > div.mr-15 > a:has([src*='topMenuImages/RGNSER/RVMPSR.svg'])",
+        event: 'click'
+    },
+    pageLink:
+        "/vpv/li/personal-banking/dashboardPage"
+});
+
+// Select the 'Deposits' accordion
+HowToPrematurelyCloseFDTour.addStep({
+    id: 'HowToPrematurelyCloseFDTour_3',
+    title: '3/5',
+    text: 'Click on Deposits',
+    attachTo: {
+        element: "#DepositsId",
+        on: 'right'
+    },
+    advanceOn: {
+        selector: "#DepositsId",
+        event: 'click'
+    },
+    pageLink: "/vpv/li/personal-banking/custservice/servicerequests"
+});
+
+// Select Fixed Deposit in the accordion sub-menu
+HowToPrematurelyCloseFDTour.addStep({
+    id: 'HowToPrematurelyCloseFDTour_3b',
+    title: '3b/5',
+    text: 'Click on Fixed Deposit',
+    attachTo: {
+        element: "#fixed-deposit",
+        on: 'right'
+    },
+    showOn: function () {
+        // if Fixed Deposit accordion is already selected, move to the next step
+        const element = document.querySelector("#fixed-deposit > a:has([class*='active'])")
+        if (element) {
+            return false
+        }
+        return true
+    },
+    advanceOn: {
+        selector: "#fixed-deposit",
+        event: 'click'
+    },
+    pageLink: "/vpv/li/personal-banking/custservice/servicerequests"
+});
+
+// click on Closure/Renewal of Fixed Deposit
+HowToPrematurelyCloseFDTour.addStep({
+    id: 'HowToPrematurelyCloseFDTour_4',
+    title: '4/5',
+    text: 'Click on Closure/Renewal of Fixed Deposit',
+    attachTo: {
+        element: "#fixed-deposit-srs > li:nth-child(6) > a[title='Closure/Renewal of Fixed Deposit']",
+        on: 'right'
+    },
+    advanceOn: {
+        selector: "#fixed-deposit-srs > li:nth-child(6) > a[title='Closure/Renewal of Fixed Deposit']",
+        event: 'click'
+    },
+    pageLink: "/vpv/li/personal-banking/custservice/servicerequests"
+});
+
+
+
+// Know about various ICICI Bank pre-approved loans offer
