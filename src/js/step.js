@@ -418,8 +418,8 @@ export class Step extends Evented {
 
     const content = this.shepherdElementComponent.getElement();
     const target = this.target || document.body;
-    console.log("Creating the content canvas at:", content)
-    console.log("Attaching the modal to element:", target)
+    console.log('Creating the content canvas at:', content);
+    console.log('Attaching the modal to element:', target);
     target.classList.add(`${this.classPrefix}shepherd-target`);
     target.classList.add(`${this.classPrefix}shepherd-enabled`);
     target.classList.add(`shepherd-highlight-border`);

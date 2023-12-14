@@ -1,64 +1,26 @@
 // This file contains all the Guided journeys for RIB
+// oldRIBJourneys.js
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
-// ICICIGuidedJourneys.js
-window.addEventListener('load', function () {
-    console.log("Page loaded, loading tour now")
-    // check last tour step from local storage 
-    let currentStepIndex = localStorage.getItem('currentStepIndex');
-    let currentTourIndex = localStorage.getItem('tourInstanceCaller');
-    // if current tour is active, continue
-    if (currentTourIndex === 'HowToBuyAFastTagTour') {
-        console.log("Buying a FastTag tour under progress")
-        if (currentStepIndex != '0') {
-            HowToBuyAFastTagTour.show(Number(currentStepIndex));
-        }
-    }
 
-    if (currentTourIndex === 'HowToMakeICICIBankCreditCardPaymentTour') {
-        console.log("Credit card payment tour in progress")
-        if (currentStepIndex != '0') {
-            HowToMakeICICIBankCreditCardPaymentTour.show(Number(currentStepIndex));
-        }
-    }
+// journeys created
+// 1 - How to buy a mutual fund
+// 2 - How to Pay ICICI Credit card bill
+// 3 - How to buy ICICI FasTag
 
-    if (currentTourIndex === 'HowToBuyAMutualFundTour') {
-        console.log("Buying a mutual fund tour under progress")
-        if (currentStepIndex != '0') {
-            HowToBuyAMutualFundTour.show(Number(currentStepIndex));
-        }
-    }
-}, false)
+// journeys to be created
+// 1 - transfer funds
+// 2 - do a premature closure of FD
+// 3 - Know about various ICICI Bank pre-approved loans offer
+// 4 - How to view personal loan account statement
+// 5 - How to update my PAN details in savings accounts
+// 6 - Apply for an ICICI Bank Credit card
 
-window.addEventListener('DOMContentLoaded', function () {
-    const PaymentsandTransferTabElement = document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)");
-    const InvestmentsAndInsuranceTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)');
-    const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)')
-
-    if (PaymentsandTransferTabElement) {
-        PaymentsandTransferTabElement.addEventListener('mouseleave', PaymentsandTransferTabElementFunction)
-    }
-    if (InvestmentsAndInsuranceTabElement) {
-        InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', InvestmentsAndInsuranceTabElementFunction)
-    }
-    if (CardsAndLoansTabElement) {
-        CardsAndLoansTabElement.addEventListener('mouseleave', CardsAndLoansTabElementFunction)
-    }
-})
-const PaymentsandTransferTabElementFunction = () => {
-    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
-        HowToBuyAFastTagTour.back()
-    }
-}
-const InvestmentsAndInsuranceTabElementFunction = () => {
-    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
-        HowToBuyAMutualFundTour.back()
-    }
-}
-const CardsAndLoansTabElementFunction = () => {
-    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
-        HowToMakeICICIBankCreditCardPaymentTour.back()
-    }
+window.listOfTours = {
+    'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
+    'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
+    'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
+    'HowToTransferFundsTour': HowToTransferFundsTour
 }
 
 // eslint-disable-next-line no-undef
@@ -81,7 +43,7 @@ var HowToBuyAFastTagTour = new Shepherd.Tour({
 // Select the 'PAYMENTS & TRANSFER' button on the menubar on dashboard
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_1',
-    title: '1/7',
+    title: '1/2',
     text: "Move your mouse over 'PAYMENTS & TRANSFER",
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(3)",
@@ -97,7 +59,7 @@ HowToBuyAFastTagTour.addStep({
 // Select the 'Buy/Recharge FastTag' sub-link under 'Cards & Loans'
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_2',
-    title: '2/7',
+    title: '2/2',
     text: "Click on 'Buy/Recharge FastTag'",
     attachTo: {
         element:
@@ -114,7 +76,7 @@ HowToBuyAFastTagTour.addStep({
 
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_2b',
-    title: '2b/7',
+    title: '2b/2',
     text: 'Click on the PURCHASE tab.',
     attachTo: {
         element: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
@@ -133,124 +95,6 @@ HowToBuyAFastTagTour.addStep({
         event: 'click'
     },
     pageLink: '/vpv/li/personal-banking/FASTAG/TAGRECHARGE'
-});
-
-HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_3',
-    title: '3/7',
-    text: 'Fill in the details of your vehicle to get a quote.<br /> Click on next after filling all the details.',
-    attachTo: {
-        element: '#DispFormWithTableContent_DigiGold\\.R311112',
-        on: 'top'
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: HowToBuyAFastTagTour.next
-        },
-        {
-            text: 'Cancel',
-            action: HowToBuyAFastTagTour.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
-});
-
-HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_4',
-    title: '4/7',
-    text: 'You can edit the address you want your FastTag to be delivered.',
-    attachTo: {
-        element: '#DispFormWithTableContent_DigiGold\\.R3111131\\.C2',
-        on: 'left'
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: HowToBuyAFastTagTour.next
-        },
-        {
-            text: 'Cancel',
-            action: HowToBuyAFastTagTour.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
-});
-
-HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_5',
-    title: '5/7',
-    text: 'Select the account you want the amount to be collected from.',
-    attachTo: {
-        element: '#DispFormWithTableContent_DigiGold\\.R311116',
-        on: 'left'
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: HowToBuyAFastTagTour.next
-        },
-        {
-            text: 'Cancel',
-            action: HowToBuyAFastTagTour.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
-});
-
-HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_6',
-    title: '6/7',
-    text: 'After you have read the <u>Terms and Conditions</u>, click on the checkbox to accept.',
-    attachTo: {
-        element: '#DispFormWithTableContent_DigiGold\\.Ra0dth_mr\\.C1',
-        on: 'right'
-    },
-    advanceOn: {
-        selector: '#TERMS_AND_COND_FLAG',
-        event: 'change'
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: HowToBuyAFastTagTour.next
-        },
-        {
-            text: 'Cancel',
-            action: HowToBuyAFastTagTour.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
-});
-
-HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_7',
-    title: '7/7',
-    text: 'Click on Proceed to pay the amount and buy your FastTag.',
-    attachTo: {
-        element: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
-        on: 'bottom'
-    },
-    buttons: [
-        {
-            text: 'back',
-            action: HowToBuyAFastTagTour.back,
-            secondary: true
-        },
-        {
-            text: 'Complete',
-            action: HowToBuyAFastTagTour.complete
-        }
-    ],
-    advanceOn: {
-        selector: '#DispFormWithTableContent_DigiGold\\.R3121\\.C1',
-        event: 'click'
-    },
-    pageLink: '/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage'
 });
 
 // eslint-disable-next-line no-undef
@@ -493,6 +337,8 @@ HowToBuyAMutualFundTour.addStep({
         "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
 });
 
+
+//ending notice
 HowToBuyAMutualFundTour.addStep({
     id: 'HowToBuyAMutualFundTour_7',
     title: '7/7',
@@ -511,3 +357,82 @@ HowToBuyAMutualFundTour.addStep({
     pageLink:
         "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedSelectedListing-360 ONE Focused Equity Reg-G"
 });
+
+// eslint-disable-next-line no-undef
+let HowToTransferFundsTour = new Shepherd.Tour({
+    tourName: 'How to transfer funds?',
+    instanceCaller: 'HowToTransferFundsTour',
+    defaultStepOptions: {
+        cancelIcon: {
+            enabled: true
+        },
+        scrollTo: {
+            behavior: 'smooth',
+            block: 'center'
+        },
+        arrow: true
+    },
+    useModalOverlay: false
+});
+
+// Select the 'Payments and Transfer' button on the menubar on dashboard
+HowToTransferFundsTour.addStep({
+    id: 'HowToTransferFundsTour_1',
+    title: '1/3',
+    text: 'Move your mouse over Investments & Insurance',
+    attachTo: {
+        element: "#topbar > div.light-orange > div > div:nth-child(3)",
+        on: 'left'
+    },
+    advanceOn: {
+        selector: "#topbar > div.light-orange > div > div:nth-child(3)",
+        event: 'mouseover'
+    },
+    pageLink:
+        "/vpv/li/personal-banking/dashboardPage"
+});
+
+// Select the 'Payments and Transfer' button on the menubar on dashboard
+HowToTransferFundsTour.addStep({
+    id: 'HowToTransferFundsTour_2',
+    title: '2/3',
+    text: 'Click on Fund Transfer',
+    attachTo: {
+        element: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(2) > a:has([src*='topMenuImages/RTXNS/RTXNSS.svg'])",
+        on: 'left'
+    },
+    advanceOn: {
+        selector: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(2) > a:has([src*='topMenuImages/RTXNS/RTXNSS.svg'])",
+        event: 'click'
+    },
+    pageLink:
+        "/vpv/li/personal-banking/dashboardPage"
+});
+
+// Select payee or add a new payee to do funds transfer
+HowToTransferFundsTour.addStep({
+    id: 'HowToTransferFundsTour_3',
+    title: '3/3',
+    text: 'Select a Payee from the dropdown to transfer money to, or click on the <strong>+Add New</strong> button to add a new payee.',
+    attachTo: {
+        element: "#CorporateUserDashboard_WFT__1\\:DispFormWithTableContent_FTRevamp\\.Rowset18c_mr > div.fundtranfer_submenu_content.select_payee_container > div",
+        on: 'bottom'
+    },
+    advanceOn: {
+        selector: "#CorporateUserDashboard_WFT__1\\:DispFormWithTableContent_FTRevamp\\.Rowset18c_mr > div.fundtranfer_submenu_content.select_payee_container > div",
+        event: 'click'
+    },
+    buttons: [
+        {
+            text: 'Finish',
+            action: HowToTransferFundsTour.next
+        },
+        {
+            text: 'Cancel',
+            action: HowToTransferFundsTour.cancel,
+            secondary: true
+        }
+    ],
+    pageLink:
+        "/VPV/LI/PaymentsandTransfer/FundsTransfer/TransferFundstoMyPayeesne"
+}); 
