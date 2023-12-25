@@ -1,3 +1,5 @@
+"use strict";
+
 // This file contains all the Guided journeys for RIB
 // oldRIBJourneys.js
 /* eslint-disable prettier/prettier */
@@ -16,15 +18,6 @@
 // 4 - How to view personal loan account statement
 // 5 - How to update my PAN details in savings accounts
 
-window.listOfTours = {
-    'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
-    'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
-    'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
-    'HowToTransferFundsTour': HowToTransferFundsTour,
-    'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
-    'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
-    'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
-}
 
 // eslint-disable-next-line no-undef
 var HowToBuyAFastTagTour = new Shepherd.Tour({
@@ -761,3 +754,13 @@ HowToApplyForICICIBankCreditCard.addStep({
     },
     pageLink: "/vpv/li/personal-banking/dashboardPage"
 })
+
+const listOfTours = {
+    'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
+    'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
+    'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
+    'HowToTransferFundsTour': HowToTransferFundsTour,
+    'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
+    'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
+    'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
+}

@@ -1,3 +1,4 @@
+"use strict";
 // This file contains all the utilities required by guided journey
 // oldRIBDAPUtilities.js
 
