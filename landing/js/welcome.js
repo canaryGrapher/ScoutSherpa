@@ -1,5 +1,3 @@
-'use strict';
-
 (function () {
   function init() {
     var shepherd = setupShepherd();

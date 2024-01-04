@@ -1,5 +1,3 @@
-"use strict";
-
 // This file contains all the Guided journeys for RIB
 // oldRIBJourneys.js
 /* eslint-disable prettier/prettier */
@@ -755,7 +753,7 @@ HowToApplyForICICIBankCreditCard.addStep({
     pageLink: "/vpv/li/personal-banking/dashboardPage"
 })
 
-const listOfTours = {
+window.listOfTours = {
     'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
     'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
     'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
