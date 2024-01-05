@@ -19,7 +19,6 @@ const getPageFromArray = (dataArray) => {
 
 // add a button prompt on the pages where overlay pages tour is available
 window.addEventListener('DOMContentLoaded', function () {
-
     const GuideMeLinks = [
         {
             tour: 'WhatsOnBankAccountPageGuideMe',
@@ -37,9 +36,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // if matched, add a button to the left corner, vertically centered on the page
     if (matchedLink) {
-
         var button = document.createElement('button');
-
         button.innerHTML = 'Watch Demo';
         button.classList.add('shepherd-button-guide-me');
         // button.classList.add("shepherd-button-guide-me");
@@ -397,7 +394,7 @@ WhatsOnOtherBankAddPayee.addStep({
 WhatsOnOtherBankAddPayee.addStep({
     id: "WhatsOnOtherBankAddPayee_7",
     title: "7/9",
-    text: "Re-enter the account number to make sure you got it right the first time. You can validate the payee you just added by clicking on the <span style='color: red;'><u>Click here</u></span> hyperlink.",
+    text: "Re-enter the account number to make sure you got it right the first time. You can validate the payee you just added by clicking on the <span style='color: red;'><u>Validate now!</u></span> hyperlink.",
     buttons: [
         {
             text: 'Next',

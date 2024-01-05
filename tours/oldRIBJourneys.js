@@ -3,9 +3,12 @@
 /* eslint-disable max-lines */
 // ICICIGuidedJourneys.js
 window.addEventListener('load', function () {
+
     console.log("Page loaded, loading tour now")
     // check last tour step from local storage 
+
     let currentStepIndex = localStorage.getItem('currentStepIndex');
+
     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
     // if current tour is active, continue
     if (currentTourIndex === 'HowToBuyAFastTagTour') {
@@ -31,51 +34,34 @@ window.addEventListener('load', function () {
 }, false)
 
 window.addEventListener('DOMContentLoaded', function () {
+
     const PaymentsandTransferTabElement = document.querySelector("#topbar > div.light-orange > div > div:nth-child(3)");
     const InvestmentsAndInsuranceTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)');
     const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)')
 
     if (PaymentsandTransferTabElement) {
-        PaymentsandTransferTabElement.addEventListener('mouseleave', PaymentsandTransferTabElementFunction('hide'))
-        PaymentsandTransferTabElement.addEventListener('mouseenter', PaymentsandTransferTabElementFunction('show'))
+        PaymentsandTransferTabElement.addEventListener('mouseleave', PaymentsandTransferTabElementFunction)
     }
     if (InvestmentsAndInsuranceTabElement) {
-        InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', InvestmentsAndInsuranceTabElementFunction('hide'))
-        InvestmentsAndInsuranceTabElement.addEventListener('mouseenter', InvestmentsAndInsuranceTabElementFunction('show'))
+        InvestmentsAndInsuranceTabElement.addEventListener('mouseleave', InvestmentsAndInsuranceTabElementFunction)
     }
     if (CardsAndLoansTabElement) {
-        CardsAndLoansTabElement.addEventListener('mouseleave', CardsAndLoansTabElementFunction('hide'))
-        CardsAndLoansTabElement.addEventListener('mouseenter', CardsAndLoansTabElementFunction('show'))
+        CardsAndLoansTabElement.addEventListener('mouseleave', CardsAndLoansTabElementFunction)
     }
 })
-const PaymentsandTransferTabElementFunction = (action) => {
+const PaymentsandTransferTabElementFunction = () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAFastTagTour_2') {
-        if (action === "hide") {
-            HowToBuyAFastTagTour.hide()
-        } else {
-            HowToBuyAFastTagTour.show()
-        }
-
+        HowToBuyAFastTagTour.back()
     }
 }
-const InvestmentsAndInsuranceTabElementFunction = (action) => {
+const InvestmentsAndInsuranceTabElementFunction = () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToBuyAMutualFundTour_2') {
-        if (action === "hide") {
-            HowToBuyAMutualFundTour.hide()
-        } else {
-            HowToBuyAMutualFundTour.show()
-        }
-
+        HowToBuyAMutualFundTour.back()
     }
 }
-const CardsAndLoansTabElementFunction = (action) => {
+const CardsAndLoansTabElementFunction = () => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === 'HowToMakeICICIBankCreditCardPaymentTour_2') {
-        if (action === "hide") {
-            HowToMakeICICIBankCreditCardPaymentTour.hide()
-        } else {
-            HowToMakeICICIBankCreditCardPaymentTour.show()
-        }
-
+        HowToMakeICICIBankCreditCardPaymentTour.back()
     }
 }
 
@@ -222,7 +208,9 @@ HowToBuyAFastTagTour.addStep({
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_6',
     title: '6/7',
+
     text: 'After you have read the <u>Terms and Conditions</u>, click on the checkbox to accept.',
+
     attachTo: {
         element: '#DispFormWithTableContent_DigiGold\\.Ra0dth_mr\\.C1',
         on: 'right'
@@ -358,8 +346,8 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
             action: HowToMakeICICIBankCreditCardPaymentTour.next
         },
         {
-            text: 'Cancel',
-            action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
+            text: 'Back',
+            action: HowToMakeICICIBankCreditCardPaymentTour.back,
             secondary: true
         }
     ],
