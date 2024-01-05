@@ -1,7 +1,8 @@
 <!--
---- Readme.md Snippet without images Start ---
+&lt;--- Readme.md Snippet without images Start ---&gt;
 ## Tech Stack
 canaryGrapher/ScoutSherpa is built on the following main stack:
+
 - [Code Climate](https://codeclimate.com/) – Code Review
 - [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
@@ -19,11 +20,13 @@ canaryGrapher/ScoutSherpa is built on the following main stack:
 - [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 
 Full tech stack [here](/techstack.md)
---- Readme.md Snippet without images End ---
 
---- Readme.md Snippet with images Start ---
+&lt;--- Readme.md Snippet without images End ---&gt;
+
+&lt;--- Readme.md Snippet with images Start ---&gt;
 ## Tech Stack
 canaryGrapher/ScoutSherpa is built on the following main stack:
+
 - <img width='25' height='25' src='https://img.stackshare.io/service/305/KFgYaUkK.png' alt='Code Climate'/> [Code Climate](https://codeclimate.com/) – Code Review
 - <img width='25' height='25' src='https://img.stackshare.io/service/830/jest.png' alt='Jest'/> [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
 - <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
@@ -41,14 +44,15 @@ canaryGrapher/ScoutSherpa is built on the following main stack:
 - <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 
 Full tech stack [here](/techstack.md)
---- Readme.md Snippet with images End ---
+
+&lt;--- Readme.md Snippet with images End ---&gt;
 -->
 <div align="center">
 
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [canaryGrapher/ScoutSherpa](https://github.com/canaryGrapher/ScoutSherpa)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
-|53<br/>Tools used|11/10/23 <br/>Report generated|
+|54<br/>Tools used|01/05/24 <br/>Report generated|
 |------|------|
 </div>
 
@@ -227,9 +231,9 @@ Full tech stack [here](/techstack.md)
 </table>
 
 
-## <img src='https://img.stackshare.io/group.svg' /> Open source packages (34)</h2>
+## <img src='https://img.stackshare.io/group.svg' /> Open source packages (35)</h2>
 
-## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (34)
+## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (35)
 
 |NAME|VERSION|LAST UPDATED|LAST UPDATED BY|LICENSE|VULNERABILITIES|
 |:------|:------|:------|:------|:------|:------|
@@ -240,6 +244,7 @@ Full tech stack [here](/techstack.md)
 |[babel-jest](https://www.npmjs.com/babel-jest)|v29.7.0|10/10/23|canaryGrapher |MIT|N/A|
 |[babel-plugin-transform-es2015-modules-commonjs](https://www.npmjs.com/babel-plugin-transform-es2015-modules-commonjs)|v6.26.2|10/10/23|canaryGrapher |MIT|N/A|
 |[codeclimate-test-reporter](https://www.npmjs.com/codeclimate-test-reporter)|v0.5.1|10/10/23|canaryGrapher |MIT|N/A|
+|[cssnano](https://www.npmjs.com/cssnano)|v6.0.1|10/09/23|dependabot[bot] |MIT|N/A|
 |[deepmerge](https://www.npmjs.com/deepmerge)|v4.3.1|03/20/23|dependabot[bot] |MIT|N/A|
 |[del](https://www.npmjs.com/del)|v7.1.0|01/03/14|Adam Schwartz |MIT|N/A|
 |[eslint-config-prettier](https://www.npmjs.com/eslint-config-prettier)|v8.10.0|10/10/23|canaryGrapher |MIT|N/A|
@@ -271,4 +276,4 @@ Full tech stack [here](/techstack.md)
 <br/>
 <div align='center'>
 
-Generated via [Stack File](https://github.com/apps/stack-file)
+Generated via [Stack File](https://github.com/marketplace/stack-file)
