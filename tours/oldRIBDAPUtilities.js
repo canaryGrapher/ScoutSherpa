@@ -52,6 +52,7 @@ window.addEventListener('DOMContentLoaded', function () {
     const InvestmentsAndInsuranceTabLegacyElement = document.querySelector('#INVESTMENTS__INSURANCE');
     const CustomerServiceLegacyElement = document.querySelector('#CUSTOMER_SERVICE');
 
+    // if step is 2 and the user is on the dashboard page, 
     if (window.Shepherd.activeTour.currentStep.options.title.split('/')[0] === '2' && getPageFromArray(dashboardPageVPV)) {
         let ActiveBarElement = null;
         const topBarSelector =

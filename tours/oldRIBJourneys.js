@@ -18,7 +18,7 @@
 
 
 // eslint-disable-next-line no-undef
-var HowToBuyAFastTagTour = new Shepherd.Tour({
+const HowToBuyAFastTagTour = new window.Shepherd.Tour({
     tourName: 'How to buy a ICICI FastTag',
     instanceCaller: 'HowToBuyAFastTagTour',
     defaultStepOptions: {
@@ -92,7 +92,7 @@ HowToBuyAFastTagTour.addStep({
 });
 
 // eslint-disable-next-line no-undef
-var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
+const HowToMakeICICIBankCreditCardPaymentTour = new window.Shepherd.Tour({
     tourName: "How to make ICICI bank credit card payment?",
     instanceCaller: "HowToMakeICICIBankCreditCardPaymentTour",
     defaultStepOptions: {
@@ -237,7 +237,7 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
 
 
 // eslint-disable-next-line no-undef
-let HowToBuyAMutualFundTour = new Shepherd.Tour({
+const HowToBuyAMutualFundTour = new window.Shepherd.Tour({
     tourName: 'How to Buy a Mutual Fund?',
     instanceCaller: 'HowToBuyAMutualFundTour',
     defaultStepOptions: {
@@ -374,7 +374,7 @@ HowToBuyAMutualFundTour.addStep({
 
 
 // eslint-disable-next-line no-undef
-let HowToTransferFundsTour = new Shepherd.Tour({
+const HowToTransferFundsTour = new window.Shepherd.Tour({
     tourName: 'How to transfer funds?',
     instanceCaller: 'HowToTransferFundsTour',
     defaultStepOptions: {
@@ -453,7 +453,7 @@ HowToTransferFundsTour.addStep({
 });
 
 // eslint-disable-next-line no-undef
-let HowToPrematurelyCloseFDTour = new Shepherd.Tour({
+const HowToPrematurelyCloseFDTour = new window.Shepherd.Tour({
     tourName: 'How to prematurely close a FD?',
     instanceCaller: 'HowToPrematurelyCloseFDTour',
     defaultStepOptions: {
@@ -563,7 +563,7 @@ HowToPrematurelyCloseFDTour.addStep({
 
 // Know about various ICICI Bank pre-approved loans offer
 // eslint-disable-next-line no-undef
-let HowToKnowAboutPreApprovedOffers = new Shepherd.Tour({
+const HowToKnowAboutPreApprovedOffers = new window.Shepherd.Tour({
     tourName: 'Know about pre-approved offers',
     instanceCaller: 'HowToKnowAboutPreApprovedOffers',
     defaultStepOptions: {
@@ -670,7 +670,7 @@ HowToKnowAboutPreApprovedOffers.addStep({
 })
 
 // eslint-disable-next-line no-undef
-let HowToApplyForICICIBankCreditCard = new Shepherd.Tour({
+const HowToApplyForICICIBankCreditCard = new window.Shepherd.Tour({
     tourName: 'How to Apply For an ICICI Bank Credit Card',
     instanceCaller: 'HowToApplyForICICIBankCreditCard',
     defaultStepOptions: {
