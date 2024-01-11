@@ -1,100 +1,63 @@
-// This file contains all the Guided journeys for RIB
-// oldRIBJourneys.js
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
 
-// journeys created
-// 1 - How to buy a mutual fund
-// 2 - How to Pay ICICI Credit card bill
-// 3 - How to buy ICICI FasTag
-// 4 - transfer funds
-// 5 - Know about various ICICI Bank pre-approved loans offer
-// 6 - do a premature closure of FD
-// 7 - Apply for an ICICI Bank Credit card
-
-// journeys to be created
-// 4 - How to view personal loan account statement
-// 5 - How to update my PAN details in savings accounts
-
-
-// eslint-disable-next-line no-undef
-var HowToBuyAFastTagTour = new Shepherd.Tour({
-    tourName: 'How to buy a ICICI FastTag',
-    instanceCaller: 'HowToBuyAFastTagTour',
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        },
-        scrollTo: {
-            behavior: 'smooth',
-            block: 'center'
-        },
-        arrow: true
-    },
-    useModalOverlay: false
-});
-
-// Select the 'PAYMENTS & TRANSFER' button on the menubar on dashboard
-HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_1',
-    title: '1/2',
-    text: "Move your mouse over 'PAYMENTS & TRANSFER",
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(3)",
-        on: 'right'
-    },
-    advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(3)",
-        event: 'mouseover'
-    },
-    pageLink: '/vpv/li/personal-banking/dashboardPage'
-});
-
-// Select the 'Buy/Recharge FastTag' sub-link under 'Payment & Transfer' link
-HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_2',
-    title: '2/2',
-    text: "Click on 'Buy/Recharge FastTag'",
-    attachTo: {
-        element:
-            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])",
-        on: 'left'
-    },
-    advanceOn: {
-        selector:
-            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])",
-        event: 'click'
-    },
-    pageLink: '/vpv/li/personal-banking/dashboardPage'
-});
-
-HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_2b',
-    title: '2b/2',
-    text: 'Click on the PURCHASE tab.',
-    attachTo: {
-        element: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
-        on: 'bottom'
-    },
-    showOn: function () {
-        // if user already has a FasTag, website opens on the recharge page, this step asks the user to move to Buy tab. 
-        const element = document.querySelector("#FastagRech\\.Rowset1 > ul > li:nth-child(2)")
-        if (element) {
-            return true
+// This file contains all the Overlay pages for RIB
+const getPageFromArray = (dataArray) => {
+    const data = dataArray.find((item) => {
+        // eslint-disable-next-line no-prototype-builtins
+        if (item.hasOwnProperty('page')) {
+            return item.page;
+            // eslint-disable-next-line no-prototype-builtins
+        } else if (item.hasOwnProperty('vpv')) {
+            return item.vpv;
+        } else {
+            return null;
         }
-        return false
-    },
-    advanceOn: {
-        selector: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
-        event: 'click'
-    },
-    pageLink: '/vpv/li/personal-banking/FASTAG/TAGRECHARGE'
+    });
+    return data.page || data.vpv;
+};
+
+// add a button prompt on the pages where overlay pages tour is available
+window.addEventListener('DOMContentLoaded', function () {
+    const GuideMeLinks = [
+        {
+            tour: 'WhatsOnBankAccountPageGuideMe',
+            link: '/vpv/li/personal-banking/myacc/bankacc'
+        },
+        {
+            tour: 'WhatsOnOtherBankAddPayee',
+            link: '/vpv/li/personal-banking/pmt-tranf/managepayees'
+        }
+    ];
+    const pageLink = getPageFromArray(window.dataLayer);
+    console.log('DOM content loaded for guideMe button injection. Loading tour');
+    // match if current pageLink is in the GuideMeLinks array
+    const matchedLink = GuideMeLinks.find((link) => link.link === pageLink);
+
+    // if matched, add a button to the left corner, vertically centered on the page
+    if (matchedLink) {
+        var button = document.createElement('button');
+        button.innerHTML = 'Watch Demo';
+        button.classList.add('shepherd-button-guide-me');
+        // button.classList.add("shepherd-button-guide-me");
+        // button.style.cssText = "position: fixed; left: 0; top: 50%; z-index: 500; padding: 5px 13px; border-radius: 5px 5px 0 0; border-color: rgb(239, 124, 0); color: #ffffff; background-color: rgb(239, 124, 0); transform: translate(-30px, 0%) rotate(90deg); cursor: pointer;"
+        if (matchedLink.tour === 'WhatsOnBankAccountPageGuideMe') {
+            button.onclick = function () {
+                WhatsOnBankAccountPageGuideMe.start();
+            };
+        } else if (matchedLink.tour === 'WhatsOnOtherBankAddPayee') {
+            button.onclick = function () {
+                WhatsOnOtherBankAddPayee.start();
+            };
+        }
+        document.body.appendChild(button);
+    }
 });
 
 // eslint-disable-next-line no-undef
-var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
-    tourName: "How to make ICICI bank credit card payment?",
-    instanceCaller: "HowToMakeICICIBankCreditCardPaymentTour",
+var WhatsOnBankAccountPageGuideMe = new Shepherd.Tour({
+    tourName: "Guide Me: What's on Bank Account Page",
+    instanceCaller: "WhatsOnBankAccountPageGuideMe",
     defaultStepOptions: {
         cancelIcon: {
             enabled: true
@@ -105,660 +68,387 @@ var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
         },
         arrow: true,
     },
-    useModalOverlay: false,
+    useModalOverlay: true,
 });
 
-// Select the credit card you want to pay bill for
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_0",
-    title: "1/1",
-    text: "Looks like you do not have any credit card linked to your account. This feature is not available for you right now.",
-    showOn: function () {
-        const element = window.find("Apply from a range of credit cards")
-        if (element) {
-            return true
-        }
-        return false
-    },
-    buttons: [
-        {
-            text: 'Understood',
-            action: HowToMakeICICIBankCreditCardPaymentTour.complete
-        },
-        {
-            text: 'Cancel',
-            action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
-})
-
-// Select the 'Cards & Loans' button on the menubar on dashboard
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_1",
-    title: "1/5",
-    text: "Move your mouse over 'Cards & Loans'",
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(4)",
-        on: "left"
-    },
-    advanceOn: {
-        selector: '#topbar > div.light-orange > div > div:nth-child(4)',
-        event: 'mouseover',
-    },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
-})
-
-// Select the 'Credit Cards' sub-link under 'Cards & Loans'
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_2",
-    title: "2/5",
-    text: "Click on 'Credit Cards'",
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
-        on: "left"
-    },
-    advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
-        event: 'click',
-    },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
-})
-
-// Select the credit card you want to pay bill for
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_3",
-    title: "3/5",
-    text: "You can select the credit card you want to pay the bill for in this glider. However if you have only one credit card, you can ignore this step.",
-    attachTo: {
-        element: "#credit-1 > div.glider-cont.glider-contain.mb-20",
-        on: "top"
-    },
+// Code for Bank Account page overlay pages tour
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_1",
+    title: "1/6",
+    text: "Welcome to your account page. Here you can view your account summary, account details, and account statements.",
     buttons: [
         {
             text: 'Next',
-            action: HowToMakeICICIBankCreditCardPaymentTour.next
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
             text: 'Cancel',
-            action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
+            action: WhatsOnBankAccountPageGuideMe.cancel,
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/myacc/creditcards"
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
-// check outstanding balance
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_4",
-    title: "4/5",
-    text: "You can see your credit card outstanding balance here.",
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_2",
+    title: "2/6",
+    text: "This is your account summary. Here you can view your account balance.",
     attachTo: {
-        element: "#pb0",
-        on: "right"
-    },
-    buttons: [
-        {
-            text: 'Next',
-            action: HowToMakeICICIBankCreditCardPaymentTour.next
-        },
-        {
-            text: 'Cancel',
-            action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/creditcards"
-})
-
-// Click on 'Pay Bill' button to pay the bill
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_5",
-    title: "5/5",
-    text: "Click on 'Pay Bill' to pay against your Credit Card bill. You can select to pay for your outstanding dues, minimum amount due or any other amount you want to pay on the following page.",
-    attachTo: {
-        element: "#credit-1 > div.pl-4.pt-2 > a",
+        element: "#AccountsTable_TotalBalance-MonthsTurnover > tbody",
         on: "bottom"
     },
     buttons: [
         {
-            text: 'back',
-            action: HowToMakeICICIBankCreditCardPaymentTour.back,
-            secondary: true
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
-            text: 'Complete',
-            action: HowToMakeICICIBankCreditCardPaymentTour.complete
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/myacc/creditcards"
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
-
-// eslint-disable-next-line no-undef
-let HowToBuyAMutualFundTour = new Shepherd.Tour({
-    tourName: 'How to Buy a Mutual Fund?',
-    instanceCaller: 'HowToBuyAMutualFundTour',
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        },
-        scrollTo: {
-            behavior: 'smooth',
-            block: 'center'
-        },
-        arrow: true
-    },
-    useModalOverlay: false
-});
-
-// Select the 'Investment and Insurance' button on the menubar on dashboard
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_1',
-    title: '1/5',
-    text: 'Move your mouse over Investments & Insurance',
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_3",
+    title: "3/6",
+    text: "List of all accounts with summary is displayed here. Select that account using the radio button to interact with it.",
     attachTo: {
-        element: '#topbar > div.light-orange > div > div:nth-child(5)',
-        on: 'left'
-    },
-    advanceOn: {
-        selector: '#topbar > div.light-orange > div > div:nth-child(5)',
-        event: 'mouseover'
-    },
-    pageLink: '/vpv/li/personal-banking/dashboardPage'
-});
-
-// Click on Buy Mutual Funds option in the drop-down menu > redirection
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_2',
-    title: '2/5',
-    text: 'Click on Buy Mutual Funds',
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])",
-        on: 'left'
-    },
-    advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])",
-        event: 'click'
-    },
-    pageLink: '/vpv/li/personal-banking/dashboardPage'
-});
-
-//Click on view all button on the page where investment categories are displayed
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_3a',
-    title: '3/5',
-    showOn: function () {
-        const mutualFundsExists = window.find("My Portfolio");
-        if (mutualFundsExists) {
-            return false;
-        } else {
-            return true;
-        }
-    },
-    text: "These are the top categories of Mutual Funds. <strong>Click on 'View All'</strong> to see more categories",
-    attachTo: {
-        // document.querySelector("#ListingTable3 > main > section:nth-child(4) > div")
-        element: "#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds",
-        on: 'right'
-    },
-    advanceOn: {
-        selector: "#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > div > button.btn.btn-default.js-show",
-        event: 'click'
-    },
-    pageLink:
-        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails'
-});
-
-//Click on view all button on the page where investment categories are displayed
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_3b',
-    title: '3/5',
-    showOn: function () {
-        const mutualFundsExists = window.find("My Portfolio");
-        if (mutualFundsExists) {
-            return true;
-        } else {
-            return false;
-        }
-    },
-    text: "Looks like you already have Mutual Funds, however you can subscribe for more Mutual Funds through these top categories. <strong>Click on 'View All'</strong> to see more categories",
-    attachTo: {
-        element: "#ListingTable3 > main > section:nth-child(4) > div",
-        on: 'right'
-    },
-    advanceOn: {
-        selector: "#ListingTable3 > main > section:nth-child(4) > div > div > div.comp-funds > div > button.btn.btn-default.js-show",
-        event: 'click'
-    },
-    pageLink:
-        "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/PortfolioDetails"
-});
-
-// User clicks on any one category from the tiles displayed
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_4',
-    title: '4/5',
-    text: "Let's start buying one of the top-rated mutual funds. Click on <strong>Top Rated Funds</strong> to begin.",
-    attachTo: {
-        element:
-            `#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > ul > a:has([onclick="callFundListing('topRated')"]) > li`,
-        on: 'right'
-    },
-    advanceOn: {
-        selector:
-            `#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > ul > a:has([onclick="callFundListing('topRated')"]) > li`,
-        event: 'click'
-    },
-    pageLink:
-        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails'
-});
-
-// Click on "Invest Now" on any one of the suggested funds
-HowToBuyAMutualFundTour.addStep({
-    id: 'HowToBuyAMutualFundTour_5',
-    title: '5/5',
-    text: "Let's start with Equity funds. Click on the <strong>Invest Now</strong> button on the highlighted fund to start investing.",
-    attachTo: {
-        element: '#equity > div > ul > li:first-child',
-        on: 'top'
-    },
-    advanceOn: {
-        selector: "#equity > div > ul > li:nth-child(1) > div > div > div > div.bf-action-wrap > button.btn.btn-default.investNow0.flInvest0",
-        event: 'click'
-    },
-    pageLink:
-        "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/TopRatedFundsListing"
-});
-
-
-// eslint-disable-next-line no-undef
-let HowToTransferFundsTour = new Shepherd.Tour({
-    tourName: 'How to transfer funds?',
-    instanceCaller: 'HowToTransferFundsTour',
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        },
-        scrollTo: {
-            behavior: 'smooth',
-            block: 'center'
-        },
-        arrow: true
-    },
-    useModalOverlay: false
-});
-
-// Select the 'Payments and Transfer' button on the menubar on dashboard
-HowToTransferFundsTour.addStep({
-    id: 'HowToTransferFundsTour_1',
-    title: '1/3',
-    text: 'Move your mouse over Investments & Insurance',
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(3)",
-        on: 'left'
-    },
-    advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(3)",
-        event: 'mouseover'
-    },
-    pageLink:
-        "/vpv/li/personal-banking/dashboardPage"
-});
-
-// Select the 'Fund Transfer' button in the dropdown menu
-HowToTransferFundsTour.addStep({
-    id: 'HowToTransferFundsTour_2',
-    title: '2/3',
-    text: 'Click on Fund Transfer',
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(2) > a:has([src*='topMenuImages/RTXNS/RTXNSS.svg'])",
-        on: 'left'
-    },
-    advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(2) > a:has([src*='topMenuImages/RTXNS/RTXNSS.svg'])",
-        event: 'click'
-    },
-    pageLink:
-        "/vpv/li/personal-banking/dashboardPage"
-});
-
-// Select payee or add a new payee to do funds transfer
-HowToTransferFundsTour.addStep({
-    id: 'HowToTransferFundsTour_3',
-    title: '3/3',
-    text: 'Select a Payee from the dropdown to transfer money to, or click on the <strong>+Add New</strong> button to add a new payee.',
-    attachTo: {
-        element: "#CorporateUserDashboard_WFT__1\\:DispFormWithTableContent_FTRevamp\\.Rowset18c_mr > div.fundtranfer_submenu_content.select_payee_container > div",
-        on: 'bottom'
-    },
-    advanceOn: {
-        selector: "#CorporateUserDashboard_WFT__1\\:DispFormWithTableContent_FTRevamp\\.Rowset18c_mr > div.fundtranfer_submenu_content.select_payee_container > div",
-        event: 'click'
+        element: "#SummaryList",
+        on: "bottom"
     },
     buttons: [
         {
-            text: 'Finish',
-            action: HowToTransferFundsTour.next
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
-            text: 'Cancel',
-            action: HowToTransferFundsTour.cancel,
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
             secondary: true
         }
     ],
-    pageLink:
-        "/VPV/LI/PaymentsandTransfer/FundsTransfer/TransferFundstoMyPayeesne"
-});
-
-// eslint-disable-next-line no-undef
-let HowToPrematurelyCloseFDTour = new Shepherd.Tour({
-    tourName: 'How to prematurely close a FD?',
-    instanceCaller: 'HowToPrematurelyCloseFDTour',
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        },
-        scrollTo: {
-            behavior: 'smooth',
-            block: 'center'
-        },
-        arrow: true
-    },
-    useModalOverlay: false
-});
-
-// Select the 'Customer Service' button on the menubar on dashboard
-HowToPrematurelyCloseFDTour.addStep({
-    id: 'HowToPrematurelyCloseFDTour_1',
-    title: '1/5',
-    text: 'Move your mouse over Customer Service',
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(6)",
-        on: 'left'
-    },
-    advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(6)",
-        event: 'mouseover'
-    },
-    pageLink:
-        "/vpv/li/personal-banking/dashboardPage"
-});
-
-// Select the 'Service Requests' button in the dropdown menu
-HowToPrematurelyCloseFDTour.addStep({
-    id: 'HowToPrematurelyCloseFDTour_2',
-    title: '2/5',
-    text: 'Click on Service Requests',
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(6) > div > div > div.mr-15 > a:has([src*='topMenuImages/RGNSER/RVMPSR.svg'])",
-        on: 'left'
-    },
-    advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(6) > div > div > div.mr-15 > a:has([src*='topMenuImages/RGNSER/RVMPSR.svg'])",
-        event: 'click'
-    },
-    pageLink:
-        "/vpv/li/personal-banking/dashboardPage"
-});
-
-// Select the 'Deposits' accordion
-HowToPrematurelyCloseFDTour.addStep({
-    id: 'HowToPrematurelyCloseFDTour_3',
-    title: '3/5',
-    text: 'Click on Deposits',
-    attachTo: {
-        element: "#DepositsId",
-        on: 'right'
-    },
-    advanceOn: {
-        selector: "#DepositsId",
-        event: 'click'
-    },
-    pageLink: "/vpv/li/personal-banking/custservice/servicerequests"
-});
-
-// Select Fixed Deposit in the accordion sub-menu
-HowToPrematurelyCloseFDTour.addStep({
-    id: 'HowToPrematurelyCloseFDTour_3b',
-    title: '3b/5',
-    text: 'Click on Fixed Deposit',
-    attachTo: {
-        element: "#fixed-deposit",
-        on: 'right'
-    },
-    showOn: function () {
-        // if Fixed Deposit accordion is already selected, move to the next step
-        const element = document.querySelector("#fixed-deposit > a:has([class*='active'])")
-        if (element) {
-            return false
-        }
-        return true
-    },
-    advanceOn: {
-        selector: "#fixed-deposit",
-        event: 'click'
-    },
-    pageLink: "/vpv/li/personal-banking/custservice/servicerequests"
-});
-
-// click on Closure/Renewal of Fixed Deposit
-HowToPrematurelyCloseFDTour.addStep({
-    id: 'HowToPrematurelyCloseFDTour_4',
-    title: '4/5',
-    text: 'Click on Closure/Renewal of Fixed Deposit',
-    attachTo: {
-        element: "#fixed-deposit-srs > li:nth-child(6) > a[title='Closure/Renewal of Fixed Deposit']",
-        on: 'right'
-    },
-    advanceOn: {
-        selector: "#fixed-deposit-srs > li:nth-child(6) > a[title='Closure/Renewal of Fixed Deposit']",
-        event: 'click'
-    },
-    pageLink: "/vpv/li/personal-banking/custservice/servicerequests"
-});
-
-
-
-// Know about various ICICI Bank pre-approved loans offer
-// eslint-disable-next-line no-undef
-let HowToKnowAboutPreApprovedOffers = new Shepherd.Tour({
-    tourName: 'Know about pre-approved offers',
-    instanceCaller: 'HowToKnowAboutPreApprovedOffers',
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        },
-        scrollTo: {
-            behavior: 'smooth',
-            block: 'center'
-        },
-        arrow: true
-    },
-    useModalOverlay: false
-});
-
-HowToKnowAboutPreApprovedOffers.addStep({
-    id: 'HowToKnowAboutPreApprovedOffers_1',
-    title: '1/3',
-    text: "Move your mouse over 'Cards & Loans'",
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(4)",
-        on: "left"
-    },
-    advanceOn: {
-        selector: '#topbar > div.light-orange > div > div:nth-child(4)',
-        event: 'mouseover',
-    },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
-HowToKnowAboutPreApprovedOffers.addStep({
-    id: 'HowToKnowAboutPreApprovedOffers_2',
-    title: '2/3',
-    text: "Click on 'Cards & Loans'",
-    attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(2) > a:has([src*='topMenuImages/CARDLN/RLACTM.svg']",
-        on: 'left'
-    },
-    advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(2) > a:has([src*='topMenuImages/CARDLN/RLACTM.svg']",
-        event: 'click'
-    },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
-})
-
-HowToKnowAboutPreApprovedOffers.addStep({
-    id: "HowToKnowAboutPreApprovedOffers_3a",
-    title: '3/3',
-    text: "All your Pre-Approved offers are available here",
-    attachTo: {
-        element: "#InfoPanel1\\.Rowset1 > section > div > div > div > div > div.main-top",
-        on: 'top'
-    },
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_4i",
+    title: "4/6",
+    text: "Use these action buttons to view more information about your account(s). You can also use the dropdown to raise service requests like Account Linking, Cheque Status Enquiry, Cheque stopping, Debit/ATM card blocking and Aadhaar number updation",
     showOn: function () {
-        const element = window.find("Your Loan Account List")
-        if (element) {
-            return false
-        } else {
-            return true
-        }
-    },
-    buttons: [
-        {
-            text: 'Complete',
-            action: HowToKnowAboutPreApprovedOffers.complete
-        },
-        {
-            text: 'Cancel',
-            action: HowToKnowAboutPreApprovedOffers.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/loanNotLinkedPage"
-})
-
-HowToKnowAboutPreApprovedOffers.addStep({
-    id: "HowToKnowAboutPreApprovedOffers_3b",
-    title: '3/3',
-    text: "All your Pre-Approved offers are available here",
-    attachTo: {
-        element: "#InfoPanel1\\.Rowset1 > section > div > div > div > div > div.main-top",
-        on: 'top'
-    },
-    showOn: function () {
-        const element = window.find("Your Loan Account List")
-        if (element) {
+        if (document.querySelector("#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper")) {
             return true
         } else {
             return false
         }
     },
+    attachTo: {
+        element: "#ListTableWithCtrls\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper",
+        on: "bottom"
+    },
     buttons: [
         {
-            text: 'Complete',
-            action: HowToKnowAboutPreApprovedOffers.complete
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
         },
         {
-            text: 'Cancel',
-            action: HowToKnowAboutPreApprovedOffers.cancel,
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/myacc/loans"
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
-// eslint-disable-next-line no-undef
-let HowToApplyForICICIBankCreditCard = new Shepherd.Tour({
-    tourName: 'How to Apply For an ICICI Bank Credit Card',
-    instanceCaller: 'HowToApplyForICICIBankCreditCard',
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        },
-        scrollTo: {
-            behavior: 'smooth',
-            block: 'center'
-        },
-        arrow: true
-    },
-    useModalOverlay: false
-});
-
-HowToApplyForICICIBankCreditCard.addStep({
-    id: 'HowToApplyForICICIBankCreditCard_0',
-    title: '1/1',
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_4ii",
+    title: "4/6",
+    text: "Use these action buttons to view more information about your account(s). You can also use the dropdown to raise service requests like Account Linking, Cheque Status Enquiry, Cheque stopping, Debit/ATM card blocking and Aadhaar number updation",
     showOn: function () {
-        const element = window.find("Apply from a range of credit cards")
-        if (element) {
+        if (document.querySelector("#ListTableWithCtrlsDEH\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper")) {
             return true
         }
         return false
     },
-    text: "Move your mouse over 'Cards & Loans'",
+    beforeShowPromise: function () {
+        document.querySelector("#footerInner").click();
+    },
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(4)",
-        on: "button"
+        element: "#ListTableWithCtrlsDEH\\.Rb1_mr.m_table_btm_btn_bar.m_cf.labelWrapper",
+        on: "bottom"
     },
-    advanceOn: {
-        selector: '#topbar > div.light-orange > div > div:nth-child(4)',
-        event: 'mouseover',
-    },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
-HowToApplyForICICIBankCreditCard.addStep({
-    id: 'HowToApplyForICICIBankCreditCard_1',
-    title: '1/3',
-    text: "Move your mouse over 'Cards & Loans'",
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_5",
+    title: "5/6",
+    text: "You can also download your acccount details in PDF or XLS format. Click on 'OK' to download the file after selecting the desired format.",
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(4)",
+        element: "#NavPanel_mr\\.Rb1",
         on: "left"
     },
-    advanceOn: {
-        selector: '#topbar > div.light-orange > div > div:nth-child(4)',
-        event: 'mouseover',
-    },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnBankAccountPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
-HowToApplyForICICIBankCreditCard.addStep({
-    id: 'HowToApplyForICICIBankCreditCard_2',
-    title: '2/3',
-    text: "Click on 'Credit Cards'",
+WhatsOnBankAccountPageGuideMe.addStep({
+    id: "WhatsOnBankAccountPageGuideMe_6",
+    title: "6/6",
+    text: "That is all for this tour! Click on 'Finish' to end the tour.",
+    buttons: [
+        {
+            text: 'Finish',
+            action: WhatsOnBankAccountPageGuideMe.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnBankAccountPageGuideMe.back,
+            secondary: true
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
+})
+
+// code for Add Payee: Other bank overlay pages tour
+// eslint-disable-next-line no-undef
+var WhatsOnOtherBankAddPayee = new Shepherd.Tour({
+    tourName: "Guide Me: What's on Add Other bank payee page?",
+    instanceCaller: "WhatsOnOtherBankAddPayee",
+    defaultStepOptions: {
+        cancelIcon: {
+            enabled: true
+        },
+        classes: 'z-50',
+        scrollTo: {
+            behavior: 'smooth',
+            block: 'center'
+        },
+        arrow: true,
+    },
+    useModalOverlay: true,
+});
+
+WhatsOnOtherBankAddPayee.addStep({
+    id: "WhatsOnOtherBankAddPayee_1",
+    title: "1/9",
+    text: "<p>Welcome to Add Payee: Other Bank page. This tour will guide you through the options available on the page.</p>",
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnOtherBankAddPayee.next
+        },
+        {
+            text: 'Cancel',
+            action: WhatsOnOtherBankAddPayee.cancel,
+            secondary: true
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+})
+
+WhatsOnOtherBankAddPayee.addStep({
+    id: "WhatsOnOtherBankAddPayee_2",
+    title: "2/9",
+    text: "Enter the Payee Account Number as it is displayed on your payee's bank records.",
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnOtherBankAddPayee.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnOtherBankAddPayee.back,
+            secondary: true
+        }
+    ],
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
-        on: "left"
+        element: "p#DispFormWithTableContent\\.Ryz1_mr",
+        on: "bottom"
     },
-    advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
-        event: 'click',
-    },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
-HowToApplyForICICIBankCreditCard.addStep({
-    id: 'HowToApplyForICICIBankCreditCard_3',
-    title: '3/3',
-    text: "Click on APPLY NOW to apply for a new credit card. ",
+WhatsOnOtherBankAddPayee.addStep({
+    id: "WhatsOnOtherBankAddPayee_3",
+    title: "3/9",
+    beforeShowPromise: function () {
+        document.querySelector("#main > div.wrapper").click();
+    },
+    text: "Enter the Nickname of your choice as you want this payee to be visible on your payee page.",
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnOtherBankAddPayee.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnOtherBankAddPayee.back,
+            secondary: true
+        }
+    ],
+
     attachTo: {
-        element: "#ListingTable3 > section > div > div > div > div > div:nth-child(9):has([src*='CCSliderSummary/single_card_icon.png'])",
-        on: "top"
+        element: "p#DispFormWithTableContent\\.Ryz2_mr",
+        on: "bottom"
     },
-    advanceOn: {
-        selector: '#topbar > div.light-orange > div > div:nth-child(4)',
-        event: 'mouseover',
-    },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
-const listOfTours = {
-    'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
-    'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
-    'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
-    'HowToTransferFundsTour': HowToTransferFundsTour,
-    'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
-    'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
-    'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
-}
+WhatsOnOtherBankAddPayee.addStep({
+    id: "WhatsOnOtherBankAddPayee_4",
+    title: "4/9",
+    beforeShowPromise: function () {
+        document.querySelector("#DispFormWithTableContent\\.Ryz7_mr\\.C2 > span > span > div > div.selectedTxt").click();
+    },
+    text: "Select an account type for the payee account you are adding. You can select between Savings, Current Account, Cash Credit or Loan Account from this dropdown.",
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnOtherBankAddPayee.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnOtherBankAddPayee.back,
+            secondary: true
+        }
+    ],
+    attachTo: {
+        element: "#DispFormWithTableContent\\.Ryz7_mr",
+        on: "bottom"
+    },
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+})
+
+WhatsOnOtherBankAddPayee.addStep({
+    id: "WhatsOnOtherBankAddPayee_5",
+    title: "5/9",
+    beforeShowPromise: function () {
+        document.querySelector("#main > div.wrapper").click();
+    },
+    text: "Enter the payee's bank account IFSC code. Not sure about the IFSC code? You can search for the IFSC code by clicking on the <strong>Search</strong> button.",
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnOtherBankAddPayee.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnOtherBankAddPayee.back,
+            secondary: true
+        }
+    ],
+    attachTo: {
+        element: "#DispFormWithTableContent\\.Ryz6_mr",
+        on: "bottom"
+    },
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+})
+
+WhatsOnOtherBankAddPayee.addStep({
+    id: "WhatsOnOtherBankAddPayee_6",
+    title: "6/9",
+    text: "Enter the Account number of the payee. It is critical that you get this number right to avoid sending money to the wrong account.",
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnOtherBankAddPayee.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnOtherBankAddPayee.back,
+            secondary: true
+        }
+    ],
+    attachTo: {
+        element: "#DispFormWithTableContent\\.Ryz3_mr",
+        on: "bottom"
+    },
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+})
+
+WhatsOnOtherBankAddPayee.addStep({
+    id: "WhatsOnOtherBankAddPayee_7",
+    title: "7/9",
+    text: "Re-enter the account number to make sure you got it right the first time. You can validate the payee you just added by clicking on the <span style='color: red;'><u>Validate now!</u></span> hyperlink.",
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnOtherBankAddPayee.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnOtherBankAddPayee.back,
+            secondary: true
+        }
+    ],
+    attachTo: {
+        element: "#DispFormWithTableContent\\.Ryz5_mr",
+        on: "bottom"
+    },
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+})
+
+WhatsOnOtherBankAddPayee.addStep({
+    id: "WhatsOnOtherBankAddPayee_8",
+    title: "8/9",
+    text: "Payee alert will be sent to this mobile number. Keep it handy.",
+    buttons: [
+        {
+            text: 'Next',
+            action: WhatsOnOtherBankAddPayee.next
+        },
+        {
+            text: 'Back',
+            action: WhatsOnOtherBankAddPayee.back,
+            secondary: true
+        }
+    ],
+    attachTo: {
+        element: "#DispFormWithTableContent\\.Ryz15_mr",
+        on: "bottom"
+    },
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+})
+
+WhatsOnOtherBankAddPayee.addStep({
+    id: "WhatsOnOtherBankAddPayee_9",
+    title: "9/9",
+    text: "That's all for this guide. Click on <strong>Next</strong> to go to the confirmation page to finalize the payee addition.",
+    buttons: [
+        {
+            text: 'Complete',
+            action: WhatsOnOtherBankAddPayee.complete
+        },
+        {
+            text: 'Back',
+            action: WhatsOnOtherBankAddPayee.back,
+            secondary: true
+        }
+    ],
+    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
+})
