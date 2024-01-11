@@ -1,0 +1,27 @@
+name: Purge jsDelivr cache
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  purge_cache:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Purge jsDelivr cache
+      uses: gacts/purge-jsdelivr-cache@v1.1.0
+      with:
+        url: 
+          - https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/tours/oldRIBDAPUtilities.js
+          - https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/tours/oldRIBJourneys.js
+          - https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/tours/oldRIBOverlays.js
+          - https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/css/shepherd.css
+          - https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/css/shepherd.min.css
+          - https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/js/shepherd.js
+          - https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/js/shepherd.min.js
+        attempts: 2
