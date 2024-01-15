@@ -200,10 +200,8 @@ export class Tour extends Evented {
     console.log('Loading next step');
     const index = this.steps.indexOf(this.currentStep);
     if (index === this.steps.length - 1) {
-      // remove the currentStepIndex and the tourInstanceCaller from the local storage after completing the tour
-      localStorage.removeItem('currentStepIndex');
-      localStorage.removeItem('tourInstanceCaller');
       // if last step, complete the tour
+      console.log("Completing steps...")
       this.complete();
     } else {
       // set the current step number in the localStorage
@@ -269,7 +267,6 @@ export class Tour extends Evented {
       });
       return vpvArray;
     };
-
     // check if the page VPV passed in the step matches with any of the VPV available in the dataLayer populated by GTM
     const vpvInPage = () => {
       let pageVPV = getPageFromArray(window.dataLayer);
@@ -288,7 +285,7 @@ export class Tour extends Evented {
         console.log(
           'FALSE Current VPV: ',
           currentVPV,
-          '/n is not present in pageVPV array: ',
+          ' is not present in pageVPV \n array: ',
           pageVPV
         );
         return false;
@@ -348,6 +345,7 @@ export class Tour extends Evented {
    */
   _done(event) {
     // clear the local storage items to remove tour history
+    // remove the currentStepIndex and the tourInstanceCaller from the local storage after completing the tour
     localStorage.removeItem('currentStepIndex');
     localStorage.removeItem('tourInstanceCaller');
 
@@ -410,7 +408,7 @@ export class Tour extends Evented {
     });
   }
 
-  /**
+  /** 
    * Called when `showOn` evaluates to false, to skip the step or complete the tour if it's the last step
    * @param {Step} step The step to skip
    * @param {Boolean} forward True if we are going forward, false if backward

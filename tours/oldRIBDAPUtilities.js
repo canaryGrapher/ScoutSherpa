@@ -23,14 +23,18 @@ const getPageFromArray = (searchVPV) => {
     return vpvArray.includes(searchVPV);
 };
 
-window.addEventListener('load', function () {
+window.addEventListener('DOMContentLoaded', function () {
     // check last tour step from local storage 
     let currentStepIndex = localStorage.getItem('currentStepIndex');
     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
     // if current tour is active, continue
     // console.log("Page loaded, loading tour now")
     // Check if currentTourIndex is not null or undefined
+    console.log("Checking DAP utilities on loaded tour")
+    console.log(currentTourIndex + " is the current tour")
+    console.log(window.listOfTours[currentTourIndex] + " is its reference")
     if (currentTourIndex && window.listOfTours[currentTourIndex]) {
+        console.log("Trying to load tour " + currentTourIndex + " or " + window.listOfTours[currentTourIndex])
         window.listOfTours[currentTourIndex].show(Number(currentStepIndex));
     } else {
         console.log('No matching class found or currentStepIndex is empty in local storage.');
@@ -38,7 +42,7 @@ window.addEventListener('load', function () {
 }, false)
 
 
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('load', function () {
     const OverviewElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(1)');
     const BankAccountsElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(2)');
     const PaymentsandTransferTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(3)');
