@@ -1,7 +1,5 @@
 /*! scoutsherpa.js 2.3.0 */
 
-
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 function _regeneratorRuntime() {
   _regeneratorRuntime = function () {
     return exports;
@@ -842,14 +840,10 @@ var computePosition$1 = /*#__PURE__*/function () {
             return platform.isRTL == null ? void 0 : platform.isRTL(floating);
           case 4:
             rtl = _context.sent;
-            if (!(validMiddleware.filter(function (_ref) {
-              var name = _ref.name;
-              return name === 'autoPlacement' || name === 'flip';
-            }).length > 1)) {
-              _context.next = 9;
+            {
+              _context.next = 10;
               break;
             }
-            throw new Error(['Floating UI: duplicate `flip` and/or `autoPlacement` middleware', 'detected. This will lead to an infinite loop. Ensure only one of', 'either has been passed to the `middleware` array.'].join(' '));
           case 9:
           case 10:
             _context.next = 12;
@@ -5301,9 +5295,6 @@ var Tour = /*#__PURE__*/function (_Evented) {
   _proto.next = function next() {
     var index = this.steps.indexOf(this.currentStep);
     if (index === this.steps.length - 1) {
-      // remove the currentStepIndex and the tourInstanceCaller from the local storage after completing the tour
-      localStorage.removeItem('currentStepIndex');
-      localStorage.removeItem('tourInstanceCaller');
       // if last step, complete the tour
       this.complete();
     } else {
@@ -5369,7 +5360,6 @@ var Tour = /*#__PURE__*/function (_Evented) {
       });
       return vpvArray;
     };
-
     // check if the page VPV passed in the step matches with any of the VPV available in the dataLayer populated by GTM
     var vpvInPage = function vpvInPage() {
       var pageVPV = getPageFromArray(window.dataLayer);
@@ -5423,6 +5413,7 @@ var Tour = /*#__PURE__*/function (_Evented) {
    */;
   _proto._done = function _done(event) {
     // clear the local storage items to remove tour history
+    // remove the currentStepIndex and the tourInstanceCaller from the local storage after completing the tour
     localStorage.removeItem('currentStepIndex');
     localStorage.removeItem('tourInstanceCaller');
     var index = this.steps.indexOf(this.currentStep);
@@ -5484,7 +5475,7 @@ var Tour = /*#__PURE__*/function (_Evented) {
     });
   }
 
-  /**
+  /** 
    * Called when `showOn` evaluates to false, to skip the step or complete the tour if it's the last step
    * @param {Step} step The step to skip
    * @param {Boolean} forward True if we are going forward, false if backward

@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', function () {
 }, false)
 
 
-window.addEventListener('load', function () {
+window.addEventListener('DOM', function () {
     const OverviewElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(1)');
     const BankAccountsElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(2)');
     const PaymentsandTransferTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(3)');
