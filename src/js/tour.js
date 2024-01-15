@@ -199,6 +199,9 @@ export class Tour extends Evented {
   next() {
     console.log('Loading next step');
     const index = this.steps.indexOf(this.currentStep);
+    console.log("current step: " + index)
+    console.log("TOtal steps: " + this.steps.length)
+    console.log("Actuals steps: " + this.steps.length - 1)
     if (index === this.steps.length - 1) {
       // if last step, complete the tour
       console.log("Completing steps...")
