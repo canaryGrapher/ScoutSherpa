@@ -40,29 +40,14 @@ HowToBuyAFastTagTour.addStep({
     title: '1/3',
     text: "Move your mouse over 'PAYMENTS & TRANSFER",
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(3)",
+        element: returnMainMenuElement("Payments & Transfer"),
         on: 'right'
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(3)",
+        selector: returnMainMenuElement("Payments & Transfer"),
         event: 'mouseover'
     },
-    pageLink: '/vpv/li/personal-banking/dashboardPage'
-});
-
-HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_1b',
-    title: '1/3',
-    text: "Move your mouse over 'PAYMENTS & TRANSFER",
-    attachTo: {
-        element: "#PAYMENTS__TRANSFER",
-        on: 'right'
-    },
-    advanceOn: {
-        selector: "#PAYMENTS__TRANSFER",
-        event: 'mouseover'
-    },
-    pageLink: 'AllButDashboard'
+    pageLink: 'All'
 });
 
 // Select the 'Buy/Recharge FastTag' sub-link under 'Payment & Transfer' link
@@ -72,33 +57,15 @@ HowToBuyAFastTagTour.addStep({
     text: "Click on 'Buy/Recharge FastTag'",
     attachTo: {
         element:
-            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])",
+            returnSubMenuElement('Payments & Transfer', 'Buy/Recharge FastTag'),
         on: 'left'
     },
     advanceOn: {
         selector:
-            "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])",
+            returnSubMenuElement('Payments & Transfer', 'Buy/Recharge FastTag'),
         event: 'click'
     },
-    pageLink: '/vpv/li/personal-banking/dashboardPage'
-});
-
-// Select the 'Buy/Recharge FastTag' sub-link under 'Payment & Transfer' link
-HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_2b',
-    title: '2/3',
-    text: "Click on 'Buy/Recharge FastTag'",
-    attachTo: {
-        element:
-            "#PAYMENTS__TRANSFER > ul > .submenu_links:has([id='Buy--Recharge-Fastag'])",
-        on: 'left'
-    },
-    advanceOn: {
-        selector:
-            "#PAYMENTS__TRANSFER > ul > .submenu_links:has([id='Buy--Recharge-Fastag'])",
-        event: 'click'
-    },
-    pageLink: 'AllButDashboard'
+    pageLink: 'All'
 });
 
 HowToBuyAFastTagTour.addStep({
@@ -191,14 +158,14 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     title: "1/5",
     text: "Move your mouse over 'Cards & Loans'",
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(4)",
+        element: returnMainMenuElement('Cards & Loans'),
         on: "left"
     },
     advanceOn: {
-        selector: '#topbar > div.light-orange > div > div:nth-child(4)',
+        selector: returnMainMenuElement('Cards & Loans'),
         event: 'mouseover',
     },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
+    pageLink: "All"
 })
 
 // Select the 'Credit Cards' sub-link under 'Cards & Loans'
@@ -207,14 +174,14 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     title: "2/5",
     text: "Click on 'Credit Cards'",
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
+        element: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
         on: "left"
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/CARDLN/RCCRDM.svg'])",
+        selector: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
         event: 'click',
     },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
+    pageLink: "All"
 })
 
 // Select the credit card you want to pay bill for
@@ -261,14 +228,14 @@ HowToBuyAMutualFundTour.addStep({
     title: '1/4',
     text: 'Move your mouse over Investments & Insurance',
     attachTo: {
-        element: '#topbar > div.light-orange > div > div:nth-child(5)',
+        element: returnMainMenuElement('Investments & Insurance'),
         on: 'left'
     },
     advanceOn: {
-        selector: '#topbar > div.light-orange > div > div:nth-child(5)',
+        selector: returnMainMenuElement('Investments & Insurance'),
         event: 'mouseover'
     },
-    pageLink: '/vpv/li/personal-banking/dashboardPage'
+    pageLink: 'All'
 });
 
 // Click on Buy Mutual Funds option in the drop-down menu > redirection
@@ -277,14 +244,14 @@ HowToBuyAMutualFundTour.addStep({
     title: '2/4',
     text: 'Click on Buy Mutual Funds',
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])",
+        element: returnSubMenuElement('Investments & Insurance', 'Buy  Mutual Funds'),
         on: 'left'
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(5) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RINVIN/MFRV.svg'])",
+        selector: returnSubMenuElement('Investments & Insurance', 'Buy  Mutual Funds'),
         event: 'click'
     },
-    pageLink: '/vpv/li/personal-banking/dashboardPage'
+    pageLink: 'All'
 });
 
 //Click on view all button on the page where investment categories are displayed
@@ -372,15 +339,15 @@ HowToTransferFundsTour.addStep({
     title: '1/3',
     text: 'Move your mouse over Investments & Insurance',
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(3)",
+        element: returnMainMenuElement('Investments & Insurance'),
         on: 'left'
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(3)",
+        selector: returnMainMenuElement('Investments & Insurance'),
         event: 'mouseover'
     },
     pageLink:
-        "/vpv/li/personal-banking/dashboardPage"
+        "All"
 });
 
 // Select the 'Fund Transfer' button in the dropdown menu
@@ -389,15 +356,15 @@ HowToTransferFundsTour.addStep({
     title: '2/3',
     text: 'Click on Fund Transfer',
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(2) > a:has([src*='topMenuImages/RTXNS/RTXNSS.svg'])",
+        element: returnSubMenuElement('Investments & Insurance', 'Fund Transfer'),
         on: 'bottom'
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(2) > a:has([src*='topMenuImages/RTXNS/RTXNSS.svg'])",
+        selector: returnSubMenuElement('Investments & Insurance', 'Fund Transfer'),
         event: 'click'
     },
     pageLink:
-        "/vpv/li/personal-banking/dashboardPage"
+        "All"
 });
 
 // Select payee or add a new payee to do funds transfer
@@ -451,15 +418,15 @@ HowToPrematurelyCloseFDTour.addStep({
     title: '1/4',
     text: 'Move your mouse over Customer Service',
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(6)",
+        element: returnMainMenuElement('Customer Service'),
         on: 'left'
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(6)",
+        selector: returnMainMenuElement('Customer Service'),
         event: 'mouseover'
     },
     pageLink:
-        "/vpv/li/personal-banking/dashboardPage"
+        "All"
 });
 
 // Select the 'Service Requests' button in the dropdown menu
@@ -468,15 +435,15 @@ HowToPrematurelyCloseFDTour.addStep({
     title: '2/4',
     text: 'Click on Service Requests',
     attachTo: {
-        element: "#topbar > div.light-orange > div > div:nth-child(6) > div > div > div.mr-15 > a:has([src*='topMenuImages/RGNSER/RVMPSR.svg'])",
+        element: returnSubMenuElement('Customer Service', 'Service Request'),
         on: 'left'
     },
     advanceOn: {
-        selector: "#topbar > div.light-orange > div > div:nth-child(6) > div > div > div.mr-15 > a:has([src*='topMenuImages/RGNSER/RVMPSR.svg'])",
+        selector: returnSubMenuElement('Customer Service', 'Service Request'),
         event: 'click'
     },
     pageLink:
-        "/vpv/li/personal-banking/dashboardPage"
+        "All"
 });
 
 // Select the 'Deposits' accordion

@@ -5392,24 +5392,11 @@
         if (shouldSkipStep) {
           this._skipStep(step, forward);
         } else {
-          // condition to handle top bar switching
-          if ((this.options.id.split("_")[1] === "1" || this.options.id.split("_")[1] === "2") && !getPageFromArray(window.dataLayer).includes("/vpv/li/personal-banking/dashboardPage")) {
-            this._skipStep(step, forward);
-          } else {
-            if (_tourInstanceCaller === this.options.instanceCaller && this.options.pageLink === "All") {
-              StepShow();
-            } else if (_tourInstanceCaller === this.options.instanceCaller && this.options.pageLink === "AllButDashboard") {
-              if (!getPageFromArray(window.dataLayer).includes("/vpv/li/personal-banking/dashboardPage")) {
-                StepShow();
-              }
-            } else if (_tourInstanceCaller === this.options.instanceCaller && this.options.pageLink === "Dashboard") {
-              if (getPageFromArray(window.dataLayer).includes("/vpv/li/personal-banking/dashboardPage")) {
-                StepShow();
-              }
-            } else if (_tourInstanceCaller === this.options.instanceCaller && vpvInPage()) {
-              StepShow();
-            }
-          }
+          if (_tourInstanceCaller === this.options.instanceCaller && step.options.pageLink == "All") {
+            StepShow();
+          } else if (_tourInstanceCaller === this.options.instanceCaller && vpvInPage()) {
+            StepShow();
+          } else ;
         }
       }
     }
