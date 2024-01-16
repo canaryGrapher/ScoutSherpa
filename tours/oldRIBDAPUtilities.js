@@ -7,7 +7,7 @@
 const dashboardPageVPV = "/vpv/li/personal-banking/dashboardPage"
 
 // check if the step data in the local storage is as per the current step
-const getPageFromArray = (searchVPV) => {
+const checkPageInVPVList = (searchVPV) => {
     const vpvArray = [];
     window.dataLayer.forEach(item => {
         // eslint-disable-next-line no-prototype-builtins
@@ -25,6 +25,7 @@ const getPageFromArray = (searchVPV) => {
 
 window.addEventListener('DOMContentLoaded', function () {
     // check last tour step from local storage 
+    // <!--- block 1 --->
     let currentStepIndex = localStorage.getItem('currentStepIndex');
     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
     // if current tour is active, continue
@@ -39,10 +40,9 @@ window.addEventListener('DOMContentLoaded', function () {
     } else {
         console.log('No matching class found or currentStepIndex is empty in local storage.');
     }
-}, false)
+    // <!--- end of block 1 --->
 
-
-window.addEventListener('DOM', function () {
+    // <!--- block 2 --->
     const OverviewElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(1)');
     const BankAccountsElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(2)');
     const PaymentsandTransferTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(3)');
@@ -56,7 +56,8 @@ window.addEventListener('DOM', function () {
     const InvestmentsAndInsuranceTabLegacyElement = document.querySelector('#INVESTMENTS__INSURANCE');
     const CustomerServiceLegacyElement = document.querySelector('#CUSTOMER_SERVICE');
 
-    if (window.Shepherd.activeTour.currentStep.options.title.split('/')[0] === '2' && getPageFromArray(dashboardPageVPV)) {
+    if (window.Shepherd.activeTour.currentStep.options.id.split('_')[1] === '2' && checkPageInVPVList(dashboardPageVPV)) {
+        console.log("Event listener for 2 event")
         let ActiveBarElement = null;
         const topBarSelector =
             window.Shepherd.activeTour.steps[0].options.advanceOn.selector;
@@ -85,7 +86,8 @@ window.addEventListener('DOM', function () {
         ActiveBarElement?.addEventListener('mouseenter', () => elementAction(window.Shepherd.activeTour.currentStep.options, 'show'));
         ActiveBarElement?.addEventListener('mouseleave', () => elementAction(window.Shepherd.activeTour.currentStep.options, 'hide'));
     }
-    if (window.Shepherd.activeTour.currentStep.options.title.split('/')[0] === '2b' && !getPageFromArray(dashboardPageVPV)) {
+    if (window.Shepherd.activeTour.currentStep.options.id.split('_')[1] === '2b' && !checkPageInVPVList(dashboardPageVPV)) {
+        console.log("Event listener for 2b event")
         let ActiveBarElement = null;
         const topBarSelector =
             window.Shepherd.activeTour.steps[0].options.advanceOn.selector;
@@ -114,7 +116,8 @@ window.addEventListener('DOM', function () {
         ActiveBarElement?.addEventListener('mouseenter', () => elementAction(window.Shepherd.activeTour.currentStep.options, 'show'));
         ActiveBarElement?.addEventListener('mouseleave', () => elementAction(window.Shepherd.activeTour.currentStep.options, 'hide'));
     }
-});
+    // <!--- end of block 2 --->
+}, false)
 
 const elementAction = (stepIdentifier, action) => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === stepIdentifier) {

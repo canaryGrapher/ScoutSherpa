@@ -50,6 +50,21 @@ HowToBuyAFastTagTour.addStep({
     pageLink: '/vpv/li/personal-banking/dashboardPage'
 });
 
+HowToBuyAFastTagTour.addStep({
+    id: 'HowToBuyAFastTagTour_1b',
+    title: '1/3',
+    text: "Move your mouse over 'PAYMENTS & TRANSFER",
+    attachTo: {
+        element: "#PAYMENTS__TRANSFER",
+        on: 'right'
+    },
+    advanceOn: {
+        selector: "#PAYMENTS__TRANSFER",
+        event: 'mouseover'
+    },
+    pageLink: 'AllButDashboard'
+});
+
 // Select the 'Buy/Recharge FastTag' sub-link under 'Payment & Transfer' link
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_2',
@@ -66,6 +81,24 @@ HowToBuyAFastTagTour.addStep({
         event: 'click'
     },
     pageLink: '/vpv/li/personal-banking/dashboardPage'
+});
+
+// Select the 'Buy/Recharge FastTag' sub-link under 'Payment & Transfer' link
+HowToBuyAFastTagTour.addStep({
+    id: 'HowToBuyAFastTagTour_2b',
+    title: '2/3',
+    text: "Click on 'Buy/Recharge FastTag'",
+    attachTo: {
+        element:
+            "#PAYMENTS__TRANSFER > ul > .submenu_links:has([id='Buy--Recharge-Fastag'])",
+        on: 'left'
+    },
+    advanceOn: {
+        selector:
+            "#PAYMENTS__TRANSFER > ul > .submenu_links:has([id='Buy--Recharge-Fastag'])",
+        event: 'click'
+    },
+    pageLink: 'AllButDashboard'
 });
 
 HowToBuyAFastTagTour.addStep({
@@ -92,7 +125,7 @@ HowToBuyAFastTagTour.addStep({
 });
 
 HowToBuyAFastTagTour.addStep({
-    id: 'HowToBuyAFastTagTour_2b',
+    id: 'HowToBuyAFastTagTour_3',
     title: '3/3',
     text: 'You can fill in your details here and apply for the FasTag.',
     buttons: [

@@ -5336,6 +5336,7 @@ var Tour = /*#__PURE__*/function (_Evented) {
    * @param {Boolean} forward True if we are going forward, false if backward
    */;
   _proto.show = function show(key, forward) {
+    var _this4 = this;
     if (key === void 0) {
       key = 0;
     }
@@ -5370,21 +5371,38 @@ var Tour = /*#__PURE__*/function (_Evented) {
         return false;
       }
     };
+    var StepShow = function StepShow() {
+      _this4.trigger('show', {
+        step: step,
+        previous: _this4.currentStep
+      });
+      _this4.currentStep = step;
+      step.show();
+    };
     if (step) {
       this._updateStateBeforeShow();
       var shouldSkipStep = isFunction(step.options.showOn) && !step.options.showOn();
-
       // If `showOn` returns false, we want to skip the step, otherwise, show the step like normal
       if (shouldSkipStep) {
         this._skipStep(step, forward);
       } else {
-        if (_tourInstanceCaller === this.options.instanceCaller && vpvInPage()) {
-          this.trigger('show', {
-            step: step,
-            previous: this.currentStep
-          });
-          this.currentStep = step;
-          step.show();
+        // condition to handle top bar switching
+        if ((this.options.id.split("_")[1] === "1" || this.options.id.split("_")[1] === "2") && !getPageFromArray(window.dataLayer).includes("/vpv/li/personal-banking/dashboardPage")) {
+          this._skipStep(step, forward);
+        } else {
+          if (_tourInstanceCaller === this.options.instanceCaller && this.options.pageLink === "All") {
+            StepShow();
+          } else if (_tourInstanceCaller === this.options.instanceCaller && this.options.pageLink === "AllButDashboard") {
+            if (!getPageFromArray(window.dataLayer).includes("/vpv/li/personal-banking/dashboardPage")) {
+              StepShow();
+            }
+          } else if (_tourInstanceCaller === this.options.instanceCaller && this.options.pageLink === "Dashboard") {
+            if (getPageFromArray(window.dataLayer).includes("/vpv/li/personal-banking/dashboardPage")) {
+              StepShow();
+            }
+          } else if (_tourInstanceCaller === this.options.instanceCaller && vpvInPage()) {
+            StepShow();
+          }
         }
       }
     }
