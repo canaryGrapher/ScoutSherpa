@@ -314,16 +314,15 @@ export class Tour extends Evented {
       if (shouldSkipStep) {
         this._skipStep(step, forward);
       } else {
-        if (_tourInstanceCaller === this.options.instanceCaller && step.options.pageLink == "All") {
+        if (step.options.pageLink == "All" && (_tourInstanceCaller === this.options.instanceCaller)) {
           StepShow()
         }
-        else if (_tourInstanceCaller === this.options.instanceCaller && vpvInPage()) {
+        else if (vpvInPage() && (_tourInstanceCaller === this.options.instanceCaller)) {
           console.log('Page VPV matched, loading step');
           StepShow()
         } else {
           console.error('Page VPV not found')
         }
-
       }
     }
   }

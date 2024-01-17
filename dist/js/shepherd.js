@@ -5392,9 +5392,9 @@
         if (shouldSkipStep) {
           this._skipStep(step, forward);
         } else {
-          if (_tourInstanceCaller === this.options.instanceCaller && step.options.pageLink == "All") {
+          if (step.options.pageLink == "All" && _tourInstanceCaller === this.options.instanceCaller) {
             StepShow();
-          } else if (_tourInstanceCaller === this.options.instanceCaller && vpvInPage()) {
+          } else if (vpvInPage() && _tourInstanceCaller === this.options.instanceCaller) {
             StepShow();
           } else ;
         }

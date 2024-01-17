@@ -104,7 +104,7 @@ const topNavData = [
                 legacyElement: '',
             },
             {
-                mainNavItemName: "Buy / Recharge Fastag",
+                mainNavItemName: "Buy/Recharge Fastag",
                 mainElement: "#topbar > div.light-orange > div > div:nth-child(3) > div > div > div:nth-child(1) > a:has([src*='topMenuImages/RTXNS/FASTAG.svg'])",
                 legacyElement: "#PAYMENTS__TRANSFER > ul > .submenu_links:has([id='Buy--Recharge-Fastag'])",
             },
@@ -178,8 +178,8 @@ const topNavData = [
             },
             {
                 mainNavItemName: "Loans",
-                mainElement: '',
-                legacyElement: '',
+                mainElement: "#topbar > div.light-orange > div > div:nth-child(4) > div > div > div:nth-child(2) > a:has([src*='topMenuImages/CARDLN/RLACTM.svg'])",
+                legacyElement: "#CARDS__LOANS > ul > .submenu_links:has([id='Loans'])",
             },
             {
                 mainNavItemName: "Apply Online",
