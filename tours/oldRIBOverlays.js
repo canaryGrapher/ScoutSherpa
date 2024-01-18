@@ -2,21 +2,6 @@
 /* eslint-disable max-lines */
 
 // This file contains all the Overlay pages for RIB
-const getPageFromArray = (dataArray) => {
-    const data = dataArray.find((item) => {
-        // eslint-disable-next-line no-prototype-builtins
-        if (item.hasOwnProperty('page')) {
-            return item.page;
-            // eslint-disable-next-line no-prototype-builtins
-        } else if (item.hasOwnProperty('vpv')) {
-            return item.vpv;
-        } else {
-            return null;
-        }
-    });
-    return data.page || data.vpv;
-};
-
 // add a button prompt on the pages where overlay pages tour is available
 window.addEventListener('DOMContentLoaded', function () {
     const GuideMeLinks = [
@@ -87,7 +72,6 @@ WhatsOnBankAccountPageGuideMe.addStep({
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
@@ -109,7 +93,6 @@ WhatsOnBankAccountPageGuideMe.addStep({
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
@@ -131,7 +114,6 @@ WhatsOnBankAccountPageGuideMe.addStep({
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
@@ -160,7 +142,6 @@ WhatsOnBankAccountPageGuideMe.addStep({
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
@@ -191,7 +172,6 @@ WhatsOnBankAccountPageGuideMe.addStep({
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
@@ -213,7 +193,6 @@ WhatsOnBankAccountPageGuideMe.addStep({
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
 WhatsOnBankAccountPageGuideMe.addStep({
@@ -231,7 +210,6 @@ WhatsOnBankAccountPageGuideMe.addStep({
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/myacc/bankacc"
 })
 
 // code for Add Payee: Other bank overlay pages tour
@@ -268,7 +246,6 @@ WhatsOnOtherBankAddPayee.addStep({
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
 WhatsOnOtherBankAddPayee.addStep({
@@ -290,7 +267,6 @@ WhatsOnOtherBankAddPayee.addStep({
         element: "p#DispFormWithTableContent\\.Ryz1_mr",
         on: "bottom"
     },
-    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
 WhatsOnOtherBankAddPayee.addStep({
@@ -316,7 +292,6 @@ WhatsOnOtherBankAddPayee.addStep({
         element: "p#DispFormWithTableContent\\.Ryz2_mr",
         on: "bottom"
     },
-    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
 WhatsOnOtherBankAddPayee.addStep({
@@ -341,7 +316,6 @@ WhatsOnOtherBankAddPayee.addStep({
         element: "#DispFormWithTableContent\\.Ryz7_mr",
         on: "bottom"
     },
-    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
 WhatsOnOtherBankAddPayee.addStep({
@@ -366,7 +340,6 @@ WhatsOnOtherBankAddPayee.addStep({
         element: "#DispFormWithTableContent\\.Ryz6_mr",
         on: "bottom"
     },
-    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
 WhatsOnOtherBankAddPayee.addStep({
@@ -388,7 +361,6 @@ WhatsOnOtherBankAddPayee.addStep({
         element: "#DispFormWithTableContent\\.Ryz3_mr",
         on: "bottom"
     },
-    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
 WhatsOnOtherBankAddPayee.addStep({
@@ -410,7 +382,6 @@ WhatsOnOtherBankAddPayee.addStep({
         element: "#DispFormWithTableContent\\.Ryz5_mr",
         on: "bottom"
     },
-    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
 WhatsOnOtherBankAddPayee.addStep({
@@ -432,7 +403,6 @@ WhatsOnOtherBankAddPayee.addStep({
         element: "#DispFormWithTableContent\\.Ryz15_mr",
         on: "bottom"
     },
-    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })
 
 WhatsOnOtherBankAddPayee.addStep({
@@ -450,5 +420,4 @@ WhatsOnOtherBankAddPayee.addStep({
             secondary: true
         }
     ],
-    pageLink: "/vpv/li/personal-banking/pmt-tranf/managepayees"
 })

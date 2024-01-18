@@ -5350,33 +5350,9 @@
         forward = true;
       }
       // get tour data from localStorage
-      var _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
+      localStorage.getItem('tourInstanceCaller');
       localStorage.getItem('currentStepIndex');
       var step = isString(key) ? this.getById(key) : this.steps[key];
-      // check if the step data in the local storage is as per the current step
-      var getPageFromArray = function getPageFromArray(dataArray) {
-        var vpvArray = [];
-        dataArray.forEach(function (item) {
-          // eslint-disable-next-line no-prototype-builtins
-          if (item.hasOwnProperty('page')) {
-            vpvArray.push(item.page);
-            // eslint-disable-next-line no-prototype-builtins
-          } else if (item.hasOwnProperty('vpv')) {
-            vpvArray.push(item.vpv);
-          } else ;
-        });
-        return vpvArray;
-      };
-      // check if the page VPV passed in the step matches with any of the VPV available in the dataLayer populated by GTM
-      var vpvInPage = function vpvInPage() {
-        var pageVPV = getPageFromArray(window.dataLayer);
-        var currentVPV = step.options.pageLink;
-        if (pageVPV.indexOf(currentVPV) > -1) {
-          return true;
-        } else {
-          return false;
-        }
-      };
       var StepShow = function StepShow() {
         _this4.trigger('show', {
           step: step,
@@ -5392,11 +5368,7 @@
         if (shouldSkipStep) {
           this._skipStep(step, forward);
         } else {
-          if (step.options.pageLink == "All" && _tourInstanceCaller === this.options.instanceCaller) {
-            StepShow();
-          } else if (vpvInPage() && _tourInstanceCaller === this.options.instanceCaller) {
-            StepShow();
-          } else ;
+          StepShow();
         }
       }
     }

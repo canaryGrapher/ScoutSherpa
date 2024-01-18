@@ -16,6 +16,91 @@
 // 4 - How to view personal loan account statement
 // 5 - How to update my PAN details in savings accounts
 
+// eslint-disable-next-line no-undef
+const HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
+    tourName: "How to make ICICI bank credit card payment?",
+    instanceCaller: "HowToMakeICICIBankCreditCardPaymentTour",
+    defaultStepOptions: {
+        cancelIcon: {
+            enabled: true
+        },
+        scrollTo: {
+            behavior: 'smooth',
+            block: 'center'
+        },
+        arrow: true,
+    },
+    useModalOverlay: false,
+});
+// Select the credit card you want to pay bill for
+// HowToMakeICICIBankCreditCardPaymentTour.addStep({
+//     id: "HowToMakeICICIBankCreditCardPaymentTour_0",
+//     title: "1/1",
+//     text: "Looks like you do not have any credit card linked to your account. This feature is not available for you right now.",
+//     showOn: function () {
+//         const element = window.find("Apply from a range of credit cards")
+//         if (element) {
+//             return true
+//         }
+//         return false
+//     },
+//     buttons: [
+//         {
+//             text: 'Understood',
+//             action: HowToMakeICICIBankCreditCardPaymentTour.complete
+//         },
+//         {
+//             text: 'Cancel',
+//             action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
+//             secondary: true
+//         }
+//     ]
+// })
+// Select the 'Cards & Loans' button on the menubar on dashboard
+HowToMakeICICIBankCreditCardPaymentTour.addStep({
+    id: "HowToMakeICICIBankCreditCardPaymentTour_1",
+    title: "1/5",
+    text: "Move your mouse over 'Cards & Loans'",
+    attachTo: {
+        element: returnMainMenuElement('Cards & Loans'),
+        on: "left"
+    },
+    advanceOn: {
+        selector: returnMainMenuElement('Cards & Loans'),
+        event: 'mouseover',
+    },
+})
+// Select the 'Credit Cards' sub-link under 'Cards & Loans'
+HowToMakeICICIBankCreditCardPaymentTour.addStep({
+    id: "HowToMakeICICIBankCreditCardPaymentTour_2",
+    title: "2/5",
+    text: "Click on 'Credit Cards'",
+    attachTo: {
+        element: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
+        on: "left"
+    },
+    advanceOn: {
+        selector: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
+        event: 'click',
+    }
+})
+// Select the credit card you want to pay bill for
+HowToMakeICICIBankCreditCardPaymentTour.addStep({
+    id: "HowToMakeICICIBankCreditCardPaymentTour_3",
+    title: "3/3",
+    text: "Select the credit you want to make the payment for using the tab(s) on the top and click on 'Pay Bill' button to make the payment.",
+    buttons: [
+        {
+            text: 'Understood',
+            action: HowToMakeICICIBankCreditCardPaymentTour.complete
+        },
+        {
+            text: 'Cancel',
+            action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
+            secondary: true
+        }
+    ]
+})
 
 // eslint-disable-next-line no-undef
 const HowToBuyAFastTagTour = new Shepherd.Tour({
@@ -46,7 +131,6 @@ HowToBuyAFastTagTour.addStep({
         selector: returnMainMenuElement("Payments & Transfer"),
         event: 'mouseover'
     },
-    pageLink: 'All'
 });
 // Select the 'Buy/Recharge FastTag' sub-link under 'Payment & Transfer' link
 HowToBuyAFastTagTour.addStep({
@@ -55,15 +139,14 @@ HowToBuyAFastTagTour.addStep({
     text: "Click on 'Buy/Recharge FastTag'",
     attachTo: {
         element:
-            returnSubMenuElement('Payments & Transfer', 'Buy/Recharge FastTag'),
+            returnSubMenuElement('Payments & Transfer', "Buy/Recharge Fastag"),
         on: 'left'
     },
     advanceOn: {
         selector:
-            returnSubMenuElement('Payments & Transfer', 'Buy/Recharge FastTag'),
+            returnSubMenuElement('Payments & Transfer', 'Buy/Recharge Fastag'),
         event: 'click'
     },
-    pageLink: 'All'
 });
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_2b',
@@ -85,7 +168,6 @@ HowToBuyAFastTagTour.addStep({
         selector: '#FastagRech\\.Rowset1 > ul > li:nth-child(1)',
         event: 'click'
     },
-    pageLink: '/vpv/li/personal-banking/FASTAG/TAGRECHARGE'
 });
 HowToBuyAFastTagTour.addStep({
     id: 'HowToBuyAFastTagTour_3',
@@ -102,100 +184,7 @@ HowToBuyAFastTagTour.addStep({
             secondary: true
         }
     ],
-    pageLink: "/VPV/LI/Exclusive Offerings/BuyFastag/Landingpage"
 });
-
-
-// eslint-disable-next-line no-undef
-const HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
-    tourName: "How to make ICICI bank credit card payment?",
-    instanceCaller: "HowToMakeICICIBankCreditCardPaymentTour",
-    defaultStepOptions: {
-        cancelIcon: {
-            enabled: true
-        },
-        scrollTo: {
-            behavior: 'smooth',
-            block: 'center'
-        },
-        arrow: true,
-    },
-    useModalOverlay: false,
-});
-// Select the credit card you want to pay bill for
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_0",
-    title: "1/1",
-    text: "Looks like you do not have any credit card linked to your account. This feature is not available for you right now.",
-    showOn: function () {
-        const element = window.find("Apply from a range of credit cards")
-        if (element) {
-            return true
-        }
-        return false
-    },
-    buttons: [
-        {
-            text: 'Understood',
-            action: HowToMakeICICIBankCreditCardPaymentTour.complete
-        },
-        {
-            text: 'Cancel',
-            action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
-})
-// Select the 'Cards & Loans' button on the menubar on dashboard
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_1",
-    title: "1/5",
-    text: "Move your mouse over 'Cards & Loans'",
-    attachTo: {
-        element: returnMainMenuElement('Cards & Loans'),
-        on: "left"
-    },
-    advanceOn: {
-        selector: returnMainMenuElement('Cards & Loans'),
-        event: 'mouseover',
-    },
-    pageLink: "All"
-})
-// Select the 'Credit Cards' sub-link under 'Cards & Loans'
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_2",
-    title: "2/5",
-    text: "Click on 'Credit Cards'",
-    attachTo: {
-        element: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
-        on: "left"
-    },
-    advanceOn: {
-        selector: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
-        event: 'click',
-    },
-    pageLink: "All"
-})
-// Select the credit card you want to pay bill for
-HowToMakeICICIBankCreditCardPaymentTour.addStep({
-    id: "HowToMakeICICIBankCreditCardPaymentTour_3",
-    title: "3/3",
-    text: "Select the credit you want to make the payment for using the tab(s) on the top and click on 'Pay Bill' button to make the payment.",
-    buttons: [
-        {
-            text: 'Understood',
-            action: HowToMakeICICIBankCreditCardPaymentTour.complete
-        },
-        {
-            text: 'Cancel',
-            action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
-            secondary: true
-        }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/creditcards"
-})
-
 
 // eslint-disable-next-line no-undef
 const HowToBuyAMutualFundTour = new Shepherd.Tour({
@@ -226,7 +215,6 @@ HowToBuyAMutualFundTour.addStep({
         selector: returnMainMenuElement('Investments & Insurance'),
         event: 'mouseover'
     },
-    pageLink: 'All'
 });
 // Click on Buy Mutual Funds option in the drop-down menu > redirection
 HowToBuyAMutualFundTour.addStep({
@@ -241,7 +229,6 @@ HowToBuyAMutualFundTour.addStep({
         selector: returnSubMenuElement('Investments & Insurance', 'Buy Mutual Funds'),
         event: 'click'
     },
-    pageLink: 'All'
 });
 //Click on view all button on the page where investment categories are displayed
 HowToBuyAMutualFundTour.addStep({
@@ -264,9 +251,7 @@ HowToBuyAMutualFundTour.addStep({
     advanceOn: {
         selector: "#ListingTable3 > main > section:nth-child(3) > div > div > div.comp-funds > div > button.btn.btn-default.js-show",
         event: 'click'
-    },
-    pageLink:
-        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails'
+    }
 });
 //Click on view all button on the page where investment categories are displayed
 HowToBuyAMutualFundTour.addStep({
@@ -288,19 +273,25 @@ HowToBuyAMutualFundTour.addStep({
     advanceOn: {
         selector: "#ListingTable3 > main > section:nth-child(4) > div > div > div.comp-funds > div > button.btn.btn-default.js-show",
         event: 'click'
-    },
-    pageLink:
-        "/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/PortfolioDetails"
+    }
 });
 // User clicks on any one category from the tiles displayed
 HowToBuyAMutualFundTour.addStep({
     id: 'HowToBuyAMutualFundTour_4',
     title: '4/4',
     text: "You can start investing in Mutual Funds by clicking on one of the following categories and exploring the Mutual Funds that suit your investment needs.",
-    pageLink:
-        '/VPV/LI/InvestmentsandInsurance/InvestOnline/MutualFunds/HomeDetails'
+    buttons: [
+        {
+            text: 'Finish',
+            action: HowToBuyAMutualFundTour.next
+        },
+        {
+            text: 'Cancel',
+            action: HowToBuyAMutualFundTour.cancel,
+            secondary: true
+        }
+    ],
 });
-
 
 
 // eslint-disable-next-line no-undef
@@ -332,8 +323,6 @@ HowToTransferFundsTour.addStep({
         selector: returnMainMenuElement('Payments & Transfer'),
         event: 'mouseover'
     },
-    pageLink:
-        "All"
 });
 // Select the 'Fund Transfer' button in the dropdown menu
 HowToTransferFundsTour.addStep({
@@ -348,8 +337,6 @@ HowToTransferFundsTour.addStep({
         selector: returnSubMenuElement('Payments & Transfer', 'Fund Transfer'),
         event: 'click'
     },
-    pageLink:
-        "All"
 });
 // Select payee or add a new payee to do funds transfer
 HowToTransferFundsTour.addStep({
@@ -374,9 +361,7 @@ HowToTransferFundsTour.addStep({
             action: HowToTransferFundsTour.cancel,
             secondary: true
         }
-    ],
-    pageLink:
-        "/VPV/LI/PaymentsandTransfer/FundsTransfer/TransferFundstoMyPayeesnew"
+    ]
 });
 
 
@@ -408,9 +393,7 @@ HowToPrematurelyCloseFDTour.addStep({
     advanceOn: {
         selector: returnMainMenuElement('Customer Service'),
         event: 'mouseover'
-    },
-    pageLink:
-        "All"
+    }
 });
 // Select the 'Service Requests' button in the dropdown menu
 HowToPrematurelyCloseFDTour.addStep({
@@ -425,8 +408,6 @@ HowToPrematurelyCloseFDTour.addStep({
         selector: returnSubMenuElement('Customer Service', 'Service Request'),
         event: 'click'
     },
-    pageLink:
-        "All"
 });
 // Select the 'Deposits' accordion
 HowToPrematurelyCloseFDTour.addStep({
@@ -441,7 +422,6 @@ HowToPrematurelyCloseFDTour.addStep({
         selector: "#DepositsId",
         event: 'click'
     },
-    pageLink: "/vpv/li/personal-banking/custservice/servicerequests"
 });
 // Select Fixed Deposit in the accordion sub-menu
 HowToPrematurelyCloseFDTour.addStep({
@@ -463,8 +443,7 @@ HowToPrematurelyCloseFDTour.addStep({
     advanceOn: {
         selector: "#fixed-deposit",
         event: 'click'
-    },
-    pageLink: "/vpv/li/personal-banking/custservice/servicerequests"
+    }
 });
 // click on Closure/Renewal of Fixed Deposit
 HowToPrematurelyCloseFDTour.addStep({
@@ -478,8 +457,7 @@ HowToPrematurelyCloseFDTour.addStep({
     advanceOn: {
         selector: "#fixed-deposit-srs > li:nth-child(6) > a[title='Closure/Renewal of Fixed Deposit']",
         event: 'click'
-    },
-    pageLink: "/vpv/li/personal-banking/custservice/servicerequests"
+    }
 });
 
 
@@ -511,8 +489,7 @@ HowToKnowAboutPreApprovedOffers.addStep({
     advanceOn: {
         selector: returnMainMenuElement('Cards & Loans'),
         event: 'mouseover',
-    },
-    pageLink: "All"
+    }
 })
 HowToKnowAboutPreApprovedOffers.addStep({
     id: 'HowToKnowAboutPreApprovedOffers_2',
@@ -525,8 +502,7 @@ HowToKnowAboutPreApprovedOffers.addStep({
     advanceOn: {
         selector: returnSubMenuElement('Cards & Loans', 'Loans'),
         event: 'click'
-    },
-    pageLink: "All"
+    }
 })
 HowToKnowAboutPreApprovedOffers.addStep({
     id: "HowToKnowAboutPreApprovedOffers_3a",
@@ -554,8 +530,7 @@ HowToKnowAboutPreApprovedOffers.addStep({
             action: HowToKnowAboutPreApprovedOffers.cancel,
             secondary: true
         }
-    ],
-    pageLink: "/vpv/li/personal-banking/loanNotLinkedPage"
+    ]
 })
 HowToKnowAboutPreApprovedOffers.addStep({
     id: "HowToKnowAboutPreApprovedOffers_3b",
@@ -583,8 +558,7 @@ HowToKnowAboutPreApprovedOffers.addStep({
             action: HowToKnowAboutPreApprovedOffers.cancel,
             secondary: true
         }
-    ],
-    pageLink: "/vpv/li/personal-banking/myacc/loans"
+    ]
 })
 
 // eslint-disable-next-line no-undef
@@ -621,8 +595,7 @@ HowToApplyForICICIBankCreditCard.addStep({
     advanceOn: {
         selector: '#topbar > div.light-orange > div > div:nth-child(4)',
         event: 'mouseover',
-    },
-    pageLink: "/vpv/li/personal-banking/dashboardPage"
+    }
 })
 
 HowToApplyForICICIBankCreditCard.addStep({
@@ -636,8 +609,7 @@ HowToApplyForICICIBankCreditCard.addStep({
     advanceOn: {
         selector: returnMainMenuElement('Cards & Loans'),
         event: 'mouseover',
-    },
-    pageLink: "All"
+    }
 })
 HowToApplyForICICIBankCreditCard.addStep({
     id: 'HowToApplyForICICIBankCreditCard_2',
@@ -650,10 +622,8 @@ HowToApplyForICICIBankCreditCard.addStep({
     advanceOn: {
         selector: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
         event: 'click',
-    },
-    pageLink: "All"
+    }
 })
-
 HowToApplyForICICIBankCreditCard.addStep({
     id: 'HowToApplyForICICIBankCreditCard_3',
     title: '3/3',
@@ -665,8 +635,7 @@ HowToApplyForICICIBankCreditCard.addStep({
     advanceOn: {
         selector: '#topbar > div.light-orange > div > div:nth-child(4)',
         event: 'mouseover',
-    },
-    pageLink: "/vpv/li/personal-banking/myacc/creditcards"
+    }
 })
 
 window.listOfTours = {
@@ -677,4 +646,37 @@ window.listOfTours = {
     'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
     'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
     'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
+}
+
+const journeysTestFunction = () => {
+    console.log("Tester version 1")
+    HowToBuyAFastTagTour
+    HowToMakeICICIBankCreditCardPaymentTour
+    HowToBuyAMutualFundTour
+    HowToTransferFundsTour
+    HowToPrematurelyCloseFDTour
+    HowToKnowAboutPreApprovedOffers
+    HowToApplyForICICIBankCreditCard
+    console.log("Checking stability of menu links")
+    console.log("For HowToMakeICICIBankCreditCardPaymentTour")
+    returnMainMenuElement('Cards & Loans')
+    returnSubMenuElement('Cards & Loans', 'Credit Cards')
+    console.log("For HowToBuyFastTagTour")
+    returnMainMenuElement("Payments & Transfer")
+    returnSubMenuElement('Payments & Transfer', "Buy/Recharge Fastag")
+    console.log("For HowToBuyMutualFundTour")
+    returnMainMenuElement('Investments & Insurance')
+    returnSubMenuElement('Investments & Insurance', 'Buy Mutual Funds')
+    console.log("For HowToTransferFunds")
+    returnMainMenuElement('Payments & Transfer')
+    returnSubMenuElement('Payments & Transfer', 'Fund Transfer')
+    console.log("For HowToPrematurelyCloseFDTour")
+    returnMainMenuElement('Customer Service')
+    returnSubMenuElement('Customer Service', 'Service Request')
+    console.log("For HowToKnowAboutPreApprovedOffers")
+    returnMainMenuElement('Cards & Loans')
+    returnSubMenuElement('Cards & Loans', 'Loans')
+    console.log("For HowToApplyForICICIBankCreditCard")
+    returnMainMenuElement('Cards & Loans')
+    returnSubMenuElement('Cards & Loans', 'Credit Cards')
 }

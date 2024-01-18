@@ -254,54 +254,11 @@ export class Tour extends Evented {
     console.log('Current step index is ', _currentStepIndex);
     console.log('Current tour instance caller is ', _tourInstanceCaller);
     const step = isString(key) ? this.getById(key) : this.steps[key];
-    // check if the step data in the local storage is as per the current step
-    const getPageFromArray = (dataArray) => {
-      const vpvArray = [];
-      dataArray.forEach((item) => {
-        // eslint-disable-next-line no-prototype-builtins
-        if (item.hasOwnProperty('page')) {
-          vpvArray.push(item.page);
-          // eslint-disable-next-line no-prototype-builtins
-        } else if (item.hasOwnProperty('vpv')) {
-          vpvArray.push(item.vpv);
-        } else {
-          void 0;
-        }
-      });
-      return vpvArray;
-    };
-    // check if the page VPV passed in the step matches with any of the VPV available in the dataLayer populated by GTM
-    const vpvInPage = () => {
-      let pageVPV = getPageFromArray(window.dataLayer);
-      let currentVPV = step.options.pageLink;
-      console.log('Current page VPV is ', pageVPV);
-      console.log('Current step VPV is ', currentVPV);
-      if (pageVPV.indexOf(currentVPV) > -1) {
-        console.log(
-          'TRUE Current VPV: ',
-          currentVPV,
-          '/n is present in pageVPV array: ',
-          pageVPV
-        );
-        return true;
-      } else {
-        console.log(
-          'FALSE Current VPV: ',
-          currentVPV,
-          ' is not present in pageVPV \n array: ',
-          pageVPV
-        );
-        return false;
-      }
-    };
-
     const StepShow = () => {
-      console.log('Page VPV matched, loading step');
       this.trigger('show', {
         step,
         previous: this.currentStep
       });
-
       this.currentStep = step;
       step.show();
     }
@@ -314,15 +271,7 @@ export class Tour extends Evented {
       if (shouldSkipStep) {
         this._skipStep(step, forward);
       } else {
-        if (step.options.pageLink == "All" && (_tourInstanceCaller === this.options.instanceCaller)) {
-          StepShow()
-        }
-        else if (vpvInPage() && (_tourInstanceCaller === this.options.instanceCaller)) {
-          console.log('Page VPV matched, loading step');
-          StepShow()
-        } else {
-          console.error('Page VPV not found')
-        }
+        StepShow()
       }
     }
   }
