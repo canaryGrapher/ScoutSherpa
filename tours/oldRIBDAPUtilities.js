@@ -376,6 +376,7 @@ const elementAction = (stepIdentifier, action) => {
 };
 
 function returnMainMenuElement(topMenuName) {
+    console.log('returnMainMenuElement', topMenuName);
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
     if (!topMenu) {
         // Return an appropriate default value if the topMenuName is not found
@@ -385,6 +386,7 @@ function returnMainMenuElement(topMenuName) {
 }
 
 function returnSubMenuElement(topMenuName, subMenuName) {
+    console.log('returnSubMenuELement', subMenuName)
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
     if (!topMenu || !topMenu.subLinks) {
         // Return an appropriate default value if the topMenuName is not found or if it has no subLinks
