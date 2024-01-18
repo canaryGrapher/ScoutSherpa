@@ -16,7 +16,7 @@ jobs:
     - name: Make fetch requests
       run: |
         # Replace these URLs with your actual URLs
-        urls=("https://purge.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/tours/oldRIBDAPUtilities.js" "https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/tours/oldRIBJourneys.js" "https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/tours/oldRIBOverlays.js" "https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/css/shepherd.css" "https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/css/shepherd.min.css" "https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/js/shepherd.js" "https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/js/shepherd.min.js")
+        urls=("https://purge.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/tours/oldRIBDAPUtilities.js" "https://purge.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/tours/oldRIBJourneys.js" "https://purge.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/tours/oldRIBOverlays.js" "https://purge.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/css/shepherd.css" "https://purge.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/css/shepherd.min.css" "https://purge.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/js/shepherd.js" "https://purge.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@oldRIB/dist/js/shepherd.min.js")
 
         for URL in "${urls[@]}"; do
           echo "Fetching $url"
