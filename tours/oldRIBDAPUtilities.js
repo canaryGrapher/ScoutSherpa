@@ -331,59 +331,59 @@ const checkPageInVPVList = (searchVPV) => {
     return vpvArray.includes(searchVPV);
 };
 
-// get an array of all 
-const ElemAllMain = topNavData.map(element => `element.mainElement > .dropdown-content`);
-const ElemAllLegacy = topNavData.map(element => `element.legacyElement > .submenu`)
+// // get an array of all 
+// const ElemAllMain = topNavData.map(element => `element.mainElement > .dropdown-content`);
+// const ElemAllLegacy = topNavData.map(element => `element.legacyElement > .submenu`)
 
-window.addEventListener('DOMContentLoaded', function () {
-    // <!--- block 1 --->
-    // check last tour step from local storage 
-    let currentStepIndex = localStorage.getItem('currentStepIndex');
-    let currentTourIndex = localStorage.getItem('tourInstanceCaller');
-    // if current tour is active, continue
-    // Check if currentTourIndex is not null or undefined
-    console.log("Checking DAP utilities on loaded tour")
-    console.log(currentTourIndex + " is the current tour")
-    console.log(listOfTours[currentTourIndex] + " is its reference")
-    if (currentTourIndex && listOfTours[currentTourIndex]) {
-        console.log("Trying to load tour " + currentTourIndex + " or " + listOfTours[currentTourIndex])
-        listOfTours[currentTourIndex].show(Number(currentStepIndex));
-    } else {
-        console.log('No matching class found or currentStepIndex is empty in local storage.');
-    }
-    // <!--- end of block 1 --->
-}, false)
+// window.addEventListener('DOMContentLoaded', function () {
+//     // <!--- block 1 --->
+//     // check last tour step from local storage 
+//     let currentStepIndex = localStorage.getItem('currentStepIndex');
+//     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
+//     // if current tour is active, continue
+//     // Check if currentTourIndex is not null or undefined
+//     console.log("Checking DAP utilities on loaded tour")
+//     console.log(currentTourIndex + " is the current tour")
+//     console.log(listOfTours[currentTourIndex] + " is its reference")
+//     if (currentTourIndex && listOfTours[currentTourIndex]) {
+//         console.log("Trying to load tour " + currentTourIndex + " or " + listOfTours[currentTourIndex])
+//         listOfTours[currentTourIndex].show(Number(currentStepIndex));
+//     } else {
+//         console.log('No matching class found or currentStepIndex is empty in local storage.');
+//     }
+//     // <!--- end of block 1 --->
+// }, false)
 
 
-// Add a mouseover event listener to the document object
-document.addEventListener("mouseover", function (event) {
-    // Check if the event target matches the selector stored in ElemAllMain
-    if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-        // Call the showElementB function
-        elementAction('show')
-    }
-});
+// // Add a mouseover event listener to the document object
+// document.addEventListener("mouseover", function (event) {
+//     // Check if the event target matches the selector stored in ElemAllMain
+//     if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+//         // Call the showElementB function
+//         elementAction('show')
+//     }
+// });
 
-// Add a mouseleave event listener to the document object
-document.addEventListener("mouseleave", function (event) {
-    // Check if the event target matches the selector stored in ElemAllMain
-    if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-        // Call the hideElementB function
-        elementAction('hide')
-    }
-});
+// // Add a mouseleave event listener to the document object
+// document.addEventListener("mouseleave", function (event) {
+//     // Check if the event target matches the selector stored in ElemAllMain
+//     if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+//         // Call the hideElementB function
+//         elementAction('hide')
+//     }
+// });
 
-const elementAction = (action) => {
-    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep && window.Shepherd.activeTour.currentStep.options.id.split('_')[1] === '2') {
-        let shepherdInstance = window.Shepherd.activeTour;
+// const elementAction = (action) => {
+//     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep && window.Shepherd.activeTour.currentStep.options.id.split('_')[1] === '2') {
+//         let shepherdInstance = window.Shepherd.activeTour;
 
-        if (action === 'hide' && typeof shepherdInstance.hide === 'function') {
-            shepherdInstance.hide();
-        } else if (action === 'show' && typeof shepherdInstance.show === 'function') {
-            shepherdInstance.show();
-        }
-    }
-};
+//         if (action === 'hide' && typeof shepherdInstance.hide === 'function') {
+//             shepherdInstance.hide();
+//         } else if (action === 'show' && typeof shepherdInstance.show === 'function') {
+//             shepherdInstance.show();
+//         }
+//     }
+// };
 
 function returnMainMenuElement(topMenuName) {
     console.log('returnMainMenuElement', topMenuName);
@@ -410,15 +410,15 @@ function returnSubMenuElement(topMenuName, subMenuName) {
     return checkPageInVPVList(dashboardPageVPV) ? subMenu.mainElement : subMenu.legacyElement;
 }
 
-const listOfTours = {
-    'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
-    'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
-    'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
-    'HowToTransferFundsTour': HowToTransferFundsTour,
-    'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
-    'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
-    'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
-}
+// const listOfTours = {
+//     'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
+//     'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
+//     'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
+//     'HowToTransferFundsTour': HowToTransferFundsTour,
+//     'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
+//     'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
+//     'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
+// }
 
 const journeysTestFunction = () => {
     console.log("Tester version 1")
