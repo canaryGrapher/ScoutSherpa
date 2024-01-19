@@ -331,46 +331,56 @@ const checkPageInVPVList = (searchVPV) => {
     return vpvArray.includes(searchVPV);
 };
 
+// get an array of all 
+const ElemAllMain = topNavData.map(element => `element.mainElement > .dropdown-content`);
+const ElemAllLegacy = topNavData.map(element => `element.legacyElement > .submenu`)
+
 window.addEventListener('DOMContentLoaded', function () {
-    // check last tour step from local storage 
     // <!--- block 1 --->
+    // check last tour step from local storage 
     let currentStepIndex = localStorage.getItem('currentStepIndex');
     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
     // if current tour is active, continue
-    // console.log("Page loaded, loading tour now")
     // Check if currentTourIndex is not null or undefined
     console.log("Checking DAP utilities on loaded tour")
     console.log(currentTourIndex + " is the current tour")
-    console.log(window.listOfTours[currentTourIndex] + " is its reference")
-    if (currentTourIndex && window.listOfTours[currentTourIndex]) {
-        console.log("Trying to load tour " + currentTourIndex + " or " + window.listOfTours[currentTourIndex])
-        window.listOfTours[currentTourIndex].show(Number(currentStepIndex));
+    console.log(listOfTours[currentTourIndex] + " is its reference")
+    if (currentTourIndex && listOfTours[currentTourIndex]) {
+        console.log("Trying to load tour " + currentTourIndex + " or " + listOfTours[currentTourIndex])
+        listOfTours[currentTourIndex].show(Number(currentStepIndex));
     } else {
         console.log('No matching class found or currentStepIndex is empty in local storage.');
     }
     // <!--- end of block 1 --->
-
-    // <!--- block 2 --->
-    // const OverviewElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(1)');
-    // const BankAccountsElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(2)');
-    // const PaymentsandTransferTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(3)');
-    // const CardsAndLoansTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(4)');
-    // const InvestmentsAndInsuranceTabElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(5)');
-    // const CustomerServiceElement = document.querySelector('#topbar > div.light-orange > div > div:nth-child(6)');
-    // const OverviewLegacyElement = document.querySelector('#OVERVIEW');
-    // const BankAccountsLegacyElement = document.querySelector('#BANK_ACCOUNTS');
-    // const PaymentsandTransferTabLegacyElement = document.querySelector('#PAYMENTS__TRANSFER');
-    // const CardsAndLoansTabLegacyElement = document.querySelector('#CARDS__LOANS');
-    // const InvestmentsAndInsuranceTabLegacyElement = document.querySelector('#INVESTMENTS__INSURANCE');
-    // const CustomerServiceLegacyElement = document.querySelector('#CUSTOMER_SERVICE');
-    // <!--- end of block 2 --->
 }, false)
 
-const elementAction = (stepIdentifier, action) => {
-    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep.options.id === stepIdentifier) {
-        let actionalble = window['shepherd'];
-        if (typeof actionalble === 'function') {
-            actionalble(action);
+
+// Add a mouseover event listener to the document object
+document.addEventListener("mouseover", function (event) {
+    // Check if the event target matches the selector stored in ElemAllMain
+    if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+        // Call the showElementB function
+        elementAction('show')
+    }
+});
+
+// Add a mouseleave event listener to the document object
+document.addEventListener("mouseleave", function (event) {
+    // Check if the event target matches the selector stored in ElemAllMain
+    if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+        // Call the hideElementB function
+        elementAction('hide')
+    }
+});
+
+const elementAction = (action) => {
+    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep && window.Shepherd.activeTour.currentStep.options.id.split('_')[1] === '2') {
+        let shepherdInstance = window.Shepherd.activeTour;
+
+        if (action === 'hide' && typeof shepherdInstance.hide === 'function') {
+            shepherdInstance.hide();
+        } else if (action === 'show' && typeof shepherdInstance.show === 'function') {
+            shepherdInstance.show();
         }
     }
 };
@@ -380,7 +390,7 @@ function returnMainMenuElement(topMenuName) {
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
     if (!topMenu) {
         // Return an appropriate default value if the topMenuName is not found
-        return null;
+        return "";
     }
     return checkPageInVPVList(dashboardPageVPV) ? topMenu.mainElement : topMenu.legacyElement;
 }
@@ -390,12 +400,55 @@ function returnSubMenuElement(topMenuName, subMenuName) {
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
     if (!topMenu || !topMenu.subLinks) {
         // Return an appropriate default value if the topMenuName is not found or if it has no subLinks
-        return null;
+        return "";
     }
     const subMenu = topMenu.subLinks.find(sub => sub.mainNavItemName === subMenuName);
     if (!subMenu) {
         // Return an appropriate default value if the subMenuName is not found
-        return null;
+        return "";
     }
     return checkPageInVPVList(dashboardPageVPV) ? subMenu.mainElement : subMenu.legacyElement;
+}
+
+const listOfTours = {
+    'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
+    'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
+    'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
+    'HowToTransferFundsTour': HowToTransferFundsTour,
+    'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
+    'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
+    'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
+}
+
+const journeysTestFunction = () => {
+    console.log("Tester version 1")
+    HowToBuyAFastTagTour
+    HowToMakeICICIBankCreditCardPaymentTour
+    HowToBuyAMutualFundTour
+    HowToTransferFundsTour
+    HowToPrematurelyCloseFDTour
+    HowToKnowAboutPreApprovedOffers
+    HowToApplyForICICIBankCreditCard
+    console.log("Checking stability of menu links")
+    console.log("For HowToMakeICICIBankCreditCardPaymentTour")
+    returnMainMenuElement('Cards & Loans')
+    returnSubMenuElement('Cards & Loans', 'Credit Cards')
+    console.log("For HowToBuyFastTagTour")
+    returnMainMenuElement("Payments & Transfer")
+    returnSubMenuElement('Payments & Transfer', "Buy/Recharge Fastag")
+    console.log("For HowToBuyMutualFundTour")
+    returnMainMenuElement('Investments & Insurance')
+    returnSubMenuElement('Investments & Insurance', 'Buy Mutual Funds')
+    console.log("For HowToTransferFunds")
+    returnMainMenuElement('Payments & Transfer')
+    returnSubMenuElement('Payments & Transfer', 'Fund Transfer')
+    console.log("For HowToPrematurelyCloseFDTour")
+    returnMainMenuElement('Customer Service')
+    returnSubMenuElement('Customer Service', 'Service Request')
+    console.log("For HowToKnowAboutPreApprovedOffers")
+    returnMainMenuElement('Cards & Loans')
+    returnSubMenuElement('Cards & Loans', 'Loans')
+    console.log("For HowToApplyForICICIBankCreditCard")
+    returnMainMenuElement('Cards & Loans')
+    returnSubMenuElement('Cards & Loans', 'Credit Cards')
 }
