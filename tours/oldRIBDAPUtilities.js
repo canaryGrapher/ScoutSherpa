@@ -300,6 +300,31 @@ const topNavData = [
         ]
     }
 ]
+
+function returnMainMenuElement(topMenuName) {
+    console.log('returnMainMenuElement', topMenuName);
+    const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
+    if (!topMenu) {
+        // Return an appropriate default value if the topMenuName is not found
+        return "";
+    }
+    return checkPageInVPVList(dashboardPageVPV) ? topMenu.mainElement : topMenu.legacyElement;
+}
+
+function returnSubMenuElement(topMenuName, subMenuName) {
+    console.log('returnSubMenuELement', subMenuName)
+    const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
+    if (!topMenu || !topMenu.subLinks) {
+        // Return an appropriate default value if the topMenuName is not found or if it has no subLinks
+        return "";
+    }
+    const subMenu = topMenu.subLinks.find(sub => sub.mainNavItemName === subMenuName);
+    if (!subMenu) {
+        // Return an appropriate default value if the subMenuName is not found
+        return "";
+    }
+    return checkPageInVPVList(dashboardPageVPV) ? subMenu.mainElement : subMenu.legacyElement;
+}
 const getPageFromArray = (dataArray) => {
     const data = dataArray.find((item) => {
         // eslint-disable-next-line no-prototype-builtins
@@ -317,7 +342,7 @@ const getPageFromArray = (dataArray) => {
 // check if the step data in the local storage is as per the current step
 const checkPageInVPVList = (searchVPV) => {
     const vpvArray = [];
-    window.dataLayer.forEach(item => {
+    dataLayer.forEach(item => {
         // eslint-disable-next-line no-prototype-builtins
         if (item.hasOwnProperty('page')) {
             vpvArray.push(item.page);
@@ -384,31 +409,6 @@ const checkPageInVPVList = (searchVPV) => {
 //         }
 //     }
 // };
-
-function returnMainMenuElement(topMenuName) {
-    console.log('returnMainMenuElement', topMenuName);
-    const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
-    if (!topMenu) {
-        // Return an appropriate default value if the topMenuName is not found
-        return "";
-    }
-    return checkPageInVPVList(dashboardPageVPV) ? topMenu.mainElement : topMenu.legacyElement;
-}
-
-function returnSubMenuElement(topMenuName, subMenuName) {
-    console.log('returnSubMenuELement', subMenuName)
-    const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
-    if (!topMenu || !topMenu.subLinks) {
-        // Return an appropriate default value if the topMenuName is not found or if it has no subLinks
-        return "";
-    }
-    const subMenu = topMenu.subLinks.find(sub => sub.mainNavItemName === subMenuName);
-    if (!subMenu) {
-        // Return an appropriate default value if the subMenuName is not found
-        return "";
-    }
-    return checkPageInVPVList(dashboardPageVPV) ? subMenu.mainElement : subMenu.legacyElement;
-}
 
 // const listOfTours = {
 //     'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
