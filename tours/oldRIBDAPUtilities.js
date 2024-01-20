@@ -300,7 +300,6 @@ const topNavData = [
         ]
     }
 ]
-
 function returnMainMenuElement(topMenuName) {
     console.log('returnMainMenuElement', topMenuName);
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
@@ -310,7 +309,6 @@ function returnMainMenuElement(topMenuName) {
     }
     return checkPageInVPVList(dashboardPageVPV) ? topMenu.mainElement : topMenu.legacyElement;
 }
-
 function returnSubMenuElement(topMenuName, subMenuName) {
     console.log('returnSubMenuELement', subMenuName)
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
