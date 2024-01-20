@@ -32,29 +32,29 @@ var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
     useModalOverlay: false,
 });
 // Select the credit card you want to pay bill for
-// HowToMakeICICIBankCreditCardPaymentTour.addStep({
-//     id: "HowToMakeICICIBankCreditCardPaymentTour_0",
-//     title: "1/1",
-//     text: "Looks like you do not have any credit card linked to your account. This feature is not available for you right now.",
-//     showOn: function () {
-//         const element = window.find("Apply from a range of credit cards")
-//         if (element) {
-//             return true
-//         }
-//         return false
-//     },
-//     buttons: [
-//         {
-//             text: 'Understood',
-//             action: HowToMakeICICIBankCreditCardPaymentTour.complete
-//         },
-//         {
-//             text: 'Cancel',
-//             action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
-//             secondary: true
-//         }
-//     ]
-// })
+HowToMakeICICIBankCreditCardPaymentTour.addStep({
+    id: "HowToMakeICICIBankCreditCardPaymentTour_0",
+    title: "1/1",
+    text: "Looks like you do not have any credit card linked to your account. This feature is not available for you right now.",
+    showOn: function () {
+        const element = window.find("Apply from a range of credit cards")
+        if (element) {
+            return true
+        }
+        return false
+    },
+    buttons: [
+        {
+            text: 'Understood',
+            action: HowToMakeICICIBankCreditCardPaymentTour.complete
+        },
+        {
+            text: 'Cancel',
+            action: HowToMakeICICIBankCreditCardPaymentTour.cancel,
+            secondary: true
+        }
+    ]
+})
 // Select the 'Cards & Loans' button on the menubar on dashboard
 HowToMakeICICIBankCreditCardPaymentTour.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTour_1",

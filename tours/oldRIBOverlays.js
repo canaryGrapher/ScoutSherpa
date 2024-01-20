@@ -1,3 +1,12 @@
+// This file contains all the Overlay Pages for RIB
+// oldRIBJourneys.js
+/* eslint-disable prettier/prettier */
+/* eslint-disable max-lines */
+
+// overlays created
+// 1 - What's on Bank Account Page
+// 2 - What's on other bank add payee page
+
 // add a button prompt on the pages where overlay pages tour is available
 window.addEventListener('DOMContentLoaded', function () {
     const GuideMeLinks = [
@@ -11,7 +20,6 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     ];
     const pageLink = getPageFromArray(window.dataLayer);
-    console.log('DOM content loaded for guideMe button injection. Loading tour');
     // match if current pageLink is in the GuideMeLinks array
     const matchedLink = GuideMeLinks.find((link) => link.link === pageLink);
 
@@ -33,7 +41,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
         document.body.appendChild(button);
     }
-});
+}, false);
 
 // eslint-disable-next-line no-undef
 var WhatsOnBankAccountPageGuideMe = new Shepherd.Tour({
