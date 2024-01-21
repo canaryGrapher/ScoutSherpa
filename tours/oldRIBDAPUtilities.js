@@ -3,7 +3,7 @@
 
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
-let websiteVPV = ''
+let websiteVPV = ["", ""]
 
 
 
@@ -343,7 +343,7 @@ const getPageFromArray = (dataArray) => {
 // check if the step data in the local storage is as per the current step
 const checkPageInVPVList = (searchVPV, dataElement) => {
     const vpvArray = [];
-    dataElement.forEach(item => {
+    dataElement.map(item => {
         // eslint-disable-next-line no-prototype-builtins
         if (item.hasOwnProperty('page')) {
             vpvArray.push(item.page);
