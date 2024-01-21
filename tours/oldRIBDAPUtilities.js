@@ -3,6 +3,9 @@
 
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+let websiteVPV = ''
+
+
 
 const dashboardPageVPV = "/vpv/li/personal-banking/dashboardPage"
 const topNavData = [
@@ -307,7 +310,7 @@ function returnMainMenuElement(topMenuName) {
         // Return an appropriate default value if the topMenuName is not found
         return "";
     }
-    return checkPageInVPVList(dashboardPageVPV) ? topMenu.mainElement : topMenu.legacyElement;
+    return checkPageInVPVList(dashboardPageVPV, websiteVPV) ? topMenu.mainElement : topMenu.legacyElement;
 }
 function returnSubMenuElement(topMenuName, subMenuName) {
     console.log('returnSubMenuELement', subMenuName)
@@ -321,7 +324,7 @@ function returnSubMenuElement(topMenuName, subMenuName) {
         // Return an appropriate default value if the subMenuName is not found
         return "";
     }
-    return checkPageInVPVList(dashboardPageVPV) ? subMenu.mainElement : subMenu.legacyElement;
+    return checkPageInVPVList(dashboardPageVPV, websiteVPV) ? subMenu.mainElement : subMenu.legacyElement;
 }
 const getPageFromArray = (dataArray) => {
     const data = dataArray.find((item) => {
@@ -338,9 +341,9 @@ const getPageFromArray = (dataArray) => {
     return data.page || data.vpv;
 };
 // check if the step data in the local storage is as per the current step
-const checkPageInVPVList = (searchVPV) => {
+const checkPageInVPVList = (searchVPV, dataElement) => {
     const vpvArray = [];
-    dataLayer.forEach(item => {
+    dataElement.forEach(item => {
         // eslint-disable-next-line no-prototype-builtins
         if (item.hasOwnProperty('page')) {
             vpvArray.push(item.page);
@@ -355,68 +358,69 @@ const checkPageInVPVList = (searchVPV) => {
 };
 
 // // get an array of all 
-// const ElemAllMain = topNavData.map(element => `element.mainElement > .dropdown-content`);
-// const ElemAllLegacy = topNavData.map(element => `element.legacyElement > .submenu`)
+const ElemAllMain = topNavData.map(element => `element.mainElement > .dropdown-content`);
+const ElemAllLegacy = topNavData.map(element => `element.legacyElement > .submenu`)
 
-// window.addEventListener('DOMContentLoaded', function () {
-//     // <!--- block 1 --->
-//     // check last tour step from local storage 
-//     let currentStepIndex = localStorage.getItem('currentStepIndex');
-//     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
-//     // if current tour is active, continue
-//     // Check if currentTourIndex is not null or undefined
-//     console.log("Checking DAP utilities on loaded tour")
-//     console.log(currentTourIndex + " is the current tour")
-//     console.log(listOfTours[currentTourIndex] + " is its reference")
-//     if (currentTourIndex && listOfTours[currentTourIndex]) {
-//         console.log("Trying to load tour " + currentTourIndex + " or " + listOfTours[currentTourIndex])
-//         listOfTours[currentTourIndex].show(Number(currentStepIndex));
-//     } else {
-//         console.log('No matching class found or currentStepIndex is empty in local storage.');
-//     }
-//     // <!--- end of block 1 --->
-// }, false)
+window.addEventListener('DOMContentLoaded', function () {
+    websiteVPV = window.dataLayer
+    // <!--- block 1 --->
+    // check last tour step from local storage 
+    let currentStepIndex = localStorage.getItem('currentStepIndex');
+    let currentTourIndex = localStorage.getItem('tourInstanceCaller');
+    // if current tour is active, continue
+    // Check if currentTourIndex is not null or undefined
+    console.log("Checking DAP utilities on loaded tour")
+    console.log(currentTourIndex + " is the current tour")
+    console.log(listOfTours[currentTourIndex] + " is its reference")
+    if (currentTourIndex && listOfTours[currentTourIndex]) {
+        console.log("Trying to load tour " + currentTourIndex + " or " + listOfTours[currentTourIndex])
+        listOfTours[currentTourIndex].show(Number(currentStepIndex));
+    } else {
+        console.log('No matching class found or currentStepIndex is empty in local storage.');
+    }
+    // <!--- end of block 1 --->
+}, false)
 
 
-// // Add a mouseover event listener to the document object
-// document.addEventListener("mouseover", function (event) {
-//     // Check if the event target matches the selector stored in ElemAllMain
-//     if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-//         // Call the showElementB function
-//         elementAction('show')
-//     }
-// });
+// Add a mouseover event listener to the document object
+document.addEventListener("mouseover", function (event) {
+    // Check if the event target matches the selector stored in ElemAllMain
+    if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+        // Call the showElementB function
+        elementAction('show')
+    }
+});
 
-// // Add a mouseleave event listener to the document object
-// document.addEventListener("mouseleave", function (event) {
-//     // Check if the event target matches the selector stored in ElemAllMain
-//     if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-//         // Call the hideElementB function
-//         elementAction('hide')
-//     }
-// });
+// Add a mouseleave event listener to the document object
+document.addEventListener("mouseleave", function (event) {
+    // Check if the event target matches the selector stored in ElemAllMain
+    if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+        // Call the hideElementB function
+        elementAction('hide')
+    }
+});
 
-// const elementAction = (action) => {
-//     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep && window.Shepherd.activeTour.currentStep.options.id.split('_')[1] === '2') {
-//         let shepherdInstance = window.Shepherd.activeTour;
+const elementAction = (action) => {
+    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep && window.Shepherd.activeTour.currentStep.options.id.split('_')[1] === '2') {
+        let shepherdInstance = window.Shepherd.activeTour;
 
-//         if (action === 'hide' && typeof shepherdInstance.hide === 'function') {
-//             shepherdInstance.hide();
-//         } else if (action === 'show' && typeof shepherdInstance.show === 'function') {
-//             shepherdInstance.show();
-//         }
-//     }
-// };
+        if (action === 'hide' && typeof shepherdInstance.hide === 'function') {
+            shepherdInstance.hide();
+        } else if (action === 'show' && typeof shepherdInstance.show === 'function') {
+            shepherdInstance.show();
+        }
+    }
+};
 
-// const listOfTours = {
-//     'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
-//     'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
-//     'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
-//     'HowToTransferFundsTour': HowToTransferFundsTour,
-//     'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
-//     'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
-//     'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
-// }
+const listOfTours = {
+    'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
+    'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
+    'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
+    'HowToTransferFundsTour': HowToTransferFundsTour,
+    'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
+    'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
+    'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
+}
 
 const journeysTestFunction = () => {
     console.log("Tester version 1")
