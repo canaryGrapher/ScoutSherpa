@@ -3,15 +3,7 @@
 
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
-const listOfTours = {
-    'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
-    'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
-    'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
-    'HowToTransferFundsTour': HowToTransferFundsTour,
-    'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
-    'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
-    'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
-}
+
 const dashboardPageVPV = "/vpv/li/personal-banking/dashboardPage"
 const topNavData = [
     // Overview
@@ -367,21 +359,28 @@ const checkPageInVPVList = (searchVPV, dataElement) => {
 const ElemAllMain = topNavData.map(element => `${element.mainElement} > .dropdown-content`);
 const ElemAllLegacy = topNavData.map(element => `${element.legacyElement} > .submenu`)
 
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('load', function () {
     // <!--- block 1 --->
     // check last tour step from local storage 
     let currentStepIndex = localStorage.getItem('currentStepIndex');
     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
     // if current tour is active, continue
     // Check if currentTourIndex is not null or undefined
-    if (currentTourIndex && listOfTours[currentTourIndex]) {
-        console.log("Checking DAP utilities on loaded tour")
-        console.log(currentTourIndex + " is the current tour")
-        console.log(listOfTours[currentTourIndex] + " is its reference")
-        console.log("Trying to load tour " + currentTourIndex + " or " + listOfTours[currentTourIndex])
-        listOfTours[currentTourIndex].show(Number(currentStepIndex));
+    console.log("Window scope for list of tours")
+    console.log(typeof window['listOfTours'])
+    if (typeof window['listOfTours'] === 'object') {
+        if (currentTourIndex && window.listOfTours[currentTourIndex]) {
+            console.log("Checking DAP utilities on loaded tour")
+            console.log(currentTourIndex + " is the current tour")
+            console.log(window.listOfTours[currentTourIndex] + " is its reference")
+            console.log("Trying to load tour " + currentTourIndex + " or " + window.listOfTours[currentTourIndex])
+            window.listOfTours[currentTourIndex].show(Number(currentStepIndex));
+        }
+        else {
+            console.log('No matching class found or currentStepIndex is empty in local storage.');
+        }
     } else {
-        console.log('No matching class found or currentStepIndex is empty in local storage.');
+        console.log("Could not find the Map of tours in wondow scope")
     }
     // <!--- end of block 1 --->
 }, false)

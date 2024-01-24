@@ -8,7 +8,7 @@
 // 2 - What's on other bank add payee page
 
 // add a button prompt on the pages where overlay pages tour is available
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('load', function () {
     const GuideMeLinks = [
         {
             tour: 'WhatsOnBankAccountPageGuideMe',
