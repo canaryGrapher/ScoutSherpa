@@ -62,7 +62,7 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     text: "Move your mouse over 'Cards & Loans'",
     attachTo: {
         element: returnMainMenuElement('Cards & Loans'),
-        on: "left"
+        on: "right"
     },
     advanceOn: {
         selector: returnMainMenuElement('Cards & Loans'),
@@ -579,7 +579,7 @@ HowToApplyForICICIBankCreditCard.addStep({
     text: "Move your mouse over 'Cards & Loans'",
     attachTo: {
         element: "#topbar > div.light-orange > div > div:nth-child(4)",
-        on: "button"
+        on: "bottom"
     },
     advanceOn: {
         selector: '#topbar > div.light-orange > div > div:nth-child(4)',

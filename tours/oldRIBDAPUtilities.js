@@ -3,10 +3,6 @@
 
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
-let websiteVPV = ["", ""]
-
-
-
 const dashboardPageVPV = "/vpv/li/personal-banking/dashboardPage"
 const topNavData = [
     // Overview
@@ -308,9 +304,10 @@ function returnMainMenuElement(topMenuName) {
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
     if (!topMenu) {
         // Return an appropriate default value if the topMenuName is not found
+        console.log("Top menu not found")
         return "";
     }
-    return checkPageInVPVList(dashboardPageVPV, websiteVPV) ? topMenu.mainElement : topMenu.legacyElement;
+    return checkPageInVPVList(dashboardPageVPV, window.dataLayer) ? topMenu.mainElement : topMenu.legacyElement;
 }
 function returnSubMenuElement(topMenuName, subMenuName) {
     console.log('returnSubMenuELement', subMenuName)
@@ -324,7 +321,7 @@ function returnSubMenuElement(topMenuName, subMenuName) {
         // Return an appropriate default value if the subMenuName is not found
         return "";
     }
-    return checkPageInVPVList(dashboardPageVPV, websiteVPV) ? subMenu.mainElement : subMenu.legacyElement;
+    return checkPageInVPVList(dashboardPageVPV, window.dataLayer) ? subMenu.mainElement : subMenu.legacyElement;
 }
 const getPageFromArray = (dataArray) => {
     const data = dataArray.find((item) => {
@@ -362,7 +359,6 @@ const ElemAllMain = topNavData.map(element => `element.mainElement > .dropdown-c
 const ElemAllLegacy = topNavData.map(element => `element.legacyElement > .submenu`)
 
 window.addEventListener('DOMContentLoaded', function () {
-    websiteVPV = window.dataLayer
     // <!--- block 1 --->
     // check last tour step from local storage 
     let currentStepIndex = localStorage.getItem('currentStepIndex');
