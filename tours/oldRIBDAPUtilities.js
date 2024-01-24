@@ -364,8 +364,8 @@ const checkPageInVPVList = (searchVPV, dataElement) => {
 };
 
 // // get an array of all 
-const ElemAllMain = topNavData.map(element => `element.mainElement > .dropdown-content`);
-const ElemAllLegacy = topNavData.map(element => `element.legacyElement > .submenu`)
+const ElemAllMain = topNavData.map(element => `${element.mainElement} > .dropdown-content`);
+const ElemAllLegacy = topNavData.map(element => `${element.legacyElement} > .submenu`)
 
 window.addEventListener('DOMContentLoaded', function () {
     // <!--- block 1 --->
@@ -374,10 +374,10 @@ window.addEventListener('DOMContentLoaded', function () {
     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
     // if current tour is active, continue
     // Check if currentTourIndex is not null or undefined
-    console.log("Checking DAP utilities on loaded tour")
-    console.log(currentTourIndex + " is the current tour")
-    console.log(listOfTours[currentTourIndex] + " is its reference")
     if (currentTourIndex && listOfTours[currentTourIndex]) {
+        console.log("Checking DAP utilities on loaded tour")
+        console.log(currentTourIndex + " is the current tour")
+        console.log(listOfTours[currentTourIndex] + " is its reference")
         console.log("Trying to load tour " + currentTourIndex + " or " + listOfTours[currentTourIndex])
         listOfTours[currentTourIndex].show(Number(currentStepIndex));
     } else {
@@ -393,15 +393,6 @@ document.addEventListener("mouseover", function (event) {
     if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
         // Call the showElementB function
         elementAction('show')
-    }
-});
-
-// Add a mouseleave event listener to the document object
-document.addEventListener("mouseleave", function (event) {
-    // Check if the event target matches the selector stored in ElemAllMain
-    if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-        // Call the hideElementB function
-        elementAction('hide')
     }
 });
 
@@ -449,3 +440,12 @@ const journeysTestFunction = () => {
     returnMainMenuElement('Cards & Loans')
     returnSubMenuElement('Cards & Loans', 'Credit Cards')
 }
+
+// Add a mouseleave event listener to the document object
+document.addEventListener("mouseleave", function (event) {
+    // Check if the event target matches the selector stored in ElemAllMain
+    if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+        // Call the hideElementB function
+        elementAction('hide')
+    }
+});
