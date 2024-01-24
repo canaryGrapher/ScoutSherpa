@@ -3,6 +3,15 @@
 
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+const listOfTours = {
+    'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
+    'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
+    'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
+    'HowToTransferFundsTour': HowToTransferFundsTour,
+    'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
+    'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
+    'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
+}
 const dashboardPageVPV = "/vpv/li/personal-banking/dashboardPage"
 const topNavData = [
     // Overview
@@ -407,16 +416,6 @@ const elementAction = (action) => {
         }
     }
 };
-
-const listOfTours = {
-    'HowToBuyAFastTagTour': HowToBuyAFastTagTour,
-    'HowToMakeICICIBankCreditCardPaymentTour': HowToMakeICICIBankCreditCardPaymentTour,
-    'HowToBuyAMutualFundTour': HowToBuyAMutualFundTour,
-    'HowToTransferFundsTour': HowToTransferFundsTour,
-    'HowToPrematurelyCloseFDTour': HowToPrematurelyCloseFDTour,
-    'HowToKnowAboutPreApprovedOffers': HowToKnowAboutPreApprovedOffers,
-    'HowToApplyForICICIBankCreditCard': HowToApplyForICICIBankCreditCard
-}
 
 const journeysTestFunction = () => {
     console.log("Tester version 1")
