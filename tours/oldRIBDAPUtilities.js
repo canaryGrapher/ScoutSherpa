@@ -308,7 +308,7 @@ function returnMainMenuElement(topMenuName) {
         console.log("Top menu not found")
         return "";
     }
-    return checkPageInVPVList(dashboardPageVPV, window.dataLayer) ? topMenu.mainElement : topMenu.legacyElement;
+    return checkPageInVPVList(dashboardPageVPV) ? topMenu.mainElement : topMenu.legacyElement;
 }
 function returnSubMenuElement(topMenuName, subMenuName) {
     console.log('returnSubMenuELement', subMenuName)
@@ -322,7 +322,7 @@ function returnSubMenuElement(topMenuName, subMenuName) {
         // Return an appropriate default value if the subMenuName is not found
         return "";
     }
-    return checkPageInVPVList(dashboardPageVPV, window.dataLayer) ? subMenu.mainElement : subMenu.legacyElement;
+    return checkPageInVPVList(dashboardPageVPV) ? subMenu.mainElement : subMenu.legacyElement;
 }
 const getPageFromArray = (dataArray) => {
     const data = dataArray.find((item) => {
@@ -339,9 +339,9 @@ const getPageFromArray = (dataArray) => {
     return data.page || data.vpv;
 };
 // check if the step data in the local storage is as per the current step
-const checkPageInVPVList = (searchVPV, dataElement) => {
+const checkPageInVPVList = (searchVPV) => {
     const vpvArray = [];
-    dataElement.map(item => {
+    window.dataLayer.map(item => {
         // eslint-disable-next-line no-prototype-builtins
         if (item.hasOwnProperty('page')) {
             vpvArray.push(item.page);
