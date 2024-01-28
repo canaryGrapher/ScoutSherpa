@@ -4,6 +4,39 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
 
+const journeysTestFunction = () => {
+    console.log("Tester version 1")
+    HowToBuyAFastTagTour
+    HowToMakeICICIBankCreditCardPaymentTour
+    HowToBuyAMutualFundTour
+    HowToTransferFundsTour
+    HowToPrematurelyCloseFDTour
+    HowToKnowAboutPreApprovedOffers
+    HowToApplyForICICIBankCreditCard
+    console.log("Checking stability of menu links")
+    console.log("For HowToMakeICICIBankCreditCardPaymentTour")
+    returnMainMenuElement('Cards & Loans')
+    returnSubMenuElement('Cards & Loans', 'Credit Cards')
+    console.log("For HowToBuyFastTagTour")
+    returnMainMenuElement("Payments & Transfer")
+    returnSubMenuElement('Payments & Transfer', "Buy/Recharge Fastag")
+    console.log("For HowToBuyMutualFundTour")
+    returnMainMenuElement('Investments & Insurance')
+    returnSubMenuElement('Investments & Insurance', 'Buy Mutual Funds')
+    console.log("For HowToTransferFunds")
+    returnMainMenuElement('Payments & Transfer')
+    returnSubMenuElement('Payments & Transfer', 'Fund Transfer')
+    console.log("For HowToPrematurelyCloseFDTour")
+    returnMainMenuElement('Customer Service')
+    returnSubMenuElement('Customer Service', 'Service Request')
+    console.log("For HowToKnowAboutPreApprovedOffers")
+    returnMainMenuElement('Cards & Loans')
+    returnSubMenuElement('Cards & Loans', 'Loans')
+    console.log("For HowToApplyForICICIBankCreditCard")
+    returnMainMenuElement('Cards & Loans')
+    returnSubMenuElement('Cards & Loans', 'Credit Cards')
+}
+
 const dashboardPageVPV = "/vpv/li/personal-banking/dashboardPage"
 const topNavData = [
     // Overview
@@ -300,30 +333,6 @@ const topNavData = [
         ]
     }
 ]
-function returnMainMenuElement(topMenuName) {
-    console.log('returnMainMenuElement', topMenuName);
-    const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
-    if (!topMenu) {
-        // Return an appropriate default value if the topMenuName is not found
-        console.log("Top menu not found")
-        return "";
-    }
-    return checkPageInVPVList(dashboardPageVPV) ? topMenu.mainElement : topMenu.legacyElement;
-}
-function returnSubMenuElement(topMenuName, subMenuName) {
-    console.log('returnSubMenuELement', subMenuName)
-    const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
-    if (!topMenu || !topMenu.subLinks) {
-        // Return an appropriate default value if the topMenuName is not found or if it has no subLinks
-        return "";
-    }
-    const subMenu = topMenu.subLinks.find(sub => sub.mainNavItemName === subMenuName);
-    if (!subMenu) {
-        // Return an appropriate default value if the subMenuName is not found
-        return "";
-    }
-    return checkPageInVPVList(dashboardPageVPV) ? subMenu.mainElement : subMenu.legacyElement;
-}
 const getPageFromArray = (dataArray) => {
     const data = dataArray.find((item) => {
         // eslint-disable-next-line no-prototype-builtins
@@ -338,21 +347,50 @@ const getPageFromArray = (dataArray) => {
     });
     return data.page || data.vpv;
 };
-// check if the step data in the local storage is as per the current step
-const checkPageInVPVList = (searchVPV) => {
-    const vpvArray = [];
-    window.dataLayer.map(item => {
-        // eslint-disable-next-line no-prototype-builtins
-        if (item.hasOwnProperty('page')) {
-            vpvArray.push(item.page);
-            // eslint-disable-next-line no-prototype-builtins
-        } else if (item.hasOwnProperty('vpv')) {
-            vpvArray.push(item.vpv);
-        } else {
-            return 0
+
+function waitFor(predicate, timeout) {
+    return new Promise((resolve, reject) => {
+        const check = () => {
+            console.log('checking', predicate());
+            if (!predicate()) return;
+            clearInterval(interval);
+            resolve();
         };
+        const interval = setInterval(check, 100);
+        check();
+
+        if (!timeout) return;
+        setTimeout(() => {
+            clearInterval(interval);
+            reject();
+        }, timeout);
     });
-    return vpvArray.includes(searchVPV);
+}
+
+// check if the step data in the local storage is as per the current step
+const checkPageInVPVList = async (searchVPV) => {
+    try {
+        if (await waitFor(() => window.hasOwnProperty('dataLayer'), 5000)) {
+
+            const vpvArray = [];
+            window.dataLayer.map(item => {
+                // eslint-disable-next-line no-prototype-builtins
+                if (item.hasOwnProperty('page')) {
+                    vpvArray.push(item.page);
+                    // eslint-disable-next-line no-prototype-builtins
+                } else if (item.hasOwnProperty('vpv')) {
+                    vpvArray.push(item.vpv);
+                } else {
+                    return 0
+                };
+            });
+            return vpvArray.includes(searchVPV);
+        }
+    }
+    catch (err) {
+        console.error('fetching dataLayer timed out, switching to default')
+        return true
+    }
 };
 
 // // get an array of all 
@@ -385,7 +423,6 @@ window.addEventListener('load', function () {
     // <!--- end of block 1 --->
 }, false)
 
-
 // Add a mouseover event listener to the document object
 document.addEventListener("mouseover", function (event) {
     // Check if the event target matches the selector stored in ElemAllMain
@@ -407,38 +444,7 @@ const elementAction = (action) => {
     }
 };
 
-const journeysTestFunction = () => {
-    console.log("Tester version 1")
-    HowToBuyAFastTagTour
-    HowToMakeICICIBankCreditCardPaymentTour
-    HowToBuyAMutualFundTour
-    HowToTransferFundsTour
-    HowToPrematurelyCloseFDTour
-    HowToKnowAboutPreApprovedOffers
-    HowToApplyForICICIBankCreditCard
-    console.log("Checking stability of menu links")
-    console.log("For HowToMakeICICIBankCreditCardPaymentTour")
-    returnMainMenuElement('Cards & Loans')
-    returnSubMenuElement('Cards & Loans', 'Credit Cards')
-    console.log("For HowToBuyFastTagTour")
-    returnMainMenuElement("Payments & Transfer")
-    returnSubMenuElement('Payments & Transfer', "Buy/Recharge Fastag")
-    console.log("For HowToBuyMutualFundTour")
-    returnMainMenuElement('Investments & Insurance')
-    returnSubMenuElement('Investments & Insurance', 'Buy Mutual Funds')
-    console.log("For HowToTransferFunds")
-    returnMainMenuElement('Payments & Transfer')
-    returnSubMenuElement('Payments & Transfer', 'Fund Transfer')
-    console.log("For HowToPrematurelyCloseFDTour")
-    returnMainMenuElement('Customer Service')
-    returnSubMenuElement('Customer Service', 'Service Request')
-    console.log("For HowToKnowAboutPreApprovedOffers")
-    returnMainMenuElement('Cards & Loans')
-    returnSubMenuElement('Cards & Loans', 'Loans')
-    console.log("For HowToApplyForICICIBankCreditCard")
-    returnMainMenuElement('Cards & Loans')
-    returnSubMenuElement('Cards & Loans', 'Credit Cards')
-}
+
 
 // Add a mouseleave event listener to the document object
 document.addEventListener("mouseleave", function (event) {
@@ -448,3 +454,28 @@ document.addEventListener("mouseleave", function (event) {
         elementAction('hide')
     }
 });
+
+async function returnMainMenuElement(topMenuName) {
+    console.log('returnMainMenuElement', topMenuName);
+    const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
+    if (!topMenu) {
+        // Return an appropriate default value if the topMenuName is not found
+        console.log("Top menu not found")
+        return "";
+    }
+    return await checkPageInVPVList(dashboardPageVPV) ? topMenu.mainElement : topMenu.legacyElement;
+}
+async function returnSubMenuElement(topMenuName, subMenuName) {
+    console.log('returnSubMenuELement', subMenuName)
+    const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
+    if (!topMenu || !topMenu.subLinks) {
+        // Return an appropriate default value if the topMenuName is not found or if it has no subLinks
+        return "";
+    }
+    const subMenu = topMenu.subLinks.find(sub => sub.mainNavItemName === subMenuName);
+    if (!subMenu) {
+        // Return an appropriate default value if the subMenuName is not found
+        return "";
+    }
+    return await checkPageInVPVList(dashboardPageVPV) ? subMenu.mainElement : subMenu.legacyElement;
+}
