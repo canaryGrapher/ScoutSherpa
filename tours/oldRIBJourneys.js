@@ -20,7 +20,7 @@ let HowToApplyForICICIBankCreditCard, HowToMakeICICIBankCreditCardPaymentTour, H
 
 window.addEventListener("load", function () {
     console.log("Load of tours complete")
-    window.HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
+    HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
         tourName: "How to make ICICI bank credit card payment?",
         instanceCaller: "HowToMakeICICIBankCreditCardPaymentTour",
         defaultStepOptions: {
@@ -105,7 +105,7 @@ window.addEventListener("load", function () {
         ]
     })
 
-    window.HowToBuyAFastTagTour = new Shepherd.Tour({
+    HowToBuyAFastTagTour = new Shepherd.Tour({
         tourName: 'How to buy a ICICI FastTag',
         instanceCaller: 'HowToBuyAFastTagTour',
         defaultStepOptions: {
@@ -188,7 +188,7 @@ window.addEventListener("load", function () {
         ],
     });
 
-    window.HowToBuyAMutualFundTour = new Shepherd.Tour({
+    HowToBuyAMutualFundTour = new Shepherd.Tour({
         tourName: 'How to Buy a Mutual Fund?',
         instanceCaller: 'HowToBuyAMutualFundTour',
         defaultStepOptions: {
@@ -294,7 +294,7 @@ window.addEventListener("load", function () {
         ],
     });
 
-    window.HowToTransferFundsTour = new Shepherd.Tour({
+    HowToTransferFundsTour = new Shepherd.Tour({
         tourName: 'How to transfer funds?',
         instanceCaller: 'HowToTransferFundsTour',
         defaultStepOptions: {
@@ -363,7 +363,7 @@ window.addEventListener("load", function () {
         ]
     });
 
-    window.HowToPrematurelyCloseFDTour = new Shepherd.Tour({
+    HowToPrematurelyCloseFDTour = new Shepherd.Tour({
         tourName: 'How to prematurely close a FD?',
         instanceCaller: 'HowToPrematurelyCloseFDTour',
         defaultStepOptions: {
@@ -457,7 +457,7 @@ window.addEventListener("load", function () {
         }
     });
 
-    window.HowToKnowAboutPreApprovedOffers = new Shepherd.Tour({
+    HowToKnowAboutPreApprovedOffers = new Shepherd.Tour({
         tourName: 'Know about pre-approved offers',
         instanceCaller: 'HowToKnowAboutPreApprovedOffers',
         defaultStepOptions: {
@@ -555,7 +555,7 @@ window.addEventListener("load", function () {
         ]
     })
 
-    window.HowToApplyForICICIBankCreditCard = new Shepherd.Tour({
+    HowToApplyForICICIBankCreditCard = new Shepherd.Tour({
         tourName: 'How to Apply For an ICICI Bank Credit Card',
         instanceCaller: 'HowToApplyForICICIBankCreditCard',
         defaultStepOptions: {
