@@ -351,7 +351,7 @@ const getPageFromArray = (dataArray) => {
 function waitFor(predicate, timeout) {
     return new Promise((resolve, reject) => {
         const check = () => {
-            console.log('checking', predicate());
+            console.log('checking predicate');
             if (!predicate()) return;
             clearInterval(interval);
             resolve();
@@ -370,26 +370,27 @@ function waitFor(predicate, timeout) {
 // check if the step data in the local storage is as per the current step
 const checkPageInVPVList = async (searchVPV) => {
     try {
-        if (await waitFor(() => window.hasOwnProperty('dataLayer'), 5000)) {
+        const condition = window.hasOwnProperty('dataLayer') && dataLayer.length > 0;
 
-            const vpvArray = [];
-            window.dataLayer.map(item => {
-                // eslint-disable-next-line no-prototype-builtins
-                if (item.hasOwnProperty('page')) {
-                    vpvArray.push(item.page);
-                    // eslint-disable-next-line no-prototype-builtins
-                } else if (item.hasOwnProperty('vpv')) {
-                    vpvArray.push(item.vpv);
-                } else {
-                    return 0
-                };
-            });
-            return vpvArray.includes(searchVPV);
-        }
-    }
-    catch (err) {
-        console.error('fetching dataLayer timed out, switching to default')
-        return true
+        // Use await to wait for the promise to resolve
+        await waitFor(condition, 5000);
+
+        const vpvArray = [];
+        window.dataLayer.map(item => {
+            if (item.hasOwnProperty('page')) {
+                vpvArray.push(item.page);
+            } else if (item.hasOwnProperty('vpv')) {
+                vpvArray.push(item.vpv);
+            }
+            // No need for an else statement here
+        });
+
+        // Return the result here
+        return vpvArray.includes(searchVPV);
+    } catch (e) {
+        console.error('Fetching dataLayer timed out, switching to default');
+        // Return a default value in case of a timeout
+        return true;
     }
 };
 
@@ -458,24 +459,15 @@ document.addEventListener("mouseleave", function (event) {
 async function returnMainMenuElement(topMenuName) {
     console.log('returnMainMenuElement', topMenuName);
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
-    if (!topMenu) {
-        // Return an appropriate default value if the topMenuName is not found
-        console.log("Top menu not found")
-        return "";
-    }
-    return await checkPageInVPVList(dashboardPageVPV) ? topMenu.mainElement : topMenu.legacyElement;
+    const elementCheck = await checkPageInVPVList(dashboardPageVPV)
+    const element = elementCheck ? topMenu.mainElement : topMenu.legacyElement;
+    return element
 }
 async function returnSubMenuElement(topMenuName, subMenuName) {
     console.log('returnSubMenuELement', subMenuName)
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
-    if (!topMenu || !topMenu.subLinks) {
-        // Return an appropriate default value if the topMenuName is not found or if it has no subLinks
-        return "";
-    }
     const subMenu = topMenu.subLinks.find(sub => sub.mainNavItemName === subMenuName);
-    if (!subMenu) {
-        // Return an appropriate default value if the subMenuName is not found
-        return "";
-    }
-    return await checkPageInVPVList(dashboardPageVPV) ? subMenu.mainElement : subMenu.legacyElement;
+    const elementCheck = await checkPageInVPVList(dashboardPageVPV)
+    const element = elementCheck ? subMenu.mainElement : subMenu.legacyElement;
+    return element
 }
