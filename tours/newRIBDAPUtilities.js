@@ -1,4 +1,4 @@
-q// update 4: animation added
+// update 4: animation added
 // update 3: changed position of event listener and window to document
 // update 2: changed Domcontentloaded to load
 
