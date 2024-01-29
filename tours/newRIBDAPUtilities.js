@@ -243,7 +243,7 @@ const replaceButton = (buttonReference) => {
   })
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
   // showModal(buttonReference, modalReference);
   const buttonReference = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
   replaceButton(buttonReference)
