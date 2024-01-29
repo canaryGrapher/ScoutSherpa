@@ -1,5 +1,6 @@
-// update 2: changed Domcontentloaded to load
 // update 3: changed position of event listener and window to document
+// update 2: changed Domcontentloaded to load
+
 
 
 document.addEventListener('load', () => {
