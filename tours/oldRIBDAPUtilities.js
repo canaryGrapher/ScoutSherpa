@@ -333,20 +333,7 @@ const topNavData = [
         ]
     }
 ]
-const getPageFromArray = (dataArray) => {
-    const data = dataArray.find((item) => {
-        // eslint-disable-next-line no-prototype-builtins
-        if (item.hasOwnProperty('page')) {
-            return item.page;
-            // eslint-disable-next-line no-prototype-builtins
-        } else if (item.hasOwnProperty('vpv')) {
-            return item.vpv;
-        } else {
-            return null;
-        }
-    });
-    return data.page || data.vpv;
-};
+
 
 function waitFor(predicate, timeout) {
     return new Promise((resolve, reject) => {
@@ -368,31 +355,31 @@ function waitFor(predicate, timeout) {
 }
 
 // check if the step data in the local storage is as per the current step
-const checkPageInVPVList = async (searchVPV) => {
-    try {
-        const condition = window.hasOwnProperty('dataLayer') && dataLayer.length > 0;
+// const checkPageInVPVList = async (searchVPV) => {
+//     try {
+//         const condition = window.hasOwnProperty('dataLayer') && dataLayer.length > 0;
 
-        // Use await to wait for the promise to resolve
-        await waitFor(condition, 5000);
+//         // Use await to wait for the promise to resolve
+//         await waitFor(condition, 5000);
 
-        const vpvArray = [];
-        window.dataLayer.map(item => {
-            if (item.hasOwnProperty('page')) {
-                vpvArray.push(item.page);
-            } else if (item.hasOwnProperty('vpv')) {
-                vpvArray.push(item.vpv);
-            }
-            // No need for an else statement here
-        });
+//         const vpvArray = [];
+//         window.dataLayer.map(item => {
+//             if (item.hasOwnProperty('page')) {
+//                 vpvArray.push(item.page);
+//             } else if (item.hasOwnProperty('vpv')) {
+//                 vpvArray.push(item.vpv);
+//             }
+//             // No need for an else statement here
+//         });
 
-        // Return the result here
-        return vpvArray.includes(searchVPV);
-    } catch (e) {
-        console.error('Fetching dataLayer timed out, switching to default');
-        // Return a default value in case of a timeout
-        return true;
-    }
-};
+//         // Return the result here
+//         return vpvArray.includes(searchVPV);
+//     } catch (e) {
+//         console.error('Fetching dataLayer timed out, switching to default');
+//         // Return a default value in case of a timeout
+//         return true;
+//     }
+// };
 
 // // get an array of all 
 const ElemAllMain = topNavData.map(element => `${element.mainElement} > .dropdown-content`);

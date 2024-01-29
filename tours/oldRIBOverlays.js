@@ -7,6 +7,21 @@
 // 1 - What's on Bank Account Page
 // 2 - What's on other bank add payee page
 
+const getPageFromArray = (dataArray) => {
+    const data = dataArray.find((item) => {
+        // eslint-disable-next-line no-prototype-builtins
+        if (item.hasOwnProperty('page')) {
+            return item.page;
+            // eslint-disable-next-line no-prototype-builtins
+        } else if (item.hasOwnProperty('vpv')) {
+            return item.vpv;
+        } else {
+            return null;
+        }
+    });
+    return data.page || data.vpv;
+};
+
 // add a button prompt on the pages where overlay pages tour is available
 window.addEventListener('load', function () {
     const GuideMeLinks = [
