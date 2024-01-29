@@ -459,7 +459,8 @@ document.addEventListener("mouseleave", function (event) {
 async function returnMainMenuElement(topMenuName) {
     console.log('returnMainMenuElement', topMenuName);
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
-    const elementCheck = await checkPageInVPVList(dashboardPageVPV)
+    // const elementCheck = await checkPageInVPVList(dashboardPageVPV)
+    const elementCheck = window.find("Relationship Manager")
     const element = elementCheck ? topMenu.mainElement : topMenu.legacyElement;
     return element
 }
@@ -467,7 +468,8 @@ async function returnSubMenuElement(topMenuName, subMenuName) {
     console.log('returnSubMenuELement', subMenuName)
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
     const subMenu = topMenu.subLinks.find(sub => sub.mainNavItemName === subMenuName);
-    const elementCheck = await checkPageInVPVList(dashboardPageVPV)
+    // const elementCheck = await checkPageInVPVList(dashboardPageVPV)
+    const elementCheck = window.find("Relationship Manager")
     const element = elementCheck ? subMenu.mainElement : subMenu.legacyElement;
     return element
 }
