@@ -1,3 +1,5 @@
+// update 2: changed Domcontentloaded to load
+
 let isModalVisible = true;
 const modalContentText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="closeButton" onClick="toggleModal(document.querySelector('#navButton'))">×</button>
