@@ -1,3 +1,4 @@
+q// update 4: animation added
 // update 3: changed position of event listener and window to document
 // update 2: changed Domcontentloaded to load
 
@@ -241,9 +242,9 @@ const calculateRetract = (buttonReference, modalReference) => {
   document.head.appendChild(style);
 }
 const addAndRemoveGlow = (buttonReference) => {
-  // const style = document.createElement('style');
-  // style.innerHTML = ``
-  // buttonReference.classList.add('glow-indicator');
+  const style = document.createElement('style');
+  style.innerHTML = ``
+  buttonReference.classList.add('glow-indicator');
   setTimeout(function () {
     buttonReference.classList.remove('glow-indicator');
   }, 5000); // 5000 milliseconds = 5 seconds
@@ -254,4 +255,4 @@ const replaceButton = (buttonReference) => {
   buttonReference.addEventListener("click", () => {
     toggleModal()
   })
-}div.headerSecondary
+}
