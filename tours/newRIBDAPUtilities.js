@@ -1,4 +1,14 @@
 // update 2: changed Domcontentloaded to load
+// update 3: changed position of event listener and window to document
+
+
+document.addEventListener('load', () => {
+  // showModal(buttonReference, modalReference);
+  const buttonReference = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
+  replaceButton(buttonReference)
+  console.log("Load")
+})
+
 
 let isModalVisible = true;
 const modalContentText = `<div id="modalContainer" class="modal">
@@ -239,15 +249,8 @@ const addAndRemoveGlow = (buttonReference) => {
 }
 
 const replaceButton = (buttonReference) => {
-  buttonReference.innerHTML = `<p _ngcontent-ndd-c111="" class="font-10 font-extra-bold cursor-pointer" id="#navButton">GUIDE</p>`
+  buttonReference.innerHTML = '<p _ngcontent-ndd-c111="" class="font-10 font-extra-bold cursor-pointer" id="#navButton">GUIDE</p>'
   buttonReference.addEventListener("click", () => {
     toggleModal()
   })
-}
-
-window.addEventListener('load', () => {
-  // showModal(buttonReference, modalReference);
-  const buttonReference = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
-  replaceButton(buttonReference)
-  console.log("Load")
-})
+}div.headerSecondary
