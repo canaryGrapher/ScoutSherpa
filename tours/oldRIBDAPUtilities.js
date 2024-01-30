@@ -6,13 +6,6 @@
 
 const journeysTestFunction = () => {
     console.log("Tester version 1")
-    HowToBuyAFastTagTour
-    HowToMakeICICIBankCreditCardPaymentTour
-    HowToBuyAMutualFundTour
-    HowToTransferFundsTour
-    HowToPrematurelyCloseFDTour
-    HowToKnowAboutPreApprovedOffers
-    HowToApplyForICICIBankCreditCard
     console.log("Checking stability of menu links")
     console.log("For HowToMakeICICIBankCreditCardPaymentTour")
     returnMainMenuElement('Cards & Loans')
@@ -36,8 +29,6 @@ const journeysTestFunction = () => {
     returnMainMenuElement('Cards & Loans')
     returnSubMenuElement('Cards & Loans', 'Credit Cards')
 }
-
-const dashboardPageVPV = "/vpv/li/personal-banking/dashboardPage"
 const topNavData = [
     // Overview
     {
@@ -334,56 +325,39 @@ const topNavData = [
     }
 ]
 
+const dropdownMenuMarkings = [
+    {
+        name: "Overview",
+        main: "#topbar > div.light-orange > div > div:nth-child(1) > div > div",
+        legacy: "#OVERVIEW>#child"
+    },
+    {
+        name: "Bank Accounts",
+        main: "#topbar > div.light-orange > div > div:nth-child(2) > div > div",
+        legacy: "#BANK_ACCOUNTS>#child"
+    },
+    {
+        name: "Payments and Transfer",
+        main: "#topbar > div.light-orange > div > div:nth-child(3) > div > div",
+        legacy: "#PAYMENTS__TRANSFER>#child"
+    },
+    {
+        name: "Cards & Loans",
+        main: "#topbar > div.light-orange > div > div:nth-child(4) > div > div",
+        legacy: "#CARDS__LOANS>#child"
+    },
+    {
+        name: "Investments & Insurance",
+        main: "#topbar > div.light-orange > div > div:nth-child(5) > div > div",
+        legacy: "#INVESTMENTS__INSURANCE>#child"
+    },
+    {
+        name: "Customer Service",
+        main: "#topbar > div.light-orange > div > div:nth-child(6) > div > div",
+        legacy: "#CUSTOMER_SERVICE>#child"
+    },
+]
 
-function waitFor(predicate, timeout) {
-    return new Promise((resolve, reject) => {
-        const check = () => {
-            console.log('checking predicate');
-            if (!predicate()) return;
-            clearInterval(interval);
-            resolve();
-        };
-        const interval = setInterval(check, 100);
-        check();
-
-        if (!timeout) return;
-        setTimeout(() => {
-            clearInterval(interval);
-            reject();
-        }, timeout);
-    });
-}
-
-// check if the step data in the local storage is as per the current step
-// const checkPageInVPVList = async (searchVPV) => {
-//     try {
-//         const condition = window.hasOwnProperty('dataLayer') && dataLayer.length > 0;
-
-//         // Use await to wait for the promise to resolve
-//         await waitFor(condition, 5000);
-
-//         const vpvArray = [];
-//         window.dataLayer.map(item => {
-//             if (item.hasOwnProperty('page')) {
-//                 vpvArray.push(item.page);
-//             } else if (item.hasOwnProperty('vpv')) {
-//                 vpvArray.push(item.vpv);
-//             }
-//             // No need for an else statement here
-//         });
-
-//         // Return the result here
-//         return vpvArray.includes(searchVPV);
-//     } catch (e) {
-//         console.error('Fetching dataLayer timed out, switching to default');
-//         // Return a default value in case of a timeout
-//         return true;
-//     }
-// };
-
-// // get an array of all 
-const ElemAllMain = topNavData.map(element => `${element.mainElement} > .dropdown-content`);
-const ElemAllLegacy = topNavData.map(element => `${element.legacyElement} > .submenu`)
 
 window.addEventListener('load', function () {
     // <!--- block 1 --->
@@ -409,16 +383,49 @@ window.addEventListener('load', function () {
         console.log("Could not find the Map of tours in wondow scope")
     }
     // <!--- end of block 1 --->
+    // get an array of all 
+    const ElemAllMain = topNavData.map(element => `${element.mainElement} > .dropdown-content`);
+    const ElemAllLegacy = topNavData.map(element => `${element.legacyElement} > .submenu`)
+    dropdownMenuMarkings.forEach((item) => {
+        if (window.find("Relationship Manager")) {
+            // Add a mouseover event listener to the document object
+            document.querySelector(item.main)?.addEventListener("mouseover", function (event) {
+                // Check if the event target matches the selector stored in ElemAllMain
+                if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+                    // Call the showElementB function
+                    elementAction('show')
+                }
+            });
+            // Add a mouseleave event listener to the document object
+            document.querySelector(item.main)?.addEventListener("mouseleave", function (event) {
+                console.log("Mouseleave action")
+                // Check if the event target matches the selector stored in ElemAllMain
+                if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+                    // Call the hideElementB function
+                    elementAction('hide')
+                }
+            });
+        } else {
+            // Add a mouseover event listener to the document object
+            document.querySelector(item.legacy).addEventListener("mouseover", function (event) {
+                // Check if the event target matches the selector stored in ElemAllMain
+                if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+                    // Call the showElementB function
+                    elementAction('show')
+                }
+            });
+            document.querySelector(item.legacy)?.addEventListener("mouseleave", function (event) {
+                console.log("Mouseleave action")
+                // Check if the event target matches the selector stored in ElemAllMain
+                if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
+                    // Call the hideElementB function
+                    elementAction('hide')
+                }
+            });
+        }
+    })
 }, false)
 
-// Add a mouseover event listener to the document object
-document.addEventListener("mouseover", function (event) {
-    // Check if the event target matches the selector stored in ElemAllMain
-    if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-        // Call the showElementB function
-        elementAction('show')
-    }
-});
 
 const elementAction = (action) => {
     if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep && window.Shepherd.activeTour.currentStep.options.id.split('_')[1] === '2') {
@@ -432,21 +439,9 @@ const elementAction = (action) => {
     }
 };
 
-
-
-// Add a mouseleave event listener to the document object
-document.addEventListener("mouseleave", function (event) {
-    // Check if the event target matches the selector stored in ElemAllMain
-    if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-        // Call the hideElementB function
-        elementAction('hide')
-    }
-});
-
 async function returnMainMenuElement(topMenuName) {
     console.log('returnMainMenuElement', topMenuName);
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
-    // const elementCheck = await checkPageInVPVList(dashboardPageVPV)
     const elementCheck = window.find("Relationship Manager")
     const element = elementCheck ? topMenu.mainElement : topMenu.legacyElement;
     return element
@@ -455,7 +450,6 @@ async function returnSubMenuElement(topMenuName, subMenuName) {
     console.log('returnSubMenuELement', subMenuName)
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
     const subMenu = topMenu.subLinks.find(sub => sub.mainNavItemName === subMenuName);
-    // const elementCheck = await checkPageInVPVList(dashboardPageVPV)
     const elementCheck = window.find("Relationship Manager")
     const element = elementCheck ? subMenu.mainElement : subMenu.legacyElement;
     return element
