@@ -328,36 +328,35 @@ const topNavData = [
 const dropdownMenuMarkings = [
     {
         name: "Overview",
-        main: "#topbar > div.light-orange > div > div:nth-child(1) > div > div",
+        main: "#topbar > div.light-orange > div > div:nth-child(1) > div",
         legacy: "#OVERVIEW>#child"
     },
     {
         name: "Bank Accounts",
-        main: "#topbar > div.light-orange > div > div:nth-child(2) > div > div",
+        main: "#topbar > div.light-orange > div > div:nth-child(2) > div",
         legacy: "#BANK_ACCOUNTS>#child"
     },
     {
         name: "Payments and Transfer",
-        main: "#topbar > div.light-orange > div > div:nth-child(3) > div > div",
+        main: "#topbar > div.light-orange > div > div:nth-child(3) > div",
         legacy: "#PAYMENTS__TRANSFER>#child"
     },
     {
         name: "Cards & Loans",
-        main: "#topbar > div.light-orange > div > div:nth-child(4) > div > div",
+        main: "#topbar > div.light-orange > div > div:nth-child(4) > div",
         legacy: "#CARDS__LOANS>#child"
     },
     {
         name: "Investments & Insurance",
-        main: "#topbar > div.light-orange > div > div:nth-child(5) > div > div",
+        main: "#topbar > div.light-orange > div > div:nth-child(5) > div",
         legacy: "#INVESTMENTS__INSURANCE>#child"
     },
     {
         name: "Customer Service",
-        main: "#topbar > div.light-orange > div > div:nth-child(6) > div > div",
+        main: "#topbar > div.light-orange > div > div:nth-child(6) > div",
         legacy: "#CUSTOMER_SERVICE>#child"
     },
 ]
-
 
 window.addEventListener('load', function () {
     // <!--- block 1 --->
@@ -383,61 +382,7 @@ window.addEventListener('load', function () {
         console.log("Could not find the Map of tours in wondow scope")
     }
     // <!--- end of block 1 --->
-    // get an array of all 
-    const ElemAllMain = topNavData.map(element => `${element.mainElement} > .dropdown-content`);
-    const ElemAllLegacy = topNavData.map(element => `${element.legacyElement} > .submenu`)
-    dropdownMenuMarkings.forEach((item) => {
-        if (window.find("Relationship Manager")) {
-            // Add a mouseover event listener to the document object
-            document.querySelector(item.main)?.addEventListener("mouseover", function (event) {
-                // Check if the event target matches the selector stored in ElemAllMain
-                if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-                    // Call the showElementB function
-                    elementAction('show')
-                }
-            });
-            // Add a mouseleave event listener to the document object
-            document.querySelector(item.main)?.addEventListener("mouseleave", function (event) {
-                console.log("Mouseleave action")
-                // Check if the event target matches the selector stored in ElemAllMain
-                if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-                    // Call the hideElementB function
-                    elementAction('hide')
-                }
-            });
-        } else {
-            // Add a mouseover event listener to the document object
-            document.querySelector(item.legacy)?.addEventListener("mouseover", function (event) {
-                // Check if the event target matches the selector stored in ElemAllMain
-                if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-                    // Call the showElementB function
-                    elementAction('show')
-                }
-            });
-            document.querySelector(item.legacy)?.addEventListener("mouseleave", function (event) {
-                console.log("Mouseleave action")
-                // Check if the event target matches the selector stored in ElemAllMain
-                if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
-                    // Call the hideElementB function
-                    elementAction('hide')
-                }
-            });
-        }
-    })
 }, false)
-
-
-const elementAction = (action) => {
-    if (window.Shepherd.activeTour && window.Shepherd.activeTour.currentStep && window.Shepherd.activeTour.currentStep.options.id.split('_')[1] === '2') {
-        let shepherdInstance = window.Shepherd.activeTour;
-
-        if (action === 'hide' && typeof shepherdInstance.hide === 'function') {
-            shepherdInstance.hide();
-        } else if (action === 'show' && typeof shepherdInstance.show === 'function') {
-            shepherdInstance.show();
-        }
-    }
-};
 
 function returnMainMenuElement(topMenuName) {
     console.log('returnMainMenuElement', topMenuName);
@@ -453,4 +398,22 @@ function returnSubMenuElement(topMenuName, subMenuName) {
     const elementCheck = window.find("Relationship Manager")
     const element = elementCheck ? subMenu.mainElement : subMenu.legacyElement;
     return element
+}
+
+function persitentMenu(name) {
+    const elementMap = dropdownMenuMarkings.find(menu => menu.name === name);
+    if (window.find("Relationship Manager")) {
+        document.querySelector(elementMap?.main).style.display = 'block';
+    } else {
+        document.querySelector(elementMap?.legacy).style.display = 'block';
+    }
+}
+
+function removePersistentMenu(name) {
+    const elementMap = dropdownMenuMarkings.find(menu => menu.name === name);
+    if (window.find("Relationship Manager")) {
+        document.querySelector(elementMap?.main).style.display = '';
+    } else {
+        document.querySelector(elementMap?.legacy).style.display = '';
+    }
 }

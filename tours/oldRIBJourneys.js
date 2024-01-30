@@ -74,6 +74,17 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTour_2",
     title: "2/5",
     text: "Click on 'Credit Cards'",
+    on: {
+        show: () => {
+            persitentMenu('Cards & Loans')
+        },
+        next: () => {
+            removePersistentMenu('Cards & Loans')
+        },
+        cancel: () => {
+            removePersistentMenu('Cards & Loans')
+        }
+    },
     attachTo: {
         element: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
         on: "left"
@@ -139,6 +150,17 @@ HowToBuyAFastTagTour.addStep({
         element:
             returnSubMenuElement('Payments & Transfer', "Buy/Recharge Fastag"),
         on: 'left'
+    },
+    on: {
+        show: () => {
+            persitentMenu('Payments & Transfer')
+        },
+        next: () => {
+            removePersistentMenu('Payments & Transfer')
+        },
+        cancel: () => {
+            removePersistentMenu('Payments & Transfer')
+        }
     },
     advanceOn: {
         selector:
@@ -221,6 +243,17 @@ HowToBuyAMutualFundTour.addStep({
     attachTo: {
         element: returnSubMenuElement('Investments & Insurance', 'Buy Mutual Funds'),
         on: 'left'
+    },
+    on: {
+        show: () => {
+            persitentMenu('Investments & Insurance')
+        },
+        next: () => {
+            removePersistentMenu('Investments & Insurance')
+        },
+        cancel: () => {
+            removePersistentMenu('Investments & Insurance')
+        }
     },
     advanceOn: {
         selector: returnSubMenuElement('Investments & Insurance', 'Buy Mutual Funds'),
@@ -328,6 +361,17 @@ HowToTransferFundsTour.addStep({
         element: returnSubMenuElement('Payments & Transfer', 'Fund Transfer'),
         on: 'bottom'
     },
+    on: {
+        show: () => {
+            persitentMenu('Payments & Transfer')
+        },
+        next: () => {
+            removePersistentMenu('Payments & Transfer')
+        },
+        cancel: () => {
+            removePersistentMenu('Payments & Transfer')
+        }
+    },
     advanceOn: {
         selector: returnSubMenuElement('Payments & Transfer', 'Fund Transfer'),
         event: 'click'
@@ -396,6 +440,17 @@ HowToPrematurelyCloseFDTour.addStep({
     attachTo: {
         element: returnSubMenuElement('Customer Service', 'Service Request'),
         on: 'left'
+    },
+    on: {
+        show: () => {
+            persitentMenu('Customer Service')
+        },
+        next: () => {
+            removePersistentMenu('Customer Service')
+        },
+        cancel: () => {
+            removePersistentMenu('Customer Service')
+        }
     },
     advanceOn: {
         selector: returnSubMenuElement('Customer Service', 'Service Request'),
@@ -488,6 +543,17 @@ HowToKnowAboutPreApprovedOffers.addStep({
     attachTo: {
         element: returnSubMenuElement('Cards & Loans', 'Loans'),
         on: 'right'
+    },
+    on: {
+        show: () => {
+            persitentMenu('Cards & Loans')
+        },
+        next: () => {
+            removePersistentMenu('Cards & Loans')
+        },
+        cancel: () => {
+            removePersistentMenu('Cards & Loans')
+        }
     },
     advanceOn: {
         selector: returnSubMenuElement('Cards & Loans', 'Loans'),
@@ -602,6 +668,17 @@ HowToApplyForICICIBankCreditCard.addStep({
 HowToApplyForICICIBankCreditCard.addStep({
     id: 'HowToApplyForICICIBankCreditCard_2',
     title: '2/3',
+    on: {
+        show: () => {
+            persitentMenu('Cards & Loans')
+        },
+        next: () => {
+            removePersistentMenu('Cards & Loans')
+        },
+        cancel: () => {
+            removePersistentMenu('Cards & Loans')
+        }
+    },
     text: "Click on 'Credit Cards'",
     attachTo: {
         element: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
