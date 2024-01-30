@@ -1,15 +1,20 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+// update 7: Reference button recloning to remove any event listeners
+// update 6: Changed event listener from document to window
 // update 5: Prettier config
 // update 4: animation added
 // update 3: changed position of event listener and window to document
 // update 2: changed Domcontentloaded to load
 
-document.addEventListener('load', () => {
+window.addEventListener('load', () => {
   // showModal(buttonReference, modalReference);
   const buttonReference = document.querySelector(
     'body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)'
   );
+  var old_element = buttonReference;
+  var new_element = old_element.cloneNode(true);
+  old_element.parentNode.replaceChild(new_element, old_element);
   replaceButton(buttonReference);
   console.log('Load');
 });
