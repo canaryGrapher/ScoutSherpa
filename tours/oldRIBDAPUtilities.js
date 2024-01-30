@@ -407,7 +407,7 @@ window.addEventListener('load', function () {
             });
         } else {
             // Add a mouseover event listener to the document object
-            document.querySelector(item.legacy).addEventListener("mouseover", function (event) {
+            document.querySelector(item.legacy)?.addEventListener("mouseover", function (event) {
                 // Check if the event target matches the selector stored in ElemAllMain
                 if (window.Shepherd.activeTour && (event.target.matches(ElemAllMain) || event.target.matches(ElemAllLegacy))) {
                     // Call the showElementB function
@@ -439,14 +439,14 @@ const elementAction = (action) => {
     }
 };
 
-async function returnMainMenuElement(topMenuName) {
+function returnMainMenuElement(topMenuName) {
     console.log('returnMainMenuElement', topMenuName);
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
     const elementCheck = window.find("Relationship Manager")
     const element = elementCheck ? topMenu.mainElement : topMenu.legacyElement;
     return element
 }
-async function returnSubMenuElement(topMenuName, subMenuName) {
+function returnSubMenuElement(topMenuName, subMenuName) {
     console.log('returnSubMenuELement', subMenuName)
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
     const subMenu = topMenu.subLinks.find(sub => sub.mainNavItemName === subMenuName);
