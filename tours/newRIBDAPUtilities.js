@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+// update 8: Wrong URL updated in RIB UI
 // update 7: Reference button recloning to remove any event listeners
 // update 6: Changed event listener from document to window
 // update 5: Prettier config
