@@ -1,18 +1,19 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable max-lines */
+// update 5: Prettier config
 // update 4: animation added
 // update 3: changed position of event listener and window to document
 // update 2: changed Domcontentloaded to load
 
-
-
 document.addEventListener('load', () => {
   // showModal(buttonReference, modalReference);
-  const buttonReference = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
-  replaceButton(buttonReference)
-  console.log("Load")
-})
+  const buttonReference = document.querySelector(
+    'body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)'
+  );
+  replaceButton(buttonReference);
+  console.log('Load');
+});
 
-
-let isModalVisible = true;
 const modalContentText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="closeButton" onClick="toggleModal(document.querySelector('#navButton'))">×</button>
 <h2>User guidance</h2>
@@ -46,14 +47,18 @@ We hope you enjoy the new online banking experience with us.</p>
     </button>
     <button class="modalButtons" type="button">Guide me</button>
 </div>
-</div>`
-let count = 0
+</div>`;
+let count = 0;
 
 const toggleModal = (buttonReference) => {
-  const modalReference = document.querySelector("#modalContainer")
-  // modalReference?.remove()
-  if (!(modalReference || modalReference?.getAttribute("class").indexOf("modalMinimized") == -1)) {
-    console.log("Creating new modal for the very first time")
+  const modalReference = document.querySelector('#modalContainer');
+  if (
+    !(
+      modalReference ||
+      modalReference?.getAttribute('class').indexOf('modalMinimized') == -1
+    )
+  ) {
+    console.log('Creating new modal for the very first time');
     const modalStyle = document.createElement('style');
     modalStyle.innerHTML = `
   #modal {
@@ -196,63 +201,84 @@ const toggleModal = (buttonReference) => {
       background-position: 0 0;
     }
   }
-  `
+  `;
     document.head.appendChild(modalStyle);
-    showModal(buttonReference, modalReference)
+    showModal(buttonReference, modalReference);
   } else {
-    console.log("Killing modal")
-    closeAction(buttonReference, modalReference)
+    console.log('Killing modal');
+    closeAction(buttonReference, modalReference);
   }
-}
+};
 
 const showModal = (buttonReference) => {
   if (count === 0) {
-    const modalContent = modalContentText
+    const modalContent = modalContentText;
     document.body.insertAdjacentHTML('beforeend', modalContent);
-    buttonReference.addEventListener("click", closeAction(buttonReference, document.querySelector("#modalContent")))
+    buttonReference.addEventListener(
+      'click',
+      closeAction(buttonReference, document.querySelector('#modalContent'))
+    );
     count++;
   } else {
-    const modalReference = document.querySelector("#modalContainer")
-    modalReference.setAttribute("class", "modal");
+    const modalReference = document.querySelector('#modalContainer');
+    modalReference.setAttribute('class', 'modal');
   }
-}
+};
 
 const closeAction = (buttonReference, modalReference) => {
-  console.log("Clicked")
-  calculateRetract(buttonReference, modalReference)
-  console.log(modalReference)
-  console.log(modalReference?.getAttribute("class"))
-  console.log(modalReference?.getAttribute("class").indexOf("modalMinimized"))
-  const shouldminimize = (modalReference.getAttribute("class").indexOf("modalMinimized") == -1)
-  console.log(shouldminimize)
+  console.log('Clicked');
+  calculateRetract(buttonReference, modalReference);
+  console.log(modalReference);
+  console.log(modalReference?.getAttribute('class'));
+  console.log(modalReference?.getAttribute('class').indexOf('modalMinimized'));
+  const shouldminimize =
+    modalReference.getAttribute('class').indexOf('modalMinimized') == -1;
+  console.log(shouldminimize);
   if (shouldminimize) {
-    modalReference.setAttribute("class", "modalMinimized");
+    modalReference.setAttribute('class', 'modalMinimized');
   }
-  addAndRemoveGlow(buttonReference)
-}
+  addAndRemoveGlow(buttonReference);
+};
 
 const calculateRetract = (buttonReference, modalReference) => {
-  const elementDetails = buttonReference.getBoundingClientRect()
-  const modalDetails = modalReference.getBoundingClientRect()
+  const elementDetails = buttonReference.getBoundingClientRect();
+  const modalDetails = modalReference.getBoundingClientRect();
   var style = document.createElement('style');
   style.innerHTML = `.modalMinimized {
-  -webkit - transform: translate(${elementDetails.left - modalDetails.left - (modalDetails.width - elementDetails.width) + 200}px, -${modalDetails.top - elementDetails.top - (elementDetails.height - modalDetails.height) - 50}px) scale(0);
-  transform: translate(${elementDetails.left - modalDetails.left - (modalDetails.width - elementDetails.width) + 200}px, -${modalDetails.top - elementDetails.top - (elementDetails.height - modalDetails.height) - 50}px) scale(0);
+  -webkit - transform: translate(${elementDetails.left -
+    modalDetails.left -
+    (modalDetails.width - elementDetails.width) +
+    200
+    }px, -${modalDetails.top -
+    elementDetails.top -
+    (elementDetails.height - modalDetails.height) -
+    50
+    }px) scale(0);
+  transform: translate(${elementDetails.left -
+    modalDetails.left -
+    (modalDetails.width - elementDetails.width) +
+    200
+    }px, -${modalDetails.top -
+    elementDetails.top -
+    (elementDetails.height - modalDetails.height) -
+    50
+    }px) scale(0);
 } `;
   document.head.appendChild(style);
-}
+};
 const addAndRemoveGlow = (buttonReference) => {
   const style = document.createElement('style');
-  style.innerHTML = ``
+  style.innerHTML = ``;
   buttonReference.classList.add('glow-indicator');
   setTimeout(function () {
     buttonReference.classList.remove('glow-indicator');
   }, 5000); // 5000 milliseconds = 5 seconds
-}
+};
 
 const replaceButton = (buttonReference) => {
-  buttonReference.innerHTML = '<p _ngcontent-ndd-c111="" class="font-10 font-extra-bold cursor-pointer" id="#navButton">GUIDE</p>'
-  buttonReference.addEventListener("click", () => {
-    toggleModal()
-  })
-}
+  buttonReference.innerHTML =
+    '<p _ngcontent-ndd-c111="" class="font-10 font-extra-bold cursor-pointer" id="#navButton">New here?</p>';
+  buttonReference.addEventListener('click', () => {
+    toggleModal();
+  });
+};
