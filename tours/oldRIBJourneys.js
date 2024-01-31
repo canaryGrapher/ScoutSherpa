@@ -16,6 +16,44 @@
 // 4 - How to view personal loan account statement
 // 5 - How to update my PAN details in savings accounts
 
+window.addEventListener("load", () => {
+    const updateStepOptions1 = {
+        id: "HowToMakeICICIBankCreditCardPaymentTour_1",
+        attachTo: {
+            element: returnMainMenuElement('Cards & Loans'),
+            on: "right"
+        },
+        advanceOn: {
+            selector: returnMainMenuElement('Cards & Loans'),
+            event: 'mouseover',
+        },
+    }
+    const updateStepOptions2 = {
+        id: "HowToMakeICICIBankCreditCardPaymentTour_2",
+        on: {
+            show: () => {
+                persitentMenu('Cards & Loans')
+            },
+            next: () => {
+                removePersistentMenu('Cards & Loans')
+            },
+            cancel: () => {
+                removePersistentMenu('Cards & Loans')
+            }
+        },
+        attachTo: {
+            element: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
+            on: "left"
+        },
+        advanceOn: {
+            selector: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
+            event: 'click',
+        }
+    }
+    HowToMakeICICIBankCreditCardPaymentTour.updateStepOptions(updateStepOptions1)
+    HowToMakeICICIBankCreditCardPaymentTour.updateStepOptions(updateStepOptions2)
+})
+
 var HowToMakeICICIBankCreditCardPaymentTour = new Shepherd.Tour({
     tourName: "How to make ICICI bank credit card payment?",
     instanceCaller: "HowToMakeICICIBankCreditCardPaymentTour",
@@ -60,39 +98,13 @@ HowToMakeICICIBankCreditCardPaymentTour.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTour_1",
     title: "1/5",
     text: "Move your mouse over 'Cards & Loans'",
-    attachTo: {
-        element: returnMainMenuElement('Cards & Loans'),
-        on: "right"
-    },
-    advanceOn: {
-        selector: returnMainMenuElement('Cards & Loans'),
-        event: 'mouseover',
-    },
 })
 // Select the 'Credit Cards' sub-link under 'Cards & Loans'
 HowToMakeICICIBankCreditCardPaymentTour.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTour_2",
     title: "2/5",
     text: "Click on 'Credit Cards'",
-    on: {
-        show: () => {
-            persitentMenu('Cards & Loans')
-        },
-        next: () => {
-            removePersistentMenu('Cards & Loans')
-        },
-        cancel: () => {
-            removePersistentMenu('Cards & Loans')
-        }
-    },
-    attachTo: {
-        element: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
-        on: "left"
-    },
-    advanceOn: {
-        selector: returnSubMenuElement('Cards & Loans', 'Credit Cards'),
-        event: 'click',
-    }
+
 })
 // Select the credit card you want to pay bill for
 HowToMakeICICIBankCreditCardPaymentTour.addStep({

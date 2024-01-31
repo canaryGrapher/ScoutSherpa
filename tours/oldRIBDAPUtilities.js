@@ -402,9 +402,12 @@ function returnSubMenuElement(topMenuName, subMenuName) {
 
 function persitentMenu(name) {
     const elementMap = dropdownMenuMarkings.find(menu => menu.name === name);
+    console.log('Waiting for relatoinship manager text on dashboard')
     if (window.find("Relationship Manager")) {
+        console.log('Relatoinship manager text on dashboard found')
         document.querySelector(elementMap?.main).style.display = 'block';
     } else {
+        console.log('Relatoinship manager text on dashboard not found')
         document.querySelector(elementMap?.legacy).style.display = 'block';
     }
 }
