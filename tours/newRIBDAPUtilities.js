@@ -10,13 +10,22 @@
 
 window.addEventListener('load', () => {
   // showModal(buttonReference, modalReference);
-  const buttonReference = document.querySelector(
-    'body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)'
-  );
-  var old_element = buttonReference;
-  var new_element = old_element.cloneNode(true);
-  old_element.parentNode.replaceChild(new_element, old_element);
-  replaceButton(buttonReference);
+  const buttonRef = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
+  buttonRef.remove()
+  const header = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary")
+  // Create a new div element
+  const newDiv = document.createElement('div');
+  newDiv.className = 'headerButton hide-content';
+  newDiv.id = '#navButtonForGuide';
+  newDiv.style.cssText = 'background-color: #feeee5; border - radius: 2.34375vw; font-size: .9375vw; line - height: 1.25vw; padding: .665vw 1.015625vw;'
+  newDiv.onclick = toggleModal(document.getElementById('navButtonForGuide'));
+  // Create a new p element inside the div
+  const newP = document.createElement('p');
+  newP.className = 'header-text';
+  newP.textContent = 'New here?';
+  // Append the p element to the div element
+  newDiv.appendChild(newP);
+  header.insertBefore(newDiv, header.firstChild);
   console.log('Load');
 });
 
@@ -279,12 +288,4 @@ const addAndRemoveGlow = (buttonReference) => {
   setTimeout(function () {
     buttonReference.classList.remove('glow-indicator');
   }, 5000); // 5000 milliseconds = 5 seconds
-};
-
-const replaceButton = (buttonReference) => {
-  buttonReference.innerHTML =
-    '<p _ngcontent-ndd-c111="" class="font-10 font-extra-bold cursor-pointer" id="#navButton">New here?</p>';
-  buttonReference.addEventListener('click', () => {
-    toggleModal();
-  });
 };
