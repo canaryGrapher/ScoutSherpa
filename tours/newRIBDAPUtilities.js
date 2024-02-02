@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable max-lines */
+// Updates to file
 // update 10: Only support for logged-in section
 // update 9: Using Observer API now to wait for button to appear
 // update 8: Wrong URL updated in RIB UI
@@ -9,6 +8,10 @@
 // update 4: animation added
 // update 3: changed position of event listener and window to document
 // update 2: changed Domcontentloaded to load
+
+
+/* eslint-disable prettier/prettier */
+/* eslint-disable max-lines */
 
 let count = 0;
 
