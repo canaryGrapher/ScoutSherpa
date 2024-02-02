@@ -18,7 +18,7 @@ window.addEventListener('load', () => {
   newDiv.className = 'headerButton hide-content';
   newDiv.id = '#navButtonForGuide';
   newDiv.style.cssText = 'background-color: #feeee5; border - radius: 2.34375vw; font-size: .9375vw; line - height: 1.25vw; padding: .665vw 1.015625vw;'
-  newDiv.onclick = toggleModal(document.getElementById('navButtonForGuide'));
+  newDiv.onclick = () => toggleModal(document.getElementById('navButtonForGuide'))
   // Create a new p element inside the div
   const newP = document.createElement('p');
   newP.className = 'header-text';
@@ -29,7 +29,8 @@ window.addEventListener('load', () => {
   console.log('Load');
 });
 
-const modalContentText = `<div id="modalContainer" class="modal">
+const getModalText = () => {
+  const modalText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="closeButton" onClick="toggleModal(document.querySelector('#navButton'))">×</button>
 <h2>User guidance</h2>
 <p>Welcome to the new and improved ICICI Bank website! We have redesigned our website to make your banking experience more convenient and rewarding. To help you get started, we have two options for you. Watch our video demos that show you how to use the new website and its features, or start a guided journey that takes you through the main sections and pages of the new website. Choose either option by clicking the respective buttons.
@@ -63,12 +64,14 @@ We hope you enjoy the new online banking experience with us.</p>
     <button class="modalButtons" type="button">Guide me</button>
 </div>
 </div>`;
+  return modalText;
+}
 let count = 0;
 
 const toggleModal = (buttonReference) => {
   const modalReference = document.querySelector('#modalContainer');
   if (
-    !(
+    (
       modalReference ||
       modalReference?.getAttribute('class').indexOf('modalMinimized') == -1
     )
@@ -227,7 +230,7 @@ const toggleModal = (buttonReference) => {
 
 const showModal = (buttonReference) => {
   if (count === 0) {
-    const modalContent = modalContentText;
+    const modalContent = getModalText();
     document.body.insertAdjacentHTML('beforeend', modalContent);
     buttonReference.addEventListener(
       'click',
