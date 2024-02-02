@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+// update 10: Only support for logged-in section
 // update 9: Using Observer API now to wait for button to appear
 // update 8: Wrong URL updated in RIB UI
 // update 7: Reference button recloning to remove any event listeners
