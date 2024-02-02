@@ -1,4 +1,5 @@
-// Updates to file
+// Updates to file - 1
+// update 11: Moved Observer API options inside load event callback
 // update 10: Only support for logged-in section
 // update 9: Using Observer API now to wait for button to appear
 // update 8: Wrong URL updated in RIB UI
@@ -286,13 +287,12 @@ const toggleModal = (buttonReference) => {
   }
 };
 
+const ObserverCall = () => {
 let options = {
   root: document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)"),
   rootMargin: "0px",
   threshold: 1.0,
 };
-
-const ObserverCall = () => {
   options.root.remove()
   const buttonRef = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
   console.log(buttonRef)
