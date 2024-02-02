@@ -8,11 +8,8 @@
 // update 3: changed position of event listener and window to document
 // update 2: changed Domcontentloaded to load
 
-const removeOriginalButton = (reference) => {
-  reference?.remove()
-}
-
 const addAndRemoveGlow = (buttonReference) => {
+  console.log("Invoking addAndRemoveGlow()")
   const style = document.createElement('style');
   style.innerHTML = ``;
   buttonReference.classList.add('glow-indicator');
@@ -22,6 +19,7 @@ const addAndRemoveGlow = (buttonReference) => {
 };
 
 const getModalText = () => {
+  console.log("Invoking getModalText()")
   const modalText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="closeButton" onClick="toggleModal(document.querySelector('#navButton'))">×</button>
 <h2>User guidance</h2>
@@ -61,6 +59,7 @@ We hope you enjoy the new online banking experience with us.</p>
 let count = 0;
 
 const showModal = (buttonReference) => {
+  console.log("Invoking showModal()")
   if (count === 0) {
     const modalContent = getModalText();
     document.body.insertAdjacentHTML('beforeend', modalContent);
@@ -76,6 +75,7 @@ const showModal = (buttonReference) => {
 };
 
 const closeAction = (buttonReference, modalReference) => {
+  console.log('Invoking closeAction()')
   console.log('Clicked');
   calculateRetract(buttonReference, modalReference);
   console.log(modalReference);
@@ -91,6 +91,7 @@ const closeAction = (buttonReference, modalReference) => {
 };
 
 const calculateRetract = (buttonReference, modalReference) => {
+  console.log('Invoking calculateRetract()')
   const elementDetails = buttonReference.getBoundingClientRect();
   const modalDetails = modalReference.getBoundingClientRect();
   var style = document.createElement('style');
@@ -119,6 +120,7 @@ const calculateRetract = (buttonReference, modalReference) => {
 
 
 const toggleModal = (buttonReference) => {
+  console.log("invoking toggleModal()")
   const modalReference = document.querySelector('#modalContainer');
   if (
     (
@@ -278,11 +280,17 @@ const toggleModal = (buttonReference) => {
   }
 };
 
-window.addEventListener('load', () => {
-  // showModal(buttonReference, modalReference);
+let options = {
+  root: document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)"),
+  rootMargin: "0px",
+  threshold: 1.0,
+};
+
+const ObserverCall = () => {
+  options.root.remove()
   const buttonRef = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
   console.log(buttonRef)
-  removeOriginalButton(buttonRef)
+  // removeOriginalButton(buttonRef)
   const header = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary")
   // Create a new div element
   const newDiv = document.createElement('div');
@@ -298,4 +306,11 @@ window.addEventListener('load', () => {
   newDiv.appendChild(newP);
   header.insertBefore(newDiv, header.firstChild);
   console.log('Load');
-});
+}
+
+let observer = new IntersectionObserver(ObserverCall, options);
+
+window.addEventListener('load', () => {
+  let target = document.querySelector("body");
+  observer.observe(target);
+})
