@@ -8,26 +8,18 @@
 // update 3: changed position of event listener and window to document
 // update 2: changed Domcontentloaded to load
 
-window.addEventListener('load', () => {
-  // showModal(buttonReference, modalReference);
-  const buttonRef = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
-  buttonRef.remove()
-  const header = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary")
-  // Create a new div element
-  const newDiv = document.createElement('div');
-  newDiv.className = 'headerButton hide-content';
-  newDiv.id = '#navButtonForGuide';
-  newDiv.style.cssText = 'background-color: #feeee5; border - radius: 2.34375vw; font-size: .9375vw; line - height: 1.25vw; padding: .665vw 1.015625vw;'
-  newDiv.onclick = () => toggleModal(document.getElementById('navButtonForGuide'))
-  // Create a new p element inside the div
-  const newP = document.createElement('p');
-  newP.className = 'header-text';
-  newP.textContent = 'New here?';
-  // Append the p element to the div element
-  newDiv.appendChild(newP);
-  header.insertBefore(newDiv, header.firstChild);
-  console.log('Load');
-});
+const removeOriginalButton = (reference) => {
+  reference?.remove()
+}
+
+const addAndRemoveGlow = (buttonReference) => {
+  const style = document.createElement('style');
+  style.innerHTML = ``;
+  buttonReference.classList.add('glow-indicator');
+  setTimeout(function () {
+    buttonReference.classList.remove('glow-indicator');
+  }, 5000); // 5000 milliseconds = 5 seconds
+};
 
 const getModalText = () => {
   const modalText = `<div id="modalContainer" class="modal">
@@ -67,6 +59,64 @@ We hope you enjoy the new online banking experience with us.</p>
   return modalText;
 }
 let count = 0;
+
+const showModal = (buttonReference) => {
+  if (count === 0) {
+    const modalContent = getModalText();
+    document.body.insertAdjacentHTML('beforeend', modalContent);
+    buttonReference.addEventListener(
+      'click',
+      closeAction(buttonReference, document.querySelector('#modalContent'))
+    );
+    count++;
+  } else {
+    const modalReference = document.querySelector('#modalContainer');
+    modalReference.setAttribute('class', 'modal');
+  }
+};
+
+const closeAction = (buttonReference, modalReference) => {
+  console.log('Clicked');
+  calculateRetract(buttonReference, modalReference);
+  console.log(modalReference);
+  console.log(modalReference?.getAttribute('class'));
+  console.log(modalReference?.getAttribute('class').indexOf('modalMinimized'));
+  const shouldminimize =
+    modalReference.getAttribute('class').indexOf('modalMinimized') == -1;
+  console.log(shouldminimize);
+  if (shouldminimize) {
+    modalReference.setAttribute('class', 'modalMinimized');
+  }
+  addAndRemoveGlow(buttonReference);
+};
+
+const calculateRetract = (buttonReference, modalReference) => {
+  const elementDetails = buttonReference.getBoundingClientRect();
+  const modalDetails = modalReference.getBoundingClientRect();
+  var style = document.createElement('style');
+  style.innerHTML = `.modalMinimized {
+  -webkit - transform: translate(${elementDetails.left -
+    modalDetails.left -
+    (modalDetails.width - elementDetails.width) +
+    200
+    }px, -${modalDetails.top -
+    elementDetails.top -
+    (elementDetails.height - modalDetails.height) -
+    50
+    }px) scale(0);
+  transform: translate(${elementDetails.left -
+    modalDetails.left -
+    (modalDetails.width - elementDetails.width) +
+    200
+    }px, -${modalDetails.top -
+    elementDetails.top -
+    (elementDetails.height - modalDetails.height) -
+    50
+    }px) scale(0);
+} `;
+  document.head.appendChild(style);
+};
+
 
 const toggleModal = (buttonReference) => {
   const modalReference = document.querySelector('#modalContainer');
@@ -228,67 +278,24 @@ const toggleModal = (buttonReference) => {
   }
 };
 
-const showModal = (buttonReference) => {
-  if (count === 0) {
-    const modalContent = getModalText();
-    document.body.insertAdjacentHTML('beforeend', modalContent);
-    buttonReference.addEventListener(
-      'click',
-      closeAction(buttonReference, document.querySelector('#modalContent'))
-    );
-    count++;
-  } else {
-    const modalReference = document.querySelector('#modalContainer');
-    modalReference.setAttribute('class', 'modal');
-  }
-};
-
-const closeAction = (buttonReference, modalReference) => {
-  console.log('Clicked');
-  calculateRetract(buttonReference, modalReference);
-  console.log(modalReference);
-  console.log(modalReference?.getAttribute('class'));
-  console.log(modalReference?.getAttribute('class').indexOf('modalMinimized'));
-  const shouldminimize =
-    modalReference.getAttribute('class').indexOf('modalMinimized') == -1;
-  console.log(shouldminimize);
-  if (shouldminimize) {
-    modalReference.setAttribute('class', 'modalMinimized');
-  }
-  addAndRemoveGlow(buttonReference);
-};
-
-const calculateRetract = (buttonReference, modalReference) => {
-  const elementDetails = buttonReference.getBoundingClientRect();
-  const modalDetails = modalReference.getBoundingClientRect();
-  var style = document.createElement('style');
-  style.innerHTML = `.modalMinimized {
-  -webkit - transform: translate(${elementDetails.left -
-    modalDetails.left -
-    (modalDetails.width - elementDetails.width) +
-    200
-    }px, -${modalDetails.top -
-    elementDetails.top -
-    (elementDetails.height - modalDetails.height) -
-    50
-    }px) scale(0);
-  transform: translate(${elementDetails.left -
-    modalDetails.left -
-    (modalDetails.width - elementDetails.width) +
-    200
-    }px, -${modalDetails.top -
-    elementDetails.top -
-    (elementDetails.height - modalDetails.height) -
-    50
-    }px) scale(0);
-} `;
-  document.head.appendChild(style);
-};
-const addAndRemoveGlow = (buttonReference) => {
-  const style = document.createElement('style');
-  style.innerHTML = ``;
-  buttonReference.classList.add('glow-indicator');
-  setTimeout(function () {
-    buttonReference.classList.remove('glow-indicator');
-  }, 5000); // 5000 milliseconds = 5 seconds
-};
+window.addEventListener('load', () => {
+  // showModal(buttonReference, modalReference);
+  const buttonRef = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
+  console.log(buttonRef)
+  removeOriginalButton(buttonRef)
+  const header = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary")
+  // Create a new div element
+  const newDiv = document.createElement('div');
+  newDiv.className = 'headerButton hide-content';
+  newDiv.id = '#navButtonForGuide';
+  newDiv.style.cssText = 'background-color: #feeee5; border - radius: 2.34375vw; font-size: .9375vw; line - height: 1.25vw; padding: .665vw 1.015625vw;'
+  newDiv.onclick = () => toggleModal(document.getElementById('navButtonForGuide'))
+  // Create a new p element inside the div
+  const newP = document.createElement('p');
+  newP.className = 'header-text';
+  newP.textContent = 'New here?';
+  // Append the p element to the div element
+  newDiv.appendChild(newP);
+  header.insertBefore(newDiv, header.firstChild);
+  console.log('Load');
+});
