@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+// update 9: Using Observer API now to wait for button to appear
 // update 8: Wrong URL updated in RIB UI
 // update 7: Reference button recloning to remove any event listeners
 // update 6: Changed event listener from document to window
@@ -7,6 +8,8 @@
 // update 4: animation added
 // update 3: changed position of event listener and window to document
 // update 2: changed Domcontentloaded to load
+
+let count = 0;
 
 const addAndRemoveGlow = (buttonReference) => {
   console.log("Invoking addAndRemoveGlow()")
@@ -56,7 +59,6 @@ We hope you enjoy the new online banking experience with us.</p>
 </div>`;
   return modalText;
 }
-let count = 0;
 
 const showModal = (buttonReference) => {
   console.log("Invoking showModal()")
@@ -311,6 +313,9 @@ const ObserverCall = () => {
 let observer = new IntersectionObserver(ObserverCall, options);
 
 window.addEventListener('load', () => {
-  let target = document.querySelector("body");
-  observer.observe(target);
+  const location = window.location.pathname;
+  if (location != '/in/login-page') {
+    let target = document.querySelector("body");
+    observer.observe(target);
+  }
 })
