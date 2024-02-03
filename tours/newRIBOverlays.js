@@ -1,3 +1,6 @@
+// Updated: February 3, 2024
+// All overlays for new RIB are stored here
+
 // eslint-disable-next-line no-undef
 var GuideMeWhatsOnNewRIBAccountPage = new Shepherd.Tour({
     tourName: "Guide Me: What's on new Bank account page",
