@@ -10,7 +10,6 @@
 // update 3: changed position of event listener and window to document
 // update 2: changed Domcontentloaded to load
 
-
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
 
@@ -287,16 +286,11 @@ const toggleModal = (buttonReference) => {
   }
 };
 
+
 const ObserverCall = () => {
-let options = {
-  root: document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)"),
-  rootMargin: "0px",
-  threshold: 1.0,
-};
-  options.root.remove()
   const buttonRef = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
   console.log(buttonRef)
-  // removeOriginalButton(buttonRef)
+  buttonRef.remove()
   const header = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary")
   // Create a new div element
   const newDiv = document.createElement('div');
@@ -314,11 +308,15 @@ let options = {
   console.log('Load');
 }
 
-let observer = new IntersectionObserver(ObserverCall, options);
-
 window.addEventListener('load', () => {
-  const location = window.location.pathname;
-  if (location != '/in/login-page') {
+  let options = {
+    root: document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)"),
+    rootMargin: "0px",
+    threshold: 1.0,
+  };
+  let observer = new IntersectionObserver(ObserverCall, options);
+  const pageCurrentLocation = window.location.pathname;
+  if (pageCurrentLocation != '/in/login-page') {
     let target = document.querySelector("body");
     observer.observe(target);
   }
