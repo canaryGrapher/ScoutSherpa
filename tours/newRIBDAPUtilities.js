@@ -1,4 +1,5 @@
-// Feb 02, 2024 | Updates to file
+// Feb 03, 2024 | Updates to file
+// update 12: Fixed incorrect variable naming 'location'
 // update 11: Moved Observer API options inside load event callback
 // update 10: Only support for logged-in section
 // update 9: Using Observer API now to wait for button to appear
