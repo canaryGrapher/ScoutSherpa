@@ -255,49 +255,6 @@ export class Tour extends Evented {
     console.log('Current tour instance caller is ', _tourInstanceCaller);
     const step = isString(key) ? this.getById(key) : this.steps[key];
     // check if the step data in the local storage is as per the current step
-    const getPageFromArray = (dataArray) => {
-      const vpvArray = [];
-      dataArray.forEach((item) => {
-        // eslint-disable-next-line no-prototype-builtins
-        if (item.hasOwnProperty('page')) {
-          vpvArray.push(item.page);
-          // eslint-disable-next-line no-prototype-builtins
-        } else if (item.hasOwnProperty('vpv')) {
-          vpvArray.push(item.vpv);
-        } else {
-          void 0;
-        }
-      });
-      return vpvArray;
-    };
-
-    // check if the page VPV passed in the step matches with any of the VPV available in the dataLayer populated by GTM
-    const vpvInPage = () => {
-      let pageVPV = getPageFromArray(window.dataLayer);
-      let currentVPV = step.options.pageLink;
-      console.log('Current page VPV is ', pageVPV);
-      console.log('Current step VPV is ', currentVPV);
-      if (pageVPV.indexOf(currentVPV) > -1) {
-        return true;
-      } else {
-        return false;
-      }
-    };
-
-    // check if the window pathname passed in the step matches with the location.pathname of the window
-    const pathnameInPage = () => {
-      const pathname = window.location.pathname;
-      const currentPageName = step.options.pageLink;
-      if (pathname === currentPageName) {
-        return true;
-      }
-      return false;
-    };
-
-    // Check if the either the page VPV pageLink matches, or the pathname matches passed in the step
-    const pageLinkMatches = () => {
-      return vpvInPage || pathnameInPage;
-    };
 
     if (step) {
       this._updateStateBeforeShow();
@@ -308,11 +265,7 @@ export class Tour extends Evented {
       if (shouldSkipStep) {
         this._skipStep(step, forward);
       } else {
-        if (
-          _tourInstanceCaller === this.options.instanceCaller &&
-          pageLinkMatches()
-        ) {
-          console.log('Page VPV matched, loading step');
+        if (_tourInstanceCaller === this.options.instanceCaller) {
           this.trigger('show', {
             step,
             previous: this.currentStep
@@ -320,8 +273,6 @@ export class Tour extends Evented {
 
           this.currentStep = step;
           step.show();
-        } else {
-          console.log("page VPV didn't match, skipping step");
         }
       }
     }

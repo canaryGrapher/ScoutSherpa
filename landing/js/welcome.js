@@ -51,7 +51,6 @@
             selector: '.hero-welcome',
             event: 'click',
           },
-          pageLink: "/",
           id: 'welcome'
         }
       ]
@@ -82,7 +81,6 @@
           }
         ],
         id: 'including',
-        pageLink: "/",
       },
       {
         title: '3/6',
@@ -98,7 +96,6 @@
         },
 
         id: 'creating',
-        pageLink: "/",
       },
       {
         title: '4/6',
@@ -112,7 +109,6 @@
           selector: '.hero-example',
           event: 'click',
         },
-        pageLink: "/",
       }
     ];
 
@@ -122,7 +118,6 @@
     shepherd.addStep({
       title: '5/6',
       id: 'mfTour_5',
-      pageLink: "/",
       advanceOn: {
         selector: '.hero-welcome',
         event: 'click',
@@ -149,7 +144,6 @@
     shepherd.addStep({
       title: '6/6',
       id: 'mfTour_6',
-      pageLink: "/",
       text: 'Star Shepherd on Github so you remember it for your next project',
       advanceOn: {
         selector: '.hero-followup',
