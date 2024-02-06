@@ -1,4 +1,5 @@
-// Feb 03, 2024 | Updates to file
+// Feb 06, 2024 | Updates to file
+// update 13: added if condition depended on count rather than modal
 // update 12: Fixed incorrect variable naming 'location'
 // update 11: Moved Observer API options inside load event callback
 // update 10: Only support for logged-in section
@@ -129,12 +130,7 @@ const calculateRetract = (buttonReference, modalReference) => {
 const toggleModal = (buttonReference) => {
   console.log("invoking toggleModal()")
   const modalReference = document.querySelector('#modalContainer');
-  if (
-    (
-      modalReference ||
-      modalReference?.getAttribute('class').indexOf('modalMinimized') == -1
-    )
-  ) {
+  if (count == 0) {
     console.log('Creating new modal for the very first time');
     const modalStyle = document.createElement('style');
     modalStyle.innerHTML = `
@@ -309,7 +305,7 @@ const ObserverCall = () => {
   console.log('Load');
 }
 
-window.addEventListener('load', () => {
+const loadAction = () => {
   let options = {
     root: document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)"),
     rootMargin: "0px",
@@ -321,4 +317,8 @@ window.addEventListener('load', () => {
     let target = document.querySelector("body");
     observer.observe(target);
   }
+}
+
+window.addEventListener('load', () => {
+  setTimeout(loadAction, 5000)
 })
