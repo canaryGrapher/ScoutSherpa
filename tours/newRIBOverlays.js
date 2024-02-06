@@ -1,8 +1,8 @@
+/* eslint-disable prettier/prettier */
+
 // Updated: February 4, 2024
 // update 1: removed dependency on Page VPVs
 // All overlays for new RIB are stored here
-
-/* eslint-disable prettier/prettier */
 // eslint-disable-next-line no-undef
 var GuideMeWhatsOnNewRIBAccountPage = new Shepherd.Tour({
 	tourName: "Guide Me: What's on new Bank account page",

@@ -1,16 +1,19 @@
+/* eslint-disable prettier/prettier */
+
 // Feb 06, 2024 | Updates to file
-// update 13: added if condition depended on count rather than modal
+// update 14: Separated functions for Addition of button, and removal of buttons
+// update 13: Added if condition depended on count rather than modal
 // update 12: Fixed incorrect variable naming 'location'
 // update 11: Moved Observer API options inside load event callback
 // update 10: Only support for logged-in section
-// update 9: Using Observer API now to wait for button to appear
-// update 8: Wrong URL updated in RIB UI
-// update 7: Reference button recloning to remove any event listeners
-// update 6: Changed event listener from document to window
-// update 5: Prettier config
-// update 4: animation added
-// update 3: changed position of event listener and window to document
-// update 2: changed Domcontentloaded to load
+// update 09: Using Observer API now to wait for button to appear
+// update 08: Wrong URL updated in RIB UI
+// update 07: Reference button recloning to remove any event listeners
+// update 06: Changed event listener from document to window
+// update 05: Prettier config
+// update 04: Animation added
+// update 03: Changed position of event listener and window to document
+// update 02: Changed Domcontentloaded to load
 
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
@@ -284,41 +287,48 @@ const toggleModal = (buttonReference) => {
 };
 
 
-const ObserverCall = () => {
-  const buttonRef = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
+const RemoveNav = (ref) => {
+  const buttonRef = document.querySelector(ref)
   console.log(buttonRef)
   buttonRef.remove()
-  const header = document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary")
+  console.log("Existing button removed")
+}
+
+const AddNav = (ref) => {
+  const header = document.querySelector(ref)
   // Create a new div element
   const newDiv = document.createElement('div');
   newDiv.className = 'headerButton hide-content';
   newDiv.id = 'navButtonForGuide';
-  newDiv.style.cssText = 'background-color: #feeee5; border - radius: 2.34375vw; font-size: .9375vw; line - height: 1.25vw; padding: .665vw 1.015625vw;'
+  newDiv.style.cssText = 'background-color: #feeee5; border-radius: 2.34375vw; font-size: .9375vw; line-height: 1.25vw; padding: .665vw 1.015625vw;'
   newDiv.onclick = () => toggleModal(document.querySelector("#navButtonForGuide"))
   // Create a new p element inside the div
   const newP = document.createElement('p');
   newP.className = 'header-text';
   newP.textContent = 'New here?';
-  // Append the p element to the div element
   newDiv.appendChild(newP);
   header.insertBefore(newDiv, header.firstChild);
-  console.log('Load');
+  console.log('New navigation button added');
 }
 
-const loadAction = () => {
-  let options = {
-    root: document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)"),
-    rootMargin: "0px",
-    threshold: 1.0,
-  };
-  let observer = new IntersectionObserver(ObserverCall, options);
-  const pageCurrentLocation = window.location.pathname;
-  if (pageCurrentLocation != '/in/login-page') {
-    let target = document.querySelector("body");
-    observer.observe(target);
-  }
-}
+// const loadAction = () => {
+// let options = {
+//   root: document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)"),
+//   rootMargin: "0px",
+//   threshold: 1.0,
+// };
+// let observer = new IntersectionObserver(ObserverCall, options);
+// const pageCurrentLocation = window.location.pathname;
+// if (pageCurrentLocation != '/in/login-page') {
+//   let target = document.querySelector("body");
+//   observer.observe(target);
+// }
+// }
 
-window.addEventListener('load', () => {
-  setTimeout(loadAction, 5000)
+window.addEventListener('DOMContentLoaded', () => {
+  console.log('DOMContentLoaded')
+  console.log('====================== Adding Navigation Button =============================')
+  AddNav("body > app-root > app-header > div > header > div > div.headerSecondary")
+  console.log('====================== Removing Navigation Button =============================')
+  RemoveNav("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
 })
