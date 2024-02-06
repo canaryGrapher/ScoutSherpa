@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+/* eslint-disable prettier/prettier */
 import { Evented } from './evented.js';
 import { Step } from './step.js';
 import autoBind from './utils/auto-bind.js';
@@ -13,21 +13,19 @@ import { normalizePrefix, uuid } from './utils/general.js';
 import ShepherdModal from './components/shepherd-modal.svelte';
 
 const Shepherd = new Evented();
+
 /**
  * Class representing the site tour
  * @extends {Evented}
  */
-
 export class Tour extends Evented {
   /**
    * @param {Object} options The options for the tour
-   * @param {boolean | (() => boolean) | Promise<boolean> | (() => Promise<boolean>)} options.confirmCancel If true, will issue a `window.confirm` before cancelling.
+   * @param {boolean | function(): boolean | Promise<boolean> | function(): Promise<boolean>} options.confirmCancel If true, will issue a `window.confirm` before cancelling.
    * If it is a function(support Async Function), it will be called and wait for the return value, and will only be cancelled if the value returned is true
    * @param {string} options.confirmCancelMessage The message to display in the `window.confirm` dialog
    * @param {string} options.classPrefix The prefix to add to the `shepherd-enabled` and `shepherd-target` class names as well as the `data-shepherd-step-id`.
    * @param {Object} options.defaultStepOptions Default options for Steps ({@link Step#constructor}), created through `addStep`
-   * @param {string} options.tourName An optional "name" for the tour. This will be appended to the the tour's
-   * @param {string} options.instanceCaller The object name sassigned to the tour instance
    * @param {boolean} options.exitOnEsc Exiting the tour with the escape key will be enabled unless this is explicitly
    * set to false.
    * @param {boolean} options.keyboardNavigation Navigating the tour via left and right arrow keys will be enabled
@@ -35,9 +33,9 @@ export class Tour extends Evented {
    * @param {HTMLElement} options.stepsContainer An optional container element for the steps.
    * If not set, the steps will be appended to `document.body`.
    * @param {HTMLElement} options.modalContainer An optional container element for the modal.
-   * If not set, the tour will have a default name "tour"
    * If not set, the modal will be appended to `document.body`.
    * @param {object[] | Step[]} options.steps An array of step options objects or Step instances to initialize the tour with
+   * @param {string} options.tourName An optional "name" for the tour. This will be appended to the the tour's
    * dynamically generated `id` property.
    * @param {boolean} options.useModalOverlay Whether or not steps should be placed above a darkened
    * modal overlay. If true, the overlay will create an opening around the target element so that it
@@ -55,6 +53,7 @@ export class Tour extends Evented {
     this.classPrefix = normalizePrefix(this.options.classPrefix);
     this.steps = [];
     this.addSteps(this.options.steps);
+
     // Pass these events onto the global Shepherd object
     const events = [
       'active',
@@ -73,7 +72,9 @@ export class Tour extends Evented {
         });
       })(event);
     });
+
     this._setTourID();
+
     return this;
   }
 
@@ -86,16 +87,19 @@ export class Tour extends Evented {
    */
   addStep(options, index) {
     let step = options;
+
     if (!(step instanceof Step)) {
       step = new Step(this, step);
     } else {
       step.tour = this;
     }
+
     if (!isUndefined(index)) {
       this.steps.splice(index, 0, step);
     } else {
       this.steps.push(step);
     }
+
     return step;
   }
 
@@ -219,6 +223,7 @@ export class Tour extends Evented {
    */
   removeStep(name) {
     const current = this.getCurrentStep();
+
     // Find the step, destroy it and remove it from this.steps
     this.steps.some((step, i) => {
       if (step.id === name) {
@@ -254,10 +259,10 @@ export class Tour extends Evented {
     console.log('Current step index is ', _currentStepIndex);
     console.log('Current tour instance caller is ', _tourInstanceCaller);
     const step = isString(key) ? this.getById(key) : this.steps[key];
-    // check if the step data in the local storage is as per the current step
 
     if (step) {
       this._updateStateBeforeShow();
+
       const shouldSkipStep =
         isFunction(step.options.showOn) && !step.options.showOn();
 
@@ -283,11 +288,10 @@ export class Tour extends Evented {
    */
   start() {
     console.log('Setting up tour');
-    // set the current step number in the localStorage and the tourInstanceCaller
     localStorage.setItem('tourInstanceCaller', this.options.instanceCaller);
     localStorage.setItem('currentStepIndex', 0);
-
     this.trigger('start');
+
     // Save the focused element before the tour opens
     this.focusedElBeforeOpen = document.activeElement;
     this.currentStep = null;
@@ -374,7 +378,6 @@ export class Tour extends Evented {
     const index = this.steps.indexOf(step);
 
     if (index === this.steps.length - 1) {
-      // eslint-disable-next-line max-lines
       this.complete();
     } else {
       const nextIndex = forward ? index + 1 : index - 1;
@@ -390,7 +393,6 @@ export class Tour extends Evented {
   _updateStateBeforeShow() {
     if (this.currentStep) {
       this.currentStep.hide();
-      // eslint-disable-next-line max-lines
     }
 
     if (!this.isActive()) {

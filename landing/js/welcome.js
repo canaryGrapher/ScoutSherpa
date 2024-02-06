@@ -7,7 +7,7 @@
       // add tour class instance name to local storage
       // so we don't show the tour again
       // resumeTour();
-      shepherd.start();
+      // shepherd.start();
     }, 400)
   }
 
@@ -44,7 +44,11 @@
           text: 'This is the first step of Shepherd JS',
           title: "1/6",
           attachTo: {
-            element: '.hero-welcome',
+            element: () => {
+              setTimeout(() => {
+                return '.hero-welcome'
+              }, 5000)
+            },
             on: 'bottom'
           },
           advanceOn: {

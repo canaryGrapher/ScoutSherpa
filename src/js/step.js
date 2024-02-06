@@ -24,12 +24,9 @@ export class Step extends Evented {
   /**
    * Create a step
    * @param {Tour} tour The tour for the step
-   * @param {tourName} tourName The tour name for the step
-   * @param {useModalOverlay} useModalOverlay The useModalOverlay for the step
    * @param {object} options The options for the step
    * @param {boolean} options.arrow Whether to display the arrow for the tooltip or not. Defaults to `true`.
    * @param {object} options.attachTo The element the step should be attached to on the page.
-   * @param {object} options.pageID The pageID the step should be attached to on the page.
    * An object with properties `element` and `on`.
    *
    * ```js
@@ -100,7 +97,7 @@ export class Step extends Evented {
    * @param {string} options.title The step's title. It becomes an `h3` at the top of the step. It can be one of two types:
    * ```
    * - HTML string
-   * - `Function` to be executed when th  e step is built. It must return HTML string.
+   * - `Function` to be executed when the step is built. It must return HTML string.
    * ```
    * @param {object} options.when You can define `show`, `hide`, etc events inside `when`. For example:
    * ```js
@@ -127,8 +124,11 @@ export class Step extends Evented {
      * @private
      */
     this._resolvedAttachTo = null;
+
     autoBind(this);
+
     this._setOptions(options);
+
     return this;
   }
 
@@ -137,7 +137,6 @@ export class Step extends Evented {
    * Triggers the `cancel` event
    */
   cancel() {
-    console.log('Tour cancelled as element could not be found');
     this.tour.cancel();
     this.trigger('cancel');
   }
@@ -275,6 +274,7 @@ export class Step extends Evented {
   _createTooltipContent() {
     const descriptionId = `${this.id}-description`;
     const labelId = `${this.id}-label`;
+
     this.shepherdElementComponent = new ShepherdElement({
       target: this.tour.options.stepsContainer || document.body,
       props: {
@@ -282,9 +282,7 @@ export class Step extends Evented {
         descriptionId,
         labelId,
         step: this,
-        styles: this.styles,
-        tourName: this.tour.options.tourName,
-        overlayPresent: this.tour.options.useModalOverlay
+        styles: this.styles
       }
     });
 
@@ -424,6 +422,7 @@ export class Step extends Evented {
     target.classList.add(`${this.classPrefix}shepherd-target`);
     target.classList.add(`shepherd-highlight-border`);
     content.classList.add('shepherd-enabled');
+
     if (isUndefined(this.target) || this.target) {
       this.trigger('show');
     }
@@ -465,6 +464,7 @@ export class Step extends Evented {
     if (this.options.highlightClass) {
       target.classList.remove(this.options.highlightClass);
     }
+
     target.classList.remove(
       'shepherd-target-click-disabled',
       `${this.classPrefix}shepherd-enabled`,

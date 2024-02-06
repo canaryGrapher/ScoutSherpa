@@ -4,7 +4,7 @@ import { Shepherd, Tour } from './tour.js';
 const isServerSide = typeof window === 'undefined';
 
 class NoOp {
-  constructor() { }
+  constructor() {}
 }
 
 if (isServerSide) {

@@ -16,9 +16,7 @@
     labelId,
     lastFocusableElement,
     step,
-    dataStepId,
-    tourName,
-    useModalOverlay;
+    dataStepId;
 
   let hasCancelIcon, hasTitle, classes;
 
@@ -109,16 +107,22 @@
         break;
       case KEY_ESC:
         if (tour.options.exitOnEsc) {
+          e.preventDefault();
+          e.stopPropagation();
           step.cancel();
         }
         break;
       case LEFT_ARROW:
         if (tour.options.keyboardNavigation) {
+          e.preventDefault();
+          e.stopPropagation();
           tour.back();
         }
         break;
       case RIGHT_ARROW:
         if (tour.options.keyboardNavigation) {
+          e.preventDefault();
+          e.stopPropagation();
           tour.next();
         }
         break;
@@ -142,15 +146,9 @@
   tabindex="0"
 >
   {#if step.options.arrow && step.options.attachTo && step.options.attachTo.element && step.options.attachTo.on}
-    <div class="shepherd-arrow" data-popper-arrow />
+    <div class="shepherd-arrow" data-popper-arrow></div>
   {/if}
-  <ShepherdContent
-    {descriptionId}
-    {labelId}
-    {step}
-    {tourName}
-    {useModalOverlay}
-  />
+  <ShepherdContent {descriptionId} {labelId} {step} />
 </div>
 
 <style global>
@@ -178,12 +176,24 @@
   }
 
   .shepherd-element {
-    font-family: Mulish, system-ui, -apple-system, BlinkMacSystemFont,
-      'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-      'Helvetica Neue', sans-serif;
+    font-family:
+      Mulish,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Open Sans',
+      'Helvetica Neue',
+      sans-serif;
     max-width: 400px;
     opacity: 0;
-    transition: opacity 0.3s, visibility 0.3s;
+    transition:
+      opacity 0.3s,
+      visibility 0.3s;
     visibility: hidden;
     min-width: 300px;
     z-index: 9999;

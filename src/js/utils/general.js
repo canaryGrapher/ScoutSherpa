@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { isFunction, isString } from './type-check';
 
 /**
@@ -36,6 +37,7 @@ export function parseAttachTo(step) {
       returnOpts.element = document.querySelector(returnOpts.element);
     } catch (e) {
       // TODO
+      console.error("Couldn't find element", e)
     }
     if (!returnOpts.element) {
       console.error(

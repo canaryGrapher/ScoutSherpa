@@ -3,7 +3,6 @@
   import { makeOverlayPath } from '../utils/overlay-path.js';
 
   export let element, openingProperties;
-  const guid = uuid();
   let modalIsVisible = false;
   let rafId = undefined;
   let pathDefinition;
@@ -38,12 +37,16 @@
    * Uses the bounds of the element we want the opening overtop of to set the dimensions of the opening and position it
    * @param {Number} modalOverlayOpeningPadding An amount of padding to add around the modal overlay opening
    * @param {Number | { topLeft: Number, bottomLeft: Number, bottomRight: Number, topRight: Number }} modalOverlayOpeningRadius An amount of border radius to add around the modal overlay opening
+   * @param {Number} modalOverlayOpeningXOffset An amount to offset the modal overlay opening in the x-direction
+   * @param {Number} modalOverlayOpeningYOffset An amount to offset the modal overlay opening in the y-direction
    * @param {HTMLElement} scrollParent The scrollable parent of the target element
    * @param {HTMLElement} targetElement The element the opening will expose
    */
   export function positionModal(
     modalOverlayOpeningPadding = 0,
     modalOverlayOpeningRadius = 0,
+    modalOverlayOpeningXOffset = 0,
+    modalOverlayOpeningYOffset = 0,
     scrollParent,
     targetElement
   ) {
@@ -55,8 +58,9 @@
       openingProperties = {
         width: width + modalOverlayOpeningPadding * 2,
         height: height + modalOverlayOpeningPadding * 2,
-        x: (x || left) - modalOverlayOpeningPadding,
-        y: y - modalOverlayOpeningPadding,
+        x:
+          (x || left) + modalOverlayOpeningXOffset - modalOverlayOpeningPadding,
+        y: y + modalOverlayOpeningYOffset - modalOverlayOpeningPadding,
         r: modalOverlayOpeningRadius
       };
     } else {
@@ -127,9 +131,14 @@
    * @private
    */
   function _styleForStep(step) {
-    const { modalOverlayOpeningPadding, modalOverlayOpeningRadius } =
-      step.options;
+    const {
+      modalOverlayOpeningPadding,
+      modalOverlayOpeningRadius,
+      modalOverlayOpeningXOffset = 0,
+      modalOverlayOpeningYOffset = 0
+    } = step.options;
 
+    const iframeOffset = _getIframeOffset(step.target);
     const scrollParent = _getScrollParent(step.target);
 
     // Setup recursive function to call requestAnimationFrame to update the modal opening position
@@ -138,6 +147,8 @@
       positionModal(
         modalOverlayOpeningPadding,
         modalOverlayOpeningRadius,
+        modalOverlayOpeningXOffset + iframeOffset.left,
+        modalOverlayOpeningYOffset + iframeOffset.top,
         scrollParent,
         step.target
       );
@@ -170,6 +181,41 @@
     }
 
     return _getScrollParent(element.parentElement);
+  }
+
+  /**
+   * Get the top and left offset required to position the modal overlay cutout
+   * when the target element is within an iframe
+   * @param {HTMLElement} element The target element
+   * @private
+   */
+  function _getIframeOffset(element) {
+    let offset = {
+      top: 0,
+      left: 0
+    };
+
+    if (!element) {
+      return offset;
+    }
+
+    let targetWindow = element.ownerDocument.defaultView;
+
+    while (targetWindow !== window.top) {
+      const targetIframe = targetWindow?.frameElement;
+
+      if (targetIframe) {
+        const targetIframeRect = targetIframe.getBoundingClientRect();
+
+        offset.top += targetIframeRect.top + (targetIframeRect.scrollTop ?? 0);
+        offset.left +=
+          targetIframeRect.left + (targetIframeRect.scrollLeft ?? 0);
+      }
+
+      targetWindow = targetWindow.parent;
+    }
+
+    return offset;
   }
 
   /**
@@ -220,7 +266,10 @@
     pointer-events: none;
     position: fixed;
     top: 0;
-    transition: all 0.3s ease-out, height 0ms 0.3s, opacity 0.3s 0ms;
+    transition:
+      all 0.3s ease-out,
+      height 0ms 0.3s,
+      opacity 0.3s 0ms;
     width: 100vw;
     z-index: 9997;
   }
@@ -228,7 +277,10 @@
   .shepherd-modal-overlay-container.shepherd-modal-is-visible {
     height: 100vh;
     opacity: 0.5;
-    transition: all 0.3s ease-out, height 0s 0s, opacity 0.3s 0s;
+    transition:
+      all 0.3s ease-out,
+      height 0s 0s,
+      opacity 0.3s 0s;
     transform: translateZ(0);
   }
 

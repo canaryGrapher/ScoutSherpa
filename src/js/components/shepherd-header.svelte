@@ -11,14 +11,14 @@
   }
 </script>
 
-<div class="shepherd-header">
+<header class="shepherd-header">
   {#if title}
     <ShepherdTitle {labelId} {title} />
   {/if}
   {#if cancelIcon && cancelIcon.enabled}
     <ShepherdCancelIcon {cancelIcon} {step} />
   {/if}
-</div>
+</header>
 
 <style global>
   .shepherd-header {

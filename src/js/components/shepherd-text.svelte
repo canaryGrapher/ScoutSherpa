@@ -34,9 +34,19 @@
 
 <style global>
   .shepherd-text {
-    font-family: Mulish, system-ui, -apple-system, BlinkMacSystemFont,
-      'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-      'Helvetica Neue', sans-serif !important;
+    font-family:
+      Mulish,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Open Sans',
+      'Helvetica Neue',
+      sans-serif !important;
     font-size: 13px !important;
     line-height: 15px !important;
     padding: 12px 12px !important;

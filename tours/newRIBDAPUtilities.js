@@ -292,9 +292,9 @@ const ObserverCall = () => {
   // Create a new div element
   const newDiv = document.createElement('div');
   newDiv.className = 'headerButton hide-content';
-  newDiv.id = '#navButtonForGuide';
+  newDiv.id = 'navButtonForGuide';
   newDiv.style.cssText = 'background-color: #feeee5; border - radius: 2.34375vw; font-size: .9375vw; line - height: 1.25vw; padding: .665vw 1.015625vw;'
-  newDiv.onclick = () => toggleModal(document.getElementById('navButtonForGuide'))
+  newDiv.onclick = () => toggleModal(document.querySelector("#navButtonForGuide"))
   // Create a new p element inside the div
   const newP = document.createElement('p');
   newP.className = 'header-text';

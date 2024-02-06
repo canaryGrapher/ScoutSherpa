@@ -27,11 +27,8 @@
 </script>
 
 <button
-  type="button"
   aria-label={label ? label : null}
-  class={`shepherd-button ${classes || ''} ${
-    secondary ? 'shepherd-button-secondary' : 'shepherd-button-primary'
-  }`}
+  class={`${classes || ''} shepherd-button ${secondary ? 'shepherd-button-secondary' : ''}`}
   {disabled}
   on:click={action}
   tabindex="0"
@@ -39,7 +36,7 @@
   {@html text}
 </button>
 
-<style>
+<style global>
   .shepherd-button {
     background-color: #ffe3cb;
     color: #ef7c00;

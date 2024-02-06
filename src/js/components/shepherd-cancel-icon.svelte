@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<style>
+<style global>
   .shepherd-cancel-icon-container {
     width: 25px;
     height: 25px;

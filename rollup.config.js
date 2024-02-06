@@ -1,4 +1,5 @@
 import babel from 'rollup-plugin-babel';
+import copy from 'rollup-plugin-copy';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import commonjs from 'rollup-plugin-commonjs';
@@ -11,7 +12,6 @@ import resolve from 'rollup-plugin-node-resolve';
 import sveltePreprocess from 'svelte-preprocess';
 import svelte from 'rollup-plugin-svelte';
 import visualizer from 'rollup-plugin-visualizer';
-import strip from '@rollup/plugin-strip';
 
 const pkg = require('./package.json');
 const banner = ['/*!', pkg.name, pkg.version, '*/\n'].join(' ');
@@ -19,10 +19,6 @@ const banner = ['/*!', pkg.name, pkg.version, '*/\n'].join(' ');
 const env = process.env.DEVELOPMENT ? 'development' : 'production';
 
 const plugins = [
-  strip({
-    functions: ['console.log'],
-    include: '**/*.js'
-  }),
   svelte({
     preprocess: sveltePreprocess(),
     emitCss: true
@@ -38,18 +34,14 @@ const plugins = [
     extensions: ['.js', '.mjs', '.html', '.svelte']
   }),
   postcss({
-    plugins: [
-      require('tailwindcss'),
-      require('autoprefixer'),
-      require('cssnano')
-    ],
+    plugins: [require('autoprefixer'), require('cssnano')],
     extract: 'css/shepherd.css'
   })
 ];
 
 // If we are running with --environment DEVELOPMENT, serve via browsersync for local development
 if (process.env.DEVELOPMENT) {
-  plugins.push(serve({ contentBase: ['.', 'dist', 'landing'], open: true }));
+  plugins.push(serve({ contentBase: ['.', 'dist', 'test/dummy'], open: true }));
   plugins.push(livereload());
 }
 
@@ -125,7 +117,10 @@ if (!process.env.DEVELOPMENT) {
           banner
         }),
         filesize(),
-        visualizer()
+        visualizer(),
+        copy({
+          targets: [{ src: 'dist/js/shepherd.js', dest: 'landing/public' }]
+        })
       ]
     }
   );

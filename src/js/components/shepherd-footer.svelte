@@ -2,12 +2,11 @@
   import ShepherdButton from './shepherd-button.svelte';
 
   export let step;
-  // export let tourName;
 
   $: buttons = step.options.buttons;
 </script>
 
-<div class="shepherd-footer">
+<footer class="shepherd-footer">
   <!-- uncomment the next line if you want to show the tourname in the footer -->
   <!-- <p class="footer-text">{tourName}</p> -->
   <div class="button-container">
@@ -17,7 +16,7 @@
       {/each}
     {/if}
   </div>
-</div>
+</footer>
 
 <style global>
   /* .footer-text {

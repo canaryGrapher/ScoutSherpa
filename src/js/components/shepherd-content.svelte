@@ -15,11 +15,10 @@
   {#if !isUndefined(step.options.text)}
     <ShepherdText {descriptionId} {step} />
   {/if}
-  <!-- {#if Array.isArray(step.options.buttons) && step.options.buttons.length} -->
+
   {#if !isUndefined(tourName) || !overlayPresent}
     <ShepherdFooter {step} {tourName} />
   {/if}
-  <!-- {/if} -->
 </div>
 
 <style global>
