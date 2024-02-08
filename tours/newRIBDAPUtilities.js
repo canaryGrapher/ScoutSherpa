@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 
-// Feb 06, 2024 | Updates to file
+// Feb 07, 2024 | Updates to file
+// update 16: count reset after modal collapse
+// update 15: Handling only modal creation and destruction now. 
 // update 14: Separated functions for Addition of button, and removal of buttons
 // update 13: Added if condition depended on count rather than modal
 // update 12: Fixed incorrect variable naming 'location'
@@ -33,7 +35,7 @@ const addAndRemoveGlow = (buttonReference) => {
 const getModalText = () => {
   console.log("Invoking getModalText()")
   const modalText = `<div id="modalContainer" class="modal">
-<button class="close-button" id="closeButton" onClick="toggleModal(document.querySelector('#navButton'))">×</button>
+<button class="close-button" id="closeButton" onClick="closeAction(document.querySelector('#navButton'))">×</button>
 <h2>User guidance</h2>
 <p>Welcome to the new and improved ICICI Bank website! We have redesigned our website to make your banking experience more convenient and rewarding. To help you get started, we have two options for you. Watch our video demos that show you how to use the new website and its features, or start a guided journey that takes you through the main sections and pages of the new website. Choose either option by clicking the respective buttons.
 We hope you enjoy the new online banking experience with us.</p>
@@ -130,9 +132,9 @@ const calculateRetract = (buttonReference, modalReference) => {
 };
 
 
-const toggleModal = (buttonReference) => {
-  console.log("invoking toggleModal()")
-  const modalReference = document.querySelector('#modalContainer');
+// eslint-disable-next-line no-unused-vars
+const associateModalForDAP = (buttonReference) => {
+  console.log("invoking associateModalForDAP()")
   if (count == 0) {
     console.log('Creating new modal for the very first time');
     const modalStyle = document.createElement('style');
@@ -279,56 +281,8 @@ const toggleModal = (buttonReference) => {
   }
   `;
     document.head.appendChild(modalStyle);
-    showModal(buttonReference, modalReference);
+    showModal(buttonReference);
   } else {
-    console.log('Killing modal');
-    closeAction(buttonReference, modalReference);
+    document.querySelector('#modalContainer').remove();
   }
 };
-
-
-const RemoveNav = (ref) => {
-  const buttonRef = document.querySelector(ref)
-  console.log(buttonRef)
-  buttonRef.remove()
-  console.log("Existing button removed")
-}
-
-const AddNav = (ref) => {
-  const header = document.querySelector(ref)
-  // Create a new div element
-  const newDiv = document.createElement('div');
-  newDiv.className = 'headerButton hide-content';
-  newDiv.id = 'navButtonForGuide';
-  newDiv.style.cssText = 'background-color: #feeee5; border-radius: 2.34375vw; font-size: .9375vw; line-height: 1.25vw; padding: .665vw 1.015625vw;'
-  newDiv.onclick = () => toggleModal(document.querySelector("#navButtonForGuide"))
-  // Create a new p element inside the div
-  const newP = document.createElement('p');
-  newP.className = 'header-text';
-  newP.textContent = 'New here?';
-  newDiv.appendChild(newP);
-  header.insertBefore(newDiv, header.firstChild);
-  console.log('New navigation button added');
-}
-
-// const loadAction = () => {
-// let options = {
-//   root: document.querySelector("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)"),
-//   rootMargin: "0px",
-//   threshold: 1.0,
-// };
-// let observer = new IntersectionObserver(ObserverCall, options);
-// const pageCurrentLocation = window.location.pathname;
-// if (pageCurrentLocation != '/in/login-page') {
-//   let target = document.querySelector("body");
-//   observer.observe(target);
-// }
-// }
-
-window.addEventListener('DOMContentLoaded', () => {
-  console.log('DOMContentLoaded')
-  console.log('====================== Adding Navigation Button =============================')
-  AddNav("body > app-root > app-header > div > header > div > div.headerSecondary")
-  console.log('====================== Removing Navigation Button =============================')
-  RemoveNav("body > app-root > app-header > div > header > div > div.headerSecondary > div:nth-child(3)")
-})

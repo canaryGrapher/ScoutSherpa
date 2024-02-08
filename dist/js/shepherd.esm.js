@@ -2702,22 +2702,22 @@ function create_each_block(ctx) {
   };
 }
 function create_fragment$8(ctx) {
-  let footer;
-  let div;
+  let div1;
+  let div0;
   let current;
   let if_block = /*buttons*/ctx[1] && create_if_block$4(ctx);
   return {
     c() {
-      footer = element("footer");
-      div = element("div");
+      div1 = element("div");
+      div0 = element("div");
       if (if_block) if_block.c();
-      attr(div, "class", "button-container");
-      attr(footer, "class", "shepherd-footer");
+      attr(div0, "class", "button-container");
+      attr(div1, "class", "shepherd-footer");
     },
     m(target, anchor) {
-      insert(target, footer, anchor);
-      append(footer, div);
-      if (if_block) if_block.m(div, null);
+      insert(target, div1, anchor);
+      append(div1, div0);
+      if (if_block) if_block.m(div0, null);
       current = true;
     },
     p(ctx, [dirty]) {
@@ -2731,7 +2731,7 @@ function create_fragment$8(ctx) {
           if_block = create_if_block$4(ctx);
           if_block.c();
           transition_in(if_block, 1);
-          if_block.m(div, null);
+          if_block.m(div0, null);
         }
       } else if (if_block) {
         group_outros();
@@ -2751,7 +2751,7 @@ function create_fragment$8(ctx) {
       current = false;
     },
     d(detaching) {
-      if (detaching) detach(footer);
+      if (detaching) detach(div1);
       if (if_block) if_block.d();
     }
   };
@@ -2995,24 +2995,24 @@ function create_if_block$3(ctx) {
   };
 }
 function create_fragment$5(ctx) {
-  let header;
+  let div;
   let t;
   let current;
   let if_block0 = /*title*/ctx[2] && create_if_block_1$1(ctx);
   let if_block1 = /*cancelIcon*/ctx[3] && /*cancelIcon*/ctx[3].enabled && create_if_block$3(ctx);
   return {
     c() {
-      header = element("header");
+      div = element("div");
       if (if_block0) if_block0.c();
       t = space();
       if (if_block1) if_block1.c();
-      attr(header, "class", "shepherd-header");
+      attr(div, "class", "shepherd-header");
     },
     m(target, anchor) {
-      insert(target, header, anchor);
-      if (if_block0) if_block0.m(header, null);
-      append(header, t);
-      if (if_block1) if_block1.m(header, null);
+      insert(target, div, anchor);
+      if (if_block0) if_block0.m(div, null);
+      append(div, t);
+      if (if_block1) if_block1.m(div, null);
       current = true;
     },
     p(ctx, [dirty]) {
@@ -3026,7 +3026,7 @@ function create_fragment$5(ctx) {
           if_block0 = create_if_block_1$1(ctx);
           if_block0.c();
           transition_in(if_block0, 1);
-          if_block0.m(header, t);
+          if_block0.m(div, t);
         }
       } else if (if_block0) {
         group_outros();
@@ -3045,7 +3045,7 @@ function create_fragment$5(ctx) {
           if_block1 = create_if_block$3(ctx);
           if_block1.c();
           transition_in(if_block1, 1);
-          if_block1.m(header, null);
+          if_block1.m(div, null);
         }
       } else if (if_block1) {
         group_outros();
@@ -3067,7 +3067,7 @@ function create_fragment$5(ctx) {
       current = false;
     },
     d(detaching) {
-      if (detaching) detach(header);
+      if (detaching) detach(div);
       if (if_block0) if_block0.d();
       if (if_block1) if_block1.d();
     }
