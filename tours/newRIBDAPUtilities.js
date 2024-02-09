@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 // Feb 09, 2024 | Updates to file
-// update 17: Fixed reopening issues with Modal. Now working
+// update 17: Fixed reopening issues with Modal. Now working, added two params
 // update 16: Count reset after modal collapse
 // update 15: Handling only modal creation and destruction now. 
 // update 14: Separated functions for Addition of button, and removal of buttons
