@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 
-// Feb 07, 2024 | Updates to file
-// update 16: count reset after modal collapse
+// Feb 09, 2024 | Updates to file
+// update 17: Fixed reopening issues with Modal. Now working
+// update 16: Count reset after modal collapse
 // update 15: Handling only modal creation and destruction now. 
 // update 14: Separated functions for Addition of button, and removal of buttons
 // update 13: Added if condition depended on count rather than modal
@@ -22,25 +23,29 @@
 
 let count = 0;
 
-const addAndRemoveGlow = (buttonReference) => {
+const addAndRemoveGlow = (buttonReference, modal) => {
   console.log("Invoking addAndRemoveGlow()")
-  const style = document.createElement('style');
-  style.innerHTML = ``;
+  console.log('Removing modal now')
+  console.log(modal)
+  // modal.remove()
   buttonReference.classList.add('glow-indicator');
   setTimeout(function () {
     buttonReference.classList.remove('glow-indicator');
-  }, 5000); // 5000 milliseconds = 5 seconds
+    modal.remove()
+
+    // buttonReference.classList.remove('modalMinimized');
+  }, 3000); // 5000 milliseconds = 5 seconds
 };
 
-const getModalText = () => {
+const getModalText = (linkURL) => {
   console.log("Invoking getModalText()")
   const modalText = `<div id="modalContainer" class="modal">
-<button class="close-button" id="closeButton" onClick="closeAction(document.querySelector('#navButton'))">×</button>
+<button class="close-button" id="dapModalCloseButton" type="btn">×</button>
 <h2>User guidance</h2>
 <p>Welcome to the new and improved ICICI Bank website! We have redesigned our website to make your banking experience more convenient and rewarding. To help you get started, we have two options for you. Watch our video demos that show you how to use the new website and its features, or start a guided journey that takes you through the main sections and pages of the new website. Choose either option by clicking the respective buttons.
 We hope you enjoy the new online banking experience with us.</p>
 <div class="modalButtonContainer">
-    <button class="iPlayContainerInModal modalButtons">
+    <button class="iPlayContainerInModal modalButtons" onClick="window.open('${linkURL}', '_blank');">
         <svg _ngcontent-rlc-c111="" width="31" height="30" viewBox="0 0 31 30" fill="none"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <circle _ngcontent-rlc-c111="" cx="15.0081" cy="15" r="14.5" fill="white" stroke="white"></circle>
@@ -71,36 +76,27 @@ We hope you enjoy the new online banking experience with us.</p>
   return modalText;
 }
 
-const showModal = (buttonReference) => {
+const showModal = (linkURL, topButtonSelector) => {
   console.log("Invoking showModal()")
-  if (count === 0) {
-    const modalContent = getModalText();
-    document.body.insertAdjacentHTML('beforeend', modalContent);
-    buttonReference.addEventListener(
-      'click',
-      closeAction(buttonReference, document.querySelector('#modalContent'))
-    );
-    count++;
-  } else {
-    const modalReference = document.querySelector('#modalContainer');
-    modalReference.setAttribute('class', 'modal');
-  }
-};
+  const modalContent = getModalText(linkURL);
+  document.body.insertAdjacentHTML('beforeend', modalContent);
+  document.querySelector("#dapModalCloseButton").addEventListener('click', () => {
+    closeAction(document.querySelector('#modalContainer'), document.querySelector(topButtonSelector))
+  });
+}
 
-const closeAction = (buttonReference, modalReference) => {
+const closeAction = (modalReference, topButton) => {
   console.log('Invoking closeAction()')
-  console.log('Clicked');
-  calculateRetract(buttonReference, modalReference);
-  console.log(modalReference);
-  console.log(modalReference?.getAttribute('class'));
-  console.log(modalReference?.getAttribute('class').indexOf('modalMinimized'));
-  const shouldminimize =
-    modalReference.getAttribute('class').indexOf('modalMinimized') == -1;
-  console.log(shouldminimize);
-  if (shouldminimize) {
-    modalReference.setAttribute('class', 'modalMinimized');
-  }
-  addAndRemoveGlow(buttonReference);
+  console.log(topButton)
+  // const buttonReference = document.getElementById('closeButton')
+  calculateRetract(topButton, modalReference);
+  // const shouldminimize =
+  //   modalReference.getAttribute('class').indexOf('modalMinimized') == -1;
+  // console.log(shouldminimize);
+  // if (shouldminimize) {
+  modalReference.setAttribute('class', 'modalMinimized');
+  // }
+  addAndRemoveGlow(topButton, modalReference);
 };
 
 const calculateRetract = (buttonReference, modalReference) => {
@@ -133,9 +129,10 @@ const calculateRetract = (buttonReference, modalReference) => {
 
 
 // eslint-disable-next-line no-unused-vars
-const associateModalForDAP = (buttonReference) => {
-  console.log("invoking associateModalForDAP()")
-  if (count == 0) {
+const associateModalForDAP = (linkURL) => {
+  // const buttonSelector = "#burlado"
+  if (count === 0) {
+    console.log("invoking associateModalForDAP()")
     console.log('Creating new modal for the very first time');
     const modalStyle = document.createElement('style');
     modalStyle.innerHTML = `
@@ -281,8 +278,7 @@ const associateModalForDAP = (buttonReference) => {
   }
   `;
     document.head.appendChild(modalStyle);
-    showModal(buttonReference);
-  } else {
-    document.querySelector('#modalContainer').remove();
+    count++;
   }
-};
+  showModal(linkURL, "body > app-root > app-header > div > header > div > div.headerSecondary > div:has([src*='header/demo.png'])");
+}; 
