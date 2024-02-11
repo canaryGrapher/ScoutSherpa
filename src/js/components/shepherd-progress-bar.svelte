@@ -4,10 +4,11 @@
 
   $: {
     function removeAlphabets(inputString) {
-      return inputString.replace(/[a-zA-Z]/g, '');
+      return inputString.replace(/[a-zA-Z]/g, "");
     }
-    total_progress = title.split('/')[1];
-    current_progress = removeAlphabets(title.split('/')[0]);
+    total_progress = title.split("/")[1];
+    current_progress = removeAlphabets(title.split("/")[0]);
+    b;
     percentage_progress = (current_progress / total_progress) * 100;
   }
 </script>
