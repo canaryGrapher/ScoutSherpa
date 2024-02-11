@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
-
 // Feb 09, 2024 | Updates to file
-// update 17: Fixed reopening issues with Modal. Now working
+// update 17: Fixed reopening issues with Modal. Now working, added two params for main func
 // update 16: Count reset after modal collapse
 // update 15: Handling only modal creation and destruction now. 
 // update 14: Separated functions for Addition of button, and removal of buttons
@@ -129,8 +128,7 @@ const calculateRetract = (buttonReference, modalReference) => {
 
 
 // eslint-disable-next-line no-unused-vars
-const associateModalForDAP = (linkURL) => {
-  // const buttonSelector = "#burlado"
+const associateModalForDAP = (linkURL, buttonSelector) => {
   if (count === 0) {
     console.log("invoking associateModalForDAP()")
     console.log('Creating new modal for the very first time');
@@ -280,5 +278,5 @@ const associateModalForDAP = (linkURL) => {
     document.head.appendChild(modalStyle);
     count++;
   }
-  showModal(linkURL, "body > app-root > app-header > div > header > div > div.headerSecondary > div:has([src*='header/demo.png'])");
+  showModal(linkURL, buttonSelector);
 }; 
