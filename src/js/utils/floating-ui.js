@@ -33,7 +33,6 @@ export function setupTooltip(step) {
   let target = attachToOptions.element;
   const floatingUIOptions = getFloatingUIOptions(attachToOptions, step);
   const shouldCenter = shouldCenterStep(attachToOptions);
-
   if (shouldCenter) {
     target = document.body;
     const content = step.shepherdElementComponent.getElement();

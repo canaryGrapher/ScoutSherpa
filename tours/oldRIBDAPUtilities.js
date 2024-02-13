@@ -3,32 +3,8 @@
 
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
+const dashboardVPV = "/vpv/li/personal-banking/dashboardPage"
 
-const journeysTestFunction = () => {
-    console.log("Tester version 1")
-    console.log("Checking stability of menu links")
-    console.log("For HowToMakeICICIBankCreditCardPaymentTour")
-    returnMainMenuElement('Cards & Loans')
-    returnSubMenuElement('Cards & Loans', 'Credit Cards')
-    console.log("For HowToBuyFastTagTour")
-    returnMainMenuElement("Payments & Transfer")
-    returnSubMenuElement('Payments & Transfer', "Buy/Recharge Fastag")
-    console.log("For HowToBuyMutualFundTour")
-    returnMainMenuElement('Investments & Insurance')
-    returnSubMenuElement('Investments & Insurance', 'Buy Mutual Funds')
-    console.log("For HowToTransferFunds")
-    returnMainMenuElement('Payments & Transfer')
-    returnSubMenuElement('Payments & Transfer', 'Fund Transfer')
-    console.log("For HowToPrematurelyCloseFDTour")
-    returnMainMenuElement('Customer Service')
-    returnSubMenuElement('Customer Service', 'Service Request')
-    console.log("For HowToKnowAboutPreApprovedOffers")
-    returnMainMenuElement('Cards & Loans')
-    returnSubMenuElement('Cards & Loans', 'Loans')
-    console.log("For HowToApplyForICICIBankCreditCard")
-    returnMainMenuElement('Cards & Loans')
-    returnSubMenuElement('Cards & Loans', 'Credit Cards')
-}
 const topNavData = [
     // Overview
     {
@@ -364,59 +340,68 @@ window.addEventListener('load', function () {
     let currentStepIndex = localStorage.getItem('currentStepIndex');
     let currentTourIndex = localStorage.getItem('tourInstanceCaller');
     // if current tour is active, continue
-    // Check if currentTourIndex is not null or undefined
-    console.log("Window scope for list of tours")
-    console.log(typeof window['listOfTours'])
-    if (typeof window['listOfTours'] === 'object') {
-        if (currentTourIndex && window.listOfTours[currentTourIndex]) {
-            console.log("Checking DAP utilities on loaded tour")
-            console.log(currentTourIndex + " is the current tour")
-            console.log(window.listOfTours[currentTourIndex] + " is its reference")
-            console.log("Trying to load tour " + currentTourIndex + " or " + window.listOfTours[currentTourIndex])
-            window.listOfTours[currentTourIndex].show(Number(currentStepIndex));
-        }
-        else {
-            console.log('No matching class found or currentStepIndex is empty in local storage.');
-        }
-    } else {
-        console.log("Could not find the Map of tours in wondow scope")
+    if (currentTourIndex) {
+        console.log("Checking DAP utilities on loaded tour")
+        console.log(currentTourIndex + " is the current tour")
+        eval(`${currentTourIndex}.show(${Number(currentStepIndex)})`)
     }
-    // <!--- end of block 1 --->
+    else {
+        console.log('No active tour yet');
+    }
 }, false)
 
-function returnMainMenuElement(topMenuName) {
-    console.log('returnMainMenuElement', topMenuName);
+const checkIfDashboard = async () => {
+    try {
+        const condition = window.hasOwnProperty('dataLayer') && dataLayer.length > 0;
+
+        // Use await to wait for the promise to resolve
+        await waitFor(condition, 5000);
+
+        const vpvArray = [];
+        window.dataLayer.map(item => {
+            if (item.hasOwnProperty('page')) {
+                vpvArray.push(item.page);
+            } else if (item.hasOwnProperty('vpv')) {
+                vpvArray.push(item.vpv);
+            }
+            // No need for an else statement here
+        });
+
+        // Return the result here
+        return vpvArray.includes(dashboardVPV);
+    } catch (e) {
+        console.error('Fetching dataLayer timed out, switching to default');
+        // Return a default value in case of a timeout
+        return true;
+    }
+};
+
+function returnMainMenuElement(topMenuName, mode) {
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
-    const elementCheck = window.find("Relationship Manager")
-    const element = elementCheck ? topMenu.mainElement : topMenu.legacyElement;
+    const element = mode === "legacy" ? topMenu.legacyElement : topMenu.mainElement;
     return element
 }
-function returnSubMenuElement(topMenuName, subMenuName) {
-    console.log('returnSubMenuELement', subMenuName)
+function returnSubMenuElement(topMenuName, subMenuName, mode) {
     const topMenu = topNavData.find(menu => menu.mainNavItemName === topMenuName);
     const subMenu = topMenu.subLinks.find(sub => sub.mainNavItemName === subMenuName);
-    const elementCheck = window.find("Relationship Manager")
-    const element = elementCheck ? subMenu.mainElement : subMenu.legacyElement;
+    const element = mode === 'legacy' ? subMenu.legacyElement : subMenu.mainElement;
     return element
 }
 
-function persitentMenu(name) {
+function persitentMenu(name, mode) {
     const elementMap = dropdownMenuMarkings.find(menu => menu.name === name);
-    console.log('Waiting for relatoinship manager text on dashboard')
-    if (window.find("Relationship Manager")) {
-        console.log('Relatoinship manager text on dashboard found')
-        document.querySelector(elementMap?.main).style.display = 'block';
-    } else {
-        console.log('Relatoinship manager text on dashboard not found')
+    if (mode === "legacy") {
         document.querySelector(elementMap?.legacy).style.display = 'block';
+    } else {
+        document.querySelector(elementMap?.main).style.display = 'block';
     }
 }
 
-function removePersistentMenu(name) {
+function removePersistentMenu(name, mode) {
     const elementMap = dropdownMenuMarkings.find(menu => menu.name === name);
-    if (window.find("Relationship Manager")) {
-        document.querySelector(elementMap?.main).style.display = '';
-    } else {
+    if (mode === "legacy") {
         document.querySelector(elementMap?.legacy).style.display = '';
+    } else {
+        document.querySelector(elementMap?.main).style.display = '';
     }
 }

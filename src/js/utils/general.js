@@ -41,6 +41,7 @@ export function parseAttachTo(step) {
       console.error(
         `The element for this Shepherd step was not found ${options.element}`
       );
+      step._hide()
     }
   }
 

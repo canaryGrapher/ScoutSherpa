@@ -728,7 +728,9 @@
       } catch (e) {
         // TODO
       }
-      if (!returnOpts.element) ;
+      if (!returnOpts.element) {
+        step._hide();
+      }
     }
     return returnOpts;
   }

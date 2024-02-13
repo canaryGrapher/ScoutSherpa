@@ -88,10 +88,17 @@
           element: document.querySelector("body > header > div > div > div > div:nth-child(2) > div"),
           on: 'right'
         },
-        advanceOn: {
-          selector: document.querySelector("body > header > div > div > div > div:nth-child(2) > div"),
-          event: 'click',
-        },
+        buttons: [
+          {
+            text: 'Next',
+            action: shepherd.next,
+          },
+          {
+            text: 'Exit',
+            action: shepherd.cancel,
+            secondary: true
+          }
+        ],
 
         id: 'creating',
       },
@@ -100,59 +107,53 @@
         id: 'mfTour_4',
         text: 'Your tour steps can target and attach to elements in DOM (like this step).',
         attachTo: {
-          element: '.hero-example',
+          element: '.hero-eddsxample',
           on: 'left'
         },
+        buttons: [
+          {
+            text: 'Next',
+            action: shepherd.next,
+          },
+          {
+            text: 'Exit',
+            action: shepherd.cancel,
+            secondary: true
+          }
+        ],
+      },
+      {
+        title: '5/6',
+        id: 'mfTour_5',
+        text: 'But attachment is totally optional!\n Without a target, a tour step will create an element that\'s centered within the view.       Check out the <a href="https://shepherdjs.dev/docs/">documentation</a> to learn more.',
+        buttons: [
+          {
+            text: 'Next',
+            action: shepherd.next,
+          },
+          {
+            text: 'Exit',
+            action: shepherd.cancel,
+            secondary: true
+          }
+        ],
+      },
+      {
+        title: '6/6',
+        id: 'mfTour_6',
+        text: 'Star Shepherd on Github so you remember it for your next project',
         advanceOn: {
-          selector: '.hero-example',
+          selector: '.hero-followup',
           event: 'click',
+        },
+        attachTo: {
+          element: '.hero-followup',
+          on: 'top'
         },
       }
     ];
 
     shepherd.addSteps(steps);
-
-    // This should add steps after the ones added with `addSteps`
-    shepherd.addStep({
-      title: '5/6',
-      id: 'mfTour_5',
-      advanceOn: {
-        selector: '.hero-welcome',
-        event: 'click',
-      },
-      text: 'But attachment is totally optional!\n       Without a target, a tour step will create an element that\'s centered within the view.       Check out the <a href="https://shepherdjs.dev/docs/">documentation</a> to learn more.',
-      buttons: [
-        {
-          action() {
-            return this.back();
-          },
-          secondary: true,
-          text: 'Back'
-        },
-        {
-          action() {
-            return this.next();
-          },
-          primary: true,
-          text: 'Next'
-        }
-      ]
-    });
-
-    shepherd.addStep({
-      title: '6/6',
-      id: 'mfTour_6',
-      text: 'Star Shepherd on Github so you remember it for your next project',
-      advanceOn: {
-        selector: '.hero-followup',
-        event: 'click',
-      },
-      attachTo: {
-        element: '.hero-followup',
-        on: 'top'
-      },
-    });
-
     return shepherd;
   }
 
