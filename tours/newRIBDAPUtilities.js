@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-// Feb 09, 2024 | Updates to file
+// Feb 14, 2024 | Updates to file
+// update 18: Added display: block to modal to fix bug
 // update 17: Fixed reopening issues with Modal. Now working, added two params for main func
 // update 16: Count reset after modal collapse
 // update 15: Handling only modal creation and destruction now. 
