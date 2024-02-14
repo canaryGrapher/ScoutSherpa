@@ -2508,7 +2508,7 @@ function create_fragment$9(ctx) {
     c() {
       button = element("button");
       attr(button, "aria-label", button_aria_label_value = /*label*/ctx[3] ? /*label*/ctx[3] : null);
-      attr(button, "class", button_class_value = `${/*classes*/ctx[1] || ''} shepherd-button ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : ''}`);
+      attr(button, "class", button_class_value = `${/*classes*/ctx[1] || ""} shepherd-button ${/*secondary*/ctx[4] ? "shepherd-button-secondary" : ""}`);
       button.disabled = /*disabled*/ctx[2];
       attr(button, "tabindex", "0");
     },
@@ -2528,7 +2528,7 @@ function create_fragment$9(ctx) {
       if (dirty & /*label*/8 && button_aria_label_value !== (button_aria_label_value = /*label*/ctx[3] ? /*label*/ctx[3] : null)) {
         attr(button, "aria-label", button_aria_label_value);
       }
-      if (dirty & /*classes, secondary*/18 && button_class_value !== (button_class_value = `${/*classes*/ctx[1] || ''} shepherd-button ${/*secondary*/ctx[4] ? 'shepherd-button-secondary' : ''}`)) {
+      if (dirty & /*classes, secondary*/18 && button_class_value !== (button_class_value = `${/*classes*/ctx[1] || ""} shepherd-button ${/*secondary*/ctx[4] ? "shepherd-button-secondary" : ""}`)) {
         attr(button, "class", button_class_value);
       }
       if (dirty & /*disabled*/4) {
@@ -3147,10 +3147,11 @@ function instance$4($$self, $$props, $$invalidate) {
     if ($$self.$$.dirty & /*title, current_progress, total_progress*/14) {
       {
         function removeAlphabets(inputString) {
-          return inputString.replace(/[a-zA-Z]/g, '');
+          return inputString.replace(/[a-zA-Z]/g, "");
         }
-        $$invalidate(2, total_progress = title.split('/')[1]);
-        $$invalidate(3, current_progress = removeAlphabets(title.split('/')[0]));
+        $$invalidate(2, total_progress = title.split("/")[1]);
+        $$invalidate(3, current_progress = removeAlphabets(title.split("/")[0]));
+        b;
         $$invalidate(0, percentage_progress = current_progress / total_progress * 100);
       }
     }
@@ -3953,7 +3954,7 @@ class Step extends Evented {
   constructor(tour, options = {}) {
     super(tour, options);
     this.tour = tour;
-    this.classPrefix = this.tour.options ? normalizePrefix(this.tour.options.classPrefix) : '';
+    this.classPrefix = this.tour.options ? normalizePrefix(this.tour.options.classPrefix) : "";
     this.styles = tour.styles;
 
     /**
@@ -3974,7 +3975,7 @@ class Step extends Evented {
    */
   cancel() {
     this.tour.cancel();
-    this.trigger('cancel');
+    this.trigger("cancel");
   }
 
   /**
@@ -3983,7 +3984,7 @@ class Step extends Evented {
    */
   complete() {
     this.tour.complete();
-    this.trigger('complete');
+    this.trigger("complete");
   }
 
   /**
@@ -3997,7 +3998,7 @@ class Step extends Evented {
       this.el = null;
     }
     this._updateStepTargetOnHide();
-    this.trigger('destroy');
+    this.trigger("destroy");
   }
 
   /**
@@ -4013,12 +4014,12 @@ class Step extends Evented {
    */
   hide() {
     this.tour.modal.hide();
-    this.trigger('before-hide');
+    this.trigger("before-hide");
     if (this.el) {
       this.el.hidden = true;
     }
     this._updateStepTargetOnHide();
-    this.trigger('hide');
+    this.trigger("hide");
   }
 
   /**
@@ -4128,7 +4129,7 @@ class Step extends Evented {
     } = this._getResolvedAttachToOptions();
     if (isFunction(this.options.scrollToHandler)) {
       this.options.scrollToHandler(element);
-    } else if (isElement$1(element) && typeof element.scrollIntoView === 'function') {
+    } else if (isElement$1(element) && typeof element.scrollIntoView === "function") {
       element.scrollIntoView(scrollToOptions);
     }
   }
@@ -4141,11 +4142,11 @@ class Step extends Evented {
    */
   _getClassOptions(stepOptions) {
     const defaultStepOptions = this.tour && this.tour.options && this.tour.options.defaultStepOptions;
-    const stepClasses = stepOptions.classes ? stepOptions.classes : '';
-    const defaultStepOptionsClasses = defaultStepOptions && defaultStepOptions.classes ? defaultStepOptions.classes : '';
-    const allClasses = [...stepClasses.split(' '), ...defaultStepOptionsClasses.split(' ')];
+    const stepClasses = stepOptions.classes ? stepOptions.classes : "";
+    const defaultStepOptionsClasses = defaultStepOptions && defaultStepOptions.classes ? defaultStepOptions.classes : "";
+    const allClasses = [...stepClasses.split(" "), ...defaultStepOptionsClasses.split(" ")];
     const uniqClasses = new Set(allClasses);
-    return Array.from(uniqClasses).join(' ').trim();
+    return Array.from(uniqClasses).join(" ").trim();
   }
 
   /**
@@ -4196,7 +4197,7 @@ class Step extends Evented {
    * @private
    */
   _show() {
-    this.trigger('before-show');
+    this.trigger("before-show");
 
     // Force resolve to make sure the options are updated on subsequent shows.
     this._resolveAttachToOptions();
@@ -4220,9 +4221,9 @@ class Step extends Evented {
     target.classList.add(`${this.classPrefix}shepherd-enabled`);
     target.classList.add(`${this.classPrefix}shepherd-target`);
     target.classList.add(`shepherd-highlight-border`);
-    content.classList.add('shepherd-enabled');
+    content.classList.add("shepherd-enabled");
     if (isUndefined(this.target) || this.target) {
-      this.trigger('show');
+      this.trigger("show");
     }
   }
 
@@ -4241,9 +4242,9 @@ class Step extends Evented {
     if (step.options.highlightClass) {
       targetElement.classList.add(step.options.highlightClass);
     }
-    targetElement.classList.remove('shepherd-target-click-disabled');
+    targetElement.classList.remove("shepherd-target-click-disabled");
     if (step.options.canClickTarget === false) {
-      targetElement.classList.add('shepherd-target-click-disabled');
+      targetElement.classList.add("shepherd-target-click-disabled");
     }
   }
 
@@ -4257,7 +4258,7 @@ class Step extends Evented {
     if (this.options.highlightClass) {
       target.classList.remove(this.options.highlightClass);
     }
-    target.classList.remove('shepherd-target-click-disabled', `${this.classPrefix}shepherd-enabled`, `${this.classPrefix}shepherd-target`, 'shepherd-highlight-border');
+    target.classList.remove("shepherd-target-click-disabled", `${this.classPrefix}shepherd-enabled`, `${this.classPrefix}shepherd-target`, "shepherd-highlight-border");
   }
 }
 

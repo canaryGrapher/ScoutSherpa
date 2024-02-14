@@ -1,5 +1,5 @@
 <script>
-  import { isFunction } from '../utils/type-check';
+  import { isFunction } from "../utils/type-check";
 
   export let config, step;
   let action, classes, disabled, label, secondary, text;
@@ -28,7 +28,9 @@
 
 <button
   aria-label={label ? label : null}
-  class={`${classes || ''} shepherd-button ${secondary ? 'shepherd-button-secondary' : ''}`}
+  class={`${classes || ""} shepherd-button ${
+    secondary ? "shepherd-button-secondary" : ""
+  }`}
   {disabled}
   on:click={action}
   tabindex="0"
@@ -40,6 +42,7 @@
   .shepherd-button {
     background-color: #ffe3cb;
     color: #ef7c00;
+    border: none;
     border-radius: 20px;
     cursor: pointer;
     margin-right: 6px;

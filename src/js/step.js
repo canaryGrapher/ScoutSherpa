@@ -1,20 +1,20 @@
-import merge from 'deepmerge';
-import { Evented } from './evented.js';
-import autoBind from './utils/auto-bind.js';
+import merge from "deepmerge";
+import { Evented } from "./evented.js";
+import autoBind from "./utils/auto-bind.js";
 import {
   isElement,
   isHTMLElement,
   isFunction,
-  isUndefined
-} from './utils/type-check.js';
-import { bindAdvance } from './utils/bind.js';
-import { parseAttachTo, normalizePrefix, uuid } from './utils/general.js';
+  isUndefined,
+} from "./utils/type-check.js";
+import { bindAdvance } from "./utils/bind.js";
+import { parseAttachTo, normalizePrefix, uuid } from "./utils/general.js";
 import {
   setupTooltip,
   destroyTooltip,
-  mergeTooltipConfig
-} from './utils/floating-ui.js';
-import ShepherdElement from './components/shepherd-element.svelte';
+  mergeTooltipConfig,
+} from "./utils/floating-ui.js";
+import ShepherdElement from "./components/shepherd-element.svelte";
 
 /**
  * A class representing steps to be added to a tour.
@@ -114,7 +114,7 @@ export class Step extends Evented {
     this.tour = tour;
     this.classPrefix = this.tour.options
       ? normalizePrefix(this.tour.options.classPrefix)
-      : '';
+      : "";
     this.styles = tour.styles;
 
     /**
@@ -138,7 +138,7 @@ export class Step extends Evented {
    */
   cancel() {
     this.tour.cancel();
-    this.trigger('cancel');
+    this.trigger("cancel");
   }
 
   /**
@@ -147,7 +147,7 @@ export class Step extends Evented {
    */
   complete() {
     this.tour.complete();
-    this.trigger('complete');
+    this.trigger("complete");
   }
 
   /**
@@ -164,7 +164,7 @@ export class Step extends Evented {
 
     this._updateStepTargetOnHide();
 
-    this.trigger('destroy');
+    this.trigger("destroy");
   }
 
   /**
@@ -181,7 +181,7 @@ export class Step extends Evented {
   hide() {
     this.tour.modal.hide();
 
-    this.trigger('before-hide');
+    this.trigger("before-hide");
 
     if (this.el) {
       this.el.hidden = true;
@@ -189,7 +189,7 @@ export class Step extends Evented {
 
     this._updateStepTargetOnHide();
 
-    this.trigger('hide');
+    this.trigger("hide");
   }
 
   /**
@@ -282,8 +282,8 @@ export class Step extends Evented {
         descriptionId,
         labelId,
         step: this,
-        styles: this.styles
-      }
+        styles: this.styles,
+      },
     });
 
     return this.shepherdElementComponent.getElement();
@@ -304,7 +304,7 @@ export class Step extends Evented {
       this.options.scrollToHandler(element);
     } else if (
       isElement(element) &&
-      typeof element.scrollIntoView === 'function'
+      typeof element.scrollIntoView === "function"
     ) {
       element.scrollIntoView(scrollToOptions);
     }
@@ -319,18 +319,18 @@ export class Step extends Evented {
   _getClassOptions(stepOptions) {
     const defaultStepOptions =
       this.tour && this.tour.options && this.tour.options.defaultStepOptions;
-    const stepClasses = stepOptions.classes ? stepOptions.classes : '';
+    const stepClasses = stepOptions.classes ? stepOptions.classes : "";
     const defaultStepOptionsClasses =
       defaultStepOptions && defaultStepOptions.classes
         ? defaultStepOptions.classes
-        : '';
+        : "";
     const allClasses = [
-      ...stepClasses.split(' '),
-      ...defaultStepOptionsClasses.split(' ')
+      ...stepClasses.split(" "),
+      ...defaultStepOptionsClasses.split(" "),
     ];
     const uniqClasses = new Set(allClasses);
 
-    return Array.from(uniqClasses).join(' ').trim();
+    return Array.from(uniqClasses).join(" ").trim();
   }
 
   /**
@@ -346,7 +346,7 @@ export class Step extends Evented {
 
     this.options = Object.assign(
       {
-        arrow: true
+        arrow: true,
       },
       tourOptions,
       options,
@@ -393,7 +393,7 @@ export class Step extends Evented {
    * @private
    */
   _show() {
-    this.trigger('before-show');
+    this.trigger("before-show");
 
     // Force resolve to make sure the options are updated on subsequent shows.
     this._resolveAttachToOptions();
@@ -421,10 +421,10 @@ export class Step extends Evented {
     target.classList.add(`${this.classPrefix}shepherd-enabled`);
     target.classList.add(`${this.classPrefix}shepherd-target`);
     target.classList.add(`shepherd-highlight-border`);
-    content.classList.add('shepherd-enabled');
+    content.classList.add("shepherd-enabled");
 
     if (isUndefined(this.target) || this.target) {
-      this.trigger('show');
+      this.trigger("show");
     }
   }
 
@@ -446,10 +446,10 @@ export class Step extends Evented {
       targetElement.classList.add(step.options.highlightClass);
     }
 
-    targetElement.classList.remove('shepherd-target-click-disabled');
+    targetElement.classList.remove("shepherd-target-click-disabled");
 
     if (step.options.canClickTarget === false) {
-      targetElement.classList.add('shepherd-target-click-disabled');
+      targetElement.classList.add("shepherd-target-click-disabled");
     }
   }
 
@@ -466,10 +466,10 @@ export class Step extends Evented {
     }
 
     target.classList.remove(
-      'shepherd-target-click-disabled',
+      "shepherd-target-click-disabled",
       `${this.classPrefix}shepherd-enabled`,
       `${this.classPrefix}shepherd-target`,
-      'shepherd-highlight-border'
+      "shepherd-highlight-border"
     );
   }
 }

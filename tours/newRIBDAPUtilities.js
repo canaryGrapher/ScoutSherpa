@@ -129,12 +129,16 @@ const calculateRetract = (buttonReference, modalReference) => {
 
 // eslint-disable-next-line no-unused-vars
 const associateModalForDAP = (linkURL, buttonSelector) => {
+  console.log("URL: ", linkURL)
+  console.log("buttonSelector: ", buttonSelector)
+
   if (count === 0) {
     console.log("invoking associateModalForDAP()")
     console.log('Creating new modal for the very first time');
     const modalStyle = document.createElement('style');
     modalStyle.innerHTML = `
   #modal {
+    display         : block;
     position        : absolute;
     margin          : auto;
     left            : 0;

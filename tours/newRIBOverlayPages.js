@@ -33,7 +33,7 @@ GuideMeWhatsOnNewRIBCreditCardPage.addStep({
   text: "These are your card's basic information. You can see balances on your card, and even setup auto payment for your bill due amount.",
   attachTo: {
     element: document.querySelector(
-      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-type > div > div > div:nth-child(1)",
+      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-type > div > div > div:nth-child(1)"
     ),
     on: "right",
   },
@@ -56,7 +56,7 @@ GuideMeWhatsOnNewRIBCreditCardPage.addStep({
   text: "View your card CVV and expiry details here. You might need them when shopping online. ",
   attachTo: {
     element: document.querySelector(
-      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-type > div > div > div:nth-child(1) > div.creditCardDetails.ng-tns-c175-7.ng-star-inserted > div.creditCardDetailsPill.ng-tns-c175-7",
+      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-type > div > div > div:nth-child(1) > div.creditCardDetails.ng-tns-c175-7.ng-star-inserted > div.creditCardDetailsPill.ng-tns-c175-7"
     ),
     on: "right",
   },
@@ -79,7 +79,7 @@ GuideMeWhatsOnNewRIBCreditCardPage.addStep({
   text: "Forgot your PIN? Click on this button to reset it.",
   attachTo: {
     element: document.querySelector(
-      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-type > div > div > div:nth-child(1) > div.creditCardDetails.ng-tns-c175-7.ng-star-inserted > div.setPinContainer.ng-tns-c175-7",
+      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-type > div > div > div:nth-child(1) > div.creditCardDetails.ng-tns-c175-7.ng-star-inserted > div.setPinContainer.ng-tns-c175-7"
     ),
     on: "right",
   },
@@ -102,7 +102,7 @@ GuideMeWhatsOnNewRIBCreditCardPage.addStep({
   text: "Want to know where you spent using your card recently? You can view your current as well as past statements in this section.",
   attachTo: {
     element: document.querySelector(
-      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-information",
+      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-information"
     ),
     on: "right",
   },
@@ -125,7 +125,7 @@ GuideMeWhatsOnNewRIBCreditCardPage.addStep({
   text: "Want your statement in PDF or XLS format? Use these buttons to export in your desired format. ",
   attachTo: {
     element: document.querySelector(
-      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-information > div.statementsRow.ng-tns-c176-8 > div",
+      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-information > div.statementsRow.ng-tns-c176-8 > div"
     ),
     on: "right",
   },
@@ -148,7 +148,7 @@ GuideMeWhatsOnNewRIBCreditCardPage.addStep({
   text: "This is your card's analysis view. View your spendings, limits, and available credit limit here.",
   attachTo: {
     element: document.querySelector(
-      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.ccRightWrapper.ng-star-inserted > cards-container > div.cardsContainer.ng-star-inserted > div > card-analysis",
+      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.ccRightWrapper.ng-star-inserted > cards-container > div.cardsContainer.ng-star-inserted > div > card-analysis"
     ),
     on: "left",
   },
