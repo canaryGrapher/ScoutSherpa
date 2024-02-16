@@ -1,12 +1,7 @@
 /* eslint-disable prettier/prettier */
-<<<<<<< HEAD
 // Feb 16, 2024 | Updates to file
 // update 20: Modal opens on selected page 3 times automatically
 // update 19: Added fix for guide me button 
-=======
-// Feb 15, 2024 | Updates to file
-// update 19: Added fix for modal wrong ID in styles
->>>>>>> d5d5d1190f87b1a65cec560ea12d3921f9d0e0e7
 // update 18: Added display: block to modal to fix bug
 // update 17: Fixed reopening issues with Modal. Now working, added two params for main func
 // update 16: Count reset after modal collapse
