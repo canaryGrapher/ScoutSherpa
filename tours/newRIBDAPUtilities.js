@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
-// Feb 14, 2024 | Updates to file
+// Feb 16, 2024 | Updates to file
+// update 20: Modal opens on selected page 3 times automatically
+// update 19: Added fix for guide me button 
 // update 18: Added display: block to modal to fix bug
 // update 17: Fixed reopening issues with Modal. Now working, added two params for main func
 // update 16: Count reset after modal collapse
@@ -22,6 +24,42 @@
 /* eslint-disable max-lines */
 
 let count = 0;
+const content = {
+  "/in/credit-card": "Guidemehowtostartcom.start()",
+};
+
+window.addEventListener("load", () => {
+  const openModalAutomatically = () => {
+    const pageReference = window.location.pathname
+    if (content[pageReference]) {
+      let openTimes = window.localStorage.getItem("modalOpenTime")
+      console.log("Open times, ", openTimes)
+      if (Number(openTimes) < 3) {
+        document.querySelector("#guided_Journey_Triggered")?.click()
+        // alert("Hola")
+        console.log("Setting open times to: ", (Number(openTimes) + 1))
+        window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
+      }
+    }
+  }
+
+
+  let dateReference = window.localStorage.getItem("modalOpenDateReference")
+  let ISODateToday = new Date()
+  let dateToday = ISODateToday.getDate()
+  console.log("dateReference", dateReference)
+  console.log("ISODateToday", ISODateToday)
+  console.log("CheckEqual")
+  if (dateReference && dateReference == ISODateToday.getDate()) {
+    console.log("Hello")
+    openModalAutomatically()
+  } else {
+    window.localStorage.setItem("modalOpenDateReference", dateToday)
+    window.localStorage.setItem("modalOpenTime", "0")
+    openModalAutomatically()
+  }
+
+})
 
 const addAndRemoveGlow = (buttonReference, modal) => {
   console.log("Invoking addAndRemoveGlow()")
@@ -38,6 +76,7 @@ const addAndRemoveGlow = (buttonReference, modal) => {
 };
 
 const getModalText = (linkURL) => {
+  const currentPath = window.location.pathname;
   console.log("Invoking getModalText()")
   const modalText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="dapModalCloseButton" type="btn">×</button>
@@ -70,7 +109,7 @@ We hope you enjoy the new online banking experience with us.</p>
         </svg>
         <span>Demo Videos</span>
     </button>
-    <button class="modalButtons" type="button">Guide me</button>
+    ${content[currentPath] ? '<button class="modalButtons" type="button" onclick=' + content[currentPath] + '>Guide me</button>' : ''}
 </div>
 </div>`;
   return modalText;

@@ -17,88 +17,29 @@ var GuideMeWhatsOnNewRIBCreditCardPage = new Shepherd.Tour({
 
 GuideMeWhatsOnNewRIBCreditCardPage.addStep({
   id: "GuideMeWhatsOnNewRIBCreditCardPage_1",
-  title: "1/8",
-  text: "Welcome to our new credit card page. Follow along this guide to know about this page.",
+  title: "1/5",
+  text: "These are your card's basic information. You can see balances on your card, your card's CVV, expiry month and year, and even setup auto payment for your bill due amount.",
+  attachTo: {
+    element: document.querySelector(
+      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-type > div > div > div:nth-child(1)"),
+    on: "right",
+  },
   buttons: [
     {
       text: "Next",
       action: GuideMeWhatsOnNewRIBCreditCardPage.next,
+    },
+    {
+      text: "Cancel",
+      action: GuideMeWhatsOnNewRIBCreditCardPage.cancel,
+      secondary: true,
     },
   ],
 });
 
 GuideMeWhatsOnNewRIBCreditCardPage.addStep({
   id: "GuideMeWhatsOnNewRIBCreditCardPage_2",
-  title: "2/8",
-  text: "These are your card's basic information. You can see balances on your card, and even setup auto payment for your bill due amount.",
-  attachTo: {
-    element: document.querySelector(
-      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-type > div > div > div:nth-child(1)"
-    ),
-    on: "right",
-  },
-  buttons: [
-    {
-      text: "Next",
-      action: GuideMeWhatsOnNewRIBCreditCardPage.next,
-    },
-    {
-      text: "Back",
-      action: GuideMeWhatsOnNewRIBCreditCardPage.back,
-      secondary: true,
-    },
-  ],
-});
-
-GuideMeWhatsOnNewRIBCreditCardPage.addStep({
-  id: "GuideMeWhatsOnNewRIBCreditCardPage_3",
-  title: "3/8",
-  text: "View your card CVV and expiry details here. You might need them when shopping online. ",
-  attachTo: {
-    element: document.querySelector(
-      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-type > div > div > div:nth-child(1) > div.creditCardDetails.ng-tns-c175-7.ng-star-inserted > div.creditCardDetailsPill.ng-tns-c175-7"
-    ),
-    on: "right",
-  },
-  buttons: [
-    {
-      text: "Next",
-      action: GuideMeWhatsOnNewRIBCreditCardPage.next,
-    },
-    {
-      text: "Back",
-      action: GuideMeWhatsOnNewRIBCreditCardPage.back,
-      secondary: true,
-    },
-  ],
-});
-
-GuideMeWhatsOnNewRIBCreditCardPage.addStep({
-  id: "GuideMeWhatsOnNewRIBCreditCardPage_4",
-  title: "4/8",
-  text: "Forgot your PIN? Click on this button to reset it.",
-  attachTo: {
-    element: document.querySelector(
-      "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-type > div > div > div:nth-child(1) > div.creditCardDetails.ng-tns-c175-7.ng-star-inserted > div.setPinContainer.ng-tns-c175-7"
-    ),
-    on: "right",
-  },
-  buttons: [
-    {
-      text: "Next",
-      action: GuideMeWhatsOnNewRIBCreditCardPage.next,
-    },
-    {
-      text: "Back",
-      action: GuideMeWhatsOnNewRIBCreditCardPage.back,
-      secondary: true,
-    },
-  ],
-});
-
-GuideMeWhatsOnNewRIBCreditCardPage.addStep({
-  id: "GuideMeWhatsOnNewRIBCreditCardPage_5",
-  title: "5/8",
+  title: "2/5",
   text: "Want to know where you spent using your card recently? You can view your current as well as past statements in this section.",
   attachTo: {
     element: document.querySelector(
@@ -120,8 +61,8 @@ GuideMeWhatsOnNewRIBCreditCardPage.addStep({
 });
 
 GuideMeWhatsOnNewRIBCreditCardPage.addStep({
-  id: "GuideMeWhatsOnNewRIBCreditCardPage_6",
-  title: "6/8",
+  id: "GuideMeWhatsOnNewRIBCreditCardPage_3",
+  title: "3/5",
   text: "Want your statement in PDF or XLS format? Use these buttons to export in your desired format. ",
   attachTo: {
     element: document.querySelector(
@@ -143,8 +84,8 @@ GuideMeWhatsOnNewRIBCreditCardPage.addStep({
 });
 
 GuideMeWhatsOnNewRIBCreditCardPage.addStep({
-  id: "GuideMeWhatsOnNewRIBCreditCardPage_6",
-  title: "7/8",
+  id: "GuideMeWhatsOnNewRIBCreditCardPage_4",
+  title: "4/5",
   text: "This is your card's analysis view. View your spendings, limits, and available credit limit here.",
   attachTo: {
     element: document.querySelector(
@@ -166,9 +107,9 @@ GuideMeWhatsOnNewRIBCreditCardPage.addStep({
 });
 
 GuideMeWhatsOnNewRIBCreditCardPage.addStep({
-  id: "GuideMeWhatsOnNewRIBCreditCardPage_8",
-  title: "8/8",
-  text: "That's all for this guide. Feel free to watch it again any time you need help.",
+  id: "GuideMeWhatsOnNewRIBCreditCardPage_5",
+  title: "5/5",
+  text: "That's all for this guide. Feel free to watch it again any time you are stuck.",
   buttons: [
     {
       text: "Complete",
