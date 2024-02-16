@@ -1,5 +1,5 @@
-/* eslint-disable prettier/prettier */
-// Feb 16, 2024 | Updates to file
+
+// Feb 16, 2024 | File updated
 // update 20: Modal opens on selected page 3 times automatically
 // update 19: Added fix for guide me button 
 // update 18: Added display: block to modal to fix bug
@@ -30,12 +30,12 @@ const content = {
 
 window.addEventListener("load", () => {
   const openModalAutomatically = () => {
-    const pageReference = window.location.pathname
+    const pageReference = window.location.pathname;
     if (content[pageReference]) {
-      let openTimes = window.localStorage.getItem("modalOpenTime")
-      console.log("Open times, ", openTimes)
+      let openTimes = window.localStorage.getItem("modalOpenTime");
+      console.log("Open times, ", openTimes);
       if (Number(openTimes) < 3) {
-        document.querySelector("#guided_Journey_Triggered")?.click()
+        document.querySelector("#guided_Journey_Triggered")?.click();
         // alert("Hola")
         console.log("Setting open times to: ", (Number(openTimes) + 1))
         window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
