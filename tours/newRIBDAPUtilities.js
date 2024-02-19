@@ -1,11 +1,11 @@
-
-// Feb 16, 2024 | File updated
+// Feb 19, 2024 | File updated
+// update 21: Fix for event Listener on page URL change
 // update 20: Modal opens on selected page 3 times automatically
-// update 19: Added fix for guide me button 
+// update 19: Added fix for guide me button
 // update 18: Added display: block to modal to fix bug
 // update 17: Fixed reopening issues with Modal. Now working, added two params for main func
 // update 16: Count reset after modal collapse
-// update 15: Handling only modal creation and destruction now. 
+// update 15: Handling only modal creation and destruction now.
 // update 14: Separated functions for Addition of button, and removal of buttons
 // update 13: Added if condition depended on count rather than modal
 // update 12: Fixed incorrect variable naming 'location'
@@ -25,10 +25,10 @@
 
 let count = 0;
 const content = {
-  "/in/credit-card": "Guidemehowtostartcom.start()",
+  "/in/credit-card": "GuideMeWhatsOnNewRIBCreditCardPage.start()",
 };
 
-window.addEventListener("load", () => {
+window.addEventListener("popstate", () => {
   const openModalAutomatically = () => {
     const pageReference = window.location.pathname;
     if (content[pageReference]) {
