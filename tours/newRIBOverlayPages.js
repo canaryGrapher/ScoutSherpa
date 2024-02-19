@@ -17,6 +17,7 @@ var GuideMeWhatsOnNewRIBCreditCardPage = new Shepherd.Tour({
 });
 
 window.addEventListener("popstate", () => {
+  console.log("POPSTATE EVeNT is TRIGGERED IN OVErLAYPAGES")
   const stepsContainer = {
     "/in/credit-card": {
       journey: GuideMeWhatsOnNewRIBCreditCardPage,

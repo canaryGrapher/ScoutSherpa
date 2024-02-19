@@ -1,4 +1,5 @@
-// Feb 19, 2024 | File updated
+// Feb 20, 2024 | File updated
+// update 22: changed event listener
 // update 21: Fix for event Listener on page URL change
 // update 20: Modal opens on selected page 3 times automatically
 // update 19: Added fix for guide me button
@@ -28,9 +29,12 @@ const content = {
   "/in/credit-card": "GuideMeWhatsOnNewRIBCreditCardPage.start()",
 };
 
-window.addEventListener("popstate", () => {
+window.onpopstate = function () {
+  alert("onpopstate")
+  console.log("POPSTATE EVENT LOADED")
   const openModalAutomatically = () => {
     const pageReference = window.location.pathname;
+    console.log("openModalAutomatically function")
     if (content[pageReference]) {
       let openTimes = window.localStorage.getItem("modalOpenTime");
       console.log("Open times, ", openTimes);
@@ -59,7 +63,7 @@ window.addEventListener("popstate", () => {
     openModalAutomatically()
   }
 
-})
+}
 
 const addAndRemoveGlow = (buttonReference, modal) => {
   console.log("Invoking addAndRemoveGlow()")
