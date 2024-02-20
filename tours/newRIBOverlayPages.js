@@ -41,7 +41,7 @@ const NewRIBCreditCardPage = () => {
         text: "Want to know where you spent using your card recently? You can view your current as well as past statements in this section.",
         attachTo: {
             element: document.querySelector(
-                "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-information"
+                ".statementContainer"
             ),
             on: "right",
         },
@@ -63,7 +63,7 @@ const NewRIBCreditCardPage = () => {
         text: "Want your statement in PDF or XLS format? Use these buttons to export in your desired format. ",
         attachTo: {
             element: document.querySelector(
-                "body > app-root > div.main > div > div > div.page-content.login > div > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.cc_type.ng-star-inserted > app-cc-information > div.statementsRow.ng-tns-c176-8 > div"
+                ".download-toggle"
             ),
             on: "right",
         },
