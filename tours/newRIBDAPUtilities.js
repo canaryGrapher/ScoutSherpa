@@ -1,4 +1,5 @@
-// Feb 20, 2024 | File 
+// Feb 21, 2024 | File updated
+// update 25: Added function for route
 // update 24: Changed animation duration for modal close
 // update 23: Removed event listener
 // update 22: Changed event listener
@@ -42,7 +43,7 @@ const addAndRemoveGlow = (buttonReference, modal) => {
     modal.remove()
 
     // buttonReference.classList.remove('modalMinimized');
-  }, 3000); // 5000 milliseconds = 5 seconds
+  }, 2000); // 2000 milliseconds = 2 seconds
 };
 
 const getModalText = (linkURL) => {
@@ -80,7 +81,7 @@ ${content[currentPath] ? "Welcome to the new and improved ICICI Bank website exp
         </svg>
         <span>Demo Videos</span>
     </button>
-    ${content[currentPath] ? '<button class="modalButtons" type="button" onclick=' + content[currentPath]  + '>Guide me</button>' : ''}
+    ${content[currentPath] ? '<button class="modalButtons" type="button" onclick=' + content[currentPath] + '>Guide me</button>' : ''}
 </div>
 </div>`;
   return modalText;
@@ -136,7 +137,6 @@ const calculateRetract = (buttonReference, modalReference) => {
 } `;
   document.head.appendChild(style);
 };
-
 
 // eslint-disable-next-line no-unused-vars
 const associateModalForDAP = (linkURL, buttonSelector) => {
@@ -294,4 +294,36 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
     count++;
   }
   showModal(linkURL, buttonSelector);
-}; 
+};
+
+// eslint-disable-next-line no-unused-vars
+const pageChangeInvokationDAP = () => {
+  alert("Page change observed")
+  const openModalAutomatically = () => {
+    const pageReference = window.location.pathname
+    if (content[pageReference]) {
+      let openTimes = window.localStorage.getItem("modalOpenTime")
+      console.log("Open times, ", openTimes)
+      if (Number(openTimes) < 3) {
+        document.querySelector("#guided_Journey_Triggered")?.click()
+        // alert("Hola")
+        console.log("Setting open times to: ", (Number(openTimes) + 1))
+        window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
+      }
+    }
+  }
+  let dateReference = window.localStorage.getItem("modalOpenDateReference")
+  let ISODateToday = new Date()
+  let dateToday = ISODateToday.getDate()
+  console.log("dateReference", dateReference)
+  console.log("ISODateToday", ISODateToday)
+  console.log("CheckEqual")
+  if (dateReference && dateReference == ISODateToday.getDate()) {
+    console.log("Hello")
+    openModalAutomatically()
+  } else {
+    window.localStorage.setItem("modalOpenDateReference", dateToday)
+    window.localStorage.setItem("modalOpenTime", "0")
+    openModalAutomatically()
+  }
+}
