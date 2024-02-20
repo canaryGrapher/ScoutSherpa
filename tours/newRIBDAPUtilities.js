@@ -1,5 +1,6 @@
-// Feb 20, 2024 | File updated
-// update 22: changed event listener
+// Feb 20, 2024 | File 
+// update 23: Removed event listener
+// update 22: Changed event listener
 // update 21: Fix for event Listener on page URL change
 // update 20: Modal opens on selected page 3 times automatically
 // update 19: Added fix for guide me button
@@ -26,44 +27,8 @@
 
 let count = 0;
 const content = {
-  "/in/credit-card": "GuideMeWhatsOnNewRIBCreditCardPage.start()",
+  "/in/credit-card": "NewRIBCreditCardPage();document.querySelector('#dapModalCloseButton').click()",
 };
-
-window.onpopstate = function () {
-  alert("onpopstate")
-  console.log("POPSTATE EVENT LOADED")
-  const openModalAutomatically = () => {
-    const pageReference = window.location.pathname;
-    console.log("openModalAutomatically function")
-    if (content[pageReference]) {
-      let openTimes = window.localStorage.getItem("modalOpenTime");
-      console.log("Open times, ", openTimes);
-      if (Number(openTimes) < 3) {
-        document.querySelector("#guided_Journey_Triggered")?.click();
-        // alert("Hola")
-        console.log("Setting open times to: ", (Number(openTimes) + 1))
-        window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
-      }
-    }
-  }
-
-
-  let dateReference = window.localStorage.getItem("modalOpenDateReference")
-  let ISODateToday = new Date()
-  let dateToday = ISODateToday.getDate()
-  console.log("dateReference", dateReference)
-  console.log("ISODateToday", ISODateToday)
-  console.log("CheckEqual")
-  if (dateReference && dateReference == ISODateToday.getDate()) {
-    console.log("Hello")
-    openModalAutomatically()
-  } else {
-    window.localStorage.setItem("modalOpenDateReference", dateToday)
-    window.localStorage.setItem("modalOpenTime", "0")
-    openModalAutomatically()
-  }
-
-}
 
 const addAndRemoveGlow = (buttonReference, modal) => {
   console.log("Invoking addAndRemoveGlow()")
@@ -113,7 +78,7 @@ We hope you enjoy the new online banking experience with us.</p>
         </svg>
         <span>Demo Videos</span>
     </button>
-    ${content[currentPath] ? '<button class="modalButtons" type="button" onclick=' + content[currentPath] + '>Guide me</button>' : ''}
+    ${content[currentPath] ? '<button class="modalButtons" type="button" onclick=' + content[currentPath]  + '>Guide me</button>' : ''}
 </div>
 </div>`;
   return modalText;
