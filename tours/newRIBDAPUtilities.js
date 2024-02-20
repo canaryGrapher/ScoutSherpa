@@ -1,4 +1,5 @@
 // Feb 20, 2024 | File 
+// update 24: Changed animation duration for modal close
 // update 23: Removed event listener
 // update 22: Changed event listener
 // update 21: Fix for event Listener on page URL change
@@ -248,7 +249,7 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
     height         : calc(100% + 4px);
     animation      : glowing 20s linear infinite;
     opacity        : 0;
-    transition     : opacity .3s ease-in-out;
+    transition     : opacity .2s ease-in-out;
   }
   
   .glow-indicator:active {
