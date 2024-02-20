@@ -50,8 +50,9 @@ const getModalText = (linkURL) => {
   const modalText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="dapModalCloseButton" type="btn">×</button>
 <h2>User guidance</h2>
-<p>Welcome to the new and improved ICICI Bank website! We have redesigned our website to make your banking experience more convenient and rewarding. To help you get started, we have two options for you. Watch our video demos that show you how to use the new website and its features, or start a guided journey that takes you through the main sections and pages of the new website. Choose either option by clicking the respective buttons.
-We hope you enjoy the new online banking experience with us.</p>
+<p
+${content[currentPath] ? "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features, or else start a guided journey that takes you through the main sections and pages of the new website. Choose either with just a click. We hope you enjoy the new online banking experience." : "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features with just a click. We hope you enjoy the new online banking experience."}
+</p>
 <div class="modalButtonContainer">
     <button class="iPlayContainerInModal modalButtons" onClick="window.open('${linkURL}', '_blank');">
         <svg _ngcontent-rlc-c111="" width="31" height="30" viewBox="0 0 31 30" fill="none"
