@@ -52,7 +52,7 @@ const getModalText = (linkURL) => {
   const modalText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="dapModalCloseButton" type="btn">×</button>
 <h2>User guidance</h2>
-<p
+<p>
 ${content[currentPath] ? "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features, or else start a guided journey that takes you through the main sections and pages of the new website. Choose either with just a click. We hope you enjoy the new online banking experience." : "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features with just a click. We hope you enjoy the new online banking experience."}
 </p>
 <div class="modalButtonContainer">
