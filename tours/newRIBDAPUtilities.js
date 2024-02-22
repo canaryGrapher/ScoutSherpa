@@ -1,4 +1,5 @@
 // Feb 21, 2024 | File updated
+// update 26: setTimeout for main function
 // update 25: Added function for route
 // update 24: Changed animation duration for modal close
 // update 23: Removed event listener
@@ -298,32 +299,38 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
 
 // eslint-disable-next-line no-unused-vars
 const pageChangeInvokationDAP = () => {
-  alert("Page change observed")
-  const openModalAutomatically = () => {
-    const pageReference = window.location.pathname
-    if (content[pageReference]) {
-      let openTimes = window.localStorage.getItem("modalOpenTime")
-      console.log("Open times, ", openTimes)
-      if (Number(openTimes) < 3) {
-        document.querySelector("#guided_Journey_Triggered")?.click()
-        // alert("Hola")
-        console.log("Setting open times to: ", (Number(openTimes) + 1))
-        window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
+  console.log("PAGE PATHNAME CHANGE OBSERVED")
+  console.log(window.location.pathname)
+  const mainFunction = () => {
+    console.log("PAGE PATHNAME CHANGE OBSERVED INSIDE mainFunction")
+    console.log(window.location.pathname)
+    const openModalAutomatically = () => {
+      const pageReference = window.location.pathname
+      if (content[pageReference]) {
+        let openTimes = window.localStorage.getItem("modalOpenTime")
+        console.log("Open times, ", openTimes)
+        if (Number(openTimes) < 3) {
+          document.querySelector("#guided_Journey_Triggered")?.click()
+          // alert("Hola")
+          console.log("Setting open times to: ", (Number(openTimes) + 1))
+          window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
+        }
       }
     }
+    let dateReference = window.localStorage.getItem("modalOpenDateReference")
+    let ISODateToday = new Date()
+    let dateToday = ISODateToday.getDate()
+    console.log("dateReference", dateReference)
+    console.log("ISODateToday", ISODateToday)
+    console.log("CheckEqual")
+    if (dateReference && dateReference == ISODateToday.getDate()) {
+      console.log("Hello")
+      openModalAutomatically()
+    } else {
+      window.localStorage.setItem("modalOpenDateReference", dateToday)
+      window.localStorage.setItem("modalOpenTime", "0")
+      openModalAutomatically()
+    }
   }
-  let dateReference = window.localStorage.getItem("modalOpenDateReference")
-  let ISODateToday = new Date()
-  let dateToday = ISODateToday.getDate()
-  console.log("dateReference", dateReference)
-  console.log("ISODateToday", ISODateToday)
-  console.log("CheckEqual")
-  if (dateReference && dateReference == ISODateToday.getDate()) {
-    console.log("Hello")
-    openModalAutomatically()
-  } else {
-    window.localStorage.setItem("modalOpenDateReference", dateToday)
-    window.localStorage.setItem("modalOpenTime", "0")
-    openModalAutomatically()
-  }
+  setTimeout(mainFunction, 4000)
 }
