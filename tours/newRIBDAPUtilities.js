@@ -1,4 +1,5 @@
 // Feb 28, 2024 | File updated
+// update 30: Auto fix for redirection
 // update 29: Fixes on new RIB
 // update 26: setTimeout for main function
 // update 25: Added function for route
@@ -31,19 +32,20 @@
 let count = 0;
 let pageCount = 0;
 const content = {
-  "/in/credit-card": "NewRIBCreditCardPage();document.querySelector('#dapModalCloseButton').click()",
+  "/in/credit-card": "document.querySelector('#dapModalCloseButton').click();NewRIBCreditCardPage()",
 };
 
 const addAndRemoveGlow = (buttonReference, modal) => {
   console.log("Invoking addAndRemoveGlow()")
   console.log('Removing modal now')
   console.log(modal)
-  // modal.remove()
   buttonReference.classList.add('glow-indicator');
+  buttonReference.style.cursor = "not-allowed";
   setTimeout(function () {
     modal.remove()
     buttonReference.classList.remove('glow-indicator');
     // buttonReference.classList.remove('modalMinimized');
+    buttonReference.style.cursor = "pointer"
   }, 2000); // 2000 milliseconds = 2 seconds
 };
 
@@ -115,14 +117,12 @@ const calculateRetract = (buttonReference, modalReference) => {
 
 // eslint-disable-next-line no-unused-vars
 const associateModalForDAP = (linkURL, buttonSelector) => {
-  console.log("URL: ", linkURL)
-  console.log("buttonSelector: ", buttonSelector)
-
-  if (count === 0) {
-    console.log("invoking associateModalForDAP()")
-    console.log('Creating new modal for the very first time');
-    const modalStyle = document.createElement('style');
-    modalStyle.innerHTML = `
+  if (document.querySelector(buttonSelector).style.cursor != "not-allowed") {
+    if (count === 0) {
+      console.log("invoking associateModalForDAP()")
+      console.log('Creating new modal for the very first time');
+      const modalStyle = document.createElement('style');
+      modalStyle.innerHTML = `
   .modal {
     position        : absolute;
     margin          : auto;
@@ -141,7 +141,7 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
     width           : 45vw;
     height          : fit-content;
     margin          : auto;
-    background-color: white;
+    background-color: #FEEEE5;
     box-shadow      : 0 0 10px rgba(0, 0, 0, 0.5);
     padding         : 20px;
     transition      : 1s all;
@@ -184,10 +184,11 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
     justify-content: space-between;
   }
   .modalButtons {
-    color           : #d16c13;
-    background-color: #feeee5;
+    color           : #ef7c00;
+    background-color: #ffe3cb;
     padding         : 8px 15px;
     border-radius   : 30px;
+    border          : 0;
     cursor          : pointer;
     flex            : 1;
     margin          : 5px;
@@ -265,25 +266,25 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
     }
   }
   `;
-    document.head.appendChild(modalStyle);
-    count++;
+      document.head.appendChild(modalStyle);
+      count++;
+    }
+    showModal(linkURL, buttonSelector);
   }
-  showModal(linkURL, buttonSelector);
 };
 
 // eslint-disable-next-line no-unused-vars
 const pageChangeInvokationDAP = () => {
-  const pageReference = window.location.pathname;
-  let dateReference = window.localStorage.getItem("modalOpenDateReference")
-  let ISODateToday = new Date()
-  let dateToday = ISODateToday.getDate()
-  console.log("dateReference", dateReference)
-  console.log("ISODateToday", ISODateToday)
-  console.log("CheckEqual")
-  console.log("PAGE PATHNAME CHANGE OBSERVED")
-  console.log(window.location.pathname)
-
   const mainFunction = () => {
+    const pageReference = window.location.pathname;
+    let dateReference = window.localStorage.getItem("modalOpenDateReference")
+    let ISODateToday = new Date()
+    let dateToday = ISODateToday.getDate()
+    console.log("dateReference", dateReference)
+    console.log("ISODateToday", ISODateToday)
+    console.log("CheckEqual")
+    console.log("PAGE PATHNAME CHANGE OBSERVED")
+    console.log(window.location.pathname)
     console.log("PAGE PATHNAME CHANGE OBSERVED INSIDE mainFunction")
     console.log(pageReference)
     const openModalAutomatically = () => {
@@ -308,8 +309,9 @@ const pageChangeInvokationDAP = () => {
       openModalAutomatically()
     }
   }
-  if (content[pageReference] && document.querySelector(".cardAnalysis")) {
-    setTimeout(mainFunction, 4000)
+  if (content[window.loca] && document.querySelector(".cardAnalysis").getBoundingClientRect().x > 0) {
+    pageCount = 0;
+    setTimeout(mainFunction, 2000)
   }
   else {
     if (pageCount < 3) {
