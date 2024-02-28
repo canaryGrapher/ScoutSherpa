@@ -57,10 +57,10 @@ HowToMakeICICIBankCreditCardPaymentTourTemp.addStep({
 // Select the 'Cards & Loans' button on the menubar on dashboard
 HowToMakeICICIBankCreditCardPaymentTourTemp.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTourTemp_1a",
-    title: "1/5",
+    title: "1/3",
     text: "Move your mouse over 'Cards & Loans'",
     showOn: () => {
-        checkIfDashboard()
+        return !checkIfDashboard()
     },
     attachTo: {
         element: returnMainMenuElement('Cards & Loans', "legacy"),
@@ -68,13 +68,13 @@ HowToMakeICICIBankCreditCardPaymentTourTemp.addStep({
     },
     when: {
         show: () => {
-            persitentMenu('Customer Service')
+            persitentMenu('Customer Service', "legacy")
         },
         next: () => {
-            removePersistentMenu('Customer Service')
+            removePersistentMenu('Customer Service', "legacy")
         },
         cancel: () => {
-            removePersistentMenu('Customer Service')
+            removePersistentMenu('Customer Service', "legacy")
         }
     },
     advanceOn: {
@@ -85,22 +85,64 @@ HowToMakeICICIBankCreditCardPaymentTourTemp.addStep({
 // Select the 'Credit Cards' sub-link under 'Cards & Loans'
 HowToMakeICICIBankCreditCardPaymentTourTemp.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTourTemp_2a",
-    title: "2/5",
+    title: "2/3",
     text: "Click on 'Credit Cards'",
     showOn: () => {
-        checkIfDashboard()
+        return !checkIfDashboard()
     },
     attachTo: {
         element: returnSubMenuElement('Credit Cards', "legacy"),
         on: 'left'
     },
-
 })
+
+// Select the 'Cards & Loans' button on the menubar on dashboard
+HowToMakeICICIBankCreditCardPaymentTourTemp.addStep({
+    id: "HowToMakeICICIBankCreditCardPaymentTourTemp_1b",
+    title: "1/3",
+    text: "Move your mouse over 'Cards & Loans'",
+    showOn: () => {
+        return checkIfDashboard()
+    },
+    attachTo: {
+        element: returnMainMenuElement('Cards & Loans', "main"),
+        on: 'left'
+    },
+    when: {
+        show: () => {
+            persitentMenu('Customer Service', 'main')
+        },
+        next: () => {
+            removePersistentMenu('Customer Service', 'main')
+        },
+        cancel: () => {
+            removePersistentMenu('Customer Service', 'main')
+        }
+    },
+    advanceOn: {
+        element: returnMainMenuElement('Cards & Loans', "legacy"),
+        on: 'click'
+    }
+})
+// Select the 'Credit Cards' sub-link under 'Cards & Loans'
+HowToMakeICICIBankCreditCardPaymentTourTemp.addStep({
+    id: "HowToMakeICICIBankCreditCardPaymentTourTemp_2b",
+    title: "2/3",
+    text: "Click on 'Credit Cards'",
+    showOn: () => {
+        return checkIfDashboard()
+    },
+    attachTo: {
+        element: returnSubMenuElement('Credit Cards', "main"),
+        on: 'left'
+    },
+})
+
 // Select the credit card you want to pay bill for
 HowToMakeICICIBankCreditCardPaymentTourTemp.addStep({
     id: "HowToMakeICICIBankCreditCardPaymentTourTemp_3",
     title: "3/3",
-    text: "Select the credit you want to make the payment for using the tab(s) on the top and click on 'Pay Bill' button to make the payment.",
+    text: "Select the credit you want to make the payment for using the tab(s) on the top and click on '<strong>Pay Bill</strong>' button to make the payment.",
     buttons: [
         {
             text: 'Understood',
