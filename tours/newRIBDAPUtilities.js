@@ -1,4 +1,5 @@
-// Feb 28, 2024 | File updated
+// Feb 29, 2024 | File updated
+// update 31: Modal content change, invokation logic change and journey change
 // update 30: Auto fix for redirection
 // update 29: Fixes on new RIB
 // update 26: setTimeout for main function
@@ -32,7 +33,7 @@
 let count = 0;
 let pageCount = 0;
 const content = {
-  "/in/credit-card": "document.querySelector('#dapModalCloseButton').click();NewRIBCreditCardPage()",
+  "/in/credit-card": "document.querySelector('#dapModalCloseButton')?.click();if(document.querySelector('.shepherd-element')?.getBoundingClientRect() == 0){NewRIBCreditCardPage()}",
 };
 
 const addAndRemoveGlow = (buttonReference, modal) => {
@@ -54,7 +55,7 @@ const getModalText = (linkURL) => {
   console.log("Invoking getModalText()")
   const modalText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="dapModalCloseButton" type="btn">×</button>
-<h2>User guidance</h2>
+<h2>View Demo</h2>
 <p>
 ${content[currentPath] ? "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features, or else start a guided journey that takes you through the main sections and pages of the new website. Choose either with just a click. We hope you enjoy the new online banking experience." : "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features with just a click. We hope you enjoy the new online banking experience."}
 </p>
@@ -117,7 +118,7 @@ const calculateRetract = (buttonReference, modalReference) => {
 
 // eslint-disable-next-line no-unused-vars
 const associateModalForDAP = (linkURL, buttonSelector) => {
-  if (document.querySelector(buttonSelector).style.cursor != "not-allowed") {
+  if (document.querySelector(buttonSelector).style.cursor != "not-allowed" && document.querySelector("#modalContainer").getBoundingClientRect().x != 0) {
     if (count === 0) {
       console.log("invoking associateModalForDAP()")
       console.log('Creating new modal for the very first time');
@@ -148,7 +149,7 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
     border-radius   : 10px;
   }
   #modalContainer>h2 {
-    font-size  : 1.8rem;
+    font-size  : 12px;
     text-align : center;
     font-weight: bold;
   }
@@ -280,36 +281,22 @@ const pageChangeInvokationDAP = () => {
     let dateReference = window.localStorage.getItem("modalOpenDateReference")
     let ISODateToday = new Date()
     let dateToday = ISODateToday.getDate()
-    console.log("dateReference", dateReference)
-    console.log("ISODateToday", ISODateToday)
-    console.log("CheckEqual")
-    console.log("PAGE PATHNAME CHANGE OBSERVED")
-    console.log(window.location.pathname)
-    console.log("PAGE PATHNAME CHANGE OBSERVED INSIDE mainFunction")
-    console.log(pageReference)
+    let openTimes = window.localStorage.getItem("modalOpenTime")
+    if (!openTimes) {
+      window.localStorage.setItem("modalOpenTime", 0)
+    }
     const openModalAutomatically = () => {
       if (content[pageReference]) {
-        let openTimes = window.localStorage.getItem("modalOpenTime")
-        console.log("Open times, ", openTimes)
-        if (Number(openTimes) < 3) {
-          document.querySelector("#guided_Journey_Triggered")?.click()
-          // alert("Hola")
-          console.log("Setting open times to: ", (Number(openTimes) + 1))
+        if (Number(openTimes) < 3 && (Number(dateReference) != dateToday)) {
+          window.localStorage.setItem("modalOpenDateReference", dateToday)
           window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
+          document.querySelector("#guided_Journey_Triggered")?.click()
         }
       }
     }
-
-    if (dateReference && dateReference == ISODateToday.getDate()) {
-      console.log("Hello")
-      openModalAutomatically()
-    } else {
-      window.localStorage.setItem("modalOpenDateReference", dateToday)
-      window.localStorage.setItem("modalOpenTime", "0")
-      openModalAutomatically()
-    }
+    openModalAutomatically()
   }
-  if (content[window.loca] && document.querySelector(".cardAnalysis").getBoundingClientRect().x > 0) {
+  if (content[window.location.pathname] && document.querySelector(".cardAnalysis").getBoundingClientRect().x > 0) {
     pageCount = 0;
     setTimeout(mainFunction, 2000)
   }
