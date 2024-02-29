@@ -1,4 +1,5 @@
 // Feb 29, 2024 | File updated
+// update 32: Trigger of modal fix change
 // update 31: Modal content change, invokation logic change and journey change
 // update 30: Auto fix for redirection
 // update 29: Fixes on new RIB
@@ -33,27 +34,27 @@
 let count = 0;
 let pageCount = 0;
 const content = {
-  "/in/credit-card": "document.querySelector('#dapModalCloseButton')?.click();if(document.querySelector('.shepherd-element')?.getBoundingClientRect() == 0){NewRIBCreditCardPage()}",
+    "/in/credit-card": `document.querySelector('#dapModalCloseButton')?.click();console.log('Closing the modal now');if(document.querySelector('.shepherd-element') === null || document.querySelector('.shepherd-element')?.getBoundingClientRect().x === 0){NewRIBCreditCardPage()}`,
 };
 
 const addAndRemoveGlow = (buttonReference, modal) => {
-  console.log("Invoking addAndRemoveGlow()")
-  console.log('Removing modal now')
-  console.log(modal)
-  buttonReference.classList.add('glow-indicator');
-  buttonReference.style.cursor = "not-allowed";
-  setTimeout(function () {
-    modal.remove()
-    buttonReference.classList.remove('glow-indicator');
-    // buttonReference.classList.remove('modalMinimized');
-    buttonReference.style.cursor = "pointer"
-  }, 2000); // 2000 milliseconds = 2 seconds
+    console.log("Invoking addAndRemoveGlow()")
+    console.log('Removing modal now')
+    console.log(modal)
+    buttonReference.classList.add('glow-indicator');
+    buttonReference.style.cursor = "not-allowed";
+    setTimeout(function () {
+        modal.remove()
+        buttonReference.classList.remove('glow-indicator');
+        // buttonReference.classList.remove('modalMinimized');
+        buttonReference.style.cursor = "pointer"
+    }, 2000); // 2000 milliseconds = 2 seconds
 };
 
 const getModalText = (linkURL) => {
-  const currentPath = window.location.pathname;
-  console.log("Invoking getModalText()")
-  const modalText = `<div id="modalContainer" class="modal">
+    const currentPath = window.location.pathname;
+    console.log("Invoking getModalText()")
+    const modalText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="dapModalCloseButton" type="btn">×</button>
 <h2>View Demo</h2>
 <p>
@@ -66,64 +67,64 @@ ${content[currentPath] ? "Welcome to the new and improved ICICI Bank website exp
     ${content[currentPath] ? '<button class="modalButtons" type="button" onclick=' + content[currentPath] + '>Guide me</button>' : ''}
 </div>
 </div>`;
-  return modalText;
+    return modalText;
 }
 
 const showModal = (linkURL, topButtonSelector) => {
-  console.log("Invoking showModal()")
-  const modalContent = getModalText(linkURL);
-  document.body.insertAdjacentHTML('beforeend', modalContent);
-  document.querySelector("#dapModalCloseButton").addEventListener('click', () => {
-    console.log("Adding closing action to the modal")
-    closeAction(document.querySelector('#modalContainer'), document.querySelector(topButtonSelector))
-  });
+    console.log("Invoking showModal()")
+    const modalContent = getModalText(linkURL);
+    document.body.insertAdjacentHTML('beforeend', modalContent);
+    document.querySelector("#dapModalCloseButton").addEventListener('click', () => {
+        console.log("Adding closing action to the modal")
+        closeAction(document.querySelector('#modalContainer'), document.querySelector(topButtonSelector))
+    });
 }
 
 const closeAction = (modalReference, topButton) => {
-  console.log('Invoking closeAction()')
-  console.log(topButton)
-  // const buttonReference = document.getElementById('closeButton')
-  calculateRetract(topButton, modalReference);
-  modalReference.setAttribute('class', 'modalMinimized')
-  addAndRemoveGlow(topButton, modalReference)
+    console.log('Invoking closeAction()')
+    console.log(topButton)
+    // const buttonReference = document.getElementById('closeButton')
+    calculateRetract(topButton, modalReference);
+    modalReference.setAttribute('class', 'modalMinimized')
+    addAndRemoveGlow(topButton, modalReference)
 };
 
 const calculateRetract = (buttonReference, modalReference) => {
-  console.log('Invoking calculateRetract()')
-  const elementDetails = buttonReference.getBoundingClientRect();
-  const modalDetails = modalReference.getBoundingClientRect();
-  var style = document.createElement('style');
-  style.innerHTML = `.modalMinimized {
+    console.log('Invoking calculateRetract()')
+    const elementDetails = buttonReference.getBoundingClientRect();
+    const modalDetails = modalReference.getBoundingClientRect();
+    var style = document.createElement('style');
+    style.innerHTML = `.modalMinimized {
   -webkit - transform: translate(${elementDetails.left -
-    modalDetails.left -
-    (modalDetails.width - elementDetails.width) +
-    200
-    }px, -${modalDetails.top -
-    elementDetails.top -
-    (elementDetails.height - modalDetails.height) -
-    50
-    }px) scale(0);
+        modalDetails.left -
+        (modalDetails.width - elementDetails.width) +
+        200
+        }px, -${modalDetails.top -
+        elementDetails.top -
+        (elementDetails.height - modalDetails.height) -
+        50
+        }px) scale(0);
   transform: translate(${elementDetails.left -
-    modalDetails.left -
-    (modalDetails.width - elementDetails.width) +
-    200
-    }px, -${modalDetails.top -
-    elementDetails.top -
-    (elementDetails.height - modalDetails.height) -
-    50
-    }px) scale(0);
+        modalDetails.left -
+        (modalDetails.width - elementDetails.width) +
+        200
+        }px, -${modalDetails.top -
+        elementDetails.top -
+        (elementDetails.height - modalDetails.height) -
+        50
+        }px) scale(0);
 } `;
-  document.head.appendChild(style);
+    document.head.appendChild(style);
 };
 
 // eslint-disable-next-line no-unused-vars
 const associateModalForDAP = (linkURL, buttonSelector) => {
-  if (document.querySelector(buttonSelector).style.cursor != "not-allowed" && document.querySelector("#modalContainer").getBoundingClientRect().x != 0) {
-    if (count === 0) {
-      console.log("invoking associateModalForDAP()")
-      console.log('Creating new modal for the very first time');
-      const modalStyle = document.createElement('style');
-      modalStyle.innerHTML = `
+    if ((document.querySelector(buttonSelector) === null || document.querySelector(buttonSelector)?.style.cursor != "not-allowed") && ((document.querySelector("#modalContainer") == null) || document.querySelector("#modalContainer")?.getBoundingClientRect().x == 0)) {
+        if (count === 0) {
+            console.log("invoking associateModalForDAP()")
+            console.log('Creating new modal for the very first time');
+            const modalStyle = document.createElement('style');
+            modalStyle.innerHTML = `
   .modal {
     position        : absolute;
     margin          : auto;
@@ -267,43 +268,49 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
     }
   }
   `;
-      document.head.appendChild(modalStyle);
-      count++;
+            document.head.appendChild(modalStyle);
+            count++;
+        }
+        if (document.querySelector('.shepherd-element') === null || document.querySelector('.shepherd-element')?.getBoundingClientRect().x === 0) {
+            showModal(linkURL, buttonSelector);
+        }
     }
-    showModal(linkURL, buttonSelector);
-  }
 };
 
 // eslint-disable-next-line no-unused-vars
 const pageChangeInvokationDAP = () => {
-  const mainFunction = () => {
-    const pageReference = window.location.pathname;
-    let dateReference = window.localStorage.getItem("modalOpenDateReference")
-    let ISODateToday = new Date()
-    let dateToday = ISODateToday.getDate()
-    let openTimes = window.localStorage.getItem("modalOpenTime")
-    if (!openTimes) {
-      window.localStorage.setItem("modalOpenTime", 0)
-    }
-    const openModalAutomatically = () => {
-      if (content[pageReference]) {
-        if (Number(openTimes) < 3 && (Number(dateReference) != dateToday)) {
-          window.localStorage.setItem("modalOpenDateReference", dateToday)
-          window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
-          document.querySelector("#guided_Journey_Triggered")?.click()
+    const mainFunction = () => {
+        const pageReference = window.location.pathname;
+        let dateReference = window.localStorage.getItem("modalOpenDateReference")
+        let ISODateToday = new Date()
+        let dateToday = ISODateToday.getDate()
+        if (!dateReference) {
+            window.localStorage.setItem("modalOpenDateReference", dateToday + 1)
         }
-      }
+        let openTimes = window.localStorage.getItem("modalOpenTime")
+        if (!openTimes) {
+            window.localStorage.setItem("modalOpenTime", 0)
+        }
+        const openModalAutomatically = () => {
+            if (content[pageReference]) {
+                if (Number(openTimes) < 3 && (Number(dateReference) != dateToday)) {
+                    window.localStorage.setItem("modalOpenDateReference", dateToday)
+                    window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
+                    document.querySelector("#guided_Journey_Triggered")?.click()
+                }
+            }
+        }
+        openModalAutomatically()
     }
-    openModalAutomatically()
-  }
-  if (content[window.location.pathname] && document.querySelector(".cardAnalysis").getBoundingClientRect().x > 0) {
-    pageCount = 0;
-    setTimeout(mainFunction, 2000)
-  }
-  else {
-    if (pageCount < 3) {
-      pageCount = pageCount + 1;
-      setTimeout(pageChangeInvokationDAP, 4000);
+    if (content[window.location.pathname] && document.querySelector(".cardAnalysis")?.getBoundingClientRect().x > 0) {
+        document.querySelector("#guided_Journey_Triggered").innerHTML = "View Demo"
+        pageCount = 0;
+        setTimeout(mainFunction, 2000)
     }
-  }
+    else {
+        if (pageCount < 3) {
+            pageCount = pageCount + 1;
+            setTimeout(pageChangeInvokationDAP, 4000);
+        }
+    }
 }
