@@ -1,4 +1,5 @@
-// Feb 29, 2024 | File updated
+// Mar 1, 2024 | File updated
+// update 32: Fixed modal opening issue
 // update 31: Modal content change, invokation logic change and journey change
 // update 30: Auto fix for redirection
 // update 29: Fixes on new RIB
@@ -33,13 +34,10 @@
 let count = 0;
 let pageCount = 0;
 const content = {
-  "/in/credit-card": "document.querySelector('#dapModalCloseButton')?.click();if(document.querySelector('.shepherd-element')?.getBoundingClientRect() == 0){NewRIBCreditCardPage()}",
+  "/in/credit-card": "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
 };
 
 const addAndRemoveGlow = (buttonReference, modal) => {
-  console.log("Invoking addAndRemoveGlow()")
-  console.log('Removing modal now')
-  console.log(modal)
   buttonReference.classList.add('glow-indicator');
   buttonReference.style.cursor = "not-allowed";
   setTimeout(function () {
@@ -52,7 +50,6 @@ const addAndRemoveGlow = (buttonReference, modal) => {
 
 const getModalText = (linkURL) => {
   const currentPath = window.location.pathname;
-  console.log("Invoking getModalText()")
   const modalText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="dapModalCloseButton" type="btn">×</button>
 <h2>View Demo</h2>
@@ -74,14 +71,12 @@ const showModal = (linkURL, topButtonSelector) => {
   const modalContent = getModalText(linkURL);
   document.body.insertAdjacentHTML('beforeend', modalContent);
   document.querySelector("#dapModalCloseButton").addEventListener('click', () => {
-    console.log("Adding closing action to the modal")
     closeAction(document.querySelector('#modalContainer'), document.querySelector(topButtonSelector))
   });
 }
 
 const closeAction = (modalReference, topButton) => {
   console.log('Invoking closeAction()')
-  console.log(topButton)
   // const buttonReference = document.getElementById('closeButton')
   calculateRetract(topButton, modalReference);
   modalReference.setAttribute('class', 'modalMinimized')
@@ -89,7 +84,6 @@ const closeAction = (modalReference, topButton) => {
 };
 
 const calculateRetract = (buttonReference, modalReference) => {
-  console.log('Invoking calculateRetract()')
   const elementDetails = buttonReference.getBoundingClientRect();
   const modalDetails = modalReference.getBoundingClientRect();
   var style = document.createElement('style');
@@ -118,9 +112,10 @@ const calculateRetract = (buttonReference, modalReference) => {
 
 // eslint-disable-next-line no-unused-vars
 const associateModalForDAP = (linkURL, buttonSelector) => {
-  if (document.querySelector(buttonSelector).style.cursor != "not-allowed" && document.querySelector("#modalContainer").getBoundingClientRect().x != 0) {
+  console.log("invoking associateModalForDAP()")
+  if (document.querySelector(buttonSelector)?.style.cursor != "not-allowed" && document.querySelector(".shepherd-element") == null) {
+    console.log("Conditions met for invoking modal")
     if (count === 0) {
-      console.log("invoking associateModalForDAP()")
       console.log('Creating new modal for the very first time');
       const modalStyle = document.createElement('style');
       modalStyle.innerHTML = `
@@ -276,33 +271,39 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
 
 // eslint-disable-next-line no-unused-vars
 const pageChangeInvokationDAP = () => {
+  alert(`This is a testing prompt, will be removed today. Count: ${pageCount}`)
+  // fnuction to handle opening of modal
   const mainFunction = () => {
-    const pageReference = window.location.pathname;
-    let dateReference = window.localStorage.getItem("modalOpenDateReference")
     let ISODateToday = new Date()
     let dateToday = ISODateToday.getDate()
     let openTimes = window.localStorage.getItem("modalOpenTime")
+    let lastOpenDate = window.localStorage.getItem("modalOpenDateReference")
+    // if the local storage key-value is missing for openTimes, set it to 0
     if (!openTimes) {
       window.localStorage.setItem("modalOpenTime", 0)
     }
+    // Modal will open automatically based on the defined condition
     const openModalAutomatically = () => {
-      if (content[pageReference]) {
-        if (Number(openTimes) < 3 && (Number(dateReference) != dateToday)) {
-          window.localStorage.setItem("modalOpenDateReference", dateToday)
-          window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
-          document.querySelector("#guided_Journey_Triggered")?.click()
-        }
+      // if modal has been opened for less that 3 time automatically and date today is not equal to the last time it was opened
+      if (Number(openTimes) < 3 && (Number(lastOpenDate) != dateToday)) {
+        window.localStorage.setItem("modalOpenDateReference", dateToday)
+        window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
+        document.querySelector("#guided_Journey_Triggered")?.click()
       }
     }
     openModalAutomatically()
   }
-  if (content[window.location.pathname] && document.querySelector(".cardAnalysis").getBoundingClientRect().x > 0) {
+
+  if (content[window.location.pathname]) {
     pageCount = 0;
-    setTimeout(mainFunction, 2000)
+    console.log("FUNCTION CONDITION MET, wopning modal in 4 seconds.")
+    setTimeout(mainFunction, 4000)
   }
   else {
     if (pageCount < 3) {
+      // increasing the number of retries.
       pageCount = pageCount + 1;
+      // retry the function after 4 seconds
       setTimeout(pageChangeInvokationDAP, 4000);
     }
   }
