@@ -1,4 +1,5 @@
 // Mar 1, 2024 | File updated
+// update 33: Added logic for button showing for edge cases
 // update 32: Fixed modal opening issue
 // update 31: Modal content change, invokation logic change and journey change
 // update 30: Auto fix for redirection
@@ -33,92 +34,97 @@
 /* eslint-disable max-lines */
 let count = 0;
 let pageCount = 0;
-const content = {
-  "/in/credit-card": "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
+const journeyInfo = {
+    "/in/credit-card": {
+        journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
+        logic: (!window.find("EXPLORE MORE CREDIT CARDS") && document.querySelectorAll(".cardAnalysis")[0])
+    },
 };
 
 const addAndRemoveGlow = (buttonReference, modal) => {
-  buttonReference.classList.add('glow-indicator');
-  buttonReference.style.cursor = "not-allowed";
-  setTimeout(function () {
-    modal.remove()
-    buttonReference.classList.remove('glow-indicator');
-    // buttonReference.classList.remove('modalMinimized');
-    buttonReference.style.cursor = "pointer"
-  }, 2000); // 2000 milliseconds = 2 seconds
+    buttonReference.classList.add('glow-indicator');
+    //   buttonReference.style.cursor = "not-allowed";
+    setTimeout(function () {
+        modal.remove()
+        buttonReference.classList.remove('glow-indicator');
+        // buttonReference.classList.remove('modalMinimized');
+        buttonReference.style.cursor = "pointer"
+    }, 2000); // 2000 milliseconds = 2 seconds
 };
 
 const getModalText = (linkURL) => {
-  const currentPath = window.location.pathname;
-  const modalText = `<div id="modalContainer" class="modal">
+    const currentPath = window.location.pathname;
+    const modalText = `<div id="modalContainer" class="modal">
 <button class="close-button" id="dapModalCloseButton" type="btn">×</button>
 <h2>View Demo</h2>
 <p>
-${content[currentPath] ? "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features, or else start a guided journey that takes you through the main sections and pages of the new website. Choose either with just a click. We hope you enjoy the new online banking experience." : "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features with just a click. We hope you enjoy the new online banking experience."}
+${journeyInfo[currentPath] ? "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features, or else start a guided journey that takes you through the main sections and pages of the new website. Choose either with just a click. We hope you enjoy the new online banking experience." : "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features with just a click. We hope you enjoy the new online banking experience."}
 </p>
 <div class="modalButtonContainer">
     <button class="iPlayContainerInModal modalButtons" onClick="window.open('${linkURL}', '_blank');">
       <span>Demo Videos</span>
     </button>
-    ${content[currentPath] ? '<button class="modalButtons" type="button" onclick=' + content[currentPath] + '>Guide me</button>' : ''}
+    ${journeyInfo[currentPath].logic ? '<button class="modalButtons" type="button" onclick=' + journeyInfo[currentPath].journey + '>Guide me</button>' : ''}
 </div>
 </div>`;
-  return modalText;
+    return modalText;
 }
 
 const showModal = (linkURL, topButtonSelector) => {
-  console.log("Invoking showModal()")
-  const modalContent = getModalText(linkURL);
-  document.body.insertAdjacentHTML('beforeend', modalContent);
-  document.querySelector("#dapModalCloseButton").addEventListener('click', () => {
-    closeAction(document.querySelector('#modalContainer'), document.querySelector(topButtonSelector))
-  });
+    console.log("Invoking showModal()")
+    document.querySelector(topButtonSelector).style.cursor = "not-allowed"
+    const modalContent = getModalText(linkURL);
+    document.body.insertAdjacentHTML('beforeend', modalContent);
+    document.querySelector("#dapModalCloseButton").addEventListener('click', () => {
+        closeAction(document.querySelector('#modalContainer'), document.querySelector(topButtonSelector))
+    });
 }
 
 const closeAction = (modalReference, topButton) => {
-  console.log('Invoking closeAction()')
-  // const buttonReference = document.getElementById('closeButton')
-  calculateRetract(topButton, modalReference);
-  modalReference.setAttribute('class', 'modalMinimized')
-  addAndRemoveGlow(topButton, modalReference)
+    console.log('Invoking closeAction()')
+    // const buttonReference = document.getElementById('closeButton')
+    calculateRetract(topButton, modalReference);
+    modalReference.setAttribute('class', 'modalMinimized')
+    addAndRemoveGlow(topButton, modalReference)
 };
 
 const calculateRetract = (buttonReference, modalReference) => {
-  const elementDetails = buttonReference.getBoundingClientRect();
-  const modalDetails = modalReference.getBoundingClientRect();
-  var style = document.createElement('style');
-  style.innerHTML = `.modalMinimized {
+    const elementDetails = buttonReference.getBoundingClientRect();
+    const modalDetails = modalReference.getBoundingClientRect();
+    var style = document.createElement('style');
+    style.innerHTML = `.modalMinimized {
   -webkit - transform: translate(${elementDetails.left -
-    modalDetails.left -
-    (modalDetails.width - elementDetails.width) +
-    200
-    }px, -${modalDetails.top -
-    elementDetails.top -
-    (elementDetails.height - modalDetails.height) -
-    50
-    }px) scale(0);
+        modalDetails.left -
+        (modalDetails.width - elementDetails.width) +
+        200
+        }px, -${modalDetails.top -
+        elementDetails.top -
+        (elementDetails.height - modalDetails.height) -
+        50
+        }px) scale(0);
   transform: translate(${elementDetails.left -
-    modalDetails.left -
-    (modalDetails.width - elementDetails.width) +
-    200
-    }px, -${modalDetails.top -
-    elementDetails.top -
-    (elementDetails.height - modalDetails.height) -
-    50
-    }px) scale(0);
+        modalDetails.left -
+        (modalDetails.width - elementDetails.width) +
+        200
+        }px, -${modalDetails.top -
+        elementDetails.top -
+        (elementDetails.height - modalDetails.height) -
+        50
+        }px) scale(0);
 } `;
-  document.head.appendChild(style);
+    document.head.appendChild(style);
 };
 
 // eslint-disable-next-line no-unused-vars
 const associateModalForDAP = (linkURL, buttonSelector) => {
-  console.log("invoking associateModalForDAP()")
-  if (document.querySelector(buttonSelector)?.style.cursor != "not-allowed" && document.querySelector(".shepherd-element") == null) {
-    console.log("Conditions met for invoking modal")
-    if (count === 0) {
-      console.log('Creating new modal for the very first time');
-      const modalStyle = document.createElement('style');
-      modalStyle.innerHTML = `
+    console.log("invoking associateModalForDAP()")
+    if (document.querySelector(buttonSelector)?.style.cursor != "not-allowed" && Array.from(document.querySelectorAll('.shepherd-element')).every(element => element.getBoundingClientRect().x === 0)
+    ) {
+        console.log("Conditions met for invoking modal")
+        if (count === 0) {
+            console.log('Creating new modal for the very first time');
+            const modalStyle = document.createElement('style');
+            modalStyle.innerHTML = `
   .modal {
     position        : absolute;
     margin          : auto;
@@ -144,11 +150,11 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
     border-radius   : 10px;
   }
   #modalContainer>h2 {
-    font-size  : 12px;
     text-align : center;
     font-weight: bold;
   }
   #modalContainer>p {
+    font-size  : 12px;
     width     : 90%;
     margin    : 10px auto 0 auto;
     text-align: justify;
@@ -262,50 +268,55 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
     }
   }
   `;
-      document.head.appendChild(modalStyle);
-      count++;
+            document.head.appendChild(modalStyle);
+            count++;
+        } else {
+            console.log("entered in show modal")
+            showModal(linkURL, buttonSelector);
+        }
     }
-    if (document.querySelector('.shepherd-element') === null || document.querySelector('.shepherd-element')?.getBoundingClientRect().x === 0) {
-      showModal(linkURL, buttonSelector);
-    }
-  }
 };
 
 // eslint-disable-next-line no-unused-vars
 const pageChangeInvokationDAP = () => {
-  // fnuction to handle opening of modal
-  const mainFunction = () => {
-    let ISODateToday = new Date()
-    let dateToday = ISODateToday.getDate()
-    let openTimes = window.localStorage.getItem("modalOpenTime")
-    let lastOpenDate = window.localStorage.getItem("modalOpenDateReference")
-    // if the local storage key-value is missing for openTimes, set it to 0
-    if (!openTimes) {
-      window.localStorage.setItem("modalOpenTime", 0)
+    // fnuction to handle opening of modal
+    const mainFunction = () => {
+        let ISODateToday = new Date()
+        let dateToday = ISODateToday.getDate()
+        let openTimes = window.localStorage.getItem("modalOpenTime")
+        let lastOpenDate = window.localStorage.getItem("modalOpenDateReference")
+        // if the local storage key-value is missing for openTimes, set it to 0
+        if (!openTimes) {
+            window.localStorage.setItem("modalOpenTime", 0)
+        }
+        // Modal will open automatically based on the defined condition
+        const openModalAutomatically = () => {
+            // if modal has been opened for less that 3 time automatically and date today is not equal to the last time it was opened
+            if (Number(openTimes) < 3 && (Number(lastOpenDate) != dateToday)) {
+                window.localStorage.setItem("modalOpenDateReference", dateToday)
+                window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
+                document.querySelector("#guided_Journey_Triggered")?.click()
+            }
+        }
+        openModalAutomatically()
     }
-    // Modal will open automatically based on the defined condition
-    const openModalAutomatically = () => {
-      // if modal has been opened for less that 3 time automatically and date today is not equal to the last time it was opened
-      if (Number(openTimes) < 3 && (Number(lastOpenDate) != dateToday)) {
-        window.localStorage.setItem("modalOpenDateReference", dateToday)
-        window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
-        document.querySelector("#guided_Journey_Triggered")?.click()
-      }
-    }
-    openModalAutomatically()
-  }
 
-  if (content[window.location.pathname]) {
-    pageCount = 0;
-    console.log("FUNCTION CONDITION MET, wopning modal in 4 seconds.")
-    setTimeout(mainFunction, 4000)
-  }
-  else {
-    if (pageCount < 3) {
-      // increasing the number of retries.
-      pageCount = pageCount + 1;
-      // retry the function after 4 seconds
-      setTimeout(pageChangeInvokationDAP, 4000);
+    if (journeyInfo[window.location.pathname]) {
+        pageCount = 0;
+        console.log("FUNCTION CONDITION MET, wopning modal in 4 seconds.")
+        const mainFunctionLogic = () => {
+            if(journeyInfo[window.location.pathname].logic) {
+                mainFunction()
+            }
+        }
+        setTimeout(mainFunctionLogic, 4000)
     }
-  }
+    else {
+        if (pageCount < 3) {
+            // increasing the number of retries.
+            pageCount = pageCount + 1;
+            // retry the function after 4 seconds
+            setTimeout(pageChangeInvokationDAP, 4000);
+        }
+    }
 }
