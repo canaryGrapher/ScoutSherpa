@@ -265,7 +265,9 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
       document.head.appendChild(modalStyle);
       count++;
     }
-    showModal(linkURL, buttonSelector);
+    if (document.querySelector('.shepherd-element') === null || document.querySelector('.shepherd-element')?.getBoundingClientRect().x === 0) {
+      showModal(linkURL, buttonSelector);
+    }
   }
 };
 
