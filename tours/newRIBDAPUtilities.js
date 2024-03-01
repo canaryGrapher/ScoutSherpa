@@ -273,7 +273,6 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
 
 // eslint-disable-next-line no-unused-vars
 const pageChangeInvokationDAP = () => {
-  alert(`This is a testing prompt, will be removed today. Count: ${pageCount}`)
   // fnuction to handle opening of modal
   const mainFunction = () => {
     let ISODateToday = new Date()
