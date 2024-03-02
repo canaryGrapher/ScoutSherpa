@@ -1,4 +1,5 @@
 // Mar 2, 2024 | File updated
+// update 35: Small changes
 // update 34: Added page load logic
 // update 33: Added logic for button showing for edge cases
 // update 32: Fixed modal opening issue
@@ -65,7 +66,7 @@ ${journeyInfo[currentPath] ? "Welcome to the new and improved ICICI Bank website
     <button class="iPlayContainerInModal modalButtons" onClick="window.open('${linkURL}', '_blank');">
       <span>Demo Videos</span>
     </button>
-    ${journeyInfo[currentPath].logic ? '<button class="modalButtons" type="button" onclick=' + journeyInfo[currentPath].journey + '>Guide me</button>' : ''}
+    ${journeyInfo[currentPath] ? '<button class="modalButtons" type="button" onclick=' + journeyInfo[currentPath].journey + '>Guide me</button>' : ''}
 </div>
 </div>`;
   return modalText;
@@ -281,11 +282,13 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
 // eslint-disable-next-line no-unused-vars
 const pageChangeInvokationDAP = () => {
   // fnuction to handle opening of modal
+  console.log("PAGE CHANGE INVOKATION DAP function run with PageCount: ", pageCount)
   const mainFunction = () => {
     let ISODateToday = new Date()
     let dateToday = ISODateToday.getDate()
     let openTimes = window.localStorage.getItem("modalOpenTime")
     let lastOpenDate = window.localStorage.getItem("modalOpenDateReference")
+    console.log("We are inside main function")
     // if the local storage key-value is missing for openTimes, set it to 0
     if (!openTimes) {
       window.localStorage.setItem("modalOpenTime", 0)
@@ -301,28 +304,32 @@ const pageChangeInvokationDAP = () => {
     }
     openModalAutomatically()
   }
-
   if (document.readyState === 'complete') {
+    console.log("PAGE HAS BEEN LOADED")
+    console.log(journeyInfo[window.location.pathname])
+    console.log(document.querySelectorAll(".shepherd-element"))
     if (journeyInfo[window.location.pathname] && document.querySelectorAll(".shepherd-element").length != 0) {
       pageCount = 0;
-      console.log("FUNCTION CONDITION MET, wopning modal in 4 seconds.")
+      console.log("FUNCTION CONDITION MET, opening modal in 4 seconds.")
       const mainFunctionLogic = () => {
         if (journeyInfo[window.location.pathname].logic) {
           mainFunction()
+        } else {
+          console.log("Journey logic error")
         }
       }
       setTimeout(mainFunctionLogic, 4000)
     }
-    else {
-      if (pageCount < 3) {
-        console.log("Trying for one more time out of three")
-        // increasing the number of retries.
-        pageCount = pageCount + 1;
-        // retry the function after 4 seconds
-        setTimeout(pageChangeInvokationDAP, 4000);
-      }
+    if (pageCount < 5) {
+      console.log("Trying for one more time out of five: ", pageCount)
+      // increasing the number of retries.
+      pageCount = pageCount + 1;
+      // retry the function after 4 seconds
+      setTimeout(pageChangeInvokationDAP, 4000);
     }
-  } else {
-    setTimeout(pageChangeInvokationDAP, 2000);
+  }
+  else {
+    console.log("PAGE HAS NOT BEEN LOADED, RE-RUNNING THIS SCRIPT in 4 seconds")
+    setTimeout(pageChangeInvokationDAP, 4000);
   }
 }
