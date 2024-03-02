@@ -280,11 +280,5 @@ var NewRIBCreditCardPage = () => {
       },
     ],
   });
-  ["complete", "cancel"].forEach((event) =>
-    GuideMeWhatsOnNewRIBCreditCardPage.on(event, () => {
-      // eslint-disable-next-line no-undef
-      addAndRemoveGlow();
-    }),
-  );
   GuideMeWhatsOnNewRIBCreditCardPage.start();
 };
