@@ -1,4 +1,5 @@
 // Mar 6, 2024 | File updated
+// update 39: Fixed double click for opening modal
 // update 38: Auto open-lofic fix != changed to ==
 // update 37: Auto-open logic
 // update 36: Increased retry time from 5 to 20
@@ -278,6 +279,7 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
   `;
       document.head.appendChild(modalStyle);
       count++;
+      showModal(linkURL, buttonSelector);
     } else {
       console.log("entered in show modal")
       showModal(linkURL, buttonSelector);
@@ -287,7 +289,8 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
 
 // eslint-disable-next-line no-unused-vars
 const pageChangeInvokationDAP = () => {
-  // fnuction to handle opening of modal
+  console.log("Invoking pageChangeInvokationDAP()")
+  // function to handle opening of modal
   console.log("PAGE CHANGE INVOKATION DAP function run with PageCount: ", pageCount)
   const mainFunction = () => {
     let ISODateToday = new Date()
@@ -305,7 +308,6 @@ const pageChangeInvokationDAP = () => {
       if (Number(openTimes) < 3 && (Number(lastOpenDate) != dateToday)) {
         window.localStorage.setItem("modalOpenDateReference", dateToday)
         window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
-        document.querySelector("#guided_Journey_Triggered")?.click()
         document.querySelector("#guided_Journey_Triggered")?.click()
       }
     }
