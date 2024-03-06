@@ -1,4 +1,5 @@
 // Mar 6, 2024 | File updated
+// update 38: Auto open-lofic fix != changed to ==
 // update 37: Auto-open logic
 // update 36: Increased retry time from 5 to 20
 // update 35: Small changes
@@ -38,6 +39,7 @@
 /* eslint-disable max-lines */
 let count = 0;
 let pageCount = 0;
+let retries = 0;
 const journeyInfo = {
   "/in/credit-card": {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
@@ -314,19 +316,19 @@ const pageChangeInvokationDAP = () => {
     console.log("Does page exist in journey descriptions: ", journeyInfo[window.location.pathname])
     console.log("Number of available shepherd elements: ", document.querySelectorAll(".shepherd-element").length)
 
-    if (journeyInfo[window.location.pathname] && document.querySelectorAll(".shepherd-element").length != 0) {
+    if (journeyInfo[window.location.pathname] && document.querySelectorAll(".shepherd-element").length == 0) {
       pageCount = 0;
-      let retries = 0;
       console.log("FUNCTION CONDITION MET, opening modal in 4 seconds.")
       const mainFunctionLogic = () => {
         console.log("Logic matching:", journeyInfo[window.location.pathname].logic, " which evaluates to: ", eval(journeyInfo[window.location.pathname].logic))
         if (eval(journeyInfo[window.location.pathname].logic)) {
           console.log("Running main function now")
+          retries = 0
           mainFunction()
         } else {
           console.log("Journey logic error, running again")
-          if (retries <= 10) {
-            retries += 1;
+          if (retries < 10) {
+            retries = retries + 1;
             setTimeout(mainFunctionLogic, 4000)
           }
         }
