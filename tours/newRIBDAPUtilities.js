@@ -1,4 +1,5 @@
-// Mar 2, 2024 | File updated
+// Mar 6, 2024 | File updated
+// update 36: Increased retry time from 5 to 20
 // update 35: Small changes
 // update 34: Added page load logic
 // update 33: Added logic for button showing for edge cases
@@ -120,6 +121,8 @@ const calculateRetract = (buttonReference, modalReference) => {
 // eslint-disable-next-line no-unused-vars
 const associateModalForDAP = (linkURL, buttonSelector) => {
   console.log("invoking associateModalForDAP()")
+  console.log(`document.querySelector(buttonSelector)?.style.cursor != "not-allowed": `, document.querySelector(buttonSelector)?.style.cursor != "not-allowed")
+  console.log(`Array.from(document.querySelectorAll('.shepherd-element')).every(element => element.getBoundingClientRect().x === 0: `, Array.from(document.querySelectorAll('.shepherd-element')).every(element => element.getBoundingClientRect().x === 0))
   if (document.querySelector(buttonSelector)?.style.cursor != "not-allowed" && Array.from(document.querySelectorAll('.shepherd-element')).every(element => element.getBoundingClientRect().x === 0)
   ) {
     console.log("Conditions met for invoking modal")
@@ -300,6 +303,7 @@ const pageChangeInvokationDAP = () => {
         window.localStorage.setItem("modalOpenDateReference", dateToday)
         window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
         document.querySelector("#guided_Journey_Triggered")?.click()
+        document.querySelector("#guided_Journey_Triggered")?.click()
       }
     }
     openModalAutomatically()
@@ -312,6 +316,7 @@ const pageChangeInvokationDAP = () => {
       pageCount = 0;
       console.log("FUNCTION CONDITION MET, opening modal in 4 seconds.")
       const mainFunctionLogic = () => {
+        console.log("Logic matching:", journeyInfo[window.location.pathname].logic)
         if (journeyInfo[window.location.pathname].logic) {
           mainFunction()
         } else {
@@ -320,16 +325,16 @@ const pageChangeInvokationDAP = () => {
       }
       setTimeout(mainFunctionLogic, 4000)
     }
-    if (pageCount < 5) {
-      console.log("Trying for one more time out of five: ", pageCount)
+    if (pageCount < 20) {
+      console.log("Trying for one more time out of twenty: ", pageCount)
       // increasing the number of retries.
       pageCount = pageCount + 1;
-      // retry the function after 4 seconds
-      setTimeout(pageChangeInvokationDAP, 4000);
+      // retry the function after 6 seconds
+      setTimeout(pageChangeInvokationDAP, 6000);
     }
   }
   else {
-    console.log("PAGE HAS NOT BEEN LOADED, RE-RUNNING THIS SCRIPT in 4 seconds")
-    setTimeout(pageChangeInvokationDAP, 4000);
+    console.log("PAGE HAS NOT BEEN LOADED, RE-RUNNING THIS SCRIPT in 6 seconds")
+    setTimeout(pageChangeInvokationDAP, 6000);
   }
 }
