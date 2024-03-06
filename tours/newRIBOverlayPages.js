@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 // Last update: March 6, 2024
+// update 4: Changed size of dialer gif
 // update 3: Added step for dialer explanation
 // update 2: Added conditions for non-target pages
 // update 1: Final update as per department review
@@ -28,7 +29,7 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_start",
     title: "1/9",
     canClickTarget: false,
-    text: `<div>This is the new navigation dialer for our website. You can click on any module to access its sub-module menu and click on it to reach the desired page. Closing the sub-module menu can be achieved by clicking on the back button at the center of the dialer when sub-module menu is open. <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="300" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+    text: `<div>This is the new navigation dialer for our website. You can click on any module to access its sub-module menu and click on it to reach the desired page. Closing the sub-module menu can be achieved by clicking on the back button at the center of the dialer when sub-module menu is open. <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
       `,
     attachTo: {
       element: document.querySelector(".dailermainwrapper"),
@@ -80,8 +81,8 @@ var NewRIBCreditCardPage = () => {
         action: GuideMeWhatsOnNewRIBCreditCardPage.next,
       },
       {
-        text: "Cancel",
-        action: GuideMeWhatsOnNewRIBCreditCardPage.cancel,
+        text: "Back",
+        action: GuideMeWhatsOnNewRIBCreditCardPage.back,
         secondary: true,
       },
     ],
