@@ -6,6 +6,51 @@
 // update 1: Final update as per department review
 
 // eslint-disable-next-line no-unused-vars
+var NewRIBFundTransferPage = () => {
+  // eslint-disable-next-line no-undef, no-unused-vars
+  var GuideMeWhatsOnNewRIBFundTransferPage = new Shepherd.Tour({
+    tourName: "Guide Me: What's on new Credit Card page",
+    instanceCaller: "GuideMeWhatsOnNewRIBFundTransferPage",
+    defaultStepOptions: {
+      cancelIcon: {
+        enabled: true,
+      },
+      scrollTo: {
+        behavior: "smooth",
+        block: "center",
+      },
+      arrow: true,
+    },
+    useModalOverlay: true,
+    exitOnEsc: true,
+    keyboardnavigation: true,
+  });
+  GuideMeWhatsOnNewRIBFundTransferPage.addStep({
+    id: "GuideMeWhatsOnNewRIBFundTransferPage_start",
+    title: "1/9",
+    canClickTarget: false,
+    text: `<div>This is the new navigation dialer for our website. You can click on any module to access its sub-module menu and click on it to reach the desired page. Closing the sub-module menu can be achieved by clicking on the back button at the center of the dialer when sub-module menu is open. <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+      `,
+    attachTo: {
+      element: document.querySelector(".dailermainwrapper"),
+      on: "right",
+    },
+    buttons: [
+      {
+        text: "Next",
+        action: GuideMeWhatsOnNewRIBFundTransferPage.next,
+      },
+      {
+        text: "Cancel",
+        action: GuideMeWhatsOnNewRIBFundTransferPage.cancel,
+        secondary: true,
+      },
+    ],
+  });
+  GuideMeWhatsOnNewRIBFundTransferPage();
+};
+
+// eslint-disable-next-line no-unused-vars
 var NewRIBCreditCardPage = () => {
   // eslint-disable-next-line no-undef
   var GuideMeWhatsOnNewRIBCreditCardPage = new Shepherd.Tour({

@@ -1,4 +1,5 @@
-// Mar 6, 2024 | File updated
+// Mar 13, 2024 | File updated
+// update 40: Fixed session expiry issue for modal
 // update 39: Fixed double click for opening modal
 // update 38: Auto open-lofic fix != changed to ==
 // update 37: Auto-open logic
@@ -88,11 +89,14 @@ const showModal = (linkURL, topButtonSelector) => {
 }
 
 const closeAction = (modalReference, topButton) => {
-  console.log('Invoking closeAction()')
-  // const buttonReference = document.getElementById('closeButton')
-  calculateRetract(topButton, modalReference);
-  modalReference.setAttribute('class', 'modalMinimized')
-  addAndRemoveGlow(topButton, modalReference)
+  if (document.querySelectorAll("#guided_Journey_Triggered").length > 0) {
+    console.log('Invoking closeAction()')
+    calculateRetract(topButton, modalReference);
+    modalReference.setAttribute('class', 'modalMinimized')
+    addAndRemoveGlow(topButton, modalReference)
+  } else {
+    document.querySelector("#modalContainer")?.remove()
+  }
 };
 
 const calculateRetract = (buttonReference, modalReference) => {
@@ -314,12 +318,13 @@ const pageChangeInvokationDAP = () => {
     openModalAutomatically()
   }
   if (document.readyState === 'complete') {
+    console.log("Page load COMPLETE")
     console.log("PAGE HAS BEEN LOADED: ", window.location.pathname)
     console.log("Does page exist in journey descriptions: ", journeyInfo[window.location.pathname])
     console.log("Number of available shepherd elements: ", document.querySelectorAll(".shepherd-element").length)
 
-    if (journeyInfo[window.location.pathname] && document.querySelectorAll(".shepherd-element").length == 0) {
-      pageCount = 0;
+    if (journeyInfo[window.location.pathname] && document.querySelectorAll(".shepherd-element")?.length == 0 && document.querySelectorAll("#guided_Journey_Triggered")?.length > 0) {
+      pageCount = 20;
       console.log("FUNCTION CONDITION MET, opening modal in 4 seconds.")
       const mainFunctionLogic = () => {
         console.log("Logic matching:", journeyInfo[window.location.pathname].logic, " which evaluates to: ", eval(journeyInfo[window.location.pathname].logic))
