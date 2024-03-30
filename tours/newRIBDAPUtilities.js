@@ -47,6 +47,10 @@ const journeyInfo = {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
     logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
   },
+  "/in/fund-transfer": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBFundTransferPage()",
+    logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
+  },
 };
 
 const addAndRemoveGlow = (buttonReference, modal) => {
@@ -301,7 +305,7 @@ const pageChangeInvokationDAP = () => {
     let dateToday = ISODateToday.getDate()
     let openTimes = window.localStorage.getItem("modalOpenTime")
     let lastOpenDate = window.localStorage.getItem("modalOpenDateReference")
-    console.log("We are inside main function")
+    console.log("We are inside main function with \n lastOpenDate: ", lastOpenDate, "\n openTimes:", openTimes)
     // if the local storage key-value is missing for openTimes, set it to 0
     if (!openTimes) {
       window.localStorage.setItem("modalOpenTime", 0)
@@ -318,7 +322,6 @@ const pageChangeInvokationDAP = () => {
     openModalAutomatically()
   }
   if (document.readyState === 'complete') {
-    console.log("Page load COMPLETE")
     console.log("PAGE HAS BEEN LOADED: ", window.location.pathname)
     console.log("Does page exist in journey descriptions: ", journeyInfo[window.location.pathname])
     console.log("Number of available shepherd elements: ", document.querySelectorAll(".shepherd-element").length)
@@ -343,7 +346,7 @@ const pageChangeInvokationDAP = () => {
       setTimeout(mainFunctionLogic, 4000)
     }
     if (pageCount < 20) {
-      console.log("Trying for one more time out of twenty: ", pageCount)
+      console.log("Trying for one more time out of twenty: ", `${pageCount}/20`)
       // increasing the number of retries.
       pageCount = pageCount + 1;
       // retry the function after 6 seconds
