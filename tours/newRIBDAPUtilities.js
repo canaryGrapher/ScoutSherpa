@@ -1,4 +1,5 @@
-// Mar 13, 2024 | File updated
+// Mar 30, 2024 | File updated
+// update 41: Added console messages for debugging
 // update 40: Fixed session expiry issue for modal
 // update 39: Fixed double click for opening modal
 // update 38: Auto open-lofic fix != changed to ==
@@ -308,6 +309,7 @@ const pageChangeInvokationDAP = () => {
     console.log("We are inside main function with \n lastOpenDate: ", lastOpenDate, "\n openTimes:", openTimes)
     // if the local storage key-value is missing for openTimes, set it to 0
     if (!openTimes) {
+      console.log("Setting modalOpen Times to 0 as previous record was not found")
       window.localStorage.setItem("modalOpenTime", 0)
     }
     // Modal will open automatically based on the defined condition
@@ -324,7 +326,6 @@ const pageChangeInvokationDAP = () => {
   if (document.readyState === 'complete') {
     console.log("PAGE HAS BEEN LOADED: ", window.location.pathname)
     console.log("Does page exist in journey descriptions: ", journeyInfo[window.location.pathname])
-    console.log("Number of available shepherd elements: ", document.querySelectorAll(".shepherd-element").length)
 
     if (journeyInfo[window.location.pathname] && document.querySelectorAll(".shepherd-element")?.length == 0 && document.querySelectorAll("#guided_Journey_Triggered")?.length > 0) {
       pageCount = 20;
