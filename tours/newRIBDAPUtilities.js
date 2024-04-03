@@ -1,4 +1,5 @@
 // April 3, 2024 | File updated
+// update 43: Logic changes
 // update 42: Switched to indexedDB instead of localStorage
 // update 41: Added console messages for debugging
 // update 40: Fixed session expiry issue for modal
@@ -38,6 +39,7 @@
 // update 04: Animation added
 // update 03: Changed position of event listener and window to document
 // update 02: Changed Domcontentloaded to load
+// update 01: First code
 
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
@@ -49,7 +51,7 @@ const journeyInfo = {
   }
 };
 const DATABASE_NAME = "GuidedJourney";
-const DATABASE_VERSION = 1;
+const DATABASE_VERSION = 2;
 const MAX_NUMBER_OF_RETRIES = 20;
 let count = 0;
 let pageCount = 0;
@@ -353,49 +355,54 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
 const pageChangeInvokationDAP = () => {
   console.log("Invoking pageChangeInvokationDAP()")
   // function to handle opening of modal
-  console.log("PAGE CHANGE INVOKATION DAP function run with PageCount: ", pageCount)
   const mainFunction = async () => {
     // CHANGE DB VERSION HERE
-
+    console.log("ENTERED MAIN-FUNCTION")
     try {
       const db = await connectToIndexedDB(DATABASE_NAME, DATABASE_VERSION);
       let ISODateToday = new Date()
       let dateToday = ISODateToday.getDate()
       const readData = await readFromIndexedDB(db, "modalStore", "modalData");
-      let openTimes = readData.modalOpenTime;
-      let lastOpenDate = readData.modalOpenDateReference;
-      console.log("We are inside main function with \n lastOpenDate: ", lastOpenDate, "\n openTimes:", openTimes)
+      let openTimes = readData?.modalOpenTime ? readData.modalOpenTime : "not available";
+      let lastOpenDate = readData?.modalOpenDateReference ? readData.modalOpenDateReference : "not available";
+      console.log("Existing DB Values read: ", readData)
+      console.log("Function variables \n { lastOpenDate: ", lastOpenDate, ", openTimes:", openTimes, " }")
       // if the local storage key-value is missing for openTimes, set it to 0
-      if (!openTimes) {
-        console.log("Setting modalOpenTime to 0 as previous record was not found")
+      if (openTimes == "not available") {
+        console.log("Setting modalOpenTime to 0 as previous record was not available")
         const data = {
           id: "modalData",
-          modalOpenTime: 0,
-          modalOpenDate: null
+          modalOpenTime: "0",
+          modalOpenDateReference: "99"
         };
+        openTimes = "0";
+        lastOpenDate = "99";
         await writeToIndexedDB(db, "modalStore", data);
       }
       // Modal will open automatically based on the defined condition
+      console.log("Running function to open module")
       const openModalAutomatically = async () => {
         // if modal has been opened for less that 3 time automatically and date today is not equal to the last time it was opened
+        console.log(`Check if ${Number(openTimes)} < 3 :(ie ${Number(openTimes) < 3}) && ${Number(lastOpenDate)} != ${dateToday}), :(ie ${Number(lastOpenDate) != dateToday})`)
         if (Number(openTimes) < 3 && (Number(lastOpenDate) != dateToday)) {
           const data = {
             id: "modalData",
-            modalOpenTime: openTimes + 1,
-            modalOpenDate: dateToday
+            modalOpenTime: `${Number(openTimes) + 1}`,
+            modalOpenDateReference: dateToday
           };
+          console.log("Setting data as: ", data)
           await writeToIndexedDB(db, "modalStore", data);
-          document.querySelector("#guided_Journey_Triggered")?.click()
+          console.log("Clicking on the button")
+          setTimeout(document.querySelector("#guided_Journey_Triggered")?.click(), 6000);
         }
       }
-      await openModalAutomatically()
+      openModalAutomatically()
     } catch (error) {
       console.error(error)
     }
   }
   if (document.readyState === 'complete') {
-    console.log("PAGE HAS BEEN LOADED: ", window.location.pathname)
-    console.log("Does page exist in journey descriptions: ", journeyInfo[window.location.pathname])
+    console.log("Does page exist in journey descriptions: ", window.location.pathname, journeyInfo[window.location.pathname])
 
     if (journeyInfo[window.location.pathname] && document.querySelectorAll(".shepherd-element")?.length == 0 && document.querySelectorAll("#guided_Journey_Triggered")?.length > 0) {
       pageCount = 20;
@@ -410,7 +417,7 @@ const pageChangeInvokationDAP = () => {
           console.log("Journey logic error, running again")
           if (retries < 10) {
             retries = retries + 1;
-            setTimeout(mainFunctionLogic, 4000)
+            setTimeout(mainFunctionLogic, 6000)
           }
         }
       }
