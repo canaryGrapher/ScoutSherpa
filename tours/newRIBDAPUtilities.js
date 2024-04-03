@@ -1,4 +1,5 @@
-// Mar 30, 2024 | File updated
+// April 3, 2024 | File updated
+// update 42: Switched to indexedDB instead of localStorage
 // update 41: Added console messages for debugging
 // update 40: Fixed session expiry issue for modal
 // update 39: Fixed double click for opening modal
@@ -40,19 +41,71 @@
 
 /* eslint-disable prettier/prettier */
 /* eslint-disable max-lines */
-let count = 0;
-let pageCount = 0;
-let retries = 0;
+
 const journeyInfo = {
   "/in/credit-card": {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
     logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
-  },
-  "/in/fund-transfer": {
-    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBFundTransferPage()",
-    logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
-  },
+  }
 };
+const DATABASE_NAME = "GuidedJourney";
+const DATABASE_VERSION = 1;
+const MAX_NUMBER_OF_RETRIES = 20;
+let count = 0;
+let pageCount = 0;
+let retries = 0;
+
+function connectToIndexedDB(databaseName, databaseVersion) {
+  return new Promise((resolve, reject) => {
+    const request = window.indexedDB.open(databaseName, databaseVersion);
+    request.onerror = () => {
+      reject("Error opening database");
+    };
+    request.onsuccess = () => {
+      const db = request.result;
+      resolve(db);
+    };
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains("modalStore")) {
+        db.createObjectStore("modalStore", { keyPath: "id" });
+      }
+    };
+  });
+}
+// Function to read data from IndexedDB
+function readFromIndexedDB(db, storeName, key) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(storeName, "readonly");
+    const objectStore = transaction.objectStore(storeName);
+    const request = objectStore.get(key);
+
+    request.onerror = () => {
+      reject("Error reading data from IndexedDB");
+    };
+
+    request.onsuccess = () => {
+      const data = request.result;
+      resolve(data);
+    };
+  });
+}
+// Function to write data to IndexedDB
+function writeToIndexedDB(db, storeName, data) {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(storeName, "readwrite");
+    const objectStore = transaction.objectStore(storeName);
+    const request = objectStore.put(data);
+
+    request.onerror = () => {
+      reject("Error writing data to IndexedDB");
+    };
+
+    request.onsuccess = () => {
+      resolve("Data written to IndexedDB");
+    };
+  });
+}
 
 const addAndRemoveGlow = (buttonReference, modal) => {
   buttonReference.classList.add('glow-indicator');
@@ -301,27 +354,44 @@ const pageChangeInvokationDAP = () => {
   console.log("Invoking pageChangeInvokationDAP()")
   // function to handle opening of modal
   console.log("PAGE CHANGE INVOKATION DAP function run with PageCount: ", pageCount)
-  const mainFunction = () => {
-    let ISODateToday = new Date()
-    let dateToday = ISODateToday.getDate()
-    let openTimes = window.localStorage.getItem("modalOpenTime")
-    let lastOpenDate = window.localStorage.getItem("modalOpenDateReference")
-    console.log("We are inside main function with \n lastOpenDate: ", lastOpenDate, "\n openTimes:", openTimes)
-    // if the local storage key-value is missing for openTimes, set it to 0
-    if (!openTimes) {
-      console.log("Setting modalOpen Times to 0 as previous record was not found")
-      window.localStorage.setItem("modalOpenTime", 0)
-    }
-    // Modal will open automatically based on the defined condition
-    const openModalAutomatically = () => {
-      // if modal has been opened for less that 3 time automatically and date today is not equal to the last time it was opened
-      if (Number(openTimes) < 3 && (Number(lastOpenDate) != dateToday)) {
-        window.localStorage.setItem("modalOpenDateReference", dateToday)
-        window.localStorage.setItem("modalOpenTime", (Number(openTimes) + 1))
-        document.querySelector("#guided_Journey_Triggered")?.click()
+  const mainFunction = async () => {
+    // CHANGE DB VERSION HERE
+
+    try {
+      const db = await connectToIndexedDB(DATABASE_NAME, DATABASE_VERSION);
+      let ISODateToday = new Date()
+      let dateToday = ISODateToday.getDate()
+      const readData = await readFromIndexedDB(db, "modalStore", "modalData");
+      let openTimes = readData.modalOpenTime;
+      let lastOpenDate = readData.modalOpenDateReference;
+      console.log("We are inside main function with \n lastOpenDate: ", lastOpenDate, "\n openTimes:", openTimes)
+      // if the local storage key-value is missing for openTimes, set it to 0
+      if (!openTimes) {
+        console.log("Setting modalOpenTime to 0 as previous record was not found")
+        const data = {
+          id: "modalData",
+          modalOpenTime: 0,
+          modalOpenDate: null
+        };
+        await writeToIndexedDB(db, "modalStore", data);
       }
+      // Modal will open automatically based on the defined condition
+      const openModalAutomatically = async () => {
+        // if modal has been opened for less that 3 time automatically and date today is not equal to the last time it was opened
+        if (Number(openTimes) < 3 && (Number(lastOpenDate) != dateToday)) {
+          const data = {
+            id: "modalData",
+            modalOpenTime: openTimes + 1,
+            modalOpenDate: dateToday
+          };
+          await writeToIndexedDB(db, "modalStore", data);
+          document.querySelector("#guided_Journey_Triggered")?.click()
+        }
+      }
+      await openModalAutomatically()
+    } catch (error) {
+      console.error(error)
     }
-    openModalAutomatically()
   }
   if (document.readyState === 'complete') {
     console.log("PAGE HAS BEEN LOADED: ", window.location.pathname)
@@ -346,8 +416,8 @@ const pageChangeInvokationDAP = () => {
       }
       setTimeout(mainFunctionLogic, 4000)
     }
-    if (pageCount < 20) {
-      console.log("Trying for one more time out of twenty: ", `${pageCount}/20`)
+    if (pageCount < MAX_NUMBER_OF_RETRIES) {
+      console.log("Trying for one more time: ", `${pageCount}/${MAX_NUMBER_OF_RETRIES}`)
       // increasing the number of retries.
       pageCount = pageCount + 1;
       // retry the function after 6 seconds
