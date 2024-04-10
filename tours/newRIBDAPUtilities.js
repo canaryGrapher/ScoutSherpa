@@ -126,12 +126,12 @@ const getModalText = (linkURL) => {
 <button class="close-button" id="dapModalCloseButton" type="btn">×</button>
 <h2>View Demo</h2>
 <p>
-${journeyInfo[currentPath] ? "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features, or else start a guided journey that takes you through the main sections and pages of the new website. Choose either with just a click. We hope you enjoy the new online banking experience." : "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features with just a click. We hope you enjoy the new online banking experience."}
+${journeyInfo[currentPath] ? "Welcome to the new and improved ICICI Bank Website Experience, designed for making your banking journey more convenient and rewarding. Start the guided journey to explore our new features and sections for a seamless online banking experience." : "Welcome to the new and improved ICICI Bank website experience! A complete revamp to make your banking experience convenient and rewarding. Get going with our video demos on how to use the new website and its features with just a click. We hope you enjoy the new online banking experience."}
 </p>
 <div class="modalButtonContainer">
-    <button class="iPlayContainerInModal modalButtons" onClick="window.open('${linkURL}', '_blank');">
-      <span>Demo Videos</span>
-    </button>
+    // <button class="iPlayContainerInModal modalButtons" onClick="window.open('${linkURL}', '_blank');">
+    //   <span>Demo Videos</span>
+    // </button>
     ${journeyInfo[currentPath] ? '<button class="modalButtons" type="button" onclick=' + journeyInfo[currentPath].journey + '>Guide me</button>' : ''}
 </div>
 </div>`;
