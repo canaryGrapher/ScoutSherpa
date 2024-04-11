@@ -1,6 +1,6 @@
 <script>
-  import { afterUpdate } from 'svelte';
-  import { isFunction } from '../utils/type-check';
+  import { afterUpdate } from "svelte";
+  import { isFunction } from "../utils/type-check";
 
   export let labelId, element, title;
 
@@ -8,17 +8,15 @@
     if (isFunction(title)) {
       title = title();
     }
-    const currentSteps = String(title).split('/');
+    const currentSteps = String(title).split("/");
     element.innerHTML =
       "<span class='currentStepIndicatorTitle'>" +
       currentSteps[0] +
-      '</span>' +
+      "</span>" +
       "<span class='totalStepsIndicatorTitle'>" +
-      '/' +
+      "/" +
       currentSteps[1] +
-      ' ' +
-      'steps' +
-      '</span>';
+      "</span>";
   });
 </script>
 

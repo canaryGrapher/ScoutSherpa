@@ -2896,8 +2896,8 @@
 	    if (isFunction(title)) {
 	      $$invalidate(2, title = title());
 	    }
-	    const currentSteps = String(title).split('/');
-	    $$invalidate(0, element.innerHTML = "<span class='currentStepIndicatorTitle'>" + currentSteps[0] + '</span>' + "<span class='totalStepsIndicatorTitle'>" + '/' + currentSteps[1] + ' ' + 'steps' + '</span>', element);
+	    const currentSteps = String(title).split("/");
+	    $$invalidate(0, element.innerHTML = "<span class='currentStepIndicatorTitle'>" + currentSteps[0] + "</span>" + "<span class='totalStepsIndicatorTitle'>" + "/" + currentSteps[1] + "</span>", element);
 	  });
 	  function h3_binding($$value) {
 	    binding_callbacks[$$value ? 'unshift' : 'push'](() => {

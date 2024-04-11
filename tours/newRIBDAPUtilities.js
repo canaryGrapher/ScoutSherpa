@@ -1,4 +1,5 @@
-// April 10, 2024 | File updated
+// April 11, 2024 | File updated
+// update 45: Changed content as per V2 of document
 // update 44: changed modal text and buttons
 // update 43: Logic changes
 // update 42: Switched to indexedDB instead of localStorage
@@ -200,148 +201,159 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
       console.log('Creating new modal for the very first time');
       const modalStyle = document.createElement('style');
       modalStyle.innerHTML = `
-  .modal {
-  position: absolute;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-  #modalContainer {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 45vw;
-  height: fit - content;
-  margin: auto;
-  background- color: #FEEEE5;
-box - shadow      : 0 0 10px rgba(0, 0, 0, 0.5);
-padding: 20px;
-transition: 1s all;
-border - radius   : 10px;
-  }
-#modalContainer > h2 {
-  text - align : center;
-  font - weight: bold;
-}
-#modalContainer > p {
-  font - size  : 12px;
-  width: 90 %;
-  margin: 10px auto 0 auto;
-  text - align: justify;
-}
-  .close - button {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  border: none;
-  background - color: transparent;
-  font - size       : 20px;
-  cursor: pointer;
-  color: #feeee5;
-  background - color: #d16c13;
-  border - radius   : 30px;
-  width: 30px;
-  height: 30px;
-  justify - content : center;
-}
-  .close - button:hover {
-  color: #d16c13;
-  background - color: #feeee5;
-}
-  .modalButtonContainer {
-  display: flex;
-  margin: auto;
-  width: 90 %;
-  margin - top     : 20px;
-  justify - content: space - between;
-}
-  .modalButtons {
-  color: #ef7c00;
-  background - color: #ffe3cb;
-  padding: 8px 15px;
-  border - radius   : 30px;
-  border: 0;
-  cursor: pointer;
-  flex: 1;
-  margin: 5px;
-  text - align      : center;
-}
-  .modalButtons:hover {
-  color: #feeee5;
-  background - color: #d16c13;
-}
-  .iPlayContainerInModal {
-  display: flex;
-  justify - content: center;
-}
-  .iPlayContainerInModal > span {
-  margin: auto 0 auto 5px;
-}
-  .glow - indicator {
-  border: none;
-  outline: none;
-  position: relative;
-  z - index : 0;
-}
-  
-  .glow - indicator:before {
-  content: '';
-  background: linear - gradient(45deg, #B02A30, #ff7300, #F99D27);
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background - size: 400 %;
-  z - index        : -1;
-  filter: blur(5px);
-  width: calc(100 % + 4px);
-  height: calc(100 % + 4px);
-  animation: glowing 20s linear infinite;
-  opacity: 0;
-  transition: opacity .2s ease -in -out;
-}
-  
-  .glow - indicator:active {
-  color: #000;
-}
-  
-  .glow - indicator: active:after {
-  background: transparent;
-}
-  
-  .glow - indicator:before {
-  opacity: 1;
-}
-  
-  .glow - indicator:after {
-  border - radius   : 2em;
-  z - index         : -1;
-  content: '';
-  position: absolute;
-  width: 100 %;
-  height: 100 %;
-  background - color: #fff;
-  left: 0;
-  top: 0;
-}
-
-@keyframes glowing {
-  0 % {
-    background- position: 0 0;
-}
-
-50 % {
-  background- position: 400 % 0;
+      .modal {
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
     }
-
-100 % {
-  background- position: 0 0;
+    
+    #modalContainer {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 45vw;
+        height: fit-content;
+        margin: auto;
+        background-color: #FEEEE5;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        transition: 1s all;
+        border-radius: 10px
     }
-  }
+    
+    #modalContainer>h2 {
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    #modalContainer>p {
+        font-size: 12px;
+        width: 90%;
+        margin: 10px auto 0 auto;
+        text-align: justify;
+    }
+    
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        border: none;
+        background-color: transparent;
+        font-size: 20px;
+        cursor: pointer;
+        color: #feeee5;
+        background-color: #d16c13;
+        border-radius: 30px;
+        width: 30px;
+        height: 30px;
+        justify-content: center;
+    }
+    
+    .close-button:hover {
+        color: #d16c13;
+        background-color: #feeee5;
+    }
+    
+    .modalButtonContainer {
+        display: flex;
+        margin: auto;
+        width: 90%;
+        margin-top: 20px;
+        justify-content: space-between;
+    }
+    
+    .modalButtons {
+        color: #ef7c00;
+        background-color: #ffe3cb;
+        padding: 8px 15px;
+        border-radius: 30px;
+        border: 0;
+        cursor: pointer;
+        flex: 1;
+        margin: 5px;
+        text-align: center;
+    }
+    
+    .modalButtons:hover {
+        color: #feeee5;
+        background-color: #d16c13;
+    }
+    
+    .iPlayContainerInModal {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .iPlayContainerInModal>span {
+        margin: auto 0 auto 5px;
+    }
+    
+    .glow-indicator {
+        border: none;
+        outline: none;
+        position: relative;
+        z-index: 0;
+    }
+    
+    .glow-indicator:before {
+        content: '';
+        background: linear-gradient(45deg, #B02A30, #ff7300, #F99D27);
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing 20s linear infinite;
+        opacity: 0;
+        transition: opacity .2s ease-in-out;
+    }
+    
+    .glow-indicator:active {
+        color: #000;
+    }
+    
+    .glow-indicator:active:after {
+        background: transparent;
+    }
+    
+    .glow-indicator:before {
+        opacity: 1;
+    }
+    
+    .glow-indicator:after {
+        border-radius: 2em;
+        z-index: -1;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        left: 0;
+        top: 0;
+    }
+    
+    @keyframes glowing {
+        0% {
+            background-position: 0 0;
+        }
+    
+        50% {
+            background-position: 400% 0;
+        }
+    
+        100% {
+            background-position: 0 0;
+        }
+    }
 `;
       document.head.appendChild(modalStyle);
       count++;
