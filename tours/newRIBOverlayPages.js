@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
-// Last update: March 6, 2024
+// Last update: April 10, 2024
+// update 5: Changed content for overlays
 // update 4: Changed size of dialer gif
 // update 3: Added step for dialer explanation
 // update 2: Added conditions for non-target pages

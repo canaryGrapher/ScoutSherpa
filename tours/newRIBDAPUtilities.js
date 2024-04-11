@@ -1,4 +1,5 @@
-// April 3, 2024 | File updated
+// April 10, 2024 | File updated
+// update 44: changed modal text and buttons
 // update 43: Logic changes
 // update 42: Switched to indexedDB instead of localStorage
 // update 41: Added console messages for debugging
