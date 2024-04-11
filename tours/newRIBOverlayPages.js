@@ -29,7 +29,7 @@ var NewRIBFundTransferPage = () => {
     id: "GuideMeWhatsOnNewRIBFundTransferPage_start",
     title: "1/8",
     canClickTarget: false,
-    text: `<div>This is the new Navigation Dialer to access our solutions menu. Click on any module to access the solutions under its sub-menu and then you could click on any solution within the sub-menu to reach your desired page. To go back to main solutions menu, click on the back button at the center of the dialer. <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+    text: `<div>Use our new navigation dialer to access our services menu. Click on any service to access the solutions under it. To return to main service menu, click on the back button at the center of the dialer. <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
       `,
     attachTo: {
       element: document.querySelector(".dailermainwrapper"),
@@ -74,7 +74,7 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_start",
     title: "1/8",
     canClickTarget: false,
-    text: `<div>This is the new Navigation Dialer to access our solutions menu. Click on any module to access the solutions under its sub-menu and then you could click on any solution within the sub-menu to reach your desired page. To go back to main solutions menu, click on the back button at the center of the dialer.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+    text: `<div>TUse our new navigation dialer to access our services menu. Click on any service to access the solutions under it. To return to main service menu, click on the back button at the center of the dialer.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
       `,
     attachTo: {
       element: document.querySelector(".dailermainwrapper"),
@@ -114,7 +114,7 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_2",
     title: "2/8",
     canClickTarget: false,
-    text: `<div>Access all your ICICI and other bank credit cards in one place, here on the horizontal tabs. Your connected cards are listed under the tabs with numbered badges. <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/cardBar.gif" width="350" alt="Animation showing connected cards dropdown" style="object-fit: contain;" crossorigin="anonymous" /></div></div>
+    text: `<div>AView all your ICICI Bank and other Bank Credit Cards here on the horizontal tabs. Your connected cards are listed under the tabs with numbered badges. <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/cardBar.gif" width="350" alt="Animation showing connected cards dropdown" style="object-fit: contain;" crossorigin="anonymous" /></div></div>
       `,
     attachTo: {
       element: document.querySelector(".pill-container"),
@@ -136,7 +136,7 @@ var NewRIBCreditCardPage = () => {
   GuideMeWhatsOnNewRIBCreditCardPage.addStep({
     id: "GuideMeWhatsOnNewRIBCreditCardPage_3",
     title: "3/8",
-    text: "Here you can find your cards' basic information. You can see your ICICI Bank cards' balances, CVV, Expiry month and year. You can pay your credit cards bill by clicking on Pay Now, and also set up auto payments for your bill due dates. <br />If you have more than 3 credit card accounts, they are pushed into the dropdown at the right of this bar.Click on the card button to move it to main menu and see their information.",
+    text: "Here, you can find your cards' basic details and balances. You could also pay your credit cards bill by clicking on Pay Now, and set up auto payments for your bills. <br /> <br />For 4+ Cards, you could see their information in the drowndown, by clicking on the card button.",
     attachTo: {
       element: document.querySelector(".ccLeftWrapper"),
       on: "right",
@@ -189,7 +189,7 @@ var NewRIBCreditCardPage = () => {
       const toShowOrNotCheck = document.querySelectorAll(".cardAnalysis").length > 0
       return toShowOrNotCheck;
     },
-    text: "The <strong>MANAGE YOUR CREDIT CARD</strong> section gives you multiple options for  smooth and hassle-free management of your credit card, just with one single click.",
+    text: "This section gives you multiple options for hassle-free management of your Credit Card, just with one single click.",
     attachTo: {
       element: document.querySelector(".rewardPointInManageCards"),
       on: "left",
@@ -215,7 +215,7 @@ var NewRIBCreditCardPage = () => {
       const toShowOrNotCheck = document.querySelectorAll(".cardAnalysis").length > 0
       return toShowOrNotCheck;
     },
-    text: "Want to check where you spent using your card recently? The Statement view helps you explore all your current and past Credit Card statements and EMI details in one section, for seamless analysis and planning for your expenses.",
+    text: "Want to check where you spent using your card recently? Explore all your current and past Credit Card statements and EMI details in this section, for seamless analysis and planning for your expenses.",
     attachTo: {
       element: document.querySelector(".statementContainer"),
       on: "right",
@@ -236,7 +236,7 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_7",
     title: "7/8",
     canClickTarget: false,
-    text: "Never miss out on our exclusive offers for you again. Click on the Offers section to view attractive offers on our products and solutions made just for you.",
+    text: "Check out our exclusive offers for you here. Click on the offers section to view attractive offers on our products and solutions.",
     showOn: () => {
       // eslint-disable-next-line prettier/prettier
       const toShowOrNotCheck = document.querySelectorAll(".cardAnalysis").length > 0
@@ -317,7 +317,7 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_9",
     title: "8/8",
     canClickTarget: false,
-    text: "You are all set to enjoy the new ICICI Bank Online experience. We hope you were able to understand about our new features through this guided journey. Please feel free to watch it again any time you are stuck. You could also watch our Video Demos to get more clarity about the website features and navigation.",
+    text: "You are all set to enjoy the new ICICI Bank Online experience. Take the Guided Tour again in case you need more assistance.",
     buttons: [
       {
         text: "Complete",
