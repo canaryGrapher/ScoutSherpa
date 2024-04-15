@@ -1,4 +1,5 @@
-// April 11, 2024 | File updated
+// April 15, 2024 | File updated
+// update 46: Changed as per v5 of document
 // update 45: Changed content as per V2 of document
 // update 44: changed modal text and buttons
 // update 43: Logic changes
@@ -129,14 +130,14 @@ const getModalText = (linkURL) => {
 <button class="close-button" id="dapModalCloseButton" type="btn">×</button>
 <h2>View Demo</h2>
 <p>
-${journeyInfo[currentPath] ? "Welcome to the all new ICICI Bank Online Banking Experience, designed for making your banking journey more convenient and rewarding." : null}
-</p >
+${journeyInfo[currentPath] ? "Welcome to the all new ICICI Bank Online Banking Experience, upgraded for making your banking journey smoother, smarter, and simpler." : null}
+</p>
   <div class="modalButtonContainer">
-    ${journeyInfo[currentPath] ? '<button class="modalButtons" type="button" onclick=' + journeyInfo[currentPath].journey + '>Guide me</button>' : ''}
+    ${journeyInfo[currentPath] ? '<button class="modalButtons" type="button" onclick=' + journeyInfo[currentPath].journey + '>Take Guided Tour</button>' : ''}
   </div>
 </div > `;
   // <button class="iPlayContainerInModal modalButtons" onClick="window.open('${linkURL}', '_blank');">
-  //   <span>Demo Videos</span>
+  //   <span>Watch Demo Videos</span>
   // </button>
   return modalText;
 }

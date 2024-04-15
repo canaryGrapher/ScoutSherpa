@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
-// Last update: April 11, 2024
+// Last update: April 15, 2024
+// update 7: Changed as per v5 of content document
 // update 6: Changed content as per V2 of document
 // update 5: Changed content for overlays
 // update 4: Changed size of dialer gif
@@ -76,7 +77,8 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_start",
     title: "1/8",
     canClickTarget: false,
-    text: `<div>TUse our new navigation dialer to access our services menu. Click on any service to access the solutions under it. To return to main service menu, click on the back button at the center of the dialer.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+    text: `<div>Introducing our newly designed navigation wheel for cards.<ul><li>Click on 'Cards' to see its sub-sections.</li>
+    <li>Click the '<' button in the center of the navigation menu to close the option.</li></ul><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
       `,
     attachTo: {
       element: document.querySelector(".dailermainwrapper"),
@@ -116,7 +118,7 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_2",
     title: "2/8",
     canClickTarget: false,
-    text: `<div>AView all your ICICI Bank and other Bank Credit Cards here on the horizontal tabs. Your connected cards are listed under the tabs with numbered badges. <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/cardBar.gif" width="350" alt="Animation showing connected cards dropdown" style="object-fit: contain;" crossorigin="anonymous" /></div></div>
+    text: `<div>View all your ICICI Bank and other Bank Credit Cards here on the horizontal tabs. Your connected cards are listed under the tabs with numbered badges.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/cardBar.gif" width="350" alt="Animation showing connected cards dropdown" style="object-fit: contain;" crossorigin="anonymous" /></div></div>
       `,
     attachTo: {
       element: document.querySelector(".pill-container"),
@@ -138,7 +140,7 @@ var NewRIBCreditCardPage = () => {
   GuideMeWhatsOnNewRIBCreditCardPage.addStep({
     id: "GuideMeWhatsOnNewRIBCreditCardPage_3",
     title: "3/8",
-    text: "Here, you can find your cards' basic details and balances. You could also pay your credit cards bill by clicking on Pay Now, and set up auto payments for your bills. <br /> <br />For 4+ Cards, you could see their information in the drowndown, by clicking on the card button.",
+    text: "Find your cards' basic details and balances here. You could also pay your credit cards bill, and set up auto payments. <br /><br />Click here to see information for 3+ Cards.",
     attachTo: {
       element: document.querySelector(".ccLeftWrapper"),
       on: "right",
@@ -191,7 +193,7 @@ var NewRIBCreditCardPage = () => {
       const toShowOrNotCheck = document.querySelectorAll(".cardAnalysis").length > 0
       return toShowOrNotCheck;
     },
-    text: "This section gives you multiple options for hassle-free management of your Credit Card, just with one single click.",
+    text: "This section gives you multiple options for hassle-free management of your Credit Cards, just with one single click.",
     attachTo: {
       element: document.querySelector(".rewardPointInManageCards"),
       on: "left",
@@ -217,7 +219,7 @@ var NewRIBCreditCardPage = () => {
       const toShowOrNotCheck = document.querySelectorAll(".cardAnalysis").length > 0
       return toShowOrNotCheck;
     },
-    text: "Want to check where you spent using your card recently? Explore all your current and past Credit Card statements and EMI details in this section, for seamless analysis and planning for your expenses.",
+    text: "Explore all your current and past Credit Card statements and EMI details for seamless analysis of your expenses.",
     attachTo: {
       element: document.querySelector(".statementContainer"),
       on: "right",
@@ -238,7 +240,7 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_7",
     title: "7/8",
     canClickTarget: false,
-    text: "Check out our exclusive offers for you here. Click on the offers section to view attractive offers on our products and solutions.",
+    text: "Check out our exclusive offers for you here.",
     showOn: () => {
       // eslint-disable-next-line prettier/prettier
       const toShowOrNotCheck = document.querySelectorAll(".cardAnalysis").length > 0
@@ -319,7 +321,7 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_9",
     title: "8/8",
     canClickTarget: false,
-    text: "You are all set to enjoy the new ICICI Bank Online experience. Take the Guided Tour again in case you need more assistance.",
+    text: "You are all set to enjoy the new ICICI Bank Online experience. <br /><br />Take the Guided Tour or watch Video Demos again in case you need more assistance.",
     buttons: [
       {
         text: "Complete",
