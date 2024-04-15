@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 // Last update: April 15, 2024
-// update 7: Changed as per v5 of content document
+// update 7: Changed content as per v5 of document
 // update 6: Changed content as per V2 of document
 // update 5: Changed content for overlays
 // update 4: Changed size of dialer gif
@@ -118,7 +118,7 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_2",
     title: "2/8",
     canClickTarget: false,
-    text: `<div>View all your ICICI Bank and other Bank Credit Cards here on the horizontal tabs. Your connected cards are listed under the tabs with numbered badges.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/cardBar.gif" width="350" alt="Animation showing connected cards dropdown" style="object-fit: contain;" crossorigin="anonymous" /></div></div>
+    text: `<div>View all your ICICI Bank and other Bank Credit Cards here on the horizontal tabs. Your connected cards are listed under the tabs with numbered badges. Click here to see information for 3+ Cards.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/cardBar.gif" width="350" alt="Animation showing connected cards dropdown" style="object-fit: contain;" crossorigin="anonymous" /></div></div>
       `,
     attachTo: {
       element: document.querySelector(".pill-container"),
@@ -140,7 +140,7 @@ var NewRIBCreditCardPage = () => {
   GuideMeWhatsOnNewRIBCreditCardPage.addStep({
     id: "GuideMeWhatsOnNewRIBCreditCardPage_3",
     title: "3/8",
-    text: "Find your cards' basic details and balances here. You could also pay your credit cards bill, and set up auto payments. <br /><br />Click here to see information for 3+ Cards.",
+    text: "Find your cards' basic details and balances here. You could also pay your credit cards bill, and set up auto payments. <br /><br />",
     attachTo: {
       element: document.querySelector(".ccLeftWrapper"),
       on: "right",
