@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
-// Last update: April 15, 2024
-// update 7: Changed content as per v5 of document
+// Last update: April 16, 2024
+// update 7: Changed content as per v5 of document (bug fix +1)
 // update 6: Changed content as per V2 of document
 // update 5: Changed content for overlays
 // update 4: Changed size of dialer gif
@@ -321,7 +321,7 @@ var NewRIBCreditCardPage = () => {
     id: "GuideMeWhatsOnNewRIBCreditCardPage_9",
     title: "8/8",
     canClickTarget: false,
-    text: "You are all set to enjoy the new ICICI Bank Online experience. <br /><br />Take the Guided Tour or watch Video Demos again in case you need more assistance.",
+    text: "You are all set to enjoy the new ICICI Bank Online experience. <br /><br />Take the Guided Tour again in case you need more assistance.",
     buttons: [
       {
         text: "Complete",
