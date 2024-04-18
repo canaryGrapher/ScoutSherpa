@@ -1,4 +1,5 @@
-// April 15, 2024 | File updated
+// April 17, 2024 | File updated
+// update 47: Mobile screen removal
 // update 46: Changed content as per V5 of document
 // update 45: Changed content as per V2 of document
 // update 44: changed modal text and buttons
@@ -416,7 +417,7 @@ const pageChangeInvokationDAP = () => {
       console.error(error)
     }
   }
-  if (document.readyState === 'complete') {
+  if (document.readyState === 'complete' && window.innerWidth >= 1025) {
     console.log("Does page exist in journey descriptions: ", window.location.pathname, journeyInfo[window.location.pathname])
 
     if (journeyInfo[window.location.pathname] && document.querySelectorAll(".shepherd-element")?.length == 0 && document.querySelectorAll("#guided_Journey_Triggered")?.length > 0) {
