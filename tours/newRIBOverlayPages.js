@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-// Last update: April 16, 2024
+// Last update: April 19, 2024
 // update 7: Changed content as per v5 of document (bug fix +1)
 // update 6: Changed content as per V2 of document
 // update 5: Changed content for overlays
@@ -78,7 +78,7 @@ var NewRIBCreditCardPage = () => {
     title: "1/8",
     canClickTarget: false,
     text: `<div>Introducing our newly designed navigation wheel for cards.<ul><li>Click on 'Cards' to see its sub-sections.</li>
-    <li>Click the '<' button in the center of the navigation menu to close the option.</li></ul><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+    <li>Click the '<' button in the center of the navigation menu to close the option.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
       `,
     attachTo: {
       element: document.querySelector(".dailermainwrapper"),
