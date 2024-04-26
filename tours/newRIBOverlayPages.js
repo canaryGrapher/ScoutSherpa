@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+ /* eslint-disable max-lines */
 // Last update: April 19, 2024
 // update 7: Changed content as per v5 of document (bug fix +1)
 // update 6: Changed content as per V2 of document
@@ -247,9 +247,7 @@ var NewRIBCreditCardPage = () => {
       return toShowOrNotCheck;
     },
     attachTo: {
-      element: document.querySelector(
-        // eslint-disable-next-line prettier/prettier
-        "body > app-root > div.main > div > div > div.page-content.login > div.container.g-0.dark-theme-border > div > app-credit-card-main > div > div.col-12.side-paddings.newLanding.ng-star-inserted > div.ccRightWrapper.ng-star-inserted > div > app-loan-cc > swiper-container"),
+      element: document.querySelector("app-loan-cc"),
       on: "right",
     },
     buttons: [
