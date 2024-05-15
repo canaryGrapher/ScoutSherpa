@@ -52,6 +52,14 @@ const journeyInfo = {
   "/in/credit-card": {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
     logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
+  },
+  "/cug/in/credit-card": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
+    logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
+  },
+  "/cug/in/fund-transfer": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBFundTransferPage()",
+    logic: `document.querySelectorAll(". searchArea")[0]?.getBoundingClientRect().x > 0`
   }
 };
 const DATABASE_NAME = "GuidedJourney";
