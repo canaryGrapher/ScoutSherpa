@@ -1,4 +1,5 @@
-// April 19, 2024 | File updated
+// May 15, 2024 | File updated
+// update 48: Added fund transfer and CUG
 // update 47: Mobile screen removal
 // update 46: Changed content as per V5 of document
 // update 45: Changed content as per V2 of document
@@ -57,7 +58,7 @@ const journeyInfo = {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
     logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
   },
-  "/cug/in/fund-transfer": {
+  "/cug/in/`fund-transfer": {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBFundTransferPage()",
     logic: `document.querySelectorAll(". searchArea")[0]?.getBoundingClientRect().x > 0`
   }
