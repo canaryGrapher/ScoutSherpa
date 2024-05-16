@@ -56,7 +56,7 @@ var NewRIBFundTransferPage = () => {
     id: "GuideMeWhatsOnNewRIBFundTransferPage_2",
     title: "2/8",
     canClickTarget: false,
-    text: `<div>This list has own account, ICICI Bank and other bank payees.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+    text: `<div>This list has own account, ICICI Bank and other bank payees.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/search.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
         `,
     attachTo: {
       element: ".searchArea",
@@ -107,7 +107,7 @@ var NewRIBFundTransferPage = () => {
     canClickTarget: false,
     text: `<div>Track all your recent transactions here. You can filter the transactions based on the transaction types i.e. IMPS/NEFT/RTGS/Within ICICI & Own Account. 
       By clicking on the <strong>SCHEDULED</strong> tab, you can track all your Schedule transactions here. You can modify transaction standing instructions 
-      <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+      <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/recent.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
         `,
     attachTo: {
       element: ".transactionWrapper",
