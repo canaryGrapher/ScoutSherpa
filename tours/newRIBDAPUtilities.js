@@ -58,7 +58,7 @@ const journeyInfo = {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
     logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
   },
-  "/cug/in/`fund-transfer": {
+  "/cug/in/payment-transfer": {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBFundTransferPage()",
     logic: `document.querySelectorAll(". searchArea")[0]?.getBoundingClientRect().x > 0`
   }
