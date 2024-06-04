@@ -1,4 +1,5 @@
-// May 15, 2024 | File updated
+// June 4, 2024 | File updated
+// update 49: Changed page URL of incorrect pages
 // update 48: Added fund transfer and CUG
 // update 47: Mobile screen removal
 // update 46: Changed content as per V5 of document
@@ -54,11 +55,15 @@ const journeyInfo = {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
     logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
   },
-  "/cug/in/credit-card": {
+  "/cug/credit-card": {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
     logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
   },
-  "/cug/in/payment-transfer": {
+  "/in/payment-transfer": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBFundTransferPage()",
+    logic: `document.querySelectorAll(". searchArea")[0]?.getBoundingClientRect().x > 0`
+  },
+  "/cug/payment-transfer": {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBFundTransferPage()",
     logic: `document.querySelectorAll(". searchArea")[0]?.getBoundingClientRect().x > 0`
   }

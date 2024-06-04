@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
-// Last update: May 15, 2024
+// Last update: June 4, 2024
+// updated content for fund transfer
 // update 8: Added overlays for fund transfer
 // update 7: Changed content as per v5 of document (bug fix +1)
 // update 6: Changed content as per V2 of document
@@ -33,8 +34,8 @@ var NewRIBFundTransferPage = () => {
     id: "GuideMeWhatsOnNewRIBFundTransferPage_start",
     title: "1/8",
     canClickTarget: false,
-    text: `<div>Introducing our newly designed navigation wheel for Fund Transfers.<ul><li>Click on 'Payment & Transfer' to see its sub-sections.</li>
-      <li>Click the '<' button in the center of the navigation menu to close the option.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+    text: `<div>    Here is our new navigation wheel for convenient Fund Transfers.<ul><li>To manage and initiate Transfers, click "Payment & Transfer"</li>
+      <li>To close the option, click the '<' button in the center.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigation.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
         `,
     attachTo: {
       element: document.querySelector(".dailermainwrapper"),
@@ -56,7 +57,7 @@ var NewRIBFundTransferPage = () => {
     id: "GuideMeWhatsOnNewRIBFundTransferPage_2",
     title: "2/8",
     canClickTarget: false,
-    text: `<div>This list has own account, ICICI Bank and other bank payees.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/searchPayee.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+    text: `<div>Track all payees across ICICI Bank and other banks.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/searchPayee.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
         `,
     attachTo: {
       element: ".searchArea",
@@ -80,8 +81,8 @@ var NewRIBFundTransferPage = () => {
     canClickTarget: false,
     text: `<div>
           <ul>
-              <li><strong>Manage Payee</strong>: You can view payee details, delete payee, transfer dunds and add new payees here</li>
-              <li><strong>Transfer to New Payee</strong>: Transfer funds to a new payee without adding them as payee</li>
+              <li>View, delete and add payee details, and transfer funds in the Manage Payee section</li>
+              <li>Transfer to New Payee quickly without adding them as payee here</li>
           </ul>
       </div>
         `,
@@ -105,10 +106,12 @@ var NewRIBFundTransferPage = () => {
     id: "GuideMeWhatsOnNewRIBFundTransferPage_4",
     title: "4/8",
     canClickTarget: false,
-    text: `<div>Track all your recent transactions here. You can filter the transactions based on the transaction types i.e. IMPS/NEFT/RTGS/Within ICICI & Own Account. 
-      By clicking on the <strong>SCHEDULED</strong> tab, you can track all your Schedule transactions here. You can modify transaction standing instructions 
-      <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/recentTransactions.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
-        `,
+    text: `<div>Manage your recent transactions here.
+    <ul>
+      <li>Track transactions basis Fund transfer modes (IMPS/NEFT/ RTGS/ Within ICICI/Own Account)</li>
+      <li>Click on SCHEDULED Tab to track and modify scheduled transactions and standing instructions</li>
+    </ul>
+      <div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/recentTransactions.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>`,
     attachTo: {
       element: ".transactionWrapper",
       on: "right",
@@ -129,12 +132,11 @@ var NewRIBFundTransferPage = () => {
     id: "GuideMeWhatsOnNewRIBFundTransferPage_5",
     title: "5/8",
     canClickTarget: false,
-    text: `<div>Want to send or receive funds from abroad? 
-      <ul><li>Make transactions using the <strong>MAKE INTERNATIONAL TRANSFERS</strong> option.</li>
-      <li>Receive funds from overseas using the <strong>REQUEST MONEY FROM OVERSEAS</strong></li>
+    text: `<div>Manage International Transactions Conveniently 
+      <ul><li>Make transactions using <strong>MAKE INTERNATIONAL TRANSFERS</strong></li>
+      <li>Receive funds from overseas using <strong>REQUEST MONEY FROM OVERSEAS</strong></li>
       </ul>
-      </div>
-        `,
+      </div>`,
     attachTo: {
       element: document.querySelectorAll(".upparCta")[0],
       on: "bottom",
@@ -155,7 +157,7 @@ var NewRIBFundTransferPage = () => {
     id: "GuideMeWhatsOnNewRIBFundTransferPage_6",
     title: "6/8",
     canClickTarget: false,
-    text: `<div>You can view and track your upcoming bills here.</div>
+    text: `<div>View and Track your upcoming bills in this section</div>
         `,
     attachTo: {
       element: ".rightWrapper",
@@ -177,7 +179,7 @@ var NewRIBFundTransferPage = () => {
     id: "GuideMeWhatsOnNewRIBFundTransferPage_7",
     title: "7/8",
     canClickTarget: false,
-    text: "Check out our exclusive offers for you here.",
+    text: "Check out exciting offers curated exclusively for you.",
     attachTo: {
       element: document.querySelector(
         "body > app-root > div.main > div > div > div.page-content.login > div.container.g-0.dark-theme-border > div > app-payment-transfer > div > div > div.ft-wrapper.ng-tns-c187-2 > app-ft-right-section > div > app-loan-cc > swiper-container",
@@ -201,7 +203,7 @@ var NewRIBFundTransferPage = () => {
     id: "GuideMeWhatsOnNewRIBFundTransferPage_8",
     title: "8/8",
     canClickTarget: false,
-    text: "You are all set to enjoy the new ICICI Bank Online experience. <br /><br />Take the Guided Tour again in case you need more assistance.",
+    text: "You are all set to enjoy the new ICICI Bank Fund Transfer experience. Take the Guided Tour again if you need more assistance.",
     buttons: [
       {
         text: "Complete",
