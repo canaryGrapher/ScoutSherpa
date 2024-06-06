@@ -1,4 +1,5 @@
-// June 4, 2024 | File updated
+// June 6, 2024 | File updated
+// update 50: added loader for deposits
 // update 49: Changed page URL of incorrect pages
 // update 48: Added fund transfer and CUG
 // update 47: Mobile screen removal
@@ -61,11 +62,19 @@ const journeyInfo = {
   },
   "/in/payment-transfer": {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBFundTransferPage()",
-    logic: `document.querySelectorAll(". searchArea")[0]?.getBoundingClientRect().x > 0`
+    logic: `document.querySelectorAll(".searchArea")[0]?.getBoundingClientRect().x > 0`
   },
   "/cug/payment-transfer": {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBFundTransferPage()",
-    logic: `document.querySelectorAll(". searchArea")[0]?.getBoundingClientRect().x > 0`
+    logic: `document.querySelectorAll(".searchArea")[0]?.getBoundingClientRect().x > 0`
+  },
+  "/in/deposit": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBDepositsPage()",
+    logic: `document.querySelectorAll(".manageDeposit")[0]?.getBoundingClientRect().x > 0`
+  },
+  "/cug/deposit": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBDepositsPage()",
+    logic: `document.querySelectorAll(".manageDeposit")[0]?.getBoundingClientRect().x > 0`
   }
 };
 const DATABASE_NAME = "GuidedJourney";
