@@ -739,10 +739,14 @@ var NewRIBAccountsPage = () => {
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_2",
     title: "2/13",
     canClickTarget: false,
-    text: `<div>Here you can see the total number of your bank accounts which include savings, current and overdraft accounts<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/accountsBar.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>`,
+    text: `<div>Here you can see the total number of your bank accounts which include savings, current and overdraft accounts<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/accountsBar.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
     attachTo: {
       element: document.querySelector(".tabbarContainer"),
       on: "bottom",
+    },
+    showOn: () => {
+      const element = document.querySelector(".tabbarContainer");
+      return element ? true : false;
     },
     buttons: [
       {
@@ -760,7 +764,7 @@ var NewRIBAccountsPage = () => {
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_3",
     title: "3/13",
     canClickTarget: false,
-    text: `<div>Here you can toggle between your savings bank accounts to view information about them in details<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/sbaBar.png" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>`,
+    text: `<div>Here you can toggle between your savings bank accounts to view information about them in details<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/sbaBar.png" width="100%" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>`,
     attachTo: {
       element: document.querySelector(".pill-container"),
       on: "bottom",
