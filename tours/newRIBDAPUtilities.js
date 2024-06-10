@@ -1,4 +1,5 @@
-// June 6, 2024 | File updated
+// June 10, 2024 | File updated
+// update 51: added bank accounts overlays
 // update 50: added loader for deposits
 // update 49: Changed page URL of incorrect pages
 // update 48: Added fund transfer and CUG
@@ -75,6 +76,14 @@ const journeyInfo = {
   "/cug/deposit": {
     journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBDepositsPage()",
     logic: `document.querySelectorAll(".manageDeposit")[0]?.getBoundingClientRect().x > 0`
+  },
+  "/cug/bank-account": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBAccountsPage()",
+    logic: `document.querySelectorAll(".payNowContainer")[0]?.getBoundingClientRect().x > 0`
+  },
+  "/in/bank-account": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBAccountsPage()",
+    logic: `document.querySelectorAll(".payNowContainer")[0]?.getBoundingClientRect().x > 0`
   }
 };
 const DATABASE_NAME = "GuidedJourney";
