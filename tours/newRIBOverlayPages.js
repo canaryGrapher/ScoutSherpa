@@ -849,6 +849,10 @@ var NewRIBAccountsPage = () => {
     title: "7/13",
     canClickTarget: false,
     text: `Click on "View Account Details" to get more information about your account.`,
+    showOn: () => {
+      const element = document.querySelector(".accountDetailsBtn");
+      return element ? true : false;
+    },
     attachTo: {
       element: document.querySelector(".accountDetailsBtn"),
       on: "right",
@@ -870,6 +874,10 @@ var NewRIBAccountsPage = () => {
     title: "8/13",
     canClickTarget: false,
     text: `Check reward points collected by you in savings account and redeem them easily here >>>`,
+    showOn: () => {
+      const element = document.querySelector(".reedeem-btn");
+      return element ? true : false;
+    },
     attachTo: {
       element: document.querySelector(".reedeem-btn"),
       on: "bottom",
@@ -891,6 +899,10 @@ var NewRIBAccountsPage = () => {
     title: "9/13",
     canClickTarget: false,
     text: `View your Debit Card details here, based on the account selected.`,
+    showOn: () => {
+      const element = document.querySelector(".card-slide");
+      return element ? true : false;
+    },
     attachTo: {
       element: document.querySelector(".card-slide"),
       on: "left",
@@ -912,6 +924,10 @@ var NewRIBAccountsPage = () => {
     title: "10/13",
     canClickTarget: false,
     text: `Manage your Debit Card easily using these services here.`,
+    showOn: () => {
+      const element = document.querySelector(".request-info");
+      return element ? true : false;
+    },
     attachTo: {
       element: document.querySelector(".request-info"),
       on: "left",
@@ -932,6 +948,10 @@ var NewRIBAccountsPage = () => {
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_11",
     title: "11/13",
     canClickTarget: false,
+    showOn: () => {
+      const element = document.querySelector(".cardAnalysisInManageCards");
+      return element ? true : false;
+    },
     text: `Click on Service Request if you need any additional service related to your selected Debit Card / Click on Service Request to manage your savings account.`,
     attachTo: {
       element: document.querySelector(".cardAnalysisInManageCards"),

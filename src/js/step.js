@@ -230,7 +230,7 @@ export class Step extends Evented {
   show() {
     if (isFunction(this.options.beforeShowPromise)) {
       return Promise.resolve(this.options.beforeShowPromise()).then(() =>
-        this._show()
+        this._show();
       );
     }
     return Promise.resolve(this._show());
