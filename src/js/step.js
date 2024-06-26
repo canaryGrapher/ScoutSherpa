@@ -124,11 +124,8 @@ export class Step extends Evented {
      * @private
      */
     this._resolvedAttachTo = null;
-
     autoBind(this);
-
     this._setOptions(options);
-
     return this;
   }
 
@@ -156,14 +153,11 @@ export class Step extends Evented {
    */
   destroy() {
     destroyTooltip(this);
-
     if (isHTMLElement(this.el)) {
       this.el.remove();
       this.el = null;
     }
-
     this._updateStepTargetOnHide();
-
     this.trigger("destroy");
   }
 
@@ -230,7 +224,7 @@ export class Step extends Evented {
   show() {
     if (isFunction(this.options.beforeShowPromise)) {
       return Promise.resolve(this.options.beforeShowPromise()).then(() =>
-        this._show()
+        this._show(),
       );
     }
     return Promise.resolve(this._show());
@@ -350,7 +344,7 @@ export class Step extends Evented {
       },
       tourOptions,
       options,
-      mergeTooltipConfig(tourOptions, options)
+      mergeTooltipConfig(tourOptions, options),
     );
 
     const { when } = this.options;
@@ -469,7 +463,7 @@ export class Step extends Evented {
       "shepherd-target-click-disabled",
       `${this.classPrefix}shepherd-enabled`,
       `${this.classPrefix}shepherd-target`,
-      "shepherd-highlight-border"
+      "shepherd-highlight-border",
     );
   }
 }

@@ -4746,14 +4746,9 @@ Z`;
 	  back() {
 	    console.log('Loading previous step');
 	    const index = this.steps.indexOf(this.currentStep);
-	    adobeTrack({
-	      ctaAction: "Back",
-	      journeyName: this.tourName,
-	      stepName: this.currentStep
-	    });
 	    // set the current number in the localStorage for future retrieval
 	    localStorage.setItem('currentStepIndex', index - 1);
-	    this.show(index - 1, false);
+	    this.show(index - 1, false, "Back");
 	  }
 
 	  /**
@@ -4763,10 +4758,11 @@ Z`;
 	   * and only cancel when the value returned is true
 	   */
 	  async cancel() {
+	    this.steps.indexOf(this.currentStep);
 	    adobeTrack({
 	      ctaAction: "Cancel",
-	      journeyName: this.tourName,
-	      stepName: this.currentStep
+	      journeyName: `Journey ${this.options.instanceCaller}`,
+	      stepName: `Step ${this.steps.indexOf(this.currentStep)}`
 	    });
 	    if (this.options.confirmCancel) {
 	      const confirmCancelIsFunction = typeof this.options.confirmCancel === 'function';
@@ -4784,12 +4780,12 @@ Z`;
 	   * Calls _done() triggering the `complete` event
 	   */
 	  complete() {
+	    console.log('Tour completed');
 	    adobeTrack({
 	      ctaAction: "Complete",
-	      journeyName: this.tourName,
-	      stepName: this.currentStep
+	      journeyName: `Journey ${this.options.instanceCaller}`,
+	      stepName: `Step ${this.steps.length}`
 	    });
-	    console.log('Tour completed');
 	    this._done('complete');
 	  }
 
@@ -4836,11 +4832,6 @@ Z`;
 	   */
 	  next() {
 	    console.log('Loading next step');
-	    adobeTrack({
-	      ctaAction: "Next",
-	      journeyName: this.tourName,
-	      stepName: this.currentStep
-	    });
 	    const index = this.steps.indexOf(this.currentStep);
 	    if (index === this.steps.length - 1) {
 	      // remove the currentStepIndex and the tourInstanceCaller from the local storage after completing the tour
@@ -4851,7 +4842,7 @@ Z`;
 	    } else {
 	      // set the current step number in the localStorage
 	      localStorage.setItem('currentStepIndex', index + 1);
-	      this.show(index + 1, true);
+	      this.show(index + 1, true, "Next");
 	    }
 	  }
 
@@ -4875,7 +4866,6 @@ Z`;
 	    });
 	    if (current && current.id === name) {
 	      this.currentStep = undefined;
-
 	      // If we have steps left, show the first one, otherwise just cancel the tour
 	      this.steps.length ? this.show(0) : this.cancel();
 	    }
@@ -4886,19 +4876,18 @@ Z`;
 	   * @param {Number|String} key The key to look up the step by
 	   * @param {Boolean} forward True if we are going forward, false if backward
 	   */
-	  show(key = 0, forward = true) {
-	    console.log('Step load tour');
-	    adobeTrack({
-	      ctaAction: "Show",
-	      journeyName: this.tourName,
-	      stepName: this.currentStep
-	    });
+	  show(key = 0, forward = true, mode) {
 	    // get tour data from localStorage
 	    const _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
 	    const _currentStepIndex = localStorage.getItem('currentStepIndex');
 	    console.log('Current step index is ', _currentStepIndex);
 	    console.log('Current tour instance caller is ', _tourInstanceCaller);
 	    const step = isString(key) ? this.getById(key) : this.steps[key];
+	    adobeTrack({
+	      ctaAction: mode,
+	      journeyName: `Journey ${_tourInstanceCaller}`,
+	      stepName: `Step ${_currentStepIndex + 1}`
+	    });
 	    if (step) {
 	      this._updateStateBeforeShow();
 	      const shouldSkipStep = isFunction(step.options.showOn) && !step.options.showOn();
@@ -4923,15 +4912,14 @@ Z`;
 	   * Start the tour
 	   */
 	  start() {
-	    adobeTrack({
-	      ctaAction: "Start",
-	      journeyName: this.tourName,
-	      stepName: this.currentStep
-	    });
 	    localStorage.setItem('tourInstanceCaller', this.options.instanceCaller);
 	    localStorage.setItem('currentStepIndex', 0);
 	    this.trigger('start');
-
+	    adobeTrack({
+	      ctaAction: "Start",
+	      journeyName: `Journey ${this.options.instanceCaller}`,
+	      stepName: `Step Start`
+	    });
 	    // Save the focused element before the tour opens
 	    this.focusedElBeforeOpen = document.activeElement;
 	    this.currentStep = null;
