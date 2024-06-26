@@ -4279,8 +4279,8 @@ function adobeTrack(props) {
     "_icicibank": {
       "pageInfo": window.adobeDataLayer[0]._icicibank.pageInfo,
       "ctaInfo": {
-        "ctaName": props.ctaAction,
-        "ctaRegion": `${props.journeyName} - Step ${props.stepName}`,
+        "ctaName": `${props.ctaAction} - ${props.journeyName}`,
+        "ctaRegion": `${props.stepName}`,
         "ctaType": "button",
         "ctaURL": ""
       },
@@ -4755,8 +4755,8 @@ class Tour extends Evented {
     this.steps.indexOf(this.currentStep);
     adobeTrack({
       ctaAction: "Cancel",
-      journeyName: `Journey ${this.options.instanceCaller}`,
-      stepName: `Step ${this.steps.indexOf(this.currentStep)}`
+      journeyName: `${this.options.instanceCaller}`,
+      stepName: `${this.steps.indexOf(this.currentStep)}`
     });
     if (this.options.confirmCancel) {
       const confirmCancelIsFunction = typeof this.options.confirmCancel === 'function';
@@ -4777,8 +4777,8 @@ class Tour extends Evented {
     console.log('Tour completed');
     adobeTrack({
       ctaAction: "Complete",
-      journeyName: `Journey ${this.options.instanceCaller}`,
-      stepName: `Step ${this.steps.length}`
+      journeyName: `${this.options.instanceCaller}`,
+      stepName: `${Number(this.steps.length) - 1}`
     });
     this._done('complete');
   }
@@ -4877,11 +4877,6 @@ class Tour extends Evented {
     console.log('Current step index is ', _currentStepIndex);
     console.log('Current tour instance caller is ', _tourInstanceCaller);
     const step = isString(key) ? this.getById(key) : this.steps[key];
-    adobeTrack({
-      ctaAction: mode,
-      journeyName: `Journey ${_tourInstanceCaller}`,
-      stepName: `Step ${_currentStepIndex + 1}`
-    });
     if (step) {
       this._updateStateBeforeShow();
       const shouldSkipStep = isFunction(step.options.showOn) && !step.options.showOn();
@@ -4891,6 +4886,20 @@ class Tour extends Evented {
         this._skipStep(step, forward);
       } else {
         if (_tourInstanceCaller === this.options.instanceCaller) {
+          if (mode === "Back") {
+            adobeTrack({
+              ctaAction: mode,
+              journeyName: `${_tourInstanceCaller}`,
+              stepName: `Step ${_currentStepIndex} to ${Number(_currentStepIndex) + 1}`
+            });
+          }
+          if (mode === "Next") {
+            adobeTrack({
+              ctaAction: mode,
+              journeyName: `${_tourInstanceCaller}`,
+              stepName: `Step ${_currentStepIndex} from ${Number(_currentStepIndex) - 1}`
+            });
+          }
           this.trigger('show', {
             step,
             previous: this.currentStep
@@ -4908,12 +4917,12 @@ class Tour extends Evented {
   start() {
     localStorage.setItem('tourInstanceCaller', this.options.instanceCaller);
     localStorage.setItem('currentStepIndex', 0);
-    this.trigger('start');
     adobeTrack({
       ctaAction: "Start",
-      journeyName: `Journey ${this.options.instanceCaller}`,
-      stepName: `Step Start`
+      journeyName: `${this.options.instanceCaller}`,
+      stepName: `Start with 1`
     });
+    this.trigger('start');
     // Save the focused element before the tour opens
     this.focusedElBeforeOpen = document.activeElement;
     this.currentStep = null;

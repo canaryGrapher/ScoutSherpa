@@ -15,8 +15,8 @@ export function adobeTrack(props) {
         "_icicibank": {
             "pageInfo": window.adobeDataLayer[0]._icicibank.pageInfo,
             "ctaInfo": {
-                "ctaName": props.ctaAction,
-                "ctaRegion": `${props.journeyName} - Step ${props.stepName}`,
+                "ctaName": `${props.ctaAction} - ${props.journeyName}`,
+                "ctaRegion": `${props.stepName}`,
                 "ctaType": "button",
                 "ctaURL": ""
             },
