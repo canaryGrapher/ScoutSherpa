@@ -7,7 +7,6 @@
 /coverage/
 /cypress/
 /docs/
-/dist/
 /site/
 /node_modules/
 /test/unit/dist
