@@ -2,6 +2,7 @@
 import { Evented } from './evented.js';
 import { Step } from './step.js';
 import autoBind from './utils/auto-bind.js';
+import { adobeTrack } from './utils/adobe.js';
 import {
   isHTMLElement,
   isFunction,
@@ -123,6 +124,7 @@ export class Tour extends Evented {
   back() {
     console.log('Loading previous step');
     const index = this.steps.indexOf(this.currentStep);
+    adobeTrack({ ctaAction: "Back", journeyName: this.tourName, stepName: this.currentStep })
     // set the current number in the localStorage for future retrieval
     localStorage.setItem('currentStepIndex', index - 1);
     this.show(index - 1, false);
@@ -135,6 +137,7 @@ export class Tour extends Evented {
    * and only cancel when the value returned is true
    */
   async cancel() {
+    adobeTrack({ ctaAction: "Cancel", journeyName: this.tourName, stepName: this.currentStep })
     if (this.options.confirmCancel) {
       const confirmCancelIsFunction =
         typeof this.options.confirmCancel === 'function';
@@ -156,6 +159,7 @@ export class Tour extends Evented {
    * Calls _done() triggering the `complete` event
    */
   complete() {
+    adobeTrack({ ctaAction: "Complete", journeyName: this.tourName, stepName: this.currentStep })
     console.log('Tour completed');
     this._done('complete');
   }
@@ -203,6 +207,7 @@ export class Tour extends Evented {
    */
   next() {
     console.log('Loading next step');
+    adobeTrack({ ctaAction: "Next", journeyName: this.tourName, stepName: this.currentStep })
     const index = this.steps.indexOf(this.currentStep);
     if (index === this.steps.length - 1) {
       // remove the currentStepIndex and the tourInstanceCaller from the local storage after completing the tour
@@ -253,6 +258,7 @@ export class Tour extends Evented {
    */
   show(key = 0, forward = true) {
     console.log('Step load tour');
+    adobeTrack({ ctaAction: "Show", journeyName: this.tourName, stepName: this.currentStep })
     // get tour data from localStorage
     const _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
     const _currentStepIndex = localStorage.getItem('currentStepIndex');
@@ -287,7 +293,7 @@ export class Tour extends Evented {
    * Start the tour
    */
   start() {
-    console.log('Setting up tour');
+    adobeTrack({ ctaAction: "Start", journeyName: this.tourName, stepName: this.currentStep })
     localStorage.setItem('tourInstanceCaller', this.options.instanceCaller);
     localStorage.setItem('currentStepIndex', 0);
     this.trigger('start');
