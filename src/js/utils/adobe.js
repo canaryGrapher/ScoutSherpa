@@ -1,6 +1,4 @@
 /* eslint-disable prettier/prettier */
-
-adobeTrack({ ctaAction: "name of function", journeyName: "journey name", stepName: "name of step" })
 export function adobeTrack(props) {
     const dataLayer = {
         "event": "ctaClick",

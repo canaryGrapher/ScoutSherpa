@@ -4268,6 +4268,37 @@
 	  }
 	}
 
+	/* eslint-disable prettier/prettier */
+	function adobeTrack(props) {
+	  const dataLayer = {
+	    "event": "ctaClick",
+	    "web": {
+	      "webInteraction": {
+	        "linkClicks": {
+	          "value": 1 // to be shared by adobe team
+	        },
+	        "name": `Guided Journey - ${props.ctaAction}`,
+	        "URL": window.location.href,
+	        "type": "button" // to be discussed - kind of button (btn/toggle) string value
+	      }
+	    },
+	    "_icicibank": {
+	      "pageInfo": window.adobeDataLayer[0]._icicibank.pageInfo,
+	      "ctaInfo": {
+	        "ctaName": props.ctaAction,
+	        "ctaRegion": `${props.journeyName} - Step ${props.stepName}`,
+	        "ctaType": "button",
+	        "ctaURL": ""
+	      },
+	      "channelInfo": window.adobeDataLayer[0]._icicibank.channelInfo,
+	      "userInfo": window.adobeDataLayer[0]._icicibank.userInfo,
+	      "productInfo": window.adobeDataLayer[0]._icicibank.productInfo,
+	      "identities": window.adobeDataLayer[0]._icicibank.identities
+	    }
+	  };
+	  window.adobeDataLayer.push(dataLayer);
+	}
+
 	/**
 	 * Cleanup the steps and set pointerEvents back to 'auto'
 	 * @param tour The tour object
@@ -4715,6 +4746,11 @@ Z`;
 	  back() {
 	    console.log('Loading previous step');
 	    const index = this.steps.indexOf(this.currentStep);
+	    adobeTrack({
+	      ctaAction: "Back",
+	      journeyName: this.tourName,
+	      stepName: this.currentStep
+	    });
 	    // set the current number in the localStorage for future retrieval
 	    localStorage.setItem('currentStepIndex', index - 1);
 	    this.show(index - 1, false);
@@ -4727,6 +4763,11 @@ Z`;
 	   * and only cancel when the value returned is true
 	   */
 	  async cancel() {
+	    adobeTrack({
+	      ctaAction: "Cancel",
+	      journeyName: this.tourName,
+	      stepName: this.currentStep
+	    });
 	    if (this.options.confirmCancel) {
 	      const confirmCancelIsFunction = typeof this.options.confirmCancel === 'function';
 	      const cancelMessage = this.options.confirmCancelMessage || 'Are you sure you want to stop the tour?';
@@ -4743,6 +4784,11 @@ Z`;
 	   * Calls _done() triggering the `complete` event
 	   */
 	  complete() {
+	    adobeTrack({
+	      ctaAction: "Complete",
+	      journeyName: this.tourName,
+	      stepName: this.currentStep
+	    });
 	    console.log('Tour completed');
 	    this._done('complete');
 	  }
@@ -4790,6 +4836,11 @@ Z`;
 	   */
 	  next() {
 	    console.log('Loading next step');
+	    adobeTrack({
+	      ctaAction: "Next",
+	      journeyName: this.tourName,
+	      stepName: this.currentStep
+	    });
 	    const index = this.steps.indexOf(this.currentStep);
 	    if (index === this.steps.length - 1) {
 	      // remove the currentStepIndex and the tourInstanceCaller from the local storage after completing the tour
@@ -4837,6 +4888,11 @@ Z`;
 	   */
 	  show(key = 0, forward = true) {
 	    console.log('Step load tour');
+	    adobeTrack({
+	      ctaAction: "Show",
+	      journeyName: this.tourName,
+	      stepName: this.currentStep
+	    });
 	    // get tour data from localStorage
 	    const _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
 	    const _currentStepIndex = localStorage.getItem('currentStepIndex');
@@ -4867,7 +4923,11 @@ Z`;
 	   * Start the tour
 	   */
 	  start() {
-	    console.log('Setting up tour');
+	    adobeTrack({
+	      ctaAction: "Start",
+	      journeyName: this.tourName,
+	      stepName: this.currentStep
+	    });
 	    localStorage.setItem('tourInstanceCaller', this.options.instanceCaller);
 	    localStorage.setItem('currentStepIndex', 0);
 	    this.trigger('start');
