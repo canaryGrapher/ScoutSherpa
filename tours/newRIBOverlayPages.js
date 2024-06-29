@@ -785,7 +785,8 @@ var NewRIBAccountsPage = () => {
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_4",
     title: "4/14",
     canClickTarget: false,
-    text: `<ul><li>Select Savings Account to view the selected account's balance, along with all savings accounts.</li><li>Select Overdraft Account to view amount utilized so far.</li></ul>`,
+    text: `
+    <div><ul><li>Select Savings Account to view the selected account's balance, along with all savings accounts.</li><li>Select Overdraft Account to view amount utilized so far.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/balancesBankAccounts.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
     attachTo: {
       element: document.querySelector(".amountDetails"),
       on: "right",
@@ -827,7 +828,7 @@ var NewRIBAccountsPage = () => {
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_6",
     title: "6/14",
     canClickTarget: false,
-    text: `Select Overdraft Account and then click "Pay Now" to settle the utilized amount, through your savings or overdraft account.`,
+    text: `<div><ul><li>Select Overdraft Account and then click "Pay Now" to settle the utilized amount, through your savings or overdraft account.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/buttonDetailsBankAccounts.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
     attachTo: {
       element: document.querySelector(".payNowContainer"),
       on: "right",

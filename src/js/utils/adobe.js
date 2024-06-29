@@ -15,10 +15,10 @@ export function adobeTrack(props) {
         "_icicibank": {
             "pageInfo": window.adobeDataLayer[0]._icicibank.pageInfo,
             "ctaInfo": {
-                "ctaName": `${props.ctaAction} - ${props.journeyName}`,
-                "ctaRegion": `${props.stepName}`,
+                "ctaName": `${props.ctaAction} - ${props.stepName} - ${props.journeyName}`,
+                "ctaRegion": "Guided Journey",
                 "ctaType": "button",
-                "ctaURL": ""
+                "ctaURL": window.location.href
             },
             "channelInfo": window.adobeDataLayer[0]._icicibank.channelInfo,
             "userInfo": window.adobeDataLayer[0]._icicibank.userInfo,

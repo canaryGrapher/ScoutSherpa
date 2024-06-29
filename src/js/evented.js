@@ -1,4 +1,4 @@
-import { isUndefined } from './utils/type-check';
+import { isUndefined } from "./utils/type-check";
 
 export class Evented {
   on(event, handler, ctx, once = false) {
