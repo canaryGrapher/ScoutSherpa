@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-// Last update: June 26, 2024
+// Last update: July 1, 2024
 // update 11: content for bank accounts updated
 // update 10: content for bank accounts and deposits
 // update 09: content for fund transfer
@@ -974,7 +974,7 @@ var NewRIBAccountsPage = () => {
       const element = document.querySelector(".cardAnalysisInManageCards");
       return element ? true : false;
     },
-    text: `Click on Service Request if you need any additional service related to your selected Debit Card / Click on Service Request to manage your savings account.`,
+    text: `Click on Service Request to manage your savings account.`,
     attachTo: {
       element: document.querySelector(".cardAnalysisInManageCards"),
       on: "left",
