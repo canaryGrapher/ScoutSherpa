@@ -717,7 +717,7 @@ var NewRIBAccountsPage = () => {
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_1",
     title: "1/14",
     canClickTarget: false,
-    text: `<div>"Here is our new navigation wheel for easy access to your Bank Accounts.<ul><li>Click on <strong>Accounts</strong> to check your bank accounts.</li><li>To close the option, click the <strong><</strong> button in the center.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigationAccounts.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
+    text: `<div>"Here is our new navigation wheel for easy access to your Bank Accounts.<ul><li>Click on <strong>Accounts</strong> to check your bank accounts.</li><li>To close the option, click the < button in the center.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigationAccounts.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
         `,
     attachTo: {
       element: document.querySelector(".dailermainwrapper"),
@@ -895,7 +895,7 @@ var NewRIBAccountsPage = () => {
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_9",
     title: "9/14",
     canClickTarget: false,
-    text: `Check reward points collected by you in savings account and redeem them easily here >>>`,
+    text: `Check reward points collected by you in savings account and redeem them easily here.`,
     showOn: () => {
       const element = document.querySelector(".reedeem-btn");
       return element ? true : false;
