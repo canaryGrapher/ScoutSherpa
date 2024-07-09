@@ -13,7 +13,7 @@ export function adobeTrack(props) {
             }
         },
         "_icicibank": {
-            "pageInfo": window.adobeDataLayer[0]._icicibank.pageInfo,
+            "pageInfo": window.adobeDataLayer[0]?._icicibank.pageInfo,
             "ctaInfo": {
                 "ctaName": `${props.ctaAction} - ${props.stepName} - ${props.journeyName}`,
                 "ctaRegion": "Guided Journey",

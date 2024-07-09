@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
-// Last update: July 1, 2024
-// update 11: content for bank accounts updated
+// Last update: July 9, 2024
+// update 11: content for bank accounts updated x 2
 // update 10: content for bank accounts and deposits
 // update 09: content for fund transfer
 // update 08: Added overlays for fund transfer
@@ -741,11 +741,11 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `<div>Find all your accounts grouped under savings, current, and overdraft account categories.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/accountsBar.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
     attachTo: {
-      element: document.querySelector(".tabbarContainer"),
+      element: document.querySelector("#bankAccountsTypeSwitcher"),
       on: "bottom",
     },
     showOn: () => {
-      const element = document.querySelector(".tabbarContainer");
+      const element = document.querySelector("#bankAccountsTypeSwitcher");
       return element ? true : false;
     },
     buttons: [
@@ -766,7 +766,7 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `<div>Toggle between your bank accounts here, to view their details.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/sbBar.gif" width="100%" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>`,
     attachTo: {
-      element: document.querySelector(".pill-container"),
+      element: document.querySelector("#bankAccountsSwitcher"),
       on: "bottom",
     },
     buttons: [
@@ -788,7 +788,7 @@ var NewRIBAccountsPage = () => {
     text: `
     <div><ul><li>Select Savings Account to view the selected account's balance, along with all savings accounts.</li><li>Select Overdraft Account to view amount utilized so far.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/balancesBankAccounts.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
     attachTo: {
-      element: document.querySelector(".amountDetails"),
+      element: document.querySelector("#bankAccountsBalancesWidget"),
       on: "right",
     },
     buttons: [
@@ -809,7 +809,7 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `<ul><li>Click on "Add Funds" to add money to your savings account through UPI</li><li>Click on "View Statement" to view your Account Statement.</li></ul>`,
     attachTo: {
-      element: document.querySelector(".payNowContainer"),
+      element: document.querySelector("#bankAccountsFundStatementActionArea"),
       on: "right",
     },
     buttons: [
@@ -830,7 +830,7 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `<div><ul><li>Select Overdraft Account and then click "Pay Now" to settle the utilized amount, through your savings or overdraft account.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/buttonDetailsBankAccounts.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
     attachTo: {
-      element: document.querySelector(".payNowContainer"),
+      element: document.querySelector("#bankAccountsFundStatementActionArea"),
       on: "right",
     },
     buttons: [
@@ -851,7 +851,7 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `View the details of your selected account here.`,
     attachTo: {
-      element: document.querySelector(".cardsContainer"),
+      element: document.querySelector(".#bankAccountsInformationAboutAccount"),
       on: "right",
     },
     buttons: [
@@ -872,11 +872,13 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `Click on "View Account Details" to get more information about your account.`,
     showOn: () => {
-      const element = document.querySelector(".accountDetailsBtn");
+      const element = document.querySelector(
+        "#bankAccountsViewAccountDetailsCTA",
+      );
       return element ? true : false;
     },
     attachTo: {
-      element: document.querySelector(".accountDetailsBtn"),
+      element: document.querySelector("#bankAccountsViewAccountDetailsCTA"),
       on: "right",
     },
     buttons: [
@@ -897,11 +899,11 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `Check reward points collected by you in savings account and redeem them easily here.`,
     showOn: () => {
-      const element = document.querySelector(".reedeem-btn");
+      const element = document.querySelector("#bankAccountsRedeemRewardsCTA");
       return element ? true : false;
     },
     attachTo: {
-      element: document.querySelector(".reedeem-btn"),
+      element: document.querySelector("#bankAccountsRedeemRewardsCTA"),
       on: "bottom",
     },
     buttons: [
@@ -922,11 +924,11 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `View your Debit Card details here, based on the account selected.`,
     showOn: () => {
-      const element = document.querySelector(".card-slide");
+      const element = document.querySelector("#bankAccountsDebitCardArea");
       return element ? true : false;
     },
     attachTo: {
-      element: document.querySelector(".card-slide"),
+      element: document.querySelector("#bankAccountsDebitCardArea"),
       on: "left",
     },
     buttons: [
@@ -947,11 +949,11 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `Manage your Debit Card easily using these services here.`,
     showOn: () => {
-      const element = document.querySelector(".request-info");
+      const element = document.querySelector("#bankAccountsManageDebitArea");
       return element ? true : false;
     },
     attachTo: {
-      element: document.querySelector(".request-info"),
+      element: document.querySelector("#bankAccountsManageDebitArea"),
       on: "left",
     },
     buttons: [
@@ -971,12 +973,12 @@ var NewRIBAccountsPage = () => {
     title: "12/14",
     canClickTarget: false,
     showOn: () => {
-      const element = document.querySelector(".cardAnalysisInManageCards");
+      const element = document.querySelector("#bankAccountsServiceRequestCTA");
       return element ? true : false;
     },
     text: `Click on Service Request to manage your savings account.`,
     attachTo: {
-      element: document.querySelector(".cardAnalysisInManageCards"),
+      element: document.querySelector("#bankAccountsServiceRequestCTA"),
       on: "left",
     },
     buttons: [
@@ -997,7 +999,7 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `Check out exciting offers curated exclusively for you here.`,
     attachTo: {
-      element: document.querySelector("app-bank-account-offers"),
+      element: document.querySelector("#bankAccountsOfferArea"),
       on: "left",
     },
     buttons: [

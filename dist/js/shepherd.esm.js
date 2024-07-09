@@ -4264,6 +4264,7 @@ class Step extends Evented {
 
 /* eslint-disable prettier/prettier */
 function adobeTrack(props) {
+  var _window$adobeDataLaye;
   const dataLayer = {
     "event": "ctaClick",
     "web": {
@@ -4277,7 +4278,7 @@ function adobeTrack(props) {
       }
     },
     "_icicibank": {
-      "pageInfo": window.adobeDataLayer[0]._icicibank.pageInfo,
+      "pageInfo": (_window$adobeDataLaye = window.adobeDataLayer[0]) == null ? void 0 : _window$adobeDataLaye._icicibank.pageInfo,
       "ctaInfo": {
         "ctaName": `${props.ctaAction} - ${props.stepName} - ${props.journeyName}`,
         "ctaRegion": "Guided Journey",
