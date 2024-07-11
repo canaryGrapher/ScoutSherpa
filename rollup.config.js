@@ -11,6 +11,7 @@ import replace from "rollup-plugin-replace";
 import resolve from "rollup-plugin-node-resolve";
 import sveltePreprocess from "svelte-preprocess";
 import svelte from "rollup-plugin-svelte";
+import del from "rollup-plugin-delete";
 import visualizer from "rollup-plugin-visualizer";
 
 const pkg = require("./package.json");
@@ -19,6 +20,7 @@ const banner = ["/*!", pkg.name, pkg.version, "*/\n"].join(" ");
 const env = process.env.DEVELOPMENT ? "development" : "production";
 
 const plugins = [
+  del({ targets: "dist/*" }),
   svelte({
     preprocess: sveltePreprocess(),
     emitCss: true,
@@ -60,13 +62,13 @@ const rollupBuilds = [
         entryFileNames: "js/[name].js",
         format: "umd",
         name: "Shepherd",
-        sourcemap: true,
+        sourcemap: false,
       },
       {
         dir: "dist",
         entryFileNames: "js/[name].esm.js",
         format: "esm",
-        sourcemap: true,
+        sourcemap: false,
       },
     ],
     plugins,
@@ -84,13 +86,13 @@ if (!process.env.DEVELOPMENT) {
           entryFileNames: "js/[name].min.js",
           format: "umd",
           name: "Shepherd",
-          sourcemap: true,
+          sourcemap: false,
         },
         {
           dir: "dist",
           entryFileNames: "js/[name].esm.min.js",
           format: "esm",
-          sourcemap: true,
+          sourcemap: false,
         },
       ],
       plugins: [

@@ -5,11 +5,11 @@ export function adobeTrack(props) {
         "web": {
             "webInteraction": {
                 "linkClicks": {
-                    "value": 1 // to be shared by adobe team
+                    "value": 1
                 },
                 "name": `Guided Journey - ${props.ctaAction}`,
                 "URL": window.location.href,
-                "type": "button" // to be discussed - kind of button (btn/toggle) string value
+                "type": "button"
             }
         },
         "_icicibank": {
@@ -20,10 +20,10 @@ export function adobeTrack(props) {
                 "ctaType": "button",
                 "ctaURL": window.location.href
             },
-            "channelInfo": window.adobeDataLayer[0]._icicibank.channelInfo,
-            "userInfo": window.adobeDataLayer[0]._icicibank.userInfo,
-            "productInfo": window.adobeDataLayer[0]._icicibank.productInfo,
-            "identities": window.adobeDataLayer[0]._icicibank.identities,
+            "channelInfo": window.adobeDataLayer[0]?._icicibank.channelInfo,
+            "userInfo": window.adobeDataLayer[0]?._icicibank.userInfo,
+            "productInfo": window.adobeDataLayer[0]?._icicibank.productInfo,
+            "identities": window.adobeDataLayer[0]?._icicibank.identities,
         }
     }
 

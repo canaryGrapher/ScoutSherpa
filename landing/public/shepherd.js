@@ -3157,7 +3157,6 @@
 	        }
 	        $$invalidate(2, total_progress = title.split("/")[1]);
 	        $$invalidate(3, current_progress = removeAlphabets(title.split("/")[0]));
-	        b;
 	        $$invalidate(0, percentage_progress = current_progress / total_progress * 100);
 	      }
 	    }
@@ -4270,17 +4269,17 @@
 
 	/* eslint-disable prettier/prettier */
 	function adobeTrack(props) {
-	  var _window$adobeDataLaye;
+	  var _window$adobeDataLaye, _window$adobeDataLaye2, _window$adobeDataLaye3, _window$adobeDataLaye4, _window$adobeDataLaye5;
 	  const dataLayer = {
 	    "event": "ctaClick",
 	    "web": {
 	      "webInteraction": {
 	        "linkClicks": {
-	          "value": 1 // to be shared by adobe team
+	          "value": 1
 	        },
 	        "name": `Guided Journey - ${props.ctaAction}`,
 	        "URL": window.location.href,
-	        "type": "button" // to be discussed - kind of button (btn/toggle) string value
+	        "type": "button"
 	      }
 	    },
 	    "_icicibank": {
@@ -4291,10 +4290,10 @@
 	        "ctaType": "button",
 	        "ctaURL": window.location.href
 	      },
-	      "channelInfo": window.adobeDataLayer[0]._icicibank.channelInfo,
-	      "userInfo": window.adobeDataLayer[0]._icicibank.userInfo,
-	      "productInfo": window.adobeDataLayer[0]._icicibank.productInfo,
-	      "identities": window.adobeDataLayer[0]._icicibank.identities
+	      "channelInfo": (_window$adobeDataLaye2 = window.adobeDataLayer[0]) == null ? void 0 : _window$adobeDataLaye2._icicibank.channelInfo,
+	      "userInfo": (_window$adobeDataLaye3 = window.adobeDataLayer[0]) == null ? void 0 : _window$adobeDataLaye3._icicibank.userInfo,
+	      "productInfo": (_window$adobeDataLaye4 = window.adobeDataLayer[0]) == null ? void 0 : _window$adobeDataLaye4._icicibank.productInfo,
+	      "identities": (_window$adobeDataLaye5 = window.adobeDataLayer[0]) == null ? void 0 : _window$adobeDataLaye5._icicibank.identities
 	    }
 	  };
 	  window.adobeDataLayer.push(dataLayer);
@@ -4748,7 +4747,7 @@ Z`;
 	    console.log('Loading previous step');
 	    const index = this.steps.indexOf(this.currentStep);
 	    // set the current number in the localStorage for future retrieval
-	    localStorage.setItem('currentStepIndex', index - 1);
+	    localStorage.setItem('currentStepIndex', index);
 	    this.show(index - 1, false, "Back");
 	  }
 
@@ -4763,7 +4762,7 @@ Z`;
 	    adobeTrack({
 	      ctaAction: "Cancel",
 	      journeyName: `${this.options.instanceCaller}`,
-	      stepName: `${this.steps.indexOf(this.currentStep)}`
+	      stepName: `${this.steps.indexOf(this.currentStep)} + 1`
 	    });
 	    if (this.options.confirmCancel) {
 	      const confirmCancelIsFunction = typeof this.options.confirmCancel === 'function';
@@ -4785,7 +4784,7 @@ Z`;
 	    adobeTrack({
 	      ctaAction: "Complete",
 	      journeyName: `${this.options.instanceCaller}`,
-	      stepName: `${Number(this.steps.length) - 1}`
+	      stepName: `${Number(this.steps.length)}`
 	    });
 	    this._done('complete');
 	  }
@@ -4880,9 +4879,6 @@ Z`;
 	  show(key = 0, forward = true, mode) {
 	    // get tour data from localStorage
 	    const _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
-	    const _currentStepIndex = localStorage.getItem('currentStepIndex');
-	    console.log('Current step index is ', _currentStepIndex);
-	    console.log('Current tour instance caller is ', _tourInstanceCaller);
 	    const step = isString(key) ? this.getById(key) : this.steps[key];
 	    if (step) {
 	      this._updateStateBeforeShow();
@@ -4893,20 +4889,12 @@ Z`;
 	        this._skipStep(step, forward);
 	      } else {
 	        if (_tourInstanceCaller === this.options.instanceCaller) {
-	          if (mode === "Back") {
-	            adobeTrack({
-	              ctaAction: mode,
-	              journeyName: `${_tourInstanceCaller}`,
-	              stepName: `Step ${_currentStepIndex} to ${Number(_currentStepIndex) + 1}`
-	            });
-	          }
-	          if (mode === "Next") {
-	            adobeTrack({
-	              ctaAction: mode,
-	              journeyName: `${_tourInstanceCaller}`,
-	              stepName: `Step ${_currentStepIndex} from ${Number(_currentStepIndex) - 1}`
-	            });
-	          }
+	          adobeTrack({
+	            ctaAction: mode,
+	            journeyName: `${this.tourName}`,
+	            stepName: `Step ${this.currentStep}`
+	          });
+	          console.log(mode, `${this.tourName}`, `Step ${this.currentStep}`);
 	          this.trigger('show', {
 	            step,
 	            previous: this.currentStep
@@ -4923,7 +4911,7 @@ Z`;
 	   */
 	  start() {
 	    localStorage.setItem('tourInstanceCaller', this.options.instanceCaller);
-	    localStorage.setItem('currentStepIndex', 0);
+	    localStorage.setItem('currentStepIndex', 1);
 	    adobeTrack({
 	      ctaAction: "Start",
 	      journeyName: `${this.options.instanceCaller}`,
@@ -5061,4 +5049,3 @@ Z`;
 	return Shepherd;
 
 }));
-//# sourceMappingURL=shepherd.js.map

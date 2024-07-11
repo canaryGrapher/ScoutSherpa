@@ -18,7 +18,9 @@
   "module": "dist/js/shepherd.esm.js",
   "types": "src/types/shepherd.d.ts",
   "scripts": {
-    "build": "yarn clean && rollup -c",
+    "build": "rimraf ./dist && rollup -c",
+    "watch": "rimraf ./dist && rollup -c --environment DEVELOPMENT --watch",
+    "start": "yarn watch",
     "postbuild": "yarn build:landing",
     "build:landing": "cd landing && yarn && yarn build",
     "clean": "rimraf ./dist",
@@ -30,7 +32,6 @@
     "lint:js": "eslint . --ext js",
     "release": "release-it",
     "rewrite-paths": "replace 'SF:.*src' 'SF:src' coverage/lcov.info",
-    "start": "yarn watch",
     "start-test-server": "http-server -p 9002",
     "test": "yarn lint:js && yarn test:ci",
     "pretest:ci": "yarn build",
@@ -39,8 +40,7 @@
     "test:cy:watch": "start-server-and-test start-test-server http://127.0.0.1:9002 cy:open",
     "test:unit:ci": "jest --coverage",
     "test:unit:watch": "jest --watch",
-    "view-coverage": "http-server -p 9003 ./coverage/lcov-report -o",
-    "watch": "yarn clean && rollup -c --environment DEVELOPMENT --watch"
+    "view-coverage": "http-server -p 9003 ./coverage/lcov-report -o"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.5.3",
@@ -88,6 +88,7 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-filesize": "^10.0.0",
     "rollup-plugin-license": "^3.2.0",
     "rollup-plugin-livereload": "^2.0.5",

@@ -8,7 +8,6 @@
     }
     total_progress = title.split("/")[1];
     current_progress = removeAlphabets(title.split("/")[0]);
-    b;
     percentage_progress = (current_progress / total_progress) * 100;
   }
 </script>

@@ -125,7 +125,7 @@ export class Tour extends Evented {
     console.log('Loading previous step');
     const index = this.steps.indexOf(this.currentStep);
     // set the current number in the localStorage for future retrieval
-    localStorage.setItem('currentStepIndex', index - 1);
+    localStorage.setItem('currentStepIndex', index);
     this.show(index - 1, false, "Back");
   }
 
@@ -137,7 +137,7 @@ export class Tour extends Evented {
    */
   async cancel() {
     this.steps.indexOf(this.currentStep)
-    adobeTrack({ ctaAction: "Cancel", journeyName: `${this.options.instanceCaller}`, stepName: `${this.steps.indexOf(this.currentStep)}` })
+    adobeTrack({ ctaAction: "Cancel", journeyName: `${this.options.instanceCaller}`, stepName: `${this.steps.indexOf(this.currentStep)} + 1` })
     if (this.options.confirmCancel) {
       const confirmCancelIsFunction =
         typeof this.options.confirmCancel === 'function';
@@ -160,7 +160,7 @@ export class Tour extends Evented {
    */
   complete() {
     console.log('Tour completed');
-    adobeTrack({ ctaAction: "Complete", journeyName: `${this.options.instanceCaller}`, stepName: `${Number(this.steps.length) - 1}` })
+    adobeTrack({ ctaAction: "Complete", journeyName: `${this.options.instanceCaller}`, stepName: `${Number(this.steps.length)}` })
     this._done('complete');
   }
 
@@ -257,9 +257,6 @@ export class Tour extends Evented {
   show(key = 0, forward = true, mode) {
     // get tour data from localStorage
     const _tourInstanceCaller = localStorage.getItem('tourInstanceCaller');
-    const _currentStepIndex = localStorage.getItem('currentStepIndex');
-    console.log('Current step index is ', _currentStepIndex);
-    console.log('Current tour instance caller is ', _tourInstanceCaller);
     const step = isString(key) ? this.getById(key) : this.steps[key];
     if (step) {
       this._updateStateBeforeShow();
@@ -272,12 +269,8 @@ export class Tour extends Evented {
         this._skipStep(step, forward);
       } else {
         if (_tourInstanceCaller === this.options.instanceCaller) {
-          if (mode === "Back") {
-            adobeTrack({ ctaAction: mode, journeyName: `${_tourInstanceCaller}`, stepName: `Step ${_currentStepIndex} to ${Number(_currentStepIndex) + 1}` })
-          }
-          if (mode === "Next") {
-            adobeTrack({ ctaAction: mode, journeyName: `${_tourInstanceCaller}`, stepName: `Step ${_currentStepIndex} from ${Number(_currentStepIndex) - 1}` })
-          }
+          adobeTrack({ ctaAction: mode, journeyName: `${this.tourName}`, stepName: `Step ${this.currentStep}` })
+          console.log(mode, `${this.tourName}`, `Step ${this.currentStep}`)
           this.trigger('show', {
             step,
             previous: this.currentStep
@@ -294,7 +287,7 @@ export class Tour extends Evented {
    */
   start() {
     localStorage.setItem('tourInstanceCaller', this.options.instanceCaller);
-    localStorage.setItem('currentStepIndex', 0);
+    localStorage.setItem('currentStepIndex', 1);
     adobeTrack({ ctaAction: "Start", journeyName: `${this.options.instanceCaller}`, stepName: `Start with 1` })
     this.trigger('start');
     // Save the focused element before the tour opens
