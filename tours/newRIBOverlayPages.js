@@ -851,7 +851,7 @@ var NewRIBAccountsPage = () => {
     canClickTarget: false,
     text: `View the details of your selected account here.`,
     attachTo: {
-      element: document.querySelector(".#bankAccountsInformationAboutAccount"),
+      element: document.querySelector("#bankAccountsInformationAboutAccount"),
       on: "right",
     },
     buttons: [
