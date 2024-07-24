@@ -475,7 +475,7 @@ var NewRIBDepositsPage = () => {
     id: "GuideMeWhatsOnNewRIBDepositsPage_start",
     title: "1/8",
     canClickTarget: false,
-    text: `<div>Introducing our newly designed navigation wheel for Fund Transfers.<ul><li>Click on 'Deposits' to see its sub-sections.</li>
+    text: `<div>Introducing our new Navigation Wheel for Deposits.<ul><li>Click on 'Deposits' to see its sub-sections.</li>
       <li>Click the '<' button in the center of the navigation menu to close the option.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigationDeposits.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
         `,
     attachTo: {
@@ -498,7 +498,7 @@ var NewRIBDepositsPage = () => {
     id: "GuideMeWhatsOnNewRIBDepositsPage_2a",
     title: "2/3",
     canClickTarget: false,
-    text: `<div>Want to check your Recurring Deposits or iWish deposits? Use these tabs.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/depositBar.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>`,
+    text: `<div>Check your Recurring Deposits or iWish deposits here.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/depositBar.gif" width="100%" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>`,
     attachTo: {
       element: document.querySelector(".tabbar"),
       on: "bottom",
@@ -523,7 +523,7 @@ var NewRIBDepositsPage = () => {
     id: "GuideMeWhatsOnNewRIBDepositsPage_3a",
     title: "3/3",
     canClickTarget: false,
-    text: `Looks like you do not have any deposits. Come back to this journey when you open a FD.`,
+    text: `No deposits found. Let's build some savings with an FD.`,
     showOn: () => {
       let contentFound = document.querySelectorAll(".sendMoney").length;
       return contentFound > 0 ? false : true;
@@ -544,7 +544,7 @@ var NewRIBDepositsPage = () => {
     id: "GuideMeWhatsOnNewRIBDepositsPage_2",
     title: "2/8",
     canClickTarget: false,
-    text: `Want to open a Fixed Deposits? Click here.`,
+    text: `Click here to open a fixed deposit.`,
     attachTo: {
       element: document.querySelector(".sendMoney"),
       on: "bottom",
@@ -565,7 +565,7 @@ var NewRIBDepositsPage = () => {
     id: "GuideMeWhatsOnNewRIBDepositsPage_3",
     title: "3/8",
     canClickTarget: false,
-    text: `You can use these options to manage your Fixed and Recurring deposits.`,
+    text: `These are options to manage your Fixed and Recurring deposits.`,
     attachTo: {
       element: document.querySelector(".manageDeposit"),
       on: "left",
@@ -586,7 +586,7 @@ var NewRIBDepositsPage = () => {
     id: "GuideMeWhatsOnNewRIBDepositsPage_4",
     title: "4/8",
     canClickTarget: false,
-    text: `You can view all your Deposit accounts here. Click on "VIEW ALL DEPOSITS" to view more accounts.`,
+    text: `Click on "VIEW ALL DEPOSITS" to view more accounts.`,
     attachTo: {
       element: document.querySelector(".all-deposits"),
       on: "right",
@@ -607,9 +607,9 @@ var NewRIBDepositsPage = () => {
     id: "GuideMeWhatsOnNewRIBDepositsPage_5",
     title: "5/8",
     canClickTarget: false,
-    text: `<div>These buttons can help you with various forms for your FDs:
+    text: `<div>Forms for your FDs:
         <ol>
-          <li><strong>INTEREST AND TDS CERTIFICATE</strong>: Interest and TDS certificates for your savings bank account can be downloaded from here.</li>
+          <li><strong>INTEREST AND TDS CERTIFICATE</strong>: Download Interest and TDS certificates for your savings bank account.</li>
           <li><strong>FORM 15G/H</strong>: If you have FD interest income of more than 50K, apply for form 15G/H here.</li>
         </ol>
     </div>`,
@@ -635,7 +635,7 @@ var NewRIBDepositsPage = () => {
     id: "GuideMeWhatsOnNewRIBDepositsPage_6",
     title: "6/8",
     canClickTarget: false,
-    text: `<div>Want to check your Recurring Deposits or iWish deposits? Use these tabs.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/depositBar.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>`,
+    text: `<div>Check your Recurring Deposits or iWish deposits here.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/depositBar.gif" width="100%" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>`,
     attachTo: {
       element: document.querySelector(".tabbar"),
       on: "bottom",
@@ -807,7 +807,7 @@ var NewRIBAccountsPage = () => {
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_5",
     title: "5/14",
     canClickTarget: false,
-    text: `<ul><li>Click on "Add Funds" to add money to your savings account through UPI</li><li>Click on "View Statement" to view your Account Statement.</li></ul>`,
+    text: `<div><ul><li>Click on "Add Funds" to add money to your savings account through UPI</li><li>Click on "View Statement" to view your Account Statement.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/buttonDetailsBankAccounts.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
     attachTo: {
       element: document.querySelector("#bankAccountsFundStatementActionArea"),
       on: "right",
