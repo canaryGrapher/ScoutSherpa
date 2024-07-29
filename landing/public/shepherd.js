@@ -4283,17 +4283,17 @@
 	      }
 	    },
 	    "_icicibank": {
-	      "pageInfo": (_window$adobeDataLaye = window.adobeDataLayer[0]) == null ? void 0 : _window$adobeDataLaye._icicibank.pageInfo,
+	      "pageInfo": (_window$adobeDataLaye = window.adobeDataLayer[0]) != null && _window$adobeDataLaye._icicibank.pageInfo ? window.adobeDataLayer[0]._icicibank.pageInfo : {},
 	      "ctaInfo": {
 	        "ctaName": `${props.ctaAction} - ${props.stepName} - ${props.journeyName}`,
 	        "ctaRegion": "Guided Journey",
 	        "ctaType": "button",
 	        "ctaURL": window.location.href
 	      },
-	      "channelInfo": (_window$adobeDataLaye2 = window.adobeDataLayer[0]) == null ? void 0 : _window$adobeDataLaye2._icicibank.channelInfo,
-	      "userInfo": (_window$adobeDataLaye3 = window.adobeDataLayer[0]) == null ? void 0 : _window$adobeDataLaye3._icicibank.userInfo,
-	      "productInfo": (_window$adobeDataLaye4 = window.adobeDataLayer[0]) == null ? void 0 : _window$adobeDataLaye4._icicibank.productInfo,
-	      "identities": (_window$adobeDataLaye5 = window.adobeDataLayer[0]) == null ? void 0 : _window$adobeDataLaye5._icicibank.identities
+	      "channelInfo": (_window$adobeDataLaye2 = window.adobeDataLayer[0]) != null && _window$adobeDataLaye2._icicibank.channelInfo ? window.adobeDataLayer[0]._icicibank.channelInfo : {},
+	      "userInfo": (_window$adobeDataLaye3 = window.adobeDataLayer[0]) != null && _window$adobeDataLaye3._icicibank.userInfo ? window.adobeDataLayer[0]._icicibank.userInfo : {},
+	      "productInfo": (_window$adobeDataLaye4 = window.adobeDataLayer[0]) != null && _window$adobeDataLaye4._icicibank.productInfo ? window.adobeDataLayer[0]._icicibank.productInfo : {},
+	      "identities": (_window$adobeDataLaye5 = window.adobeDataLayer[0]) != null && _window$adobeDataLaye5._icicibank.identities ? window.adobeDataLayer[0]._icicibank.identities : {}
 	    }
 	  };
 	  window.adobeDataLayer.push(dataLayer);
