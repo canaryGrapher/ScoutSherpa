@@ -160,7 +160,7 @@ export class Tour extends Evented {
    */
   complete() {
     console.log('Tour completed');
-    adobeTrack({ ctaAction: "Complete", journeyName: `${this.options.instanceCaller}`, stepName: `${Number(this.steps.length)}` })
+    adobeTrack({ ctaAction: "Complete", journeyName: `${this.options.instanceCaller}`, stepName: `${this.steps.indexOf(this.currentStep)} + 1` })
     this._done('complete');
   }
 
@@ -269,7 +269,7 @@ export class Tour extends Evented {
         this._skipStep(step, forward);
       } else {
         if (_tourInstanceCaller === this.options.instanceCaller) {
-          adobeTrack({ ctaAction: mode, journeyName: `${this.tourName}`, stepName: `Step ${this.currentStep}` })
+          adobeTrack({ ctaAction: mode, journeyName: `${this.tourName}`, stepName: `${this.steps.indexOf(this.currentStep)} + 1` })
           console.log(mode, `${this.tourName}`, `Step ${this.currentStep}`)
           this.trigger('show', {
             step,
@@ -288,7 +288,7 @@ export class Tour extends Evented {
   start() {
     localStorage.setItem('tourInstanceCaller', this.options.instanceCaller);
     localStorage.setItem('currentStepIndex', 1);
-    adobeTrack({ ctaAction: "Start", journeyName: `${this.options.instanceCaller}`, stepName: `Start with 1` })
+    adobeTrack({ ctaAction: "Start", journeyName: `${this.options.instanceCaller}`, stepName: `${this.steps.indexOf(this.currentStep)} + 1` })
     this.trigger('start');
     // Save the focused element before the tour opens
     this.focusedElBeforeOpen = document.activeElement;
@@ -404,7 +404,6 @@ export class Tour extends Evented {
    */
   _setTourID() {
     const tourName = this.options.tourName || 'tour';
-
     this.id = `${tourName}--${uuid()}`;
   }
 }

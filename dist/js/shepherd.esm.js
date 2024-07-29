@@ -4263,7 +4263,12 @@ class Step extends Evented {
 
 /* eslint-disable prettier/prettier */
 function adobeTrack(props) {
-  var _window$adobeDataLaye, _window$adobeDataLaye2, _window$adobeDataLaye3, _window$adobeDataLaye4, _window$adobeDataLaye5;
+  const validItems = window.adobeDataLayer.filter(item => item._icicibank.channelInfo && item._icicibank.productInfo && item._icicibank.userInfo && item._icicibank.identities);
+  const pageInfo = validItems && validItems.length > 0 ? validItems[0]._icicibank.pageInfo : {};
+  const channelInfo = validItems && validItems.length > 0 ? validItems[0]._icicibank.channelInfo : {};
+  const userInfo = validItems && validItems.length > 0 ? validItems[0]._icicibank.userInfo : {};
+  const productInfo = validItems && validItems.length > 0 ? validItems[0]._icicibank.productInfo : {};
+  const identities = validItems && validItems.length > 0 ? validItems[0]._icicibank.identities : {};
   const dataLayer = {
     "event": "ctaClick",
     "web": {
@@ -4277,17 +4282,17 @@ function adobeTrack(props) {
       }
     },
     "_icicibank": {
-      "pageInfo": (_window$adobeDataLaye = window.adobeDataLayer[0]) != null && _window$adobeDataLaye._icicibank.pageInfo ? window.adobeDataLayer[0]._icicibank.pageInfo : {},
+      "pageInfo": pageInfo,
       "ctaInfo": {
         "ctaName": `${props.ctaAction} - ${props.stepName} - ${props.journeyName}`,
         "ctaRegion": "Guided Journey",
         "ctaType": "button",
         "ctaURL": window.location.href
       },
-      "channelInfo": (_window$adobeDataLaye2 = window.adobeDataLayer[0]) != null && _window$adobeDataLaye2._icicibank.channelInfo ? window.adobeDataLayer[0]._icicibank.channelInfo : {},
-      "userInfo": (_window$adobeDataLaye3 = window.adobeDataLayer[0]) != null && _window$adobeDataLaye3._icicibank.userInfo ? window.adobeDataLayer[0]._icicibank.userInfo : {},
-      "productInfo": (_window$adobeDataLaye4 = window.adobeDataLayer[0]) != null && _window$adobeDataLaye4._icicibank.productInfo ? window.adobeDataLayer[0]._icicibank.productInfo : {},
-      "identities": (_window$adobeDataLaye5 = window.adobeDataLayer[0]) != null && _window$adobeDataLaye5._icicibank.identities ? window.adobeDataLayer[0]._icicibank.identities : {}
+      "channelInfo": channelInfo,
+      "userInfo": userInfo,
+      "productInfo": productInfo,
+      "identities": identities
     }
   };
   window.adobeDataLayer.push(dataLayer);
@@ -4778,7 +4783,7 @@ class Tour extends Evented {
     adobeTrack({
       ctaAction: "Complete",
       journeyName: `${this.options.instanceCaller}`,
-      stepName: `${Number(this.steps.length)}`
+      stepName: `${this.steps.indexOf(this.currentStep)} + 1`
     });
     this._done('complete');
   }
@@ -4886,7 +4891,7 @@ class Tour extends Evented {
           adobeTrack({
             ctaAction: mode,
             journeyName: `${this.tourName}`,
-            stepName: `Step ${this.currentStep}`
+            stepName: `${this.steps.indexOf(this.currentStep)} + 1`
           });
           console.log(mode, `${this.tourName}`, `Step ${this.currentStep}`);
           this.trigger('show', {
@@ -4909,7 +4914,7 @@ class Tour extends Evented {
     adobeTrack({
       ctaAction: "Start",
       journeyName: `${this.options.instanceCaller}`,
-      stepName: `Start with 1`
+      stepName: `${this.steps.indexOf(this.currentStep)} + 1`
     });
     this.trigger('start');
     // Save the focused element before the tour opens
