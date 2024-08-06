@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
-// Last update: July 9, 2024
+// Last update: August 6, 2024
+// update 12: content for bank accounts updated x 3
 // update 11: content for bank accounts updated x 2
 // update 10: content for bank accounts and deposits
 // update 09: content for fund transfer
@@ -715,7 +716,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_1",
-    title: "1/14",
+    title: "1/13",
     canClickTarget: false,
     text: `<div>"Here is our new navigation wheel for easy access to your Bank Accounts.<ul><li>Click on <strong>Accounts</strong> to check your bank accounts.</li><li>To close the option, click the < button in the center.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/navigationAccounts.gif" height="200" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>
         `,
@@ -737,7 +738,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_2",
-    title: "2/14",
+    title: "2/13",
     canClickTarget: false,
     text: `<div>Find all your accounts grouped under savings, current, and overdraft account categories.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/accountsBar.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
     attachTo: {
@@ -762,7 +763,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_3",
-    title: "3/14",
+    title: "3/13",
     canClickTarget: false,
     text: `<div>Toggle between your bank accounts here, to view their details.<div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/sbBar.gif" width="100%" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" /></div></div>`,
     attachTo: {
@@ -783,7 +784,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_4",
-    title: "4/14",
+    title: "4/13",
     canClickTarget: false,
     text: `
     <div><ul><li>Select Savings Account to view the selected account's balance, along with all savings accounts.</li><li>Select Overdraft Account to view amount utilized so far.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/balancesBankAccounts.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
@@ -805,30 +806,13 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_5",
-    title: "5/14",
+    title: "5/13",
     canClickTarget: false,
-    text: `<div><ul><li>Click on "Add Funds" to add money to your savings account through UPI</li><li>Click on "View Statement" to view your Account Statement.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/buttonDetailsBankAccounts.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
-    attachTo: {
-      element: document.querySelector("#bankAccountsFundStatementActionArea"),
-      on: "right",
-    },
-    buttons: [
-      {
-        text: "Next",
-        action: GuideMeWhatsOnNewRIBBankAccountsPage.next,
-      },
-      {
-        text: "Back",
-        action: GuideMeWhatsOnNewRIBBankAccountsPage.back,
-        secondary: true,
-      },
-    ],
-  });
-  GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
-    id: "GuideMeWhatsOnNewRIBBankAccountsPage_6",
-    title: "6/14",
-    canClickTarget: false,
-    text: `<div><ul><li>Select Overdraft Account and then click "Pay Now" to settle the utilized amount, through your savings or overdraft account.</li></ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/buttonDetailsBankAccounts.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
+    text: `<div><ul>
+    <li>Click on "Add Funds" to add money to your savings account through UPI</li>
+    <li>Click on "View Statement" to view your Account Statement.</li>
+    <li>Select Overdraft Account and then click "Pay Now" to settle the utilized amount, through your savings or overdraft account.</li>
+    </ul><div style="text-align: center;"><img src="https://cdn.jsdelivr.net/gh/canaryGrapher/ScoutSherpa@newRIB/tours/images/buttonDetailsBankAccounts.gif" alt="Animation showing use of new ICICI website dialer" style="object-fit: contain;margin-top:10px;" crossorigin="anonymous" width="100%" /></div></div>`,
     attachTo: {
       element: document.querySelector("#bankAccountsFundStatementActionArea"),
       on: "right",
@@ -847,7 +831,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_7",
-    title: "7/14",
+    title: "6/13",
     canClickTarget: false,
     text: `View the details of your selected account here.`,
     attachTo: {
@@ -868,7 +852,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_8",
-    title: "8/14",
+    title: "7/13",
     canClickTarget: false,
     text: `Click on "View Account Details" to get more information about your account.`,
     showOn: () => {
@@ -895,7 +879,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_9",
-    title: "9/14",
+    title: "8/13",
     canClickTarget: false,
     text: `Check reward points collected by you in savings account and redeem them easily here.`,
     showOn: () => {
@@ -920,7 +904,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_10",
-    title: "10/14",
+    title: "9/13",
     canClickTarget: false,
     text: `View your Debit Card details here, based on the account selected.`,
     showOn: () => {
@@ -945,7 +929,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_11",
-    title: "11/14",
+    title: "10/13",
     canClickTarget: false,
     text: `Manage your Debit Card easily using these services here.`,
     showOn: () => {
@@ -970,7 +954,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_12",
-    title: "12/14",
+    title: "11/13",
     canClickTarget: false,
     showOn: () => {
       const element = document.querySelector("#bankAccountsServiceRequestCTA");
@@ -995,11 +979,11 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_13",
-    title: "13/14",
+    title: "12/13",
     canClickTarget: false,
     text: `Check out exciting offers curated exclusively for you here.`,
     attachTo: {
-      element: document.querySelector("#bankAccountsOfferArea"),
+      element: document.querySelector("app-bank-account-offers"),
       on: "left",
     },
     buttons: [
@@ -1016,7 +1000,7 @@ var NewRIBAccountsPage = () => {
   });
   GuideMeWhatsOnNewRIBBankAccountsPage.addStep({
     id: "GuideMeWhatsOnNewRIBBankAccountsPage_14",
-    title: "14/14",
+    title: "13/13",
     canClickTarget: false,
     text: `You are all set to enjoy the new ICICI Bank Account page experience. Take the Guided Tour again if you need more assistance.`,
     buttons: [
