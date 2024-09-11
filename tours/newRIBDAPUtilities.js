@@ -1,4 +1,5 @@
-// July 29, 2024 | File updated
+// September 11, 2024 | File updated
+// update 53: close button fix
 // update 52: removed indexDB logic
 // update 51: added bank accounts overlays
 // update 50: added loader for deposits
