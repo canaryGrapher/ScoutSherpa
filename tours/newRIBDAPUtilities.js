@@ -107,7 +107,9 @@ const addAndRemoveGlow = (buttonReference, modal) => {
 const getModalText = (linkURL) => {
   const currentPath = window.location.pathname;
   const modalText = `<div id="modalContainer" class="modal">
-<button class="close-button" id="dapModalCloseButton" type="btn">×</button>
+  <div class="closeHolder">
+    <button class="close-button" id="dapModalCloseButton" type="btn">×</button>
+  </div>
 <h2>View Demo</h2>
 <p>
 ${journeyInfo[currentPath] ? "Welcome to the all new ICICI Bank Online Banking Experience, upgraded for making your banking journey smoother, smarter, and simpler." : null}
@@ -220,25 +222,35 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
         text-align: justify;
     }
     
-    .close-button {
-        position: absolute;
+.closeHolder {
+    	position: absolute;
         top: 10px;
         right: 20px;
-        border: none;
-        background-color: transparent;
-        font-size: 20px;
-        cursor: pointer;
-        color: #feeee5;
         background-color: #d16c13;
         border-radius: 30px;
         width: 30px;
         height: 30px;
+        color: #feeee5;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
     }
     
-    .close-button:hover {
+    .closeHolder:hover {
         color: #d16c13;
         background-color: #feeee5;
+    }
+    
+     .close-button {
+        position: relative;
+        border: none;
+        color: inherit;
+        background-color: transparent;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        margin-top: 1px;
     }
     
     .modalButtonContainer {
