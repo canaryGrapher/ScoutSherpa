@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 export function adobeTrack(props) {
 
-    const validItems = window.adobeDataLayer.filter(item => item._icicibank.channelInfo && item._icicibank.productInfo && item._icicibank.userInfo && item._icicibank.identities)
+    const validItems = window.adobeDataLayer?.filter(item => item._icicibank.channelInfo && item._icicibank.productInfo && item._icicibank.userInfo && item._icicibank.identities)
     const pageInfo = validItems && validItems.length > 0 ? validItems[0]._icicibank.pageInfo : {}
     const channelInfo = validItems && validItems.length > 0 ? validItems[0]._icicibank.channelInfo : {}
     const userInfo = validItems && validItems.length > 0 ? validItems[0]._icicibank.userInfo : {}

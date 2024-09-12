@@ -4263,7 +4263,8 @@ class Step extends Evented {
 
 /* eslint-disable prettier/prettier */
 function adobeTrack(props) {
-  const validItems = window.adobeDataLayer.filter(item => item._icicibank.channelInfo && item._icicibank.productInfo && item._icicibank.userInfo && item._icicibank.identities);
+  var _window$adobeDataLaye;
+  const validItems = (_window$adobeDataLaye = window.adobeDataLayer) == null ? void 0 : _window$adobeDataLaye.filter(item => item._icicibank.channelInfo && item._icicibank.productInfo && item._icicibank.userInfo && item._icicibank.identities);
   const pageInfo = validItems && validItems.length > 0 ? validItems[0]._icicibank.pageInfo : {};
   const channelInfo = validItems && validItems.length > 0 ? validItems[0]._icicibank.channelInfo : {};
   const userInfo = validItems && validItems.length > 0 ? validItems[0]._icicibank.userInfo : {};

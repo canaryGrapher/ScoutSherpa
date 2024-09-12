@@ -1,4 +1,5 @@
-// July 29, 2024 | File updated
+// September 11, 2024 | File updated
+// update 53: close button fix
 // update 52: removed indexDB logic
 // update 51: added bank accounts overlays
 // update 50: added loader for deposits
@@ -208,6 +209,12 @@ const associateModalForDAP = (linkURL, buttonSelector) => {
         padding: 20px;
         transition: 1s all;
         border-radius: 10px
+    }
+
+    @media only screen and (max-width: 1024px) {
+      #modalContainer {
+        height: 90vw;
+      }
     }
     
     #modalContainer>h2 {
