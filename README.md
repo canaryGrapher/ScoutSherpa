@@ -23,6 +23,57 @@ Since this is an adaption of the popular ShepherdJS library, there are many tuto
 - Youtube: [Creating Step by Step Feature Introductions with Shepherd.js](https://www.youtube.com/watch?v=oSAi10QQyoI)
 - Shepherd.js: [Official docs](https://docs.shepherdjs.dev/guides/usage/)
 
+#### Explaination of .Tour
+```js
+  var GuideMeWhatsOnNewRIBFundTransferPage = new Shepherd.Tour({
+    tourName: "Guide Me: What's on new Credit Card page",       // Name of the journey for easy identifiation. This can be anything
+    instanceCaller: "GuideMeWhatsOnNewRIBFundTransferPage",     // Instance ID. This needs to be unique for each journey to avoid conflict
+    defaultStepOptions: {                                       // Default options for the entire journey
+      cancelIcon: {                                             // Should the cancel button at top right be visible throughout the journey?
+        enabled: true,                                          // value can be true or false
+      },
+      scrollTo: {                                               // Scroll behavior. This need not be changed.
+        behavior: "smooth",
+        block: "center",
+      },
+      arrow: true,                                              // The small arrow that connects the Shepherd pop-up and the highlighted element. Value can be true or false.
+    },
+    useModalOverlay: true,                                      // The black background that is visible during the journey can be enabled or disabled using this. Value can be true or false.
+    exitOnEsc: true,                                            // Allow customer to exit the journey by pressing the Esc button. Value can be true or false.
+    keyboardnavigation: true,                                   // Allow customer to navigate journey using arrow keys, for example left button for previous, right for next. Value can be true or false.
+  });
+
+```
+
+#### Explaination of .addStep
+```js
+  GuideMeWhatsOnNewRIBBankAccountsPage.addStep({                                  // start the step
+    id: "GuideMeWhatsOnNewRIBBankAccountsPage_12",                                // Unique ID for the step. This needs to be unique.
+    title: "11/13",                                                               // Title of the step. This convention needs to be followed.
+    canClickTarget: false,                                                        // Allow user to click/interact with the highlighted area.
+    showOn: () => {                                                               // Conditional rendering. If this function returns true, step is
+      const element = document.querySelector("#banksCTA");                        // shown, and if false, step is skipped and next step is show
+      return element ? true : false;
+    },
+    text: `Click on Service Request to manage your savings account.`,             // Text that needs to be shown on the step.
+    attachTo: {
+      element: document.querySelector("#bankAccountsServiceRequestCTA"),          // Which elment to be highlighted
+      on: "left",                                                                 // Position of the step with respect to the highlighted area. Values can be 'top', 'bottom', 'right', 'left'
+    },
+    buttons: [                                                                    // Buttons to show in the footer and the action assigned to them. 
+      {
+        text: "Next",                                                             // Text can be anything.
+        action: GuideMeWhatsOnNewRIBBankAccountsPage.next,                        // Action can be: 'next', 'back', 'complete' and 'cancel'
+      },
+      {
+        text: "Back",
+        action: GuideMeWhatsOnNewRIBBankAccountsPage.back,
+        secondary: true,                                                          // If secondary is true, button in footer will not be highlighted in yellow (check image). Default value is false
+      },
+    ],
+  });
+```
+
 After the journey is created in the `/tours/newRIBOverlayPages.js` file, the journey needs to be encapsulated in a function, lets say `Function1()` and then the tour instance call should be placed at the end of the function. So the function structure is as:
 ```js
 
@@ -114,33 +165,46 @@ In logic, the current logic is `If .billPaymentAnalysis element is present, and 
             This folder contains all the components of the Shepherd library. You will need to change the content of this folder only if the bank requires any visual changes to the guided journey pop-up box.
             - ###### `shepherd-button.svelte`
                 This folder contains the components for the buttons that are visible at the bottom of the guided journey pop-up
-              
+                ![image](https://github.com/user-attachments/assets/cf06b5e2-3e0e-4bfb-85f4-050615ddf066)
+
             - ###### `shepherd-cancel-icon.svelte`
                 This folder contains the component for the cancel button at the top of the guided journey pop-up.
-              
+                ![image](https://github.com/user-attachments/assets/1d718090-a87e-440e-9a00-d9dfdc5afb13)
+      
             - ###### `shepherd-content.svelte`
                 This component contains the entire box content visible to the user beyond the blacked-out screen. It contains the header, footer and the text part.
+                ![image](https://github.com/user-attachments/assets/d493842c-670a-457c-ada5-df1f1244031d)
               
             - ###### `shepherd-elment.svelte`
                 This component file manages the appearances and the interactions for each step of the tour. It handles user focus, keyboard navigation, and dynamic class updates based on step options.
+              ![image](https://github.com/user-attachments/assets/f7e4de58-4ac0-4877-9509-3b6afc7a24da)
+
               
             - ###### `shepherd-footer.svelte`
                 Footer at the bottom of the guided journey pop-up that contains buttons like **_Next_**, **_Previous_**, **_Complete_**, and **_Cancel_**
+                ![image](https://github.com/user-attachments/assets/b271d0ea-74e3-43c4-8828-fd1334bcf620)
               
             - ###### `shepherd-header.svelte`
                 Header at the top of the guided journey container that contains the title and the close button is defined in this file.
+                ![image](https://github.com/user-attachments/assets/f25d9232-da96-4d70-89dd-a2450886bacd)
               
             - ###### `shepherd-modal.svelte`
                 This component handles creating and managing a modal overlay with a cutout (opening) to highlight specific elements on a webpage. It defines functions to position the overlay, update its dimensions, and control visibility. The overlay's position is adjusted based on the target element, considering its location within scrollable containers or iframes. Event listeners are added to manage touch interactions and animations. The SVG element defines the visible shape of the overlay, and its visibility is toggled using CSS transitions.
               
+              
             - ###### `shepherd-progress-bar.svelte`
                 A progress bar is visible between the header and the content. The logic for calculating the progress bar is as per the title of the step. If the step is 3/6, the progress bar will be `3÷6=1/2` or 50% width.
+              ![image](https://github.com/user-attachments/assets/af5eae33-5dbd-4575-bee2-5b5cdd40a598)
               
             - ###### `shepherd-text.svelte`
                 This component gets the text from the configuration files as HTML text.
+              ![image](https://github.com/user-attachments/assets/d1005622-41c5-47ff-9066-32fc04040c26)
+
               
             - ###### `shepherd-title.svelte`
                 The title is the step number that is visible on the UI. The convention to name this is `the step number / total number of steps`, so, for example, if a journey has 12 steps and the current step is 7, the title value should be `7/12`
+              ![image](https://github.com/user-attachments/assets/698374b9-82d2-46e9-811f-3b394177c683)
+
               
         - ##### `utils`
             Utility tools for the shepherdJS. You will be least likely to change the contents of this folder, except if the **Adobe** concept needs to be changed.
