@@ -7,6 +7,94 @@
     src="https://i.imgur.com/cowwtSX.png"/>
 </p>
 
+## Getting Started
+### Setup
+- Clone the repository on your system using `git clone https://github.com/canaryGrapher/ScoutSherpa.git`
+- Switch the desired branch for desired project. For example, `newRIB` for new RIB, `oldRIB` for old RIB, etc.
+- Install the dependencies with `yarn install`, `npm install` or `yarn install`
+- Make changes to the `src` folder or the `tours` folder.
+- If you have made changes to the `src` folder, you will need to build the code again using `npm run build`
+- If you have made changes to the `tours` folder, you do not need to build the code again. These files need to be imported as it is into the code.
+- You can test locally using `yarn run dev`. Please keep in mind that the changes you make here will not be the same on ICICI's website.
+
+
+### How to create a journey
+Since this is an adaption of the popular ShepherdJS library, there are many tutorials available out there. You can check out these demos for tuturials. 
+- Youtube: [Creating Step by Step Feature Introductions with Shepherd.js](https://www.youtube.com/watch?v=oSAi10QQyoI)
+- Shepherd.js: [Official docs](https://docs.shepherdjs.dev/guides/usage/)
+
+After the journey is created in the `/tours/newRIBOverlayPages.js` file, the journey needs to be encapsulated in a function, lets say `Function1()` and then the tour instance call should be placed at the end of the function. So the function structure is as:
+```js
+
+const Function1() {
+// define the tour instance
+  const tour = new Shepherd.Tour({
+  useModalOverlay: true,
+  defaultStepOptions: {
+    classes: 'shadow-md bg-purple-dark',
+    scrollTo: true
+  }
+});
+
+// add a new step to the tour
+tour.addStep({
+  id: 'example-step',
+  text: 'This step is attached to the bottom of the <code>.example-css-selector</code> element.',
+  attachTo: {
+    element: '.example-css-selector',
+    on: 'bottom'
+  },
+  classes: 'example-step-extra-class',
+  buttons: [
+    {
+      text: 'Next',
+      action: tour.next
+    }
+  ]
+});
+
+// call the tour instance
+tour.start()
+}
+```
+
+Now that this function has been added to the `newRIBOverlayPages.js` file, open the `newRIBDAPUtilities.js` file and look for the `journeyInfo` object.
+
+```js
+const journeyInfo = {
+  "/in/credit-card": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
+    logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
+  },
+  "/cug/credit-card": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
+    logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
+  },
+};
+```
+
+In this object, the first child object is the pathname of the page where this needs to be implemented. For example, if this needs to be implemented on the bill payment page, the object key will be `/in/bill-payment` or `/cug/bill-payment` for CUG website. The `journey ` is the part that should call the function we just created and the `logic` is the part that is first check before calling the journey. So, to accomodate the new function we just created, we will edit the above object as:
+
+```js
+const journeyInfo = {
+  "/in/credit-card": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
+    logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
+  },
+  "/cug/credit-card": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();NewRIBCreditCardPage()",
+    logic: `document.querySelectorAll(".cardAnalysis")[0]?.getBoundingClientRect().x > 0`
+  },
+  // new code
+  "/in/bill-payment": {
+    journey: "document.querySelector('#dapModalCloseButton')?.click();Function1()",
+    logic: `document.querySelectorAll(".billPaymentAnalysis")[0]?.getBoundingClientRect().x > 0`
+  },
+};
+```
+
+The journey has a pre-written code: `document.querySelector('#dapModalCloseButton')?.click()`. This helps in closing the pop-up button before the journey starts. 
+In logic, the current logic is `If .billPaymentAnalysis element is present, and its dimensions are greater than 0, run the journey`. However, this can be changed as per development requirement. 
 
 ## Folder Structure
 - ### `dist`
