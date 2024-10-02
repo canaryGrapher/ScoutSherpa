@@ -1,5 +1,7 @@
 # Guided Journey - customized for ICICI
 
+## About
+ScoutSherpa is a Digital Adoption Platform derived from the popular [ShepherdJS](https://github.com/shipshapecode/shepherd) project, customized for the needs of ICICI Bank.
 
 <p align="center">
   <img
